@@ -1,0 +1,3485 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Project Archive 角色图鉴、公告与战斗资料库。" />
+<title>Project Archive Wiki</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#f5f7ff;
+    --card:#ffffff;
+    --text:#111827;
+    --muted:#6b7280;
+    --line:rgba(148,163,184,.32);
+
+    --primary:#4f7cff;
+    --primary-dark:#3152c9;
+    --secondary:#8b5cf6;
+    --cyan:#22d3ee;
+    --pink:#fb7185;
+
+    --shadow-sm:0 8px 24px rgba(15,23,42,.06);
+    --shadow-md:0 18px 48px rgba(15,23,42,.12);
+    --shadow-lg:0 28px 80px rgba(15,23,42,.24);
+  }
+
+  *{
+    box-sizing:border-box;
+  }
+
+  html{
+    scroll-behavior:smooth;
+  }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 8% 8%, rgba(79,124,255,.20), transparent 34%),
+      radial-gradient(circle at 88% 18%, rgba(139,92,246,.16), transparent 32%),
+      radial-gradient(circle at 50% 100%, rgba(34,211,238,.12), transparent 42%),
+      var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.34) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.34) 1px, transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 70%);
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 70%);
+    z-index:-1;
+  }
+
+  a{
+    color:inherit;
+  }
+
+  :focus-visible{
+    outline:3px solid rgba(79,124,255,.48);
+    outline-offset:3px;
+  }
+
+  section[id],
+  footer[id]{
+    scroll-margin-top:88px;
+  }
+
+  button,
+  input,
+  select{
+    font:inherit;
+  }
+
+  .header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:16px 28px;
+    backdrop-filter:blur(18px);
+    background:rgba(245,247,255,.72);
+    border-bottom:1px solid rgba(148,163,184,.18);
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+  }
+
+  .brand-logo{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    color:white;
+    font-weight:900;
+    letter-spacing:.5px;
+    background:linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow:0 14px 34px rgba(79,124,255,.32);
+    flex-shrink:0;
+  }
+
+  .site-title{
+    margin:0;
+    font-size:18px;
+    font-weight:900;
+    letter-spacing:.2px;
+    white-space:nowrap;
+  }
+
+  .site-subtitle{
+    margin-top:2px;
+    font-size:12px;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+
+  .nav{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .nav a{
+    text-decoration:none;
+    color:#475569;
+    font-size:14px;
+    font-weight:500;
+    padding:9px 12px;
+    border-radius:999px;
+    transition:.18s ease;
+  }
+
+  .nav a:hover{
+    color:var(--primary-dark);
+    background:rgba(79,124,255,.10);
+  }
+
+  .container{
+    width:min(1180px, calc(100% - 32px));
+    margin:0 auto;
+    padding:26px 0 72px;
+  }
+
+  .hero{
+    position:relative;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:minmax(0, 1.2fr) minmax(280px, .8fr);
+    gap:22px;
+    align-items:stretch;
+    padding:28px;
+    border:1px solid rgba(148,163,184,.24);
+    border-radius:28px;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.62)),
+      radial-gradient(circle at 20% 20%, rgba(79,124,255,.22), transparent 36%),
+      radial-gradient(circle at 80% 70%, rgba(139,92,246,.18), transparent 36%);
+    box-shadow:var(--shadow-md);
+  }
+
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:-90px;
+    top:-90px;
+    width:260px;
+    height:260px;
+    background:linear-gradient(135deg, rgba(79,124,255,.22), rgba(139,92,246,.18));
+    border-radius:50%;
+  }
+
+  .hero-content,
+  .hero-panel{
+    position:relative;
+    z-index:1;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:999px;
+    color:#3152c9;
+    background:rgba(79,124,255,.12);
+    font-size:13px;
+    font-weight:700;
+  }
+
+  .eyebrow-dot{
+    width:8px;
+    height:8px;
+    border-radius:999px;
+    background:#22c55e;
+    box-shadow:0 0 0 6px rgba(34,197,94,.14);
+  }
+
+  .hero h1{
+    margin:18px 0 10px;
+    font-size:clamp(30px, 5vw, 54px);
+    line-height:1.05;
+    letter-spacing:-1.8px;
+  }
+
+  .hero p{
+    max-width:680px;
+    margin:0;
+    color:#475569;
+    font-size:15px;
+    line-height:1.8;
+  }
+
+  .hero-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:22px;
+  }
+
+  .btn{
+    border:0;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:42px;
+    padding:10px 15px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:14px;
+    transition:.18s ease;
+  }
+
+  .btn-primary{
+    color:white;
+    background:linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow:0 14px 34px rgba(79,124,255,.28);
+  }
+
+  .btn-primary:hover,
+  .btn-ghost:hover{
+    transform:translateY(-2px);
+  }
+
+  .btn-ghost{
+    color:#334155;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(148,163,184,.28);
+  }
+
+  .hero-panel{
+    display:grid;
+    gap:12px;
+  }
+
+  .stat-card{
+    padding:18px;
+    border-radius:22px;
+    background:rgba(255,255,255,.74);
+    border:1px solid rgba(148,163,184,.22);
+    box-shadow:var(--shadow-sm);
+  }
+
+  .stat-label{
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .stat-value{
+    margin-top:6px;
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:-1px;
+  }
+
+  .stat-note{
+    margin-top:5px;
+    font-size:12px;
+    color:#64748b;
+  }
+
+  .mini-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .section{
+    margin-top:30px;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:14px;
+  }
+
+  .section-title{
+    margin:0;
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:-.4px;
+  }
+
+  .section-desc{
+    margin:6px 0 0;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  .section-right{
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  .announcements{
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(290px, 380px);
+    gap:16px;
+    overflow-x:auto;
+    padding:4px 4px 14px;
+    scroll-snap-type:x proximity;
+  }
+
+  .announcements::-webkit-scrollbar{
+    height:8px;
+  }
+
+  .announcements::-webkit-scrollbar-thumb{
+    background:rgba(148,163,184,.45);
+    border-radius:999px;
+  }
+
+  .announce-card{
+    scroll-snap-align:start;
+    overflow:hidden;
+    border-radius:24px;
+    background:white;
+    border:1px solid rgba(148,163,184,.22);
+    box-shadow:var(--shadow-sm);
+    cursor:pointer;
+    transition:.2s ease;
+  }
+
+  .announce-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-md);
+  }
+
+  .announce-card.is-static{
+    cursor:default;
+  }
+
+  .announce-card.is-static:hover{
+    transform:none;
+    box-shadow:var(--shadow-sm);
+  }
+
+  .announce-img{
+    position:relative;
+    height:170px;
+    overflow:hidden;
+    background:linear-gradient(135deg, rgba(79,124,255,.95), rgba(139,92,246,.88));
+  }
+
+  .announce-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    opacity:.86;
+    mix-blend-mode:screen;
+  }
+
+  .announce-badge{
+    position:absolute;
+    left:14px;
+    top:14px;
+    padding:7px 10px;
+    border-radius:999px;
+    color:white;
+    background:rgba(15,23,42,.42);
+    backdrop-filter:blur(10px);
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .announce-body{
+    padding:16px;
+  }
+
+  .announce-title{
+    margin:0;
+    font-size:16px;
+    font-weight:900;
+    letter-spacing:-.2px;
+  }
+
+  .announce-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:10px;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  .arrow{
+    width:28px;
+    height:28px;
+    border-radius:999px;
+    display:grid;
+    place-items:center;
+    color:#3152c9;
+    background:rgba(79,124,255,.12);
+    flex-shrink:0;
+  }
+
+  .toolbar{
+    display:grid;
+    grid-template-columns:1fr 1fr minmax(220px, 1.2fr);
+    gap:12px;
+    padding:14px;
+    border-radius:24px;
+    background:rgba(255,255,255,.70);
+    border:1px solid rgba(148,163,184,.22);
+    box-shadow:var(--shadow-sm);
+    backdrop-filter:blur(14px);
+  }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+
+  .field label{
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .control{
+    width:100%;
+    min-height:42px;
+    border:1px solid rgba(148,163,184,.26);
+    border-radius:14px;
+    background:white;
+    color:#111827;
+    outline:0;
+    padding:0 12px;
+    transition:.16s ease;
+  }
+
+  .control:focus{
+    border-color:rgba(79,124,255,.78);
+    box-shadow:0 0 0 4px rgba(79,124,255,.12);
+  }
+
+  .search-wrap{
+    position:relative;
+  }
+
+  .search-wrap input{
+    padding-left:40px;
+  }
+
+  .search-icon{
+    position:absolute;
+    left:13px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#94a3b8;
+    pointer-events:none;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:16px;
+    margin-top:16px;
+  }
+
+  .char-card{
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    min-height:132px;
+    padding:14px;
+    border-radius:24px;
+    background:rgba(255,255,255,.84);
+    border:1px solid rgba(148,163,184,.22);
+    box-shadow:var(--shadow-sm);
+    cursor:pointer;
+    transition:.2s ease;
+  }
+
+  .char-card::before{
+    content:"";
+    position:absolute;
+    inset:auto -30px -48px auto;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:linear-gradient(135deg, rgba(79,124,255,.16), rgba(139,92,246,.12));
+    transition:.2s ease;
+  }
+
+  .char-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow-md);
+    border-color:rgba(79,124,255,.28);
+  }
+
+  .char-card:hover::before{
+    transform:scale(1.18);
+  }
+
+  .avatar{
+    position:relative;
+    z-index:1;
+    width:86px;
+    height:86px;
+    border-radius:20px;
+    overflow:hidden;
+    flex-shrink:0;
+    background:linear-gradient(135deg, #dbeafe, #ede9fe);
+    box-shadow:0 12px 30px rgba(15,23,42,.12);
+  }
+
+  .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .char-info{
+    position:relative;
+    z-index:1;
+    min-width:0;
+  }
+
+  .char-info h4{
+    margin:0 0 8px;
+    font-size:16px;
+    font-weight:900;
+    letter-spacing:-.2px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .card-stars{
+    margin-bottom:8px;
+    color:#f59e0b;
+    font-size:13px;
+    letter-spacing:1px;
+  }
+
+  .tag-row{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+  }
+
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 9px;
+    border-radius:999px;
+    background:#f1f5f9;
+    color:#475569;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .tag.role{
+    background:rgba(79,124,255,.10);
+    color:#3152c9;
+  }
+
+  .tag.weapon{
+    background:rgba(139,92,246,.10);
+    color:#6d28d9;
+  }
+
+  .empty{
+    grid-column:1/-1;
+    padding:26px;
+    border-radius:24px;
+    text-align:center;
+    color:var(--muted);
+    background:rgba(255,255,255,.72);
+    border:1px dashed rgba(148,163,184,.46);
+  }
+
+  .modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:22px;
+    background:rgba(15,23,42,.52);
+    backdrop-filter:blur(12px);
+    z-index:100;
+  }
+
+  .modal.open{
+    display:flex;
+  }
+
+  .modal-card{
+    width:min(880px, 100%);
+    max-height:min(780px, 90vh);
+    overflow:auto;
+    border-radius:28px;
+    background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(248,250,252,.96));
+    box-shadow:var(--shadow-lg);
+    border:1px solid rgba(255,255,255,.72);
+    animation:pop .18s ease;
+  }
+
+  @keyframes pop{
+    from{
+      opacity:0;
+      transform:scale(.96) translateY(10px);
+    }
+    to{
+      opacity:1;
+      transform:scale(1) translateY(0);
+    }
+  }
+
+  .modal-top{
+    position:relative;
+    padding:20px;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(79,124,255,.20), transparent 32%),
+      radial-gradient(circle at 82% 24%, rgba(139,92,246,.18), transparent 34%);
+    border-bottom:1px solid rgba(148,163,184,.20);
+  }
+
+  .modal-close{
+    position:absolute;
+    right:16px;
+    top:16px;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:999px;
+    cursor:pointer;
+    color:#64748b;
+    background:rgba(255,255,255,.72);
+    transition:.16s ease;
+  }
+
+  .modal-close:hover{
+    color:#111827;
+    background:white;
+    transform:rotate(90deg);
+  }
+
+  .modal-head{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    padding-right:48px;
+  }
+
+  .modal-head img{
+    width:116px;
+    height:116px;
+    border-radius:26px;
+    object-fit:cover;
+    box-shadow:0 18px 42px rgba(15,23,42,.16);
+    background:#e0e7ff;
+  }
+
+  .modal-name{
+    margin:0;
+    font-size:26px;
+    font-weight:900;
+    letter-spacing:-.7px;
+  }
+
+  .modal-stars{
+    margin-top:8px;
+    color:#f59e0b;
+    font-size:17px;
+    letter-spacing:2px;
+  }
+
+  .modal-tags{
+    margin-top:12px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .modal-body{
+    padding:20px;
+    color:#475569;
+    line-height:1.85;
+    font-size:15px;
+  }
+
+  .detail-layout{
+    display:grid;
+    gap:18px;
+  }
+
+  .detail-section{
+    padding:16px;
+    border-radius:20px;
+    background:rgba(248,250,252,.82);
+    border:1px solid rgba(148,163,184,.22);
+  }
+
+  .detail-section h3{
+    margin:0 0 12px;
+    font-size:16px;
+    font-weight:900;
+    color:#111827;
+  }
+
+  .info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:10px;
+  }
+
+  .info-item{
+    padding:12px;
+    border-radius:14px;
+    background:white;
+    border:1px solid rgba(148,163,184,.18);
+  }
+
+  .info-item span{
+    display:block;
+    margin-bottom:5px;
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .info-item strong{
+    color:#111827;
+    font-size:14px;
+  }
+
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+    gap:10px;
+  }
+
+  .stat-box{
+    padding:14px;
+    border-radius:16px;
+    background:
+      linear-gradient(135deg, rgba(79,124,255,.10), rgba(139,92,246,.08)),
+      white;
+    border:1px solid rgba(79,124,255,.14);
+  }
+
+  .stat-box span{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .stat-box strong{
+    display:block;
+    margin-top:4px;
+    color:#3152c9;
+    font-size:20px;
+    font-weight:900;
+  }
+
+  .skill-list{
+    display:grid;
+    gap:10px;
+  }
+
+  .skill-card{
+    padding:14px;
+    border-radius:16px;
+    background:white;
+    border:1px solid rgba(148,163,184,.20);
+  }
+
+  .skill-head{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+  }
+
+  .skill-head strong{
+    color:#111827;
+    font-size:15px;
+  }
+
+  .skill-head span{
+    padding:5px 8px;
+    border-radius:999px;
+    color:#3152c9;
+    background:rgba(79,124,255,.10);
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+
+  .skill-cooldown{
+    margin-top:6px;
+    color:#8b5cf6;
+    font-size:13px;
+    font-weight:700;
+  }
+
+  .skill-card p{
+    margin:8px 0 0;
+    color:#475569;
+    line-height:1.7;
+  }
+
+  .note-list{
+    margin:0;
+    padding-left:18px;
+    color:#475569;
+  }
+
+  footer{
+    margin-top:38px;
+    padding:20px 0;
+    color:#64748b;
+    text-align:center;
+    font-size:13px;
+  }
+
+  @media (max-width:820px){
+    .header{
+      padding:14px 16px;
+    }
+
+    .site-subtitle{
+      display:none;
+    }
+
+    .nav{
+      gap:4px;
+    }
+
+    .nav a{
+      padding:8px 9px;
+      font-size:13px;
+    }
+
+    .hero{
+      grid-template-columns:1fr;
+      padding:22px;
+    }
+
+    .toolbar{
+      grid-template-columns:1fr;
+    }
+
+    .mini-stats{
+      grid-template-columns:1fr 1fr;
+    }
+  }
+
+  @media (max-width:560px){
+    .container{
+      width:min(100% - 22px, 1180px);
+      padding-top:16px;
+    }
+
+    .brand-logo{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+    }
+
+    .site-title{
+      font-size:15px;
+    }
+
+    .nav a[href="#about"]{
+      display:none;
+    }
+
+    .hero h1{
+      font-size:34px;
+    }
+
+    .announcements{
+      grid-auto-columns:86%;
+    }
+
+    .grid{
+      grid-template-columns:1fr;
+    }
+
+    .modal-head{
+      align-items:flex-start;
+    }
+
+    .modal-head img{
+      width:88px;
+      height:88px;
+      border-radius:22px;
+    }
+
+    .modal-name{
+      font-size:21px;
+    }
+
+    .skill-head{
+      align-items:flex-start;
+      flex-direction:column;
+      gap:6px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="brand-logo">PA</div>
+      <div>
+        <h1 class="site-title">Project Archive Wiki</h1>
+        <div class="site-subtitle">Archive · Students · Battle Records</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="主导航">
+      <a href="#announcements">公告</a>
+      <a href="#characters">角色</a>
+      <a href="#about">关于</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Wiki Database Online
+        </div>
+
+        <h1>Project Archive<br>资料库</h1>
+
+        <p>
+          查看最新公告、角色资料、学院分类与职业定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#characters">查看角色</a>
+          <a class="btn btn-ghost" href="#announcements">最新公告</a>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="stat-card">
+          <div class="stat-label">当前版本公告</div>
+          <div class="stat-value" id="announcementCount">0</div>
+          <div class="stat-note">Updates / News</div>
+        </div>
+
+        <div class="mini-stats">
+          <div class="stat-card">
+            <div class="stat-label">角色数量</div>
+            <div class="stat-value" id="characterCount">0</div>
+            <div class="stat-note">Characters</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">学院数量</div>
+            <div class="stat-value" id="academyCount">0</div>
+            <div class="stat-note">Academies</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="announcements">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">最新公告</h2>
+          <p class="section-desc">版本更新、角色加入和活动消息会显示在这里。</p>
+        </div>
+        <div class="section-right">横向滑动查看更多</div>
+      </div>
+
+      <div class="announcements" id="announceArea" role="list"></div>
+    </section>
+
+    <section class="section" aria-label="筛选栏">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">角色筛选</h2>
+          <p class="section-desc">按照学院、职业或角色名快速查找。</p>
+        </div>
+        <div class="section-right" id="resultCount" role="status" aria-live="polite">显示 0 名角色</div>
+      </div>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="academySelect">学院</label>
+          <select class="control" id="academySelect">
+            <option value="all">全部学院</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="roleSelect">职业</label>
+          <select class="control" id="roleSelect">
+            <option value="all">全部职业</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="searchInput">搜索</label>
+          <div class="search-wrap">
+            <span class="search-icon">⌕</span>
+            <input class="control" id="searchInput" type="search" autocomplete="off" placeholder="输入角色名、学院、武器..." />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="characters">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">角色列表</h2>
+          <p class="section-desc">点击角色卡片可以查看完整角色数据。</p>
+        </div>
+      </div>
+
+      <div class="grid" id="charGrid"></div>
+    </section>
+
+    <footer id="about">
+      © 2026 Project Archive Wiki · Fan-made database layout
+    </footer>
+  </main>
+
+  <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="modalName">
+    <div class="modal-card" role="document">
+      <div class="modal-top">
+        <button id="closeModal" class="modal-close" aria-label="关闭弹窗">✕</button>
+
+        <div class="modal-head">
+          <img id="modalAvatar" src="" alt="">
+          <div>
+            <h2 class="modal-name" id="modalName"></h2>
+            <div class="modal-stars" id="modalStars"></div>
+            <div class="modal-tags" id="modalTags"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+<script>
+const announcements = [
+  {
+    title: "10月更新：Izuna 加入战场！",
+    img: "https://via.placeholder.com/800x450/4f7cff/ffffff?text=Izuna+Update",
+    link: "#",
+    type: "角色更新",
+    date: "2025.10"
+  },
+  {
+    title: "全新 Wiki 页面视觉升级",
+    img: "https://via.placeholder.com/800x450/8b5cf6/ffffff?text=Project+Archive+Wiki",
+    link: "#",
+    type: "网站公告",
+    date: "2025.10"
+  },
+  {
+    title: "学院与职业筛选功能上线",
+    img: "https://via.placeholder.com/800x450/22d3ee/ffffff?text=Filter+System",
+    link: "#",
+    type: "功能更新",
+    date: "2025.10"
+  }
+];
+
+const academies = [
+  "歌赫娜",
+  "千禧年",
+  "阿拜多斯",
+  "圣三一",
+  "瓦尔基里",
+  "阿里乌斯",
+  "海兰德",
+  "红冬",
+  "山海经",
+  "百鬼夜行",
+  "SRT",
+  "狂猎艺术"
+];
+
+const roles = [
+  "前卫",
+  "中卫",
+  "后卫",
+  "支援",
+  "狙击"
+];
+
+const characters = [
+  {
+    id: 1,
+    name: "爱丽丝 (Arisu)",
+    rarity: 3,
+    academy: "千禧年",
+    role: "后卫",
+    weapon: "光之剑 / 电磁炮",
+    attackType: "神秘",
+    defenseType: "特殊装甲",
+    position: "远程蓄能输出",
+    img: "assets/students/01-arisu.png",
+    kivoId: 108,
+
+    stats: {
+      hp: 2800,
+      attack: 720,
+      defense: 80,
+      speed: 5.8,
+      range: 42,
+      critRate: "10%",
+      reloadTime: "2.4s"
+    },
+
+    skills: [
+      {
+        name: "光之剑模块，切换！",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "短暂切换至「激光模式」，攻击变为高频的激光射击，击中敌人造成射击伤害，开火可获得少量「超充能」点数。"
+      },
+      {
+        name: "平衡崩坏！",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "蓄力后射出穿透掩体的能量炮，对直线范围内敌人造成技能伤害，并获得大量「超充能」点数。"
+      },
+      {
+        name: "强化魔法！",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "爱丽丝的攻击方式分为「蓄能模式」和「激光模式」。光之剑具备「超充能」属性，点数充足时可提升普通攻击伤害和炮弹尺寸，每次射击会消耗部分点数。"
+      }
+    ],
+
+    notes: [
+      "适合远距离蓄力输出。",
+      "超充能足够时爆发更强。",
+      "需要注意射击节奏和站位。"
+    ],
+
+    desc: "爱丽丝是一名远程蓄能输出角色，可以通过切换攻击模式和积累超充能，在中远距离造成高额伤害。"
+  },
+
+  {
+    id: 2,
+    name: "临战爱丽丝 (Arisu Armed)",
+    rarity: 3,
+    academy: "千禧年",
+    role: "后卫",
+    weapon: "阿比舒 / 光束炮",
+    attackType: "神秘",
+    defenseType: "特殊装甲",
+    position: "空中锁定输出",
+    img: "assets/students/02-arisu-armed.png",
+    kivoId: 574,
+
+    stats: {
+      hp: 3000,
+      attack: 760,
+      defense: 95,
+      speed: 6.3,
+      range: 44,
+      critRate: "11%",
+      reloadTime: "2.5s"
+    },
+
+    skills: [
+      {
+        name: "勇气的魔法",
+        type: "E技能",
+        cooldown: "14s",
+        desc: "对场上存在满层数「锁定标记」的敌人发射一轮跟踪导弹，造成技能伤害。"
+      },
+      {
+        name: "觉醒：超新星",
+        type: "Q技能",
+        cooldown: "34s",
+        desc: "进行强化锁定射击，随后进入蓄能，向前方释放巨型光束炮，对直线范围内敌人持续造成技能伤害，并自动释放一次E，期间降低移速和承伤率。"
+      },
+      {
+        name: "形态：阿比舒 / 永不言弃之心",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "长按跳跃键升空，飞行和射击会消耗阿比舒能量，能量耗尽时自动降落。命中敌人会逐步施加「锁定标记」，击中满层标记敌人会缩短E冷却。"
+      }
+    ],
+
+    notes: [
+      "适合空中持续压制。",
+      "依赖锁定标记触发导弹。",
+      "飞行能量需要管理。"
+    ],
+
+    desc: "临战爱丽丝拥有空中机动和锁定导弹机制，可以持续追踪敌人并用光束炮造成强力直线压制。"
+  },
+
+  {
+    id: 3,
+    name: "爱露 (Aru)",
+    rarity: 3,
+    academy: "歌赫娜",
+    role: "支援",
+    weapon: "狙击枪",
+    attackType: "爆发",
+    defenseType: "轻装甲",
+    position: "单体辅助 / 交易支援",
+    img: "assets/students/03-aru.png",
+    kivoId: 350,
+
+    stats: {
+      hp: 3100,
+      attack: 500,
+      defense: 95,
+      speed: 6.2,
+      range: 34,
+      critRate: "12%",
+      reloadTime: "2.1s"
+    },
+
+    skills: [
+      {
+        name: "有意义的交易",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "对一名除自身外友方发布委托，使其回复一定生命值。"
+      },
+      {
+        name: "兴趣盎然的提案",
+        type: "Q技能",
+        cooldown: "24s",
+        desc: "对一名除自身外友方发起指挥，在数秒内使其提升攻击力。"
+      },
+      {
+        name: "社长的威严 / 有利的交易",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "击中敌人时将其标记为「委任目标」。对友方使用技能时将其标记为「委任者」。若自身生命值较高，则消耗部分生命值额外治疗友方。委任目标倒下时，爱露和委任者获得护盾。"
+      }
+    ],
+
+    notes: [
+      "适合单体治疗和攻击增益。",
+      "需要选择合适的委任者。",
+      "标记目标倒下后可触发护盾收益。"
+    ],
+
+    desc: "爱露是偏单体支援的辅助角色，可以治疗友方、提升攻击力，并通过委任目标机制提供额外保护。"
+  },
+
+  {
+    id: 4,
+    name: "亚津子 (Atsuko)",
+    rarity: 3,
+    academy: "阿里乌斯",
+    role: "前卫",
+    weapon: "冲锋枪",
+    attackType: "爆发",
+    defenseType: "特殊装甲",
+    position: "烟雾生存 / 范围治疗",
+    img: "assets/students/04-atsuko.png",
+    kivoId: 35,
+
+    stats: {
+      hp: 4300,
+      attack: 360,
+      defense: 180,
+      speed: 7.2,
+      range: 18,
+      critRate: "7%",
+      reloadTime: "1.7s"
+    },
+
+    skills: [
+      {
+        name: "躲起来吧",
+        type: "E技能",
+        cooldown: "14s",
+        desc: "在自身位置释放烟雾弹，产生持续一段时间的烟雾，并短暂获得移速增加和免疫射击伤害的状态。"
+      },
+      {
+        name: "这也是我的力量……？",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "召唤医疗无人机跟随自己，前摇期间降低承伤率。无人机入场时立即治疗亚津子，之后周期性治疗范围内友方，并在首次范围治疗时解除友方减益状态。"
+      },
+      {
+        name: "烟雾突袭",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "亚津子首次离开自己释放的烟雾时，一段时间内降低承伤率。"
+      }
+    ],
+
+    notes: [
+      "烟雾能提供关键生存空间。",
+      "Q可以群体治疗并解除减益。",
+      "适合拉扯和保护队友。"
+    ],
+
+    desc: "亚津子拥有烟雾规避和范围治疗能力，适合在前线制造安全区域并提高队伍续航。"
+  },
+
+  {
+    id: 5,
+    name: "千夏 (Chinatsu)",
+    rarity: 2,
+    academy: "歌赫娜",
+    role: "支援",
+    weapon: "手枪",
+    attackType: "爆发",
+    defenseType: "轻装甲",
+    position: "治疗强化辅助",
+    img: "assets/students/05-chinatsu.png",
+    kivoId: 140,
+
+    stats: {
+      hp: 2600,
+      attack: 300,
+      defense: 80,
+      speed: 6.5,
+      range: 28,
+      critRate: "5%",
+      reloadTime: "1.6s"
+    },
+
+    skills: [
+      {
+        name: "强化战斗支援",
+        type: "E技能",
+        cooldown: "10s",
+        desc: "向一名除自身外友方丢出药丸，恢复其一定生命值。"
+      },
+      {
+        name: "战斗用A型能量剂",
+        type: "Q技能",
+        cooldown: "26s",
+        desc: "向一名除自身外友方射出强化针，使其获得护盾值，并在数秒内提升攻速、攻击力和换弹速度。"
+      },
+      {
+        name: "医疗负责人的严谨",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "千夏生命值低于一定值时，使用技能将会恢复自身一些生命值。"
+      }
+    ],
+
+    notes: [
+      "适合保护核心输出。",
+      "Q能同时提供护盾和输出强化。",
+      "自身血量低时有一定自保能力。"
+    ],
+
+    desc: "千夏是稳定的单体治疗辅助，可以强化友方输出并提供护盾保护。"
+  },
+
+  {
+    id: 6,
+    name: "千世 (Chise)",
+    rarity: 2,
+    academy: "百鬼夜行",
+    role: "中卫",
+    weapon: "榴弹发射器",
+    attackType: "神秘",
+    defenseType: "重装甲",
+    position: "范围灼烧输出",
+    img: "assets/students/06-chise.png",
+    kivoId: 84,
+
+    stats: {
+      hp: 3000,
+      attack: 560,
+      defense: 105,
+      speed: 5.9,
+      range: 30,
+      critRate: "8%",
+      reloadTime: "2.6s"
+    },
+
+    skills: [
+      {
+        name: "会有点痛哦~",
+        type: "E技能",
+        cooldown: "13s",
+        desc: "下蹲射出三发榴弹，对圆形范围内敌人造成伤害和击退，并使其减少移速、无法跳跃数秒。"
+      },
+      {
+        name: "可能会痛哦~",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "射出燃烧弹，碰撞后在地面形成圆形火焰区域，对范围内敌人造成持续伤害，灼烧效果会随停留时间增强。"
+      },
+      {
+        name: "要射击啦~",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "使用榴弹射击，爆炸范围过近会对自身造成伤害。对敌人造成伤害时附带「灼烧」，使目标持续受伤并降低受回复率。"
+      }
+    ],
+
+    notes: [
+      "擅长范围压制。",
+      "灼烧可以限制敌方治疗收益。",
+      "需要注意近距离自伤。"
+    ],
+
+    desc: "千世是一名范围输出角色，可以通过榴弹和燃烧区域持续压制敌人。"
+  },
+
+  {
+    id: 7,
+    name: "春香 (Haruka)",
+    rarity: 2,
+    academy: "歌赫娜",
+    role: "前卫",
+    weapon: "霰弹枪",
+    attackType: "爆发",
+    defenseType: "重装甲",
+    position: "近距离扇形压制",
+    img: "assets/students/07-haruka.png",
+    kivoId: 192,
+
+    stats: {
+      hp: 5000,
+      attack: 390,
+      defense: 240,
+      speed: 5.7,
+      range: 12,
+      critRate: "6%",
+      reloadTime: "2.2s"
+    },
+
+    skills: [
+      {
+        name: "一触即发",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "一定时间内，下次攻击不消耗弹药，伤害范围变为扇形，并基于命中敌人数量为自身持续提供护盾。"
+      },
+      {
+        name: "混乱射击",
+        type: "Q技能",
+        cooldown: "26s",
+        desc: "持枪缓慢行进并造成多段扇形范围伤害，对命中的敌人造成击退和移速降低。释放后获得护盾，护盾期间免疫击退，技能结束后补充弹药。"
+      },
+      {
+        name: "我，我会加油的",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "春香在射击时移速不会像其他人一样降低，生命值低于一定值时提升攻击速度。"
+      }
+    ],
+
+    notes: [
+      "适合前排近距离压制。",
+      "命中多个敌人时护盾收益更高。",
+      "低血量时输出频率提升。"
+    ],
+
+    desc: "春香是偏防守反击的前卫角色，能通过扇形射击压制敌人并获得护盾。"
+  },
+
+  {
+    id: 8,
+    name: "晴奈 (Haruna)",
+    rarity: 3,
+    academy: "歌赫娜",
+    role: "后卫",
+    weapon: "狙击枪",
+    attackType: "神秘",
+    defenseType: "重装甲",
+    position: "标记爆发输出",
+    img: "assets/students/08-haruna.png",
+    kivoId: 145,
+
+    stats: {
+      hp: 2500,
+      attack: 760,
+      defense: 85,
+      speed: 5.6,
+      range: 42,
+      critRate: "14%",
+      reloadTime: "2.5s"
+    },
+
+    skills: [
+      {
+        name: "美食家的信念",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "一定时间内，下次攻击不消耗弹药，并以落点为中心将伤害范围变为圆形。"
+      },
+      {
+        name: "美食家的愤怒",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "按下起爆器，短暂延迟后对所有带「美食标记」的敌人造成伤害，并以其为圆心额外生成范围爆炸。若场上没有标记目标则不能释放。"
+      },
+      {
+        name: "美食家的严谨",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "晴奈对敌人造成伤害时赋予「美食标记」。击中带标记目标时，会额外造成伤害。"
+      }
+    ],
+
+    notes: [
+      "需要先挂美食标记再打爆发。",
+      "适合处理多个被标记敌人。",
+      "Q需要场上存在标记目标。"
+    ],
+
+    desc: "晴奈擅长通过标记积累爆发，在合适时机引爆多个目标。"
+  },
+
+  {
+    id: 9,
+    name: "日富美 (Hifumi)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "支援",
+    weapon: "突击步枪",
+    attackType: "贯通",
+    defenseType: "轻装甲",
+    position: "召唤物控制辅助",
+    img: "assets/students/09-hifumi.png",
+    kivoId: 74,
+
+    stats: {
+      hp: 3300,
+      attack: 420,
+      defense: 100,
+      speed: 6.2,
+      range: 30,
+      critRate: "7%",
+      reloadTime: "2.0s"
+    },
+
+    skills: [
+      {
+        name: "佩洛洛大人的助威",
+        type: "E技能",
+        cooldown: "13s",
+        desc: "向前投掷手榴弹，对爆炸范围内敌人造成伤害。若场上存在「小型佩洛洛斯拉」，手榴弹会投向它，并使伤害范围等同于它的影响范围。"
+      },
+      {
+        name: "佩洛洛大人，快帮帮我！",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "向前丢出圆盘，在落点生成「小型佩洛洛斯拉」，使范围内敌人周期性受到伤害、移速降低和击飞。召唤物具有生命值，可阻挡敌人攻击。"
+      },
+      {
+        name: "佩洛洛大人的应援",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "对于受到「小型佩洛洛斯拉」影响的敌人，提升日富美对其射击造成的伤害。"
+      }
+    ],
+
+    notes: [
+      "召唤物可以干扰敌人位置。",
+      "E与Q联动后范围更大。",
+      "适合阵地战和限制走位。"
+    ],
+
+    desc: "日富美可以召唤佩洛洛斯拉控制区域，并通过召唤物强化自身输出。"
+  },
+
+  {
+    id: 10,
+    name: "小光 (Hikari)",
+    rarity: 3,
+    academy: "百鬼夜行",
+    role: "支援",
+    weapon: "手枪",
+    attackType: "贯通",
+    defenseType: "轻装甲",
+    position: "强力保护辅助",
+    img: "assets/students/10-hikari.png",
+    kivoId: 365,
+
+    stats: {
+      hp: 2900,
+      attack: 330,
+      defense: 90,
+      speed: 6.6,
+      range: 28,
+      critRate: "6%",
+      reloadTime: "1.8s"
+    },
+
+    skills: [
+      {
+        name: "预定大活跃~",
+        type: "E技能",
+        cooldown: "11s",
+        desc: "举起红旗指定一名除自身外友方回复生命值，并在一定时间内提升该友方攻击力。"
+      },
+      {
+        name: "剪票的时间",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "使一名除自身外友方在数秒内不会倒下，并根据其损失生命值提升攻击力。效果结束后为该友方回复生命值。"
+      },
+      {
+        name: "行驶准备~",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "治疗友方或击中敌人会为被动充能。充能满时，使用E期间可再次按E举起绿旗，对自身和目标额外治疗。"
+      }
+    ],
+
+    notes: [
+      "Q适合保护关键输出。",
+      "低血量队友能获得更高攻击收益。",
+      "E可通过被动追加治疗。"
+    ],
+
+    desc: "小光是偏保护型的强力辅助，可以让队友在危险时保持作战能力。"
+  },
+
+  {
+    id: 11,
+    name: "日奈 (Hina)",
+    rarity: 3,
+    academy: "歌赫娜",
+    role: "中卫",
+    weapon: "机枪",
+    attackType: "贯通",
+    defenseType: "重装甲",
+    position: "中距离演奏压制",
+    img: "assets/students/11-hina.png",
+    kivoId: 346,
+
+    stats: {
+      hp: 3200,
+      attack: 680,
+      defense: 115,
+      speed: 5.9,
+      range: 34,
+      critRate: "9%",
+      reloadTime: "2.6s"
+    },
+
+    skills: [
+      {
+        name: "周密准备",
+        type: "E技能",
+        cooldown: "14s",
+        desc: "开始唱谱并立刻装填弹药，在自身周围创造临时固定「音障」，降低承伤率，并使用「旋律」射出特殊射弹。音障防御和射弹伤害会随旋律数量提升，换弹后失效。"
+      },
+      {
+        name: "开幕演出：伊施波设",
+        type: "Q技能",
+        cooldown: "32s",
+        desc: "短暂准备后进入「集中模式」，移速降低并免疫控制。该模式下开火可发射穿透敌人的音轨，最多三次。演奏结束时，按旋律数量对受到音轨伤害的敌人造成追加伤害。"
+      },
+      {
+        name: "投入演奏的心情",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "日奈对敌人射击和使用技能时会获得「旋律」，倒下后旋律清空。"
+      }
+    ],
+
+    notes: [
+      "旋律数量会影响技能收益。",
+      "Q期间控制抗性强。",
+      "适合中距离持续压制。"
+    ],
+
+    desc: "日奈通过积累旋律强化自身技能，在中距离形成稳定且高压的火力演奏。"
+  },
+
+  {
+    id: 12,
+    name: "星野 (Hoshino)",
+    rarity: 3,
+    academy: "阿拜多斯",
+    role: "前卫",
+    weapon: "霰弹枪 / 盾牌",
+    attackType: "贯通",
+    defenseType: "重装甲",
+    position: "前排防守推进",
+    img: "assets/students/12-hoshino.png",
+    kivoId: 373,
+
+    stats: {
+      hp: 5600,
+      attack: 380,
+      defense: 280,
+      speed: 5.5,
+      range: 12,
+      critRate: "6%",
+      reloadTime: "2.3s"
+    },
+
+    skills: [
+      {
+        name: "更换护板",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "更换护板，恢复一定「耐久度」并装填三发弹药。"
+      },
+      {
+        name: "防御姿态强化",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "向前翻滚，位移过程中免疫伤害并击退前方扇形范围敌人，装填三发弹药。随后展开临时「立场盾」，期间无视位移效果。立场盾被击碎或结束时触发破片攻击。"
+      },
+      {
+        name: "钢铁荷鲁斯近战系统",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "持有盾牌，被敌方射击击中时降低该次伤害。耐久度不为零或存在立场盾时降低承伤率，耐久度归零时触发破片攻击。"
+      }
+    ],
+
+    notes: [
+      "非常适合前排抗线。",
+      "E能恢复耐久度并补弹。",
+      "Q可以推进、免伤、击退并展开盾。"
+    ],
+
+    desc: "星野是强力防守型前卫，能够通过盾牌、耐久度和立场盾稳定承担前排压力。"
+  },
+
+  {
+    id: 13,
+    name: "伊吹 (Ibuki)",
+    rarity: 2,
+    academy: "歌赫娜",
+    role: "支援",
+    weapon: "手枪",
+    attackType: "爆发",
+    defenseType: "轻装甲",
+    position: "范围治疗 / 减攻辅助",
+    img: "assets/students/13-ibuki.png",
+    kivoId: 136,
+
+    stats: {
+      hp: 2700,
+      attack: 310,
+      defense: 85,
+      speed: 6.5,
+      range: 26,
+      critRate: "5%",
+      reloadTime: "1.7s"
+    },
+
+    skills: [
+      {
+        name: "不可以当坏孩子！",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "朝指定敌人吹哨，使其攻击力降低一段时间，并为周围范围内除自身外友方回复生命值。"
+      },
+      {
+        name: "伊吹的绘画时间！",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "展示画作，创建一个跟随自身移动的临时领域，为范围内友方降低承伤率，并周期性治疗除自身以外的友方。"
+      },
+      {
+        name: "万魔殿的吉祥物",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "队友在附近时，伊吹会逐渐回复生命值。释放任意技能后，该回复效果和生效范围短暂提升。"
+      }
+    ],
+
+    notes: [
+      "适合跟随队友行动。",
+      "能降低敌方攻击力。",
+      "Q适合团队集合推进。"
+    ],
+
+    desc: "伊吹是可爱的范围辅助角色，可以治疗队友、降低敌方攻击力，并在团队附近获得更强续航。"
+  },
+
+  {
+    id: 14,
+    name: "泉奈 (Izuna)",
+    rarity: 3,
+    academy: "百鬼夜行",
+    role: "前卫",
+    weapon: "冲锋枪",
+    attackType: "神秘",
+    defenseType: "轻装甲",
+    position: "前排突进 / 隐身切入",
+    img: "assets/students/14-izuna.png",
+    kivoId: 46,
+
+    stats: {
+      hp: 3400,
+      attack: 430,
+      defense: 115,
+      speed: 8.8,
+      range: 18,
+      critRate: "12%",
+      reloadTime: "1.8s"
+    },
+
+    skills: [
+      {
+        name: "泉奈忍法帖！",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "掷出传送飞镖。再次按E、飞镖碰墙或超出距离时，在原地留下分身，本体传送至飞镖处，并短暂获得隐身和移速提升。开火会移除自身所有效果。"
+      },
+      {
+        name: "泉奈流忍法·夏天版",
+        type: "Q技能",
+        cooldown: "24s",
+        desc: "高高跳起并踢出沙滩球，对圆形范围内敌人造成伤害和击退，并红色高亮标记一段时间。泉奈射击高亮目标可补充弹药。"
+      },
+      {
+        name: "忍者的自我修养",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "泉奈在一段时间内未受伤害时，会逐渐恢复生命值至一定值。期间若再次受到伤害，则停止恢复。"
+      }
+    ],
+
+    notes: [
+      "适合绕后和快速切入。",
+      "隐身期间不要乱开火。",
+      "被动需要脱战才能回血。"
+    ],
+
+    desc: "泉奈是一名灵活的突进角色，可以通过飞镖传送、分身和隐身快速切入战场。"
+  },
+
+  {
+    id: 15,
+    name: "佳代子 (Kayoko)",
+    rarity: 2,
+    academy: "歌赫娜",
+    role: "中卫",
+    weapon: "手枪",
+    attackType: "爆发",
+    defenseType: "轻装甲",
+    position: "恐惧控制",
+    img: "assets/students/15-kayoko.png",
+    kivoId: 176,
+
+    stats: {
+      hp: 3000,
+      attack: 410,
+      defense: 90,
+      speed: 6.2,
+      range: 28,
+      critRate: "8%",
+      reloadTime: "1.9s"
+    },
+
+    skills: [
+      {
+        name: "影子射击",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "射击三发不消耗弹药的特殊子弹，对受击者造成伤害。若敌人处于「恐惧」状态，则额外造成附加伤害。"
+      },
+      {
+        name: "恐惧使者",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "释放恐怖立场并刷新E冷却，对自身范围内敌人造成伤害并施加「恐惧」。恐惧会打断敌方技能并返还充能，使目标移速下降并远离佳代子，期间无法操作。"
+      },
+      {
+        name: "可怕的表情 / 没办法……",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "佳代子不会被敌人赋予「恐惧」。她在赋予敌人恐惧或击中恐惧中的敌人时，会回复生命值。"
+      }
+    ],
+
+    notes: [
+      "核心机制是恐惧控制。",
+      "Q可以打断敌方技能。",
+      "E对恐惧目标伤害更高。"
+    ],
+
+    desc: "佳代子是控制型角色，可以通过恐惧打乱敌方行动并制造输出机会。"
+  },
+
+  {
+    id: 16,
+    name: "柯伊 (Kei)",
+    rarity: 3,
+    academy: "千禧年",
+    role: "支援",
+    weapon: "电磁炮",
+    attackType: "神秘",
+    defenseType: "特殊装甲",
+    position: "技能增幅 / 损毁输出",
+    img: "assets/students/16-kei.png",
+    kivoId: 518,
+
+    stats: {
+      hp: 3100,
+      attack: 620,
+      defense: 100,
+      speed: 5.8,
+      range: 38,
+      critRate: "9%",
+      reloadTime: "2.4s"
+    },
+
+    skills: [
+      {
+        name: "此处的我",
+        type: "E技能",
+        cooldown: "16s",
+        desc: "向前投掷装置球，落地后展开临时圆柱体「增幅立场」，使范围内除自身外队友提升技能伤害率、技能治疗率，并加快技能冷却。"
+      },
+      {
+        name: "想惹怒我是吧！？",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "蓄力后射出穿透敌人的辐能炮，对直线范围内敌人造成伤害和等值「损毁」。若场上存在队友爱丽丝，则技能结束后为爱丽丝Q提供额外充能。"
+      },
+      {
+        name: "并肩同行的伙伴",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "柯伊或增幅立场中的队友造成伤害会为电磁炮蓄能。蓄能满时，下一次射击命中造成双倍于伤害的「损毁」。损毁会扣除目标部分生命值上限，并逐渐衰减。"
+      }
+    ],
+
+    notes: [
+      "适合搭配技能型队友。",
+      "和爱丽丝有特殊联动。",
+      "损毁可以压低敌人生命上限。"
+    ],
+
+    desc: "柯伊是技能增幅型支援角色，同时拥有强力直线炮和生命上限削减机制。"
+  },
+
+  {
+    id: 17,
+    name: "桔梗 (Kikyou)",
+    rarity: 3,
+    academy: "百鬼夜行",
+    role: "中卫",
+    weapon: "步枪",
+    attackType: "神秘",
+    defenseType: "轻装甲",
+    position: "陷阱侦测 / 战术输出",
+    img: "assets/students/17-kikyou.png",
+    kivoId: 320,
+
+    stats: {
+      hp: 2900,
+      attack: 540,
+      defense: 90,
+      speed: 6.4,
+      range: 34,
+      critRate: "10%",
+      reloadTime: "2.1s"
+    },
+
+    skills: [
+      {
+        name: "知己知彼，百战不殆",
+        type: "E技能",
+        cooldown: "13s",
+        desc: "阅读诗篇并自动装填弹匣。击中落单敌人时，对其额外造成伤害。"
+      },
+      {
+        name: "神机妙算的一着",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "在指定位置布下临时「天罗地网」。区域内首次探测到敌人存在，或侦测到敌人主动攻击时，这些敌人会受到多段火力倾泻。"
+      },
+      {
+        name: "风林火山之策",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "如果桔梗一段时间内没有开火，那么下一发射击命中敌人将回复自身生命值。"
+      }
+    ],
+
+    notes: [
+      "适合反制落单敌人。",
+      "Q适合封锁区域。",
+      "被动鼓励有节奏地开火。"
+    ],
+
+    desc: "桔梗是一名战术型输出角色，能够通过陷阱区域和落单惩罚控制敌方行动。"
+  },
+
+  {
+    id: 18,
+    name: "心奈 (Kokona)",
+    rarity: 3,
+    academy: "山海经",
+    role: "支援",
+    weapon: "步枪",
+    attackType: "贯通",
+    defenseType: "特殊装甲",
+    position: "印章治疗辅助",
+    img: "assets/students/18-kokona.png",
+    kivoId: 4,
+
+    stats: {
+      hp: 2850,
+      attack: 350,
+      defense: 85,
+      speed: 6.6,
+      range: 28,
+      critRate: "6%",
+      reloadTime: "1.8s"
+    },
+
+    skills: [
+      {
+        name: "我很期待下回的表现哦！",
+        type: "E技能",
+        cooldown: "10s",
+        desc: "在限定范围内表扬一名除自身外队友，使其回复定量生命值。"
+      },
+      {
+        name: "做得真棒！",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "对一名队友和自己进行治疗，并根据持有「花丸印章」数量额外触发范围治疗、移速攻速提升、承伤率降低等效果，随后消耗花丸印章。"
+      },
+      {
+        name: "梅花园的指导法",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "心奈使用E或击中敌人时为「花丸印章」充能。根据印章数量，心奈获得缓慢回复生命、提升移速和提升攻速。"
+      }
+    ],
+
+    notes: [
+      "花丸印章越多，Q收益越强。",
+      "兼具单体治疗和范围辅助。",
+      "需要通过E和攻击维持印章。"
+    ],
+
+    desc: "心奈是印章机制治疗角色，可以通过积累花丸印章强化团队续航和机动能力。"
+  },
+
+  {
+    id: 19,
+    name: "胡桃 (Kurumi)",
+    rarity: 3,
+    academy: "SRT",
+    role: "前卫",
+    weapon: "盾牌 / 冲锋枪",
+    attackType: "贯通",
+    defenseType: "重装甲",
+    position: "突袭控制坦克",
+    img: "assets/students/19-kurumi.png",
+    kivoId: 66,
+
+    stats: {
+      hp: 5200,
+      attack: 390,
+      defense: 250,
+      speed: 6.4,
+      range: 14,
+      critRate: "6%",
+      reloadTime: "2.2s"
+    },
+
+    skills: [
+      {
+        name: "突袭！",
+        type: "E技能",
+        cooldown: "14s",
+        desc: "进入准备姿态，提升移速并降低承伤率。再次按E或接近敌人时释放震撼弹，对扇形范围敌人造成伤害和击退，并短时间降低移速。"
+      },
+      {
+        name: "推进！",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "重重砸下盾牌并向前引爆闪光弹。扇形范围内敌人受到伤害并进入「失明」，视野被遮挡、移速降低且不能跳跃。"
+      },
+      {
+        name: "闪战核心",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "持有盾牌，被敌方射击击中时降低伤害。任意技能击中敌人时，短时间降低承伤率并获得护盾，护盾值随命中敌人数增加。"
+      }
+    ],
+
+    notes: [
+      "突进和控制能力强。",
+      "技能命中多人时护盾收益更高。",
+      "适合开团和打乱阵型。"
+    ],
+
+    desc: "胡桃是一名前排突袭坦克，能够通过盾牌、震撼弹和闪光弹压制敌方行动。"
+  },
+
+  {
+    id: 20,
+    name: "玛丽 (Mari)",
+    rarity: 2,
+    academy: "圣三一",
+    role: "支援",
+    weapon: "手枪",
+    attackType: "神秘",
+    defenseType: "轻装甲",
+    position: "治疗护盾辅助",
+    img: "assets/students/20-mari.png",
+    kivoId: 498,
+
+    stats: {
+      hp: 2700,
+      attack: 320,
+      defense: 80,
+      speed: 6.3,
+      range: 28,
+      critRate: "5%",
+      reloadTime: "1.7s"
+    },
+
+    skills: [
+      {
+        name: "慈爱的飞吻",
+        type: "E技能",
+        cooldown: "10s",
+        desc: "给予一名除自身外友方祝福，使其回复一定生命值。"
+      },
+      {
+        name: "洋溢的心意",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "为大家祈祷，前摇期间无法移动。随后持续回复自身生命值，并为范围内除自身外友方提供治疗和护盾。"
+      },
+      {
+        name: "请喝水吧",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "被玛丽击中的目标附近会生成临时水瓶，友方拾取后恢复少量生命并增加移速。"
+      }
+    ],
+
+    notes: [
+      "稳定治疗和护盾辅助。",
+      "Q期间不能移动，需要注意位置。",
+      "水瓶可提供小额续航和加速。"
+    ],
+
+    desc: "玛丽是温和稳定的治疗辅助，可以为队友提供生命回复、护盾和移动收益。"
+  },
+
+  {
+    id: 21,
+    name: "小绿 (Midori)",
+    rarity: 3,
+    academy: "千禧年",
+    role: "后卫",
+    weapon: "步枪",
+    attackType: "贯通",
+    defenseType: "轻装甲",
+    position: "治疗 / 持续伤害混合",
+    img: "assets/students/21-midori.png",
+    kivoId: 27,
+
+    stats: {
+      hp: 2600,
+      attack: 520,
+      defense: 75,
+      speed: 6.5,
+      range: 36,
+      critRate: "11%",
+      reloadTime: "2.0s"
+    },
+
+    skills: [
+      {
+        name: "审美锤炼",
+        type: "E技能",
+        cooldown: "11s",
+        desc: "向一名除自身外队友丢出血包，使其回复生命值。"
+      },
+      {
+        name: "绘画艺术",
+        type: "Q技能",
+        cooldown: "26s",
+        desc: "手动射击五次，不消耗弹药。击中敌人造成伤害并施加持续伤害，击中队友则给予治疗和持续回复，效果层数可叠加。"
+      },
+      {
+        name: "艺术家灵感",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "每当通过消耗弹药击中敌人数次后，下一发弹药以落点为中心，对友方赋予持续回复，对敌方赋予持续伤害。"
+      }
+    ],
+
+    notes: [
+      "能同时处理治疗和输出。",
+      "Q需要手动命中目标。",
+      "适合灵活支援前线。"
+    ],
+
+    desc: "小绿是混合型后卫，可以在治疗友方和持续消耗敌人之间切换。"
+  },
+
+  {
+    id: 22,
+    name: "未花 (Mika)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "前卫",
+    weapon: "冲锋枪",
+    attackType: "贯通",
+    defenseType: "轻装甲",
+    position: "高暴击爆发输出",
+    img: "assets/students/22-mika.png",
+    kivoId: 1,
+
+    stats: {
+      hp: 3900,
+      attack: 720,
+      defense: 130,
+      speed: 6.4,
+      range: 20,
+      critRate: "100%",
+      reloadTime: "2.0s"
+    },
+
+    skills: [
+      {
+        name: "星之呼唤",
+        type: "E技能",
+        cooldown: "14s",
+        desc: "自动进行三段不消耗弹药的引导射击，随后召唤陨石坠落造成圆形范围伤害。"
+      },
+      {
+        name: "Kyrie Eleison",
+        type: "Q技能",
+        cooldown: "32s",
+        desc: "自动射击多次，每次造成附加伤害，期间不能移动。射击结束后，按目标被击次数和与未花距离造成附加斩杀。"
+      },
+      {
+        name: "祝福",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "未花的普通攻击必定暴击。释放技能期间，敌人离她越远，对她造成的伤害越低。"
+      }
+    ],
+
+    notes: [
+      "普通攻击必定暴击。",
+      "Q期间不能移动，需要安全环境。",
+      "适合处理高价值目标。"
+    ],
+
+    desc: "未花是强力爆发输出角色，依靠必定暴击和多段附加伤害击溃敌人。"
+  },
+
+  {
+    id: 23,
+    name: "美祢 (Mine)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "前卫",
+    weapon: "手枪 / 应援棒",
+    attackType: "爆发",
+    defenseType: "重装甲",
+    position: "禁锢控制 / 团队攻速",
+    img: "assets/students/23-mine.png",
+    kivoId: 500,
+
+    stats: {
+      hp: 5000,
+      attack: 420,
+      defense: 230,
+      speed: 6.0,
+      range: 18,
+      critRate: "7%",
+      reloadTime: "2.1s"
+    },
+
+    skills: [
+      {
+        name: "严峻的宣告",
+        type: "E技能",
+        cooldown: "14s",
+        desc: "击出特殊子弹，不消耗弹药，被击中的敌方受到伤害并被「禁锢」。若美祢持有应援棒，则消耗一个应援棒将其拉到身边，并加长禁锢时间。"
+      },
+      {
+        name: "超级偶像降临",
+        type: "Q技能",
+        cooldown: "32s",
+        desc: "高高跳起，落地后创建跟随自身移动的圆形演奏区域。根据应援棒数量，友方提升攻速，敌方降低攻速。首次进入区域的友方获得护盾，演奏结束后清空应援棒。"
+      },
+      {
+        name: "粉丝的应援",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "每当美祢被友方指向性技能选为主要目标时，获得一个应援棒，应援棒会降低她的承伤率。"
+      }
+    ],
+
+    notes: [
+      "可以禁锢并拉近敌人。",
+      "需要应援棒强化技能收益。",
+      "Q适合团战区域强化。"
+    ],
+
+    desc: "美祢是前排控制型角色，可以利用禁锢、拉拽和攻速领域影响团战。"
+  },
+
+  {
+    id: 24,
+    name: "小桃 (Momoi)",
+    rarity: 2,
+    academy: "千禧年",
+    role: "中卫",
+    weapon: "突击步枪",
+    attackType: "贯通",
+    defenseType: "轻装甲",
+    position: "扇形扫射输出",
+    img: "assets/students/24-momoi.png",
+    kivoId: 2,
+
+    stats: {
+      hp: 3000,
+      attack: 520,
+      defense: 85,
+      speed: 6.7,
+      range: 30,
+      critRate: "9%",
+      reloadTime: "2.0s"
+    },
+
+    skills: [
+      {
+        name: "严守截稿日",
+        type: "E技能",
+        cooldown: "13s",
+        desc: "抽出卡片，短时间内大幅提升移速并自动装填弹匣，随后提升攻击力一段时间。"
+      },
+      {
+        name: "创作的痛苦",
+        type: "Q技能",
+        cooldown: "26s",
+        desc: "向前方扇形区域倾泻愤怒子弹，造成多段范围伤害。技能期间降低移速并降低承伤率。"
+      },
+      {
+        name: "结果好，万事好",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "使用E后，若在下次换弹前击倒敌人，则换弹时获得护盾。单次技能仅提供一次护盾。"
+      }
+    ],
+
+    notes: [
+      "E后击倒敌人能获得护盾。",
+      "Q适合清理正面区域。",
+      "需要把握换弹前的击倒窗口。"
+    ],
+
+    desc: "小桃擅长快速装填和扇形扫射，是节奏感较强的中距离输出角色。"
+  },
+
+  {
+    id: 25,
+    name: "睦月 (Mutsuki)",
+    rarity: 2,
+    academy: "歌赫娜",
+    role: "后卫",
+    weapon: "榴弹发射器",
+    attackType: "爆发",
+    defenseType: "轻装甲",
+    position: "地雷 / 区域爆破",
+    img: "assets/students/25-mutsuki.png",
+    kivoId: 107,
+
+    stats: {
+      hp: 2600,
+      attack: 610,
+      defense: 70,
+      speed: 5.8,
+      range: 36,
+      critRate: "10%",
+      reloadTime: "2.7s"
+    },
+
+    skills: [
+      {
+        name: "爆裂咏叹调",
+        type: "E技能",
+        cooldown: "15s",
+        desc: "在指定位置安放一组隐形地雷，敌人靠近时整组引爆。地雷可被敌方射击或部分技能摧毁，并有同时存在组数上限。"
+      },
+      {
+        name: "灼热小夜曲",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "向指定方向投掷炸弹提包，可通过主动射击引爆或等待数秒自行爆炸，对三个圆形范围内敌方分别造成伤害。"
+      },
+      {
+        name: "爆破专家",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "睦月擅长通过地雷和炸弹提包控制区域，限制敌方移动路线。"
+      }
+    ],
+
+    notes: [
+      "适合预判敌人路线。",
+      "地雷可被破坏。",
+      "Q可以手动引爆创造爆发。"
+    ],
+
+    desc: "睦月是区域爆破型后卫，可以通过地雷和炸弹提包布置危险区域。"
+  },
+
+  {
+    id: 26,
+    name: "名草 (Nagusa)",
+    rarity: 3,
+    academy: "百鬼夜行",
+    role: "中卫",
+    weapon: "步枪",
+    attackType: "神秘",
+    defenseType: "轻装甲",
+    position: "孤立目标击破",
+    img: "assets/students/26-nagusa.png",
+    kivoId: 254,
+
+    stats: {
+      hp: 3100,
+      attack: 640,
+      defense: 95,
+      speed: 6.5,
+      range: 34,
+      critRate: "12%",
+      reloadTime: "2.1s"
+    },
+
+    skills: [
+      {
+        name: "锦上添花",
+        type: "E技能",
+        cooldown: "13s",
+        desc: "品尝鸡肉串并自动装填弹药。短时间内击中敌人时，若附近无其他敌人则额外造成伤害；若附近有其他敌人，则对最近另一名敌人造成伤害。效果在换弹后失效。"
+      },
+      {
+        name: "樱花烂漫",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "向前冲刺，随后蓄力并射出穿透敌人的强力射击，命中时根据目标剩余生命值百分比造成伤害。"
+      },
+      {
+        name: "穿透黄昏的言灵",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "名草击倒敌人后获得一定时间的护盾值。"
+      }
+    ],
+
+    notes: [
+      "适合处理落单目标。",
+      "击倒后可获得护盾。",
+      "Q具有穿透和生命比例伤害。"
+    ],
+
+    desc: "名草擅长击破孤立敌人，并通过击倒后的护盾继续保持进攻压力。"
+  },
+
+  {
+    id: 27,
+    name: "小夏 (Natsu)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "前卫",
+    weapon: "冲锋枪 / 盾牌",
+    attackType: "神秘",
+    defenseType: "重装甲",
+    position: "自保坦克 / 范围治疗",
+    img: "assets/students/27-natsu.png",
+    kivoId: 139,
+
+    stats: {
+      hp: 5400,
+      attack: 360,
+      defense: 260,
+      speed: 5.8,
+      range: 16,
+      critRate: "6%",
+      reloadTime: "2.2s"
+    },
+
+    skills: [
+      {
+        name: "来口这个吧！",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "向自己和圆形范围内队友丢出派，前摇期间降低移速，随后使目标回复生命值。"
+      },
+      {
+        name: "秘藏王牌",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "原地停下饮用牛奶，前摇期间承伤率大幅降低，获得持续护盾。护盾期间若满足受损且数秒内未受新伤害，则恢复护盾值。"
+      },
+      {
+        name: "填满嘴巴的幸福感",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "持有盾牌，被敌方射击击中时降低该次伤害。使用任意技能后自动换弹，并短暂提升移速。"
+      }
+    ],
+
+    notes: [
+      "适合前排稳定站场。",
+      "E可以治疗自己和队友。",
+      "Q适合承受关键火力。"
+    ],
+
+    desc: "小夏是耐久型前卫，可以通过治疗、护盾和自动换弹稳定维持战线。"
+  },
+
+  {
+    id: 28,
+    name: "妮可 (Niko)",
+    rarity: 3,
+    academy: "SRT",
+    role: "前卫",
+    weapon: "突击步枪",
+    attackType: "贯通",
+    defenseType: "重装甲",
+    position: "团队护盾 / 阵地防守",
+    img: "assets/students/28-niko.png",
+    kivoId: 65,
+
+    stats: {
+      hp: 5000,
+      attack: 390,
+      defense: 235,
+      speed: 6.0,
+      range: 22,
+      critRate: "7%",
+      reloadTime: "2.1s"
+    },
+
+    skills: [
+      {
+        name: "冲锋号令",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "发起冲锋，使自身周围范围内友方恢复生命值，并在数秒内提升移速。"
+      },
+      {
+        name: "穹顶展开",
+        type: "Q技能",
+        cooldown: "32s",
+        desc: "原地蹲下放置核心并展开临时球状「穹顶护盾」。护盾可阻挡大部分敌人自外向内的攻击，并降低内部友方承伤率。核心若被射击破坏，则护盾提前销毁。"
+      },
+      {
+        name: "战术整备",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "当妮可弹药在半数以下并触发换弹时，数秒内提升她的移速。"
+      }
+    ],
+
+    notes: [
+      "Q可以保护团队阵地。",
+      "核心被破坏会提前结束护盾。",
+      "E适合团队推进。"
+    ],
+
+    desc: "妮可是团队防守型前卫，可以通过穹顶护盾保护队友并创造安全输出空间。"
+  },
+
+  {
+    id: 29,
+    name: "诺亚 (Noa)",
+    rarity: 3,
+    academy: "千禧年",
+    role: "支援",
+    weapon: "枕头",
+    attackType: "神秘",
+    defenseType: "轻装甲",
+    position: "攻速调节 / 枕头治疗",
+    img: "assets/students/29-noa.png",
+    kivoId: 506,
+
+    stats: {
+      hp: 2800,
+      attack: 360,
+      defense: 80,
+      speed: 6.5,
+      range: 30,
+      critRate: "6%",
+      reloadTime: "1.8s"
+    },
+
+    skills: [
+      {
+        name: "嘘，要关灯了",
+        type: "E技能",
+        cooldown: "11s",
+        desc: "扔出枕头，命中队友给予治疗和攻速提升，命中敌人造成伤害和攻速下降，两种状态层数可叠加。"
+      },
+      {
+        name: "心仪的枕头",
+        type: "Q技能",
+        cooldown: "26s",
+        desc: "抱紧枕头，为自己回复生命值。随后一段时间内，普通攻击替换为投掷枕头。"
+      },
+      {
+        name: "睡意传递",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "枕头击中目标后，为落点周围范围友方回复生命值。该治疗不与E命中治疗叠加。"
+      }
+    ],
+
+    notes: [
+      "同一技能可治疗队友或削弱敌人。",
+      "Q后普攻变成枕头投掷。",
+      "适合混战中的持续辅助。"
+    ],
+
+    desc: "诺亚是灵活的枕头辅助，可以调节攻速、治疗友方并消耗敌人。"
+  },
+
+  {
+    id: 30,
+    name: "小望 (Nozomi)",
+    rarity: 3,
+    academy: "百鬼夜行",
+    role: "中卫",
+    weapon: "冲锋枪",
+    attackType: "贯通",
+    defenseType: "轻装甲",
+    position: "贴纸标记 / 列车推进",
+    img: "assets/students/30-nozomi.png",
+    kivoId: 366,
+
+    stats: {
+      hp: 3100,
+      attack: 500,
+      defense: 95,
+      speed: 6.8,
+      range: 28,
+      critRate: "10%",
+      reloadTime: "1.9s"
+    },
+
+    skills: [
+      {
+        name: "这边这边！",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "场上存在「贴纸标记」时可释放。使标记敌人对小望高亮。该敌人连续被她射击时，追加一次暴击伤害，并为小望补充弹药、提升攻速。由她击倒该敌人后，获得最大层数攻速提升并自动装填弹药。"
+      },
+      {
+        name: "启动助推器！",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "向前方部署一趟列车，对矩形区域内敌人造成伤害。短暂等待后，列车全速前进，对路径敌人造成伤害和击退。"
+      },
+      {
+        name: "出发前进！",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "小望射击命中敌人时，为其挂上「贴纸标记」，该标记同时只能存在一个。"
+      }
+    ],
+
+    notes: [
+      "E依赖贴纸标记。",
+      "击倒标记目标收益很高。",
+      "Q适合直线路径压制。"
+    ],
+
+    desc: "小望可以通过贴纸标记追击单个目标，并用列车技能制造直线推进压力。"
+  },
+
+  {
+    id: 31,
+    name: "玲纱 (Reisa)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "前卫",
+    weapon: "霰弹枪",
+    attackType: "贯通",
+    defenseType: "重装甲",
+    position: "近战持续恢复",
+    img: "assets/students/31-reisa.png",
+    kivoId: 142,
+
+    stats: {
+      hp: 5200,
+      attack: 410,
+      defense: 240,
+      speed: 5.9,
+      range: 14,
+      critRate: "7%",
+      reloadTime: "2.2s"
+    },
+
+    skills: [
+      {
+        name: "胜利的POSE！",
+        type: "E技能",
+        cooldown: "11s",
+        desc: "摆出自信姿态，使自身恢复一定生命值。"
+      },
+      {
+        name: "收下战书吧！",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "摆出战斗姿态，短时间内持续恢复生命值，并获得三发额外龙息弹弹药，每发对前方扇形范围敌人造成伤害和持续伤害，效果可叠加。"
+      },
+      {
+        name: "宇泽玲纱的存在感",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "基于玲纱周围圆柱体范围内敌方数量，提升玲纱的换弹速度。"
+      }
+    ],
+
+    notes: [
+      "敌人越多换弹越快。",
+      "Q提供持续回复和额外弹药。",
+      "适合近距离混战。"
+    ],
+
+    desc: "玲纱是近距离前卫角色，能够在敌群中通过回复、龙息弹和快速换弹持续战斗。"
+  },
+
+  {
+    id: 32,
+    name: "樱子 (Sakurako)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "中卫",
+    weapon: "步枪",
+    attackType: "神秘",
+    defenseType: "特殊装甲",
+    position: "百分比附加 / 反伤",
+    img: "assets/students/32-sakurako.png",
+    kivoId: 499,
+
+    stats: {
+      hp: 3400,
+      attack: 560,
+      defense: 115,
+      speed: 6.1,
+      range: 30,
+      critRate: "9%",
+      reloadTime: "2.0s"
+    },
+
+    skills: [
+      {
+        name: "你是最棒的",
+        type: "E技能",
+        cooldown: "13s",
+        desc: "华丽转身并自动换弹，直到下次换弹前获得「专注」。专注期间，射击造成伤害时，对目标造成视其当前生命值百分比变化的附加伤害。"
+      },
+      {
+        name: "反差萌",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "为大家献出笑容，短时间内获得护盾，随后获得「反伤」状态。反伤期间敌人对樱子造成伤害时，自身也承受等额伤害，返还伤害不再受承伤率影响。"
+      },
+      {
+        name: "为大家声援",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "当樱子不移动数秒后，为周围范围内友方提供持续恢复效果。"
+      }
+    ],
+
+    notes: [
+      "E适合打高血量目标。",
+      "Q可以反制敌方爆发。",
+      "站定后可为友方持续恢复。"
+    ],
+
+    desc: "樱子是兼具输出和反伤保护的中卫角色，适合在阵地战中持续发挥价值。"
+  },
+
+  {
+    id: 33,
+    name: "时雨 (Shigure)",
+    rarity: 3,
+    academy: "红冬",
+    role: "后卫",
+    weapon: "榴弹发射器",
+    attackType: "爆发",
+    defenseType: "重装甲",
+    position: "酒瓶范围辅助",
+    img: "assets/students/33-shigure.png",
+    kivoId: 106,
+
+    stats: {
+      hp: 3000,
+      attack: 540,
+      defense: 100,
+      speed: 5.8,
+      range: 34,
+      critRate: "8%",
+      reloadTime: "2.6s"
+    },
+
+    skills: [
+      {
+        name: "来一杯，如何？",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "向一名除自身外队友掷出酒瓶，治疗的同时使其短暂免疫枪械伤害。"
+      },
+      {
+        name: "时雨特制酒瓶手榴弹",
+        type: "Q技能",
+        cooldown: "28s",
+        desc: "向前方掷出酒瓶手榴弹，将酒挥洒在圆形范围内。击中地面酒体或范围内敌人时，对范围内所有敌人额外造成伤害，使用榴弹触发时伤害更高。"
+      },
+      {
+        name: "甜蜜发酵",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "使用榴弹射击，爆炸范围过近会自伤。使用E后，下一发普通攻击攻击力增加、范围增加，并可治疗范围内友方。"
+      }
+    ],
+
+    notes: [
+      "E能给队友短暂无视枪械伤害。",
+      "Q需要利用酒体触发额外伤害。",
+      "榴弹近距离会自伤。"
+    ],
+
+    desc: "时雨是范围辅助型后卫，可以治疗队友、提供短暂无伤窗口，并通过酒瓶区域造成额外伤害。"
+  },
+
+  {
+    id: 34,
+    name: "圣娅 (Seia)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "支援",
+    weapon: "书 / 山雀",
+    attackType: "神秘",
+    defenseType: "特殊装甲",
+    position: "充能治疗辅助",
+    img: "assets/students/34-seia.png",
+    kivoId: 43,
+
+    stats: {
+      hp: 2800,
+      attack: 330,
+      defense: 85,
+      speed: 6.2,
+      range: 30,
+      critRate: "5%",
+      reloadTime: "1.8s"
+    },
+
+    skills: [
+      {
+        name: "智者的助言",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "指定范围内一名角色为目标，召唤「山雀」落到其头上一段时间。若目标为友方，则持续治疗；若为敌方，则持续伤害。"
+      },
+      {
+        name: "微寐之庭",
+        type: "Q技能",
+        cooldown: "34s",
+        desc: "使一名除自身外友方获得歇息，前摇期间圣娅移速和承伤率降低，目标承伤率降低。若目标中途倒下，返还一定充能。随后使E冷却结束，并使该友方立即完成一次Q充能、获得护盾和持续治疗。"
+      },
+      {
+        name: "智者的直觉",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "当圣娅护盾值低于一定值时，使用任意技能将增加一定护盾值，这部分护盾持续时间无限。"
+      }
+    ],
+
+    notes: [
+      "E可对友方治疗或对敌方伤害。",
+      "Q能给队友补充Q充能。",
+      "被动让圣娅有长期护盾成长。"
+    ],
+
+    desc: "圣娅是高价值支援角色，可以提供持续治疗、技能充能和护盾保护。"
+  },
+
+  {
+    id: 35,
+    name: "忧 (Ui)",
+    rarity: 3,
+    academy: "圣三一",
+    role: "支援",
+    weapon: "步枪",
+    attackType: "爆发",
+    defenseType: "轻装甲",
+    position: "Q充能辅助",
+    img: "assets/students/35-ui.png",
+    kivoId: 23,
+
+    stats: {
+      hp: 2700,
+      attack: 340,
+      defense: 75,
+      speed: 6.0,
+      range: 30,
+      critRate: "6%",
+      reloadTime: "1.9s"
+    },
+
+    skills: [
+      {
+        name: "传授知识",
+        type: "E技能",
+        cooldown: "11s",
+        desc: "抱紧书籍，为除自身外友方回复生命值，并短暂提升她们攻击力。"
+      },
+      {
+        name: "古书专家",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "查阅古书，为一名除自身外友方恢复其Q充能值，并按其已有充能比例恢复生命值。若友方充能已满一层，则额外提升攻击力。"
+      },
+      {
+        name: "神经过敏",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "当忧的Q充能不足一层时，对敌人造成暴击伤害将为她恢复生命值。"
+      }
+    ],
+
+    notes: [
+      "非常适合辅助依赖Q的队友。",
+      "E可以群体小治疗和加攻。",
+      "Q充能比例越高治疗越高。"
+    ],
+
+    desc: "忧是技能循环辅助，可以为队友恢复Q充能并提供治疗与攻击增益。"
+  },
+
+  {
+    id: 36,
+    name: "优香 (Yuuka)",
+    rarity: 3,
+    academy: "千禧年",
+    role: "前卫",
+    weapon: "冲锋枪 / 镜子",
+    attackType: "神秘",
+    defenseType: "重装甲",
+    position: "梦境复活坦克",
+    img: "assets/students/36-yuuka.png",
+    kivoId: 505,
+
+    stats: {
+      hp: 5400,
+      attack: 390,
+      defense: 260,
+      speed: 6.0,
+      range: 16,
+      critRate: "7%",
+      reloadTime: "2.0s"
+    },
+
+    skills: [
+      {
+        name: "夜间护理",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "使用镜子打量自己，治疗自身一次。再消耗一定「梦境值」，以此为自身提供一次治疗，并为周围除自身外友方提供数秒护盾。"
+      },
+      {
+        name: "佩洛洛大人千钧一发！",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "放置海盗桶，佩洛洛飞弹从中飞出，对周围范围内所有敌人造成伤害，伤害基于优香已损失生命值。随后使敌人在数秒内降低攻击力。"
+      },
+      {
+        name: "惊醒的梦",
+        type: "被动技能",
+        cooldown: "独立冷却",
+        desc: "受到的伤害会部分转化为「梦境值」并随时间流失。受到致命伤害时触发复活，使梦境值扣除此次伤害后全部转化为生命值，并在数秒内射击不消耗弹药。"
+      }
+    ],
+
+    notes: [
+      "梦境值是核心生存资源。",
+      "可以触发一次复活机制。",
+      "Q在低血量时伤害更高。"
+    ],
+
+    desc: "优香是拥有梦境值和复活机制的前卫坦克，能在濒死时重新站场并保护队友。"
+  },
+
+  {
+    id: 37,
+    name: "柚子 (Yuzu)",
+    rarity: 3,
+    academy: "千禧年",
+    role: "后卫",
+    weapon: "榴弹发射器",
+    attackType: "贯通",
+    defenseType: "特殊装甲",
+    position: "引导点炮击",
+    img: "assets/students/37-yuzu.png",
+    kivoId: 81,
+
+    stats: {
+      hp: 2500,
+      attack: 690,
+      defense: 70,
+      speed: 5.7,
+      range: 40,
+      critRate: "13%",
+      reloadTime: "2.8s"
+    },
+
+    skills: [
+      {
+        name: "达成连击！",
+        type: "E技能",
+        cooldown: "12s",
+        desc: "仅当场上存在可用「引导点」时可释放。柚子向引导点射出飞弹，对圆形范围内敌人造成伤害。"
+      },
+      {
+        name: "游戏开始！",
+        type: "Q技能",
+        cooldown: "30s",
+        desc: "仅当场上存在可用「引导点」时可释放。柚子向引导点开炮，对圆形范围内敌人造成伤害并挂上「游戏标记」。之后一段时间内，柚子的每次射击都会向所有持标记目标额外召唤一发飞弹。"
+      },
+      {
+        name: "精确制导",
+        type: "被动技能",
+        cooldown: "无",
+        desc: "使用榴弹射击，爆炸范围过近会对自身造成伤害。柚子可通过右键创建或移动「引导点」，所有技能将向其发射。每个引导点只能使用一次，若被遮挡则不可用。"
+      }
+    ],
+
+    notes: [
+      "所有技能依赖引导点。",
+      "引导点被遮挡时不可用。",
+      "Q后普攻能触发额外飞弹。"
+    ],
+
+    desc: "柚子是引导点机制炮击角色，需要提前布置引导点来进行精准范围打击。"
+  }
+];
+
+const announceArea = document.getElementById("announceArea");
+const academySelect = document.getElementById("academySelect");
+const roleSelect = document.getElementById("roleSelect");
+const searchInput = document.getElementById("searchInput");
+const charGrid = document.getElementById("charGrid");
+const resultCount = document.getElementById("resultCount");
+
+const modal = document.getElementById("modal");
+const modalAvatar = document.getElementById("modalAvatar");
+const modalName = document.getElementById("modalName");
+const modalStars = document.getElementById("modalStars");
+const modalTags = document.getElementById("modalTags");
+const modalBody = document.getElementById("modalBody");
+const closeModal = document.getElementById("closeModal");
+let lastFocusedElement = null;
+
+document.getElementById("announcementCount").textContent = announcements.length;
+document.getElementById("characterCount").textContent = characters.length;
+document.getElementById("academyCount").textContent = academies.length;
+
+function getStars(rarity){
+  const value = Math.max(1, Math.min(5, Number(rarity) || 1));
+  return "★".repeat(value) + "☆".repeat(5 - value);
+}
+
+function createTag(text, extraClass = ""){
+  return `<span class="tag ${extraClass}">${text}</span>`;
+}
+
+function escapeXml(value){
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&apos;"
+  })[character]);
+}
+
+function createPlaceholderImage(label){
+  const shortLabel = escapeXml(
+    String(label || "Project Archive")
+      .replace(/\s*\([^)]*\)\s*/g, " ")
+      .trim()
+      .slice(0, 22)
+  );
+
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+      <defs>
+        <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#4f7cff"/>
+          <stop offset="1" stop-color="#8b5cf6"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="450" rx="32" fill="url(#background)"/>
+      <circle cx="680" cy="70" r="170" fill="#ffffff" opacity=".12"/>
+      <circle cx="120" cy="420" r="220" fill="#22d3ee" opacity=".16"/>
+      <text x="50%" y="50%" fill="#ffffff" font-family="system-ui, sans-serif" font-size="42" font-weight="700" text-anchor="middle" dominant-baseline="middle">${shortLabel}</text>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function loadImage(image, source, label){
+  const fallback = createPlaceholderImage(label);
+  const isLegacyPlaceholder = /^https:\/\/via\.placeholder\.com\//i.test(source || "");
+
+  image.onerror = () => {
+    image.onerror = null;
+    image.src = fallback;
+  };
+
+  image.src = source && !isLegacyPlaceholder ? source : fallback;
+}
+
+function renderAnnouncements(){
+  announceArea.innerHTML = "";
+
+  announcements.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "announce-card";
+    card.setAttribute("role", "listitem");
+
+    const hasLink = Boolean(item.link && item.link !== "#");
+
+    if(hasLink){
+      card.tabIndex = 0;
+      card.setAttribute("aria-label", `${item.title}，查看公告详情`);
+    }else{
+      card.classList.add("is-static");
+    }
+
+    card.innerHTML = `
+      <div class="announce-img">
+        <img alt="${item.title}" loading="lazy" decoding="async">
+        <div class="announce-badge">${item.type}</div>
+      </div>
+      <div class="announce-body">
+        <h3 class="announce-title">${item.title}</h3>
+        <div class="announce-meta">
+          <span>${item.date} · ${hasLink ? "点击查看详情" : "公告详情待补充"}</span>
+          ${hasLink ? '<span class="arrow" aria-hidden="true">→</span>' : ""}
+        </div>
+      </div>
+    `;
+
+    loadImage(card.querySelector("img"), item.img, item.title);
+
+    if(hasLink){
+      const openAnnouncement = () => {
+        window.location.href = item.link;
+      };
+
+      card.addEventListener("click", openAnnouncement);
+      card.addEventListener("keydown", event => {
+        if(event.key === "Enter" || event.key === " "){
+          event.preventDefault();
+          openAnnouncement();
+        }
+      });
+    }
+
+    announceArea.appendChild(card);
+  });
+}
+
+function populateSelects(){
+  academies.forEach(academy => {
+    const option = document.createElement("option");
+    option.value = academy;
+    option.textContent = academy;
+    academySelect.appendChild(option);
+  });
+
+  roles.forEach(role => {
+    const option = document.createElement("option");
+    option.value = role;
+    option.textContent = role;
+    roleSelect.appendChild(option);
+  });
+}
+
+function renderCharacters(list){
+  charGrid.innerHTML = "";
+  resultCount.textContent = `显示 ${list.length} 名角色`;
+
+  if(list.length === 0){
+    charGrid.innerHTML = `
+      <div class="empty">
+        没有找到匹配的角色。可以换一个学院、职业或搜索关键词试试。
+      </div>
+    `;
+    return;
+  }
+
+  list.forEach(character => {
+    const card = document.createElement("article");
+    card.className = "char-card";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-haspopup", "dialog");
+    card.setAttribute("aria-label", `查看 ${character.name} 的完整资料`);
+
+    card.innerHTML = `
+      <div class="avatar">
+        <img alt="${character.name}" loading="lazy" decoding="async">
+      </div>
+
+      <div class="char-info">
+        <h4>${character.name}</h4>
+        <div class="card-stars">${getStars(character.rarity)}</div>
+        <div class="tag-row">
+          ${createTag(character.academy)}
+          ${createTag(character.role, "role")}
+          ${createTag(character.weapon || "未知武器", "weapon")}
+        </div>
+      </div>
+    `;
+
+    loadImage(card.querySelector("img"), character.img, character.name);
+
+    card.addEventListener("click", () => openModal(character, card));
+    card.addEventListener("keydown", e => {
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        openModal(character, card);
+      }
+    });
+
+    charGrid.appendChild(card);
+  });
+}
+
+function applyFilters(){
+  const selectedAcademy = academySelect.value;
+  const selectedRole = roleSelect.value;
+  const keyword = searchInput.value.trim().toLowerCase();
+
+  const filtered = characters.filter(character => {
+    const matchAcademy = selectedAcademy === "all" || character.academy === selectedAcademy;
+    const matchRole = selectedRole === "all" || character.role === selectedRole;
+
+    const searchableText = [
+      character.name,
+      character.academy,
+      character.role,
+      character.weapon,
+      character.attackType,
+      character.defenseType,
+      character.position,
+      character.desc
+    ].join(" ").toLowerCase();
+
+    const matchKeyword = !keyword || searchableText.includes(keyword);
+
+    return matchAcademy && matchRole && matchKeyword;
+  });
+
+  renderCharacters(filtered);
+}
+
+function renderInfoItem(label, value){
+  return `
+    <div class="info-item">
+      <span>${label}</span>
+      <strong>${value ?? "未知"}</strong>
+    </div>
+  `;
+}
+
+function renderStatBox(label, value){
+  return `
+    <div class="stat-box">
+      <span>${label}</span>
+      <strong>${value ?? "-"}</strong>
+    </div>
+  `;
+}
+
+function openModal(character, triggerElement){
+  const stars = getStars(character.rarity);
+
+  lastFocusedElement = triggerElement || document.activeElement;
+  loadImage(modalAvatar, character.img, character.name);
+  modalAvatar.alt = character.name;
+  modalName.textContent = character.name;
+  modalStars.textContent = stars;
+
+  modalTags.innerHTML = `
+    ${createTag(character.academy)}
+    ${createTag(character.role, "role")}
+    ${createTag(character.weapon || "未知武器", "weapon")}
+  `;
+
+  const stats = character.stats || {};
+  const skills = character.skills || [];
+  const notes = character.notes || [];
+
+  modalBody.innerHTML = `
+    <div class="detail-layout">
+      <div class="detail-section">
+        <h3>基础信息</h3>
+
+        <div class="info-grid">
+          ${renderInfoItem("星级", stars)}
+          ${renderInfoItem("学院", character.academy)}
+          ${renderInfoItem("职业", character.role)}
+          ${renderInfoItem("武器", character.weapon)}
+          ${renderInfoItem("攻击类型", character.attackType)}
+          ${renderInfoItem("防御类型", character.defenseType)}
+          ${renderInfoItem("定位", character.position)}
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>角色数值</h3>
+
+        <div class="stats-grid">
+          ${renderStatBox("生命值", stats.hp)}
+          ${renderStatBox("伤害", stats.attack)}
+          ${renderStatBox("防御", stats.defense)}
+          ${renderStatBox("速度", stats.speed)}
+          ${renderStatBox("射程", stats.range)}
+          ${renderStatBox("暴击率", stats.critRate)}
+          ${renderStatBox("换弹时间", stats.reloadTime)}
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>技能</h3>
+
+        <div class="skill-list">
+          ${
+            skills.length > 0
+            ? skills.map(skill => `
+              <div class="skill-card">
+                <div class="skill-head">
+                  <strong>${skill.name}</strong>
+                  <span>${skill.type}</span>
+                </div>
+                <div class="skill-cooldown">冷却：${skill.cooldown}</div>
+                <p>${skill.desc}</p>
+              </div>
+            `).join("")
+            : `<div class="skill-card"><p>暂无技能资料。</p></div>`
+          }
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>角色说明</h3>
+        <p>${character.desc || "暂无介绍。"}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>使用备注</h3>
+        ${
+          notes.length > 0
+          ? `<ul class="note-list">${notes.map(note => `<li>${note}</li>`).join("")}</ul>`
+          : `<p>暂无备注。</p>`
+        }
+      </div>
+    </div>
+  `;
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  closeModal.focus();
+}
+
+function closeModalWindow(){
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+
+  if(lastFocusedElement instanceof HTMLElement){
+    lastFocusedElement.focus();
+  }
+
+  lastFocusedElement = null;
+}
+
+academySelect.addEventListener("change", applyFilters);
+roleSelect.addEventListener("change", applyFilters);
+searchInput.addEventListener("input", applyFilters);
+
+closeModal.addEventListener("click", closeModalWindow);
+
+modal.addEventListener("click", e => {
+  if(e.target === modal){
+    closeModalWindow();
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && modal.classList.contains("open")){
+    closeModalWindow();
+  }
+
+  if(e.key === "Tab" && modal.classList.contains("open")){
+    e.preventDefault();
+    closeModal.focus();
+  }
+});
+
+renderAnnouncements();
+populateSelects();
+renderCharacters(characters);
+</script>
+</body>
+</html>
