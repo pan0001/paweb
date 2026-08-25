@@ -6,8 +6,20 @@
 <meta name="description" content="Project Archive 角色图鉴、公告与战斗资料库。" />
 <title>Project Archive Wiki</title>
 
+<script>
+  (() => {
+    try{
+      const savedTheme = localStorage.getItem("pa-theme");
+      const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    }catch(error){
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -26,6 +38,10 @@
     --shadow-sm:0 8px 24px rgba(15,23,42,.06);
     --shadow-md:0 18px 48px rgba(15,23,42,.12);
     --shadow-lg:0 28px 80px rgba(15,23,42,.24);
+    --ease-out:cubic-bezier(.22,1,.36,1);
+    --motion-fast:180ms;
+    --motion-enter:520ms;
+    --glass-highlight:inset 0 1px 0 rgba(255,255,255,.72);
   }
 
   *{
@@ -47,6 +63,16 @@
       radial-gradient(circle at 50% 100%, rgba(34,211,238,.12), transparent 42%),
       var(--bg);
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  html[lang="ja"] body{
+    font-family:'Noto Sans JP', 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  ::selection{
+    color:#1e3a8a;
+    background:rgba(79,124,255,.22);
   }
 
   body::before{
@@ -92,9 +118,17 @@
     justify-content:space-between;
     gap:18px;
     padding:16px 28px;
+    -webkit-backdrop-filter:blur(18px);
     backdrop-filter:blur(18px);
     background:rgba(245,247,255,.72);
     border-bottom:1px solid rgba(148,163,184,.18);
+    transition:background .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+
+  .header.is-scrolled{
+    background:rgba(245,247,255,.9);
+    border-color:rgba(148,163,184,.26);
+    box-shadow:0 12px 34px rgba(15,23,42,.08);
   }
 
   .brand{
@@ -116,6 +150,12 @@
     background:linear-gradient(135deg, var(--primary), var(--secondary));
     box-shadow:0 14px 34px rgba(79,124,255,.32);
     flex-shrink:0;
+    transition:transform .35s var(--ease-out), box-shadow .35s ease;
+  }
+
+  .brand:hover .brand-logo{
+    transform:rotate(-6deg) scale(1.06);
+    box-shadow:0 18px 42px rgba(79,124,255,.4);
   }
 
   .site-title{
@@ -154,6 +194,89 @@
     background:rgba(79,124,255,.10);
   }
 
+  .nav a[aria-current="location"]{
+    color:var(--primary-dark);
+    background:rgba(79,124,255,.12);
+  }
+
+  .utility-controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-shrink:0;
+  }
+
+  .language-switch{
+    display:flex;
+    align-items:center;
+    gap:3px;
+    padding:3px;
+    border-radius:999px;
+    background:rgba(255,255,255,.68);
+    border:1px solid rgba(148,163,184,.24);
+    box-shadow:var(--glass-highlight);
+  }
+
+  .lang-btn,
+  .theme-toggle{
+    border:0;
+    cursor:pointer;
+    color:#64748b;
+    background:transparent;
+    font-weight:800;
+    transition:color .2s ease, background .2s ease, transform .2s var(--ease-out);
+  }
+
+  .lang-btn{
+    min-width:34px;
+    height:32px;
+    padding:0 8px;
+    border-radius:999px;
+    font-size:11px;
+    letter-spacing:.2px;
+  }
+
+  .lang-btn:is(:hover,:focus-visible){
+    color:var(--primary-dark);
+    background:rgba(79,124,255,.09);
+  }
+
+  .lang-btn[aria-pressed="true"]{
+    color:white;
+    background:linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow:0 6px 18px rgba(79,124,255,.24);
+  }
+
+  .theme-toggle{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:rgba(255,255,255,.68);
+    border:1px solid rgba(148,163,184,.24);
+    box-shadow:var(--glass-highlight);
+    font-size:18px;
+  }
+
+  .theme-toggle:is(:hover,:focus-visible){
+    color:var(--primary-dark);
+    transform:translateY(-2px) rotate(8deg);
+    background:white;
+  }
+
+  .sr-only{
+    position:absolute !important;
+    width:1px !important;
+    height:1px !important;
+    padding:0 !important;
+    margin:-1px !important;
+    overflow:hidden !important;
+    clip:rect(0,0,0,0) !important;
+    white-space:nowrap !important;
+    border:0 !important;
+  }
+
   .container{
     width:min(1180px, calc(100% - 32px));
     margin:0 auto;
@@ -161,6 +284,8 @@
   }
 
   .hero{
+    --pointer-x:30%;
+    --pointer-y:25%;
     position:relative;
     overflow:hidden;
     display:grid;
@@ -177,6 +302,16 @@
     box-shadow:var(--shadow-md);
   }
 
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:radial-gradient(520px circle at var(--pointer-x) var(--pointer-y), rgba(255,255,255,.72), transparent 58%);
+    opacity:.72;
+    transition:opacity .3s ease;
+  }
+
   .hero::after{
     content:"";
     position:absolute;
@@ -186,6 +321,8 @@
     height:260px;
     background:linear-gradient(135deg, rgba(79,124,255,.22), rgba(139,92,246,.18));
     border-radius:50%;
+    filter:blur(1px);
+    animation:orb-float 8s ease-in-out infinite;
   }
 
   .hero-content,
@@ -212,6 +349,7 @@
     border-radius:999px;
     background:#22c55e;
     box-shadow:0 0 0 6px rgba(34,197,94,.14);
+    animation:status-pulse 2.6s ease-in-out infinite;
   }
 
   .hero h1{
@@ -237,6 +375,8 @@
   }
 
   .btn{
+    position:relative;
+    overflow:hidden;
     border:0;
     cursor:pointer;
     text-decoration:none;
@@ -249,7 +389,22 @@
     border-radius:999px;
     font-weight:700;
     font-size:14px;
-    transition:.18s ease;
+    transition:transform .22s var(--ease-out), box-shadow .22s ease, background .22s ease;
+  }
+
+  .btn::after{
+    content:"";
+    position:absolute;
+    inset:-2px auto -2px -46%;
+    width:36%;
+    pointer-events:none;
+    transform:skewX(-20deg);
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+    transition:left .55s var(--ease-out);
+  }
+
+  .btn:hover::after{
+    left:118%;
   }
 
   .btn-primary{
@@ -275,11 +430,29 @@
   }
 
   .stat-card{
+    position:relative;
+    overflow:hidden;
     padding:18px;
     border-radius:22px;
     background:rgba(255,255,255,.74);
     border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--glass-highlight), var(--shadow-sm);
+    transition:transform .3s var(--ease-out), box-shadow .3s ease, border-color .3s ease;
+  }
+
+  .stat-card::before{
+    content:"";
+    position:absolute;
+    inset:0 0 auto;
+    height:2px;
+    background:linear-gradient(90deg, transparent, var(--primary), var(--cyan), transparent);
+    opacity:.58;
+  }
+
+  .stat-card:hover{
+    transform:translateY(-3px);
+    border-color:rgba(79,124,255,.3);
+    box-shadow:var(--glass-highlight), 0 16px 34px rgba(15,23,42,.1);
   }
 
   .stat-label{
@@ -361,14 +534,26 @@
     border-radius:24px;
     background:white;
     border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--glass-highlight), var(--shadow-sm);
     cursor:pointer;
-    transition:.2s ease;
+    transition:transform .3s var(--ease-out), box-shadow .3s ease, border-color .3s ease;
   }
 
-  .announce-card:hover{
+  .announce-action{
+    width:100%;
+    display:block;
+    padding:0;
+    border:0;
+    color:inherit;
+    background:transparent;
+    cursor:pointer;
+    text-align:left;
+  }
+
+  .announce-card:not(.is-static):is(:hover,:focus-within){
     transform:translateY(-5px);
-    box-shadow:var(--shadow-md);
+    box-shadow:var(--glass-highlight), var(--shadow-md);
+    border-color:rgba(79,124,255,.3);
   }
 
   .announce-card.is-static{
@@ -377,7 +562,7 @@
 
   .announce-card.is-static:hover{
     transform:none;
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--glass-highlight), var(--shadow-sm);
   }
 
   .announce-img{
@@ -387,13 +572,33 @@
     background:linear-gradient(135deg, rgba(79,124,255,.95), rgba(139,92,246,.88));
   }
 
+  .announce-img::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(to top, rgba(15,23,42,.24), transparent 62%);
+  }
+
   .announce-img img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    opacity:.86;
-    mix-blend-mode:screen;
+    opacity:0;
+    mix-blend-mode:normal;
+    transform:scale(1.025);
+    transition:opacity .3s ease, transform .55s var(--ease-out), filter .4s ease;
+  }
+
+  .announce-img img.is-loaded{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  .announce-card:not(.is-static):is(:hover,:focus-within) .announce-img img{
+    transform:scale(1.06);
+    filter:saturate(1.12);
   }
 
   .announce-badge{
@@ -404,9 +609,11 @@
     border-radius:999px;
     color:white;
     background:rgba(15,23,42,.42);
+    -webkit-backdrop-filter:blur(10px);
     backdrop-filter:blur(10px);
     font-size:12px;
     font-weight:700;
+    z-index:1;
   }
 
   .announce-body{
@@ -441,6 +648,144 @@
     flex-shrink:0;
   }
 
+  .trailer-layout{
+    display:grid;
+    grid-template-columns:minmax(0, 1.55fr) minmax(280px, .75fr);
+    gap:16px;
+    align-items:start;
+  }
+
+  .trailer-feature,
+  .trailer-card{
+    border:1px solid rgba(148,163,184,.22);
+    background:rgba(255,255,255,.84);
+    box-shadow:var(--glass-highlight), var(--shadow-sm);
+  }
+
+  .trailer-feature{
+    overflow:hidden;
+    border-radius:26px;
+  }
+
+  .video-frame{
+    position:relative;
+    aspect-ratio:16 / 9;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(79,124,255,.35), transparent 42%),
+      linear-gradient(135deg, #111827, #1e293b);
+  }
+
+  .video-frame iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+
+  .trailer-feature-body{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:16px 18px;
+  }
+
+  .trailer-feature-title{
+    margin:0;
+    font-size:17px;
+    font-weight:900;
+  }
+
+  .trailer-channel{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:12px;
+  }
+
+  .youtube-link{
+    flex-shrink:0;
+    color:#dc2626;
+    background:rgba(239,68,68,.09);
+  }
+
+  .youtube-link:is(:hover,:focus-visible){
+    background:rgba(239,68,68,.15);
+  }
+
+  .trailer-list{
+    display:grid;
+    gap:10px;
+  }
+
+  .trailer-card{
+    width:100%;
+    display:grid;
+    grid-template-columns:116px minmax(0,1fr);
+    gap:12px;
+    align-items:center;
+    padding:9px;
+    border-radius:18px;
+    color:var(--text);
+    cursor:pointer;
+    text-align:left;
+    transition:transform .25s var(--ease-out), border-color .25s ease, box-shadow .25s ease;
+  }
+
+  .trailer-card:is(:hover,:focus-visible){
+    transform:translateX(-4px);
+    border-color:rgba(79,124,255,.38);
+    box-shadow:var(--glass-highlight), var(--shadow-md);
+  }
+
+  .trailer-card[aria-pressed="true"]{
+    border-color:rgba(79,124,255,.55);
+    background:linear-gradient(135deg, rgba(79,124,255,.13), rgba(139,92,246,.08)), rgba(255,255,255,.9);
+  }
+
+  .trailer-thumb{
+    position:relative;
+    overflow:hidden;
+    aspect-ratio:16 / 9;
+    border-radius:12px;
+    background:linear-gradient(135deg, #dbeafe, #ede9fe);
+  }
+
+  .trailer-thumb img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    transition:transform .35s var(--ease-out);
+  }
+
+  .trailer-card:is(:hover,:focus-visible) .trailer-thumb img{
+    transform:scale(1.05);
+  }
+
+  .trailer-index{
+    display:block;
+    margin-bottom:4px;
+    color:var(--primary-dark);
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+  }
+
+  .trailer-card-title{
+    display:-webkit-box;
+    overflow:hidden;
+    color:var(--text);
+    font-size:13px;
+    font-weight:800;
+    line-height:1.45;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+  }
+
   .toolbar{
     display:grid;
     grid-template-columns:1fr 1fr minmax(220px, 1.2fr);
@@ -449,7 +794,8 @@
     border-radius:24px;
     background:rgba(255,255,255,.70);
     border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--glass-highlight), var(--shadow-sm);
+    -webkit-backdrop-filter:blur(14px);
     backdrop-filter:blur(14px);
   }
 
@@ -517,9 +863,10 @@
     border-radius:24px;
     background:rgba(255,255,255,.84);
     border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--glass-highlight), var(--shadow-sm);
     cursor:pointer;
-    transition:.2s ease;
+    isolation:isolate;
+    transition:transform .3s var(--ease-out), box-shadow .3s ease, border-color .3s ease;
   }
 
   .char-card::before{
@@ -530,16 +877,16 @@
     height:140px;
     border-radius:50%;
     background:linear-gradient(135deg, rgba(79,124,255,.16), rgba(139,92,246,.12));
-    transition:.2s ease;
+    transition:transform .45s var(--ease-out), opacity .3s ease;
   }
 
-  .char-card:hover{
+  .char-card:is(:hover,:focus-visible){
     transform:translateY(-6px);
-    box-shadow:var(--shadow-md);
+    box-shadow:var(--glass-highlight), var(--shadow-md);
     border-color:rgba(79,124,255,.28);
   }
 
-  .char-card:hover::before{
+  .char-card:is(:hover,:focus-visible)::before{
     transform:scale(1.18);
   }
 
@@ -559,7 +906,21 @@
     width:100%;
     height:100%;
     object-fit:cover;
+    object-position:center 20%;
     display:block;
+    opacity:0;
+    transform:scale(1.025);
+    transition:opacity .3s ease, transform .55s var(--ease-out), filter .35s ease;
+  }
+
+  .avatar img.is-loaded{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  .char-card:is(:hover,:focus-visible) .avatar img{
+    transform:scale(1.1);
+    filter:saturate(1.06) contrast(1.02);
   }
 
   .char-info{
@@ -626,17 +987,25 @@
   .modal{
     position:fixed;
     inset:0;
-    display:none;
+    display:flex;
     align-items:center;
     justify-content:center;
     padding:22px;
     background:rgba(15,23,42,.52);
+    -webkit-backdrop-filter:blur(12px);
     backdrop-filter:blur(12px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .22s var(--ease-out), visibility 0s linear .22s;
     z-index:100;
   }
 
   .modal.open{
-    display:flex;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition-delay:0s;
   }
 
   .modal-card{
@@ -645,20 +1014,16 @@
     overflow:auto;
     border-radius:28px;
     background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(248,250,252,.96));
-    box-shadow:var(--shadow-lg);
+    box-shadow:var(--glass-highlight), var(--shadow-lg);
     border:1px solid rgba(255,255,255,.72);
-    animation:pop .18s ease;
+    opacity:0;
+    transform:translateY(14px) scale(.985);
+    transition:opacity .24s var(--ease-out), transform .24s var(--ease-out);
   }
 
-  @keyframes pop{
-    from{
-      opacity:0;
-      transform:scale(.96) translateY(10px);
-    }
-    to{
-      opacity:1;
-      transform:scale(1) translateY(0);
-    }
+  .modal.open .modal-card{
+    opacity:1;
+    transform:none;
   }
 
   .modal-top{
@@ -702,8 +1067,38 @@
     height:116px;
     border-radius:26px;
     object-fit:cover;
+    object-position:center 20%;
     box-shadow:0 18px 42px rgba(15,23,42,.16);
     background:#e0e7ff;
+    opacity:0;
+    transform:scale(1.025);
+    transition:opacity .3s ease, transform .5s var(--ease-out);
+  }
+
+  .modal-head img.is-loaded{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  .modal[data-mode="announcement"] .modal-head img{
+    width:168px;
+    height:104px;
+    border-radius:20px;
+  }
+
+  .modal[data-mode="announcement"] .modal-stars{
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0;
+  }
+
+  .announcement-copy{
+    margin:0;
+  }
+
+  .announcement-copy + .announcement-copy{
+    margin-top:12px;
   }
 
   .modal-name{
@@ -862,6 +1257,36 @@
     color:#475569;
   }
 
+  .source-section{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+
+  .source-section h3{
+    margin:0;
+  }
+
+  .source-link{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 12px;
+    border-radius:999px;
+    color:#3152c9;
+    background:rgba(79,124,255,.1);
+    font-size:13px;
+    font-weight:800;
+    text-decoration:none;
+    transition:transform .22s var(--ease-out), background .22s ease;
+  }
+
+  .source-link:is(:hover,:focus-visible){
+    transform:translateY(-2px);
+    background:rgba(79,124,255,.16);
+  }
+
   footer{
     margin-top:38px;
     padding:20px 0;
@@ -870,9 +1295,255 @@
     font-size:13px;
   }
 
+  .footer-credit{
+    margin-top:6px;
+    color:#94a3b8;
+    font-size:12px;
+  }
+
+  .footer-credit a{
+    color:#64748b;
+    font-weight:700;
+    text-underline-offset:3px;
+  }
+
+  .motion-ready .hero-content{
+    animation:hero-rise .7s var(--ease-out) backwards;
+  }
+
+  .motion-ready .hero-panel .stat-card{
+    animation:hero-rise .62s var(--ease-out) backwards;
+  }
+
+  .motion-ready .hero-panel > .stat-card{
+    animation-delay:.12s;
+  }
+
+  .motion-ready .mini-stats .stat-card:nth-child(1){
+    animation-delay:.2s;
+  }
+
+  .motion-ready .mini-stats .stat-card:nth-child(2){
+    animation-delay:.28s;
+  }
+
+  .motion-ready .reveal{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity .68s ease, transform .68s var(--ease-out);
+  }
+
+  .motion-ready .reveal.is-visible{
+    opacity:1;
+    transform:none;
+  }
+
+  .motion-ready .card-enter{
+    animation:card-in .52s var(--ease-out) backwards;
+    animation-delay:var(--card-delay, 0ms);
+  }
+
+  @keyframes hero-rise{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:none;}
+  }
+
+  @keyframes card-in{
+    from{opacity:0; transform:translateY(16px) scale(.985);}
+    to{opacity:1; transform:none;}
+  }
+
+  @keyframes orb-float{
+    0%, 100%{transform:translate3d(0,0,0) scale(1);}
+    50%{transform:translate3d(-22px,18px,0) scale(1.08);}
+  }
+
+  @keyframes status-pulse{
+    0%, 100%{box-shadow:0 0 0 6px rgba(34,197,94,.14);}
+    50%{box-shadow:0 0 0 10px rgba(34,197,94,.04);}
+  }
+
+  html[data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#080c18;
+    --card:#111827;
+    --text:#eef2ff;
+    --muted:#94a3b8;
+    --line:rgba(148,163,184,.18);
+    --primary:#7698ff;
+    --primary-dark:#a9bdff;
+    --secondary:#a78bfa;
+    --shadow-sm:0 10px 28px rgba(0,0,0,.24);
+    --shadow-md:0 20px 54px rgba(0,0,0,.34);
+    --shadow-lg:0 30px 90px rgba(0,0,0,.55);
+    --glass-highlight:inset 0 1px 0 rgba(255,255,255,.08);
+  }
+
+  html[data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 8% 8%, rgba(79,124,255,.18), transparent 34%),
+      radial-gradient(circle at 88% 18%, rgba(139,92,246,.14), transparent 32%),
+      radial-gradient(circle at 50% 100%, rgba(34,211,238,.08), transparent 42%),
+      var(--bg);
+  }
+
+  html[data-theme="dark"] body::before{
+    background-image:
+      linear-gradient(rgba(148,163,184,.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,.055) 1px, transparent 1px);
+  }
+
+  html[data-theme="dark"] .header{
+    background:rgba(8,12,24,.74);
+    border-color:rgba(148,163,184,.12);
+  }
+
+  html[data-theme="dark"] .header.is-scrolled{
+    background:rgba(8,12,24,.92);
+    border-color:rgba(148,163,184,.2);
+  }
+
+  html[data-theme="dark"] .nav a,
+  html[data-theme="dark"] .lang-btn,
+  html[data-theme="dark"] .theme-toggle{
+    color:#a8b4ca;
+  }
+
+  html[data-theme="dark"] .nav a:is(:hover,[aria-current="location"]),
+  html[data-theme="dark"] .lang-btn:is(:hover,:focus-visible),
+  html[data-theme="dark"] .theme-toggle:is(:hover,:focus-visible){
+    color:#dbe7ff;
+    background:rgba(118,152,255,.14);
+  }
+
+  html[data-theme="dark"] .language-switch,
+  html[data-theme="dark"] .theme-toggle{
+    background:rgba(15,23,42,.78);
+    border-color:rgba(148,163,184,.18);
+  }
+
+  html[data-theme="dark"] .lang-btn[aria-pressed="true"]{
+    color:white;
+    background:linear-gradient(135deg, var(--primary), var(--secondary));
+  }
+
+  html[data-theme="dark"] .hero{
+    background:
+      linear-gradient(135deg, rgba(17,24,39,.94), rgba(15,23,42,.76)),
+      radial-gradient(circle at 20% 20%, rgba(79,124,255,.2), transparent 36%),
+      radial-gradient(circle at 80% 70%, rgba(139,92,246,.16), transparent 36%);
+    border-color:rgba(148,163,184,.16);
+  }
+
+  html[data-theme="dark"] .hero::before{
+    background:radial-gradient(520px circle at var(--pointer-x) var(--pointer-y), rgba(118,152,255,.13), transparent 60%);
+  }
+
+  html[data-theme="dark"] .hero p,
+  html[data-theme="dark"] .char-info,
+  html[data-theme="dark"] .modal-body,
+  html[data-theme="dark"] .skill-card p,
+  html[data-theme="dark"] .note-list{
+    color:#bdc8dc;
+  }
+
+  html[data-theme="dark"] .eyebrow{
+    color:#bed0ff;
+    background:rgba(118,152,255,.14);
+  }
+
+  html[data-theme="dark"] .btn-ghost,
+  html[data-theme="dark"] .stat-card,
+  html[data-theme="dark"] .toolbar,
+  html[data-theme="dark"] .announce-card,
+  html[data-theme="dark"] .char-card,
+  html[data-theme="dark"] .trailer-feature,
+  html[data-theme="dark"] .trailer-card{
+    color:var(--text);
+    background:rgba(15,23,42,.82);
+    border-color:rgba(148,163,184,.16);
+  }
+
+  html[data-theme="dark"] .trailer-card[aria-pressed="true"]{
+    background:linear-gradient(135deg, rgba(118,152,255,.18), rgba(167,139,250,.12)), rgba(15,23,42,.9);
+  }
+
+  html[data-theme="dark"] .control,
+  html[data-theme="dark"] .info-item,
+  html[data-theme="dark"] .skill-card{
+    color:var(--text);
+    background:#101827;
+    border-color:rgba(148,163,184,.15);
+  }
+
+  html[data-theme="dark"] .control::placeholder{
+    color:#64748b;
+  }
+
+  html[data-theme="dark"] .tag{
+    color:#c2cce0;
+    background:rgba(148,163,184,.12);
+  }
+
+  html[data-theme="dark"] .tag.role{
+    color:#bdceff;
+    background:rgba(118,152,255,.14);
+  }
+
+  html[data-theme="dark"] .tag.weapon{
+    color:#d6c5ff;
+    background:rgba(167,139,250,.14);
+  }
+
+  html[data-theme="dark"] .modal-card{
+    background:linear-gradient(135deg, rgba(15,23,42,.99), rgba(8,12,24,.98));
+    border-color:rgba(148,163,184,.14);
+  }
+
+  html[data-theme="dark"] .modal-top{
+    border-color:rgba(148,163,184,.14);
+  }
+
+  html[data-theme="dark"] .modal-close{
+    color:#bdc8dc;
+    background:rgba(30,41,59,.8);
+  }
+
+  html[data-theme="dark"] .modal-close:hover{
+    color:white;
+    background:#334155;
+  }
+
+  html[data-theme="dark"] .detail-section{
+    background:rgba(15,23,42,.72);
+    border-color:rgba(148,163,184,.15);
+  }
+
+  html[data-theme="dark"] .detail-section h3,
+  html[data-theme="dark"] .info-item strong,
+  html[data-theme="dark"] .skill-head strong,
+  html[data-theme="dark"] .trailer-card-title{
+    color:var(--text);
+  }
+
+  html[data-theme="dark"] .stat-box{
+    background:linear-gradient(135deg, rgba(79,124,255,.15), rgba(139,92,246,.1)), #101827;
+    border-color:rgba(118,152,255,.18);
+  }
+
+  html[data-theme="dark"] .empty{
+    background:rgba(15,23,42,.72);
+    border-color:rgba(148,163,184,.24);
+  }
+
+  html[data-theme="dark"] .footer-credit a{
+    color:#aebbd0;
+  }
+
   @media (max-width:820px){
     .header{
       padding:14px 16px;
+      flex-wrap:wrap;
     }
 
     .site-subtitle{
@@ -880,7 +1551,11 @@
     }
 
     .nav{
+      order:3;
+      width:100%;
       gap:4px;
+      justify-content:center;
+      overflow-x:auto;
     }
 
     .nav a{
@@ -898,6 +1573,14 @@
     }
 
     .mini-stats{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .trailer-layout{
+      grid-template-columns:1fr;
+    }
+
+    .trailer-list{
       grid-template-columns:1fr 1fr;
     }
   }
@@ -922,6 +1605,20 @@
       display:none;
     }
 
+    .utility-controls{
+      gap:6px;
+    }
+
+    .lang-btn{
+      min-width:31px;
+      padding:0 6px;
+    }
+
+    .theme-toggle{
+      width:38px;
+      height:38px;
+    }
+
     .hero h1{
       font-size:34px;
     }
@@ -944,6 +1641,12 @@
       border-radius:22px;
     }
 
+    .modal[data-mode="announcement"] .modal-head img{
+      width:112px;
+      height:76px;
+      border-radius:16px;
+    }
+
     .modal-name{
       font-size:21px;
     }
@@ -952,6 +1655,90 @@
       align-items:flex-start;
       flex-direction:column;
       gap:6px;
+    }
+
+    .source-section{
+      align-items:flex-start;
+      flex-direction:column;
+    }
+
+    .trailer-list{
+      grid-template-columns:1fr;
+    }
+
+    .trailer-card{
+      grid-template-columns:104px minmax(0,1fr);
+    }
+
+    .trailer-feature-body{
+      align-items:flex-start;
+      flex-direction:column;
+    }
+  }
+
+  @media (max-width:420px){
+    .brand > div:not(.brand-logo){
+      display:none;
+    }
+  }
+
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .header,
+    .toolbar{
+      background:rgba(245,247,255,.96);
+    }
+
+    .modal{
+      background:rgba(15,23,42,.72);
+    }
+
+    html[data-theme="dark"] .header,
+    html[data-theme="dark"] .toolbar{
+      background:rgba(8,12,24,.97);
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{
+      scroll-behavior:auto;
+    }
+
+    .hero::after,
+    .eyebrow-dot,
+    .motion-ready .hero-content,
+    .motion-ready .hero-panel .stat-card,
+    .motion-ready .card-enter{
+      animation:none !important;
+    }
+
+    .motion-ready .reveal{
+      opacity:1;
+      transform:none;
+    }
+
+    .modal,
+    .modal-card,
+    .char-card,
+    .avatar img,
+    .announce-img img,
+    .btn,
+    .modal-close,
+    .source-link,
+    .trailer-card,
+    .trailer-thumb img,
+    .lang-btn,
+    .theme-toggle{
+      transition:none !important;
+    }
+
+    .char-card:is(:hover,:focus-visible),
+    .announce-card:not(.is-static):is(:hover,:focus-within),
+    .btn:hover,
+    .modal-close:hover,
+    .source-link:is(:hover,:focus-visible),
+    .trailer-card:is(:hover,:focus-visible),
+    .theme-toggle:is(:hover,:focus-visible){
+      transform:none;
     }
   }
 </style>
@@ -963,15 +1750,29 @@
       <div class="brand-logo">PA</div>
       <div>
         <h1 class="site-title">Project Archive Wiki</h1>
-        <div class="site-subtitle">Archive · Students · Battle Records</div>
+        <div class="site-subtitle" data-i18n="brand.subtitle">档案 · 学生 · 战斗记录</div>
       </div>
     </div>
 
-    <nav class="nav" aria-label="主导航">
-      <a href="#announcements">公告</a>
-      <a href="#characters">角色</a>
-      <a href="#about">关于</a>
+    <nav class="nav" id="mainNav" aria-label="主导航">
+      <a href="#announcements" data-i18n="nav.announcements">公告</a>
+      <a href="#trailers" data-i18n="nav.trailers">宣传片</a>
+      <a href="#characters" data-i18n="nav.characters">角色</a>
+      <a href="#about" data-i18n="nav.about">关于</a>
     </nav>
+
+    <div class="utility-controls">
+      <div class="language-switch" id="languageSwitch" role="group" aria-label="切换语言">
+        <button class="lang-btn" type="button" data-language="cn" aria-pressed="true">中文</button>
+        <button class="lang-btn" type="button" data-language="en" aria-pressed="false">EN</button>
+        <button class="lang-btn" type="button" data-language="jp" aria-pressed="false">日本語</button>
+      </div>
+
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换至夜间模式" aria-pressed="false">
+        <span id="themeIcon" aria-hidden="true">☾</span>
+        <span class="sr-only" id="themeLabel">夜间模式</span>
+      </button>
+    </div>
   </header>
 
   <main class="container">
@@ -979,39 +1780,40 @@
       <div class="hero-content">
         <div class="eyebrow">
           <span class="eyebrow-dot"></span>
-          Wiki Database Online
+          <span data-i18n="hero.status">Wiki 数据库已上线</span>
         </div>
 
-        <h1>Project Archive<br>资料库</h1>
+        <h1 data-i18n-html="hero.title">Project Archive<br>资料库</h1>
 
-        <p>
+        <p data-i18n="hero.description">
           查看最新公告、角色资料、学院分类与职业定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#characters">查看角色</a>
-          <a class="btn btn-ghost" href="#announcements">最新公告</a>
+          <a class="btn btn-primary" href="#characters" data-i18n="hero.viewCharacters">查看角色</a>
+          <a class="btn btn-ghost" href="#trailers" data-i18n="hero.watchTrailers">观看最新宣传片</a>
+          <a class="btn btn-ghost" href="#announcements" data-i18n="hero.latestAnnouncements">最新公告</a>
         </div>
       </div>
 
       <div class="hero-panel">
         <div class="stat-card">
-          <div class="stat-label">当前版本公告</div>
+          <div class="stat-label" data-i18n="stats.announcements">当前版本公告</div>
           <div class="stat-value" id="announcementCount">0</div>
-          <div class="stat-note">Updates / News</div>
+          <div class="stat-note" data-i18n="stats.announcementsNote">更新 / 新闻</div>
         </div>
 
         <div class="mini-stats">
           <div class="stat-card">
-            <div class="stat-label">角色数量</div>
+            <div class="stat-label" data-i18n="stats.characters">角色数量</div>
             <div class="stat-value" id="characterCount">0</div>
-            <div class="stat-note">Characters</div>
+            <div class="stat-note" data-i18n="stats.charactersNote">角色</div>
           </div>
 
           <div class="stat-card">
-            <div class="stat-label">学院数量</div>
+            <div class="stat-label" data-i18n="stats.academies">学院数量</div>
             <div class="stat-value" id="academyCount">0</div>
-            <div class="stat-note">Academies</div>
+            <div class="stat-note" data-i18n="stats.academiesNote">学院</div>
           </div>
         </div>
       </div>
@@ -1020,41 +1822,77 @@
     <section class="section" id="announcements">
       <div class="section-head">
         <div>
-          <h2 class="section-title">最新公告</h2>
-          <p class="section-desc">版本更新、角色加入和活动消息会显示在这里。</p>
+          <h2 class="section-title" data-i18n="announcements.title">最新公告</h2>
+          <p class="section-desc" data-i18n="announcements.description">版本更新、角色加入和活动消息会显示在这里。</p>
         </div>
-        <div class="section-right">横向滑动查看更多</div>
+        <div class="section-right" data-i18n="announcements.more">横向滑动查看更多</div>
       </div>
 
       <div class="announcements" id="announceArea" role="list"></div>
     </section>
 
-    <section class="section" aria-label="筛选栏">
+    <section class="section" id="trailers">
       <div class="section-head">
         <div>
-          <h2 class="section-title">角色筛选</h2>
-          <p class="section-desc">按照学院、职业或角色名快速查找。</p>
+          <h2 class="section-title" data-i18n="trailers.title">最新宣传片</h2>
+          <p class="section-desc" data-i18n="trailers.description">选择一支宣传片，在站内开始播放。</p>
+        </div>
+        <div class="section-right" data-i18n="trailers.hint">共 4 支影片</div>
+      </div>
+
+      <div class="trailer-layout">
+        <article class="trailer-feature">
+          <div class="video-frame">
+            <iframe
+              id="trailerFrame"
+              title="Project Archive 宣传片"
+              loading="lazy"
+              src="about:blank"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="trailer-feature-body">
+            <div>
+              <h3 class="trailer-feature-title" id="activeTrailerTitle" aria-live="polite">PA IZUNA HIKARI</h3>
+              <div class="trailer-channel">YouTube · in_uni</div>
+            </div>
+            <a class="btn youtube-link" id="trailerExternalLink" href="https://www.youtube.com/watch?v=FekdUUn3cIo" target="_blank" rel="noopener noreferrer" data-i18n="trailers.openYoutube">在 YouTube 观看</a>
+          </div>
+        </article>
+
+        <div class="trailer-list" id="trailerList" role="list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="filters" aria-label="角色筛选">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title" data-i18n="filters.title">角色筛选</h2>
+          <p class="section-desc" data-i18n="filters.description">按照学院、职业或角色名快速查找。</p>
         </div>
         <div class="section-right" id="resultCount" role="status" aria-live="polite">显示 0 名角色</div>
       </div>
 
       <div class="toolbar">
         <div class="field">
-          <label for="academySelect">学院</label>
+          <label for="academySelect" data-i18n="filters.academy">学院</label>
           <select class="control" id="academySelect">
             <option value="all">全部学院</option>
           </select>
         </div>
 
         <div class="field">
-          <label for="roleSelect">职业</label>
+          <label for="roleSelect" data-i18n="filters.role">职业</label>
           <select class="control" id="roleSelect">
             <option value="all">全部职业</option>
           </select>
         </div>
 
         <div class="field">
-          <label for="searchInput">搜索</label>
+          <label for="searchInput" data-i18n="filters.search">搜索</label>
           <div class="search-wrap">
             <span class="search-icon">⌕</span>
             <input class="control" id="searchInput" type="search" autocomplete="off" placeholder="输入角色名、学院、武器..." />
@@ -1066,8 +1904,8 @@
     <section class="section" id="characters">
       <div class="section-head">
         <div>
-          <h2 class="section-title">角色列表</h2>
-          <p class="section-desc">点击角色卡片可以查看完整角色数据。</p>
+          <h2 class="section-title" data-i18n="characters.title">角色列表</h2>
+          <p class="section-desc" data-i18n="characters.description">点击角色卡片可以查看完整角色数据。</p>
         </div>
       </div>
 
@@ -1075,7 +1913,12 @@
     </section>
 
     <footer id="about">
-      © 2026 Project Archive Wiki · Fan-made database layout
+      © 2026 Project Archive Wiki · <span data-i18n="footer.fanMade">同人资料库界面</span>
+      <div class="footer-credit">
+        <span data-i18n="footer.imageSourcePrefix">角色图像资料整理自</span>
+        <a href="https://kivo.wiki/" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceName">基沃托斯古书馆</a>
+        · <span data-i18n="footer.rights">游戏素材版权归原权利方所有</span>
+      </div>
     </footer>
   </main>
 
@@ -1099,27 +1942,422 @@
   </div>
 
 <script>
+const translations = {
+  cn: {
+    "page.description":"Project Archive 角色图鉴、公告与战斗资料库。",
+    "brand.subtitle":"档案 · 学生 · 战斗记录",
+    "nav.aria":"主导航",
+    "nav.announcements":"公告",
+    "nav.trailers":"宣传片",
+    "nav.characters":"角色",
+    "nav.about":"关于",
+    "hero.status":"Wiki 数据库已上线",
+    "hero.title":"Project Archive<br>资料库",
+    "hero.description":"查看最新公告、角色资料、学院分类与职业定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。",
+    "hero.viewCharacters":"查看角色",
+    "hero.watchTrailers":"观看最新宣传片",
+    "hero.latestAnnouncements":"最新公告",
+    "stats.announcements":"当前版本公告",
+    "stats.announcementsNote":"更新 / 新闻",
+    "stats.characters":"角色数量",
+    "stats.charactersNote":"角色",
+    "stats.academies":"学院数量",
+    "stats.academiesNote":"学院",
+    "announcements.title":"最新公告",
+    "announcements.description":"版本更新、角色加入和活动消息会显示在这里。",
+    "announcements.more":"横向滑动查看更多",
+    "announcement.openAria":"查看公告“{title}”的详情",
+    "announcement.view":"查看完整公告",
+    "announcement.overview":"公告内容",
+    "announcement.highlights":"本次更新",
+    "announcement.published":"发布于 {date}",
+    "trailers.title":"最新宣传片",
+    "trailers.description":"选择一支宣传片，在站内开始播放。",
+    "trailers.hint":"共 4 支影片",
+    "trailers.play":"播放宣传片 {number}：{title}",
+    "trailers.frameTitle":"Project Archive 宣传片：{title}",
+    "trailers.openYoutube":"在 YouTube 观看",
+    "trailers.index":"宣传片 {number}",
+    "filters.aria":"角色筛选",
+    "filters.title":"角色筛选",
+    "filters.description":"按照学院、职业或角色名快速查找。",
+    "filters.resultCount":"显示 {count} 名角色",
+    "filters.academy":"学院",
+    "filters.allAcademies":"全部学院",
+    "filters.role":"职业",
+    "filters.allRoles":"全部职业",
+    "filters.search":"搜索",
+    "filters.placeholder":"输入角色名、学院、武器...",
+    "characters.title":"角色列表",
+    "characters.description":"点击角色卡片可以查看完整角色数据。",
+    "characters.empty":"没有找到匹配的角色。可以换一个学院、职业或搜索关键词试试。",
+    "characters.openAria":"查看 {name} 的完整资料",
+    "common.unknownWeapon":"未知武器",
+    "common.unknown":"未知",
+    "modal.close":"关闭弹窗",
+    "detail.basic":"基础信息",
+    "field.rarity":"星级",
+    "field.academy":"学院",
+    "field.role":"职业",
+    "field.weapon":"武器",
+    "field.attackType":"攻击类型",
+    "field.defenseType":"防御类型",
+    "field.position":"定位",
+    "detail.stats":"角色数值",
+    "stat.hp":"生命值",
+    "stat.attack":"伤害",
+    "stat.defense":"防御",
+    "stat.speed":"速度",
+    "stat.range":"射程",
+    "stat.critRate":"暴击率",
+    "stat.reloadTime":"换弹时间",
+    "detail.skills":"技能",
+    "skill.cooldown":"冷却：{value}",
+    "skill.empty":"暂无技能资料。",
+    "detail.description":"角色说明",
+    "detail.descriptionEmpty":"暂无介绍。",
+    "detail.notes":"使用备注",
+    "detail.notesEmpty":"暂无备注。",
+    "detail.imageSource":"图像来源",
+    "detail.kivoLink":"在 Kivo Wiki 查看对应图鉴",
+    "footer.fanMade":"同人资料库界面",
+    "footer.imageSourcePrefix":"角色图像资料整理自",
+    "footer.sourceName":"基沃托斯古书馆",
+    "footer.rights":"游戏素材版权归原权利方所有",
+    "language.switchAria":"切换语言",
+    "theme.toDarkAria":"切换至夜间模式",
+    "theme.toLightAria":"切换至日间模式",
+    "theme.dark":"夜间模式",
+    "theme.light":"日间模式"
+  },
+  en: {
+    "page.description":"Project Archive character guide, announcements, and battle database.",
+    "brand.subtitle":"Archive · Students · Battle Records",
+    "nav.aria":"Main navigation",
+    "nav.announcements":"Announcements",
+    "nav.trailers":"Trailers",
+    "nav.characters":"Characters",
+    "nav.about":"About",
+    "hero.status":"Wiki Database Online",
+    "hero.title":"Project Archive<br>Database",
+    "hero.description":"Browse the latest announcements, character profiles, academy categories, and combat roles. Your gateway to the Project Archive roster, update log, and gameplay resources.",
+    "hero.viewCharacters":"View Characters",
+    "hero.watchTrailers":"Watch Latest Trailers",
+    "hero.latestAnnouncements":"Latest News",
+    "stats.announcements":"Current Announcements",
+    "stats.announcementsNote":"Updates / News",
+    "stats.characters":"Character Count",
+    "stats.charactersNote":"Characters",
+    "stats.academies":"Academy Count",
+    "stats.academiesNote":"Academies",
+    "announcements.title":"Latest Announcements",
+    "announcements.description":"Version updates, new characters, and feature news appear here.",
+    "announcements.more":"Scroll horizontally to see more",
+    "announcement.openAria":"View announcement details for “{title}”",
+    "announcement.view":"View Full Announcement",
+    "announcement.overview":"Announcement",
+    "announcement.highlights":"What’s New",
+    "announcement.published":"Published {date}",
+    "trailers.title":"Latest Trailers",
+    "trailers.description":"Choose a trailer and watch it directly on the site.",
+    "trailers.hint":"4 videos",
+    "trailers.play":"Play trailer {number}: {title}",
+    "trailers.frameTitle":"Project Archive trailer: {title}",
+    "trailers.openYoutube":"Watch on YouTube",
+    "trailers.index":"Trailer {number}",
+    "filters.aria":"Character filters",
+    "filters.title":"Character Filters",
+    "filters.description":"Find characters by academy, role, or name.",
+    "filters.resultCount":"Showing {count} characters",
+    "filters.academy":"Academy",
+    "filters.allAcademies":"All Academies",
+    "filters.role":"Role",
+    "filters.allRoles":"All Roles",
+    "filters.search":"Search",
+    "filters.placeholder":"Enter a character, academy, or weapon...",
+    "characters.title":"Character List",
+    "characters.description":"Select a character card to view the full profile.",
+    "characters.empty":"No matching characters found. Try another academy, role, or search term.",
+    "characters.openAria":"View the full profile for {name}",
+    "common.unknownWeapon":"Unknown Weapon",
+    "common.unknown":"Unknown",
+    "modal.close":"Close dialog",
+    "detail.basic":"Basic Information",
+    "field.rarity":"Rarity",
+    "field.academy":"Academy",
+    "field.role":"Role",
+    "field.weapon":"Weapon",
+    "field.attackType":"Attack Type",
+    "field.defenseType":"Defense Type",
+    "field.position":"Position",
+    "detail.stats":"Stats",
+    "stat.hp":"HP",
+    "stat.attack":"Damage",
+    "stat.defense":"Defense",
+    "stat.speed":"Speed",
+    "stat.range":"Range",
+    "stat.critRate":"Crit Rate",
+    "stat.reloadTime":"Reload Time",
+    "detail.skills":"Skills",
+    "skill.cooldown":"Cooldown: {value}",
+    "skill.empty":"No skill data available.",
+    "detail.description":"Description",
+    "detail.descriptionEmpty":"No description available.",
+    "detail.notes":"Usage Notes",
+    "detail.notesEmpty":"No notes available.",
+    "detail.imageSource":"Image Source",
+    "detail.kivoLink":"View this entry on Kivo Wiki",
+    "footer.fanMade":"Fan-made database",
+    "footer.imageSourcePrefix":"Character image data sourced from",
+    "footer.sourceName":"Kivotos Ancient Library",
+    "footer.rights":"Game assets belong to their respective rights holders",
+    "language.switchAria":"Change language",
+    "theme.toDarkAria":"Switch to dark mode",
+    "theme.toLightAria":"Switch to light mode",
+    "theme.dark":"Dark Mode",
+    "theme.light":"Light Mode"
+  },
+  jp: {
+    "page.description":"Project Archiveのキャラクター図鑑、お知らせ、バトルデータベース。",
+    "brand.subtitle":"アーカイブ · 生徒 · 戦闘記録",
+    "nav.aria":"メインナビゲーション",
+    "nav.announcements":"お知らせ",
+    "nav.trailers":"最新PV",
+    "nav.characters":"キャラクター",
+    "nav.about":"このサイトについて",
+    "hero.status":"Wikiデータベース公開中",
+    "hero.title":"Project Archive<br>データベース",
+    "hero.description":"最新のお知らせ、キャラクター情報、学園分類、役割を確認できます。Project Archiveのキャラクター図鑑、更新履歴、攻略情報への入口です。",
+    "hero.viewCharacters":"キャラクターを見る",
+    "hero.watchTrailers":"最新PVを見る",
+    "hero.latestAnnouncements":"最新のお知らせ",
+    "stats.announcements":"最新のお知らせ数",
+    "stats.announcementsNote":"アップデート / ニュース",
+    "stats.characters":"キャラクター数",
+    "stats.charactersNote":"キャラクター",
+    "stats.academies":"学園数",
+    "stats.academiesNote":"学園",
+    "announcements.title":"最新のお知らせ",
+    "announcements.description":"バージョン更新、新キャラクター、機能情報をここに掲載します。",
+    "announcements.more":"横にスクロールしてさらに表示",
+    "announcement.openAria":"「{title}」のお知らせ詳細を見る",
+    "announcement.view":"お知らせの詳細を見る",
+    "announcement.overview":"お知らせ内容",
+    "announcement.highlights":"今回の更新",
+    "announcement.published":"公開日：{date}",
+    "trailers.title":"最新PV",
+    "trailers.description":"PVを選択してサイト内で再生できます。",
+    "trailers.hint":"全4本",
+    "trailers.play":"PV {number}を再生：{title}",
+    "trailers.frameTitle":"Project Archive PV：{title}",
+    "trailers.openYoutube":"YouTubeで見る",
+    "trailers.index":"PV {number}",
+    "filters.aria":"キャラクターフィルター",
+    "filters.title":"キャラクター絞り込み",
+    "filters.description":"学園、役割、キャラクター名で素早く検索できます。",
+    "filters.resultCount":"{count}人のキャラクターを表示",
+    "filters.academy":"学園",
+    "filters.allAcademies":"すべての学園",
+    "filters.role":"役割",
+    "filters.allRoles":"すべての役割",
+    "filters.search":"検索",
+    "filters.placeholder":"キャラクター名、学園、武器を入力...",
+    "characters.title":"キャラクター一覧",
+    "characters.description":"キャラクターカードを選ぶと詳しいデータを確認できます。",
+    "characters.empty":"条件に一致するキャラクターが見つかりません。学園、役割、検索語を変えてお試しください。",
+    "characters.openAria":"{name}の詳しい情報を見る",
+    "common.unknownWeapon":"不明な武器",
+    "common.unknown":"不明",
+    "modal.close":"ダイアログを閉じる",
+    "detail.basic":"基本情報",
+    "field.rarity":"レアリティ",
+    "field.academy":"学園",
+    "field.role":"役割",
+    "field.weapon":"武器",
+    "field.attackType":"攻撃タイプ",
+    "field.defenseType":"防御タイプ",
+    "field.position":"ポジション",
+    "detail.stats":"ステータス",
+    "stat.hp":"HP",
+    "stat.attack":"ダメージ",
+    "stat.defense":"防御力",
+    "stat.speed":"速度",
+    "stat.range":"射程",
+    "stat.critRate":"会心率",
+    "stat.reloadTime":"リロード時間",
+    "detail.skills":"スキル",
+    "skill.cooldown":"クールダウン：{value}",
+    "skill.empty":"スキル情報はありません。",
+    "detail.description":"キャラクター説明",
+    "detail.descriptionEmpty":"紹介はありません。",
+    "detail.notes":"使用メモ",
+    "detail.notesEmpty":"メモはありません。",
+    "detail.imageSource":"画像出典",
+    "detail.kivoLink":"Kivo Wikiで該当図鑑を見る",
+    "footer.fanMade":"ファンメイドデータベース",
+    "footer.imageSourcePrefix":"キャラクター画像資料：",
+    "footer.sourceName":"キヴォトス古書館",
+    "footer.rights":"ゲーム素材の著作権は各権利者に帰属します",
+    "language.switchAria":"言語を切り替え",
+    "theme.toDarkAria":"ダークモードに切り替え",
+    "theme.toLightAria":"ライトモードに切り替え",
+    "theme.dark":"ダークモード",
+    "theme.light":"ライトモード"
+  }
+};
+
+const localizedValues = {
+  "歌赫娜":{en:"Gehenna Academy",jp:"ゲヘナ学園"},
+  "千禧年":{en:"Millennium Science School",jp:"ミレニアムサイエンススクール"},
+  "阿拜多斯":{en:"Abydos High School",jp:"アビドス高等学校"},
+  "圣三一":{en:"Trinity General School",jp:"トリニティ総合学園"},
+  "瓦尔基里":{en:"Valkyrie Police Academy",jp:"ヴァルキューレ警察学校"},
+  "阿里乌斯":{en:"Arius Branch School",jp:"アリウス分校"},
+  "海兰德":{en:"Highlander Railroad Academy",jp:"ハイランダー鉄道学園"},
+  "红冬":{en:"Red Winter Federal Academy",jp:"レッドウィンター連邦学園"},
+  "山海经":{en:"Shanhaijing",jp:"山海経高級中学校"},
+  "百鬼夜行":{en:"Hyakkiyako Alliance Academy",jp:"百鬼夜行連合学院"},
+  "SRT":{en:"SRT Special Academy",jp:"SRT特殊学園"},
+  "狂猎艺术":{en:"Wild Hunt Academy of Arts",jp:"ワイルドハント芸術学院"},
+  "前卫":{en:"Vanguard",jp:"前衛"},
+  "中卫":{en:"Midline",jp:"中衛"},
+  "后卫":{en:"Backline",jp:"後衛"},
+  "支援":{en:"Support",jp:"サポート"},
+  "狙击":{en:"Sniper",jp:"スナイパー"},
+  "爆发":{en:"Explosive",jp:"爆発"},
+  "贯通":{en:"Piercing",jp:"貫通"},
+  "神秘":{en:"Mystic",jp:"神秘"},
+  "轻装甲":{en:"Light Armor",jp:"軽装備"},
+  "重装甲":{en:"Heavy Armor",jp:"重装甲"},
+  "特殊装甲":{en:"Special Armor",jp:"特殊装甲"},
+  "E技能":{en:"E Skill",jp:"Eスキル"},
+  "Q技能":{en:"Q Skill",jp:"Qスキル"},
+  "被动技能":{en:"Passive Skill",jp:"パッシブスキル"},
+  "光之剑 / 电磁炮":{en:"Sword of Light / Railgun",jp:"光の剣 / レールガン"},
+  "阿比舒 / 光束炮":{en:"Abishu / Beam Cannon",jp:"アビシュ / ビーム砲"},
+  "狙击枪":{en:"Sniper Rifle",jp:"スナイパーライフル"},
+  "冲锋枪":{en:"SMG",jp:"サブマシンガン"},
+  "手枪":{en:"Handgun",jp:"ハンドガン"},
+  "榴弹发射器":{en:"Grenade Launcher",jp:"グレネードランチャー"},
+  "霰弹枪":{en:"Shotgun",jp:"ショットガン"},
+  "突击步枪":{en:"Assault Rifle",jp:"アサルトライフル"},
+  "机枪":{en:"Machine Gun",jp:"マシンガン"},
+  "霰弹枪 / 盾牌":{en:"Shotgun / Shield",jp:"ショットガン / シールド"},
+  "电磁炮":{en:"Railgun",jp:"レールガン"},
+  "步枪":{en:"Rifle",jp:"ライフル"},
+  "盾牌 / 冲锋枪":{en:"Shield / SMG",jp:"シールド / サブマシンガン"},
+  "手枪 / 应援棒":{en:"Handgun / Cheer Baton",jp:"ハンドガン / 応援バトン"},
+  "冲锋枪 / 盾牌":{en:"SMG / Shield",jp:"サブマシンガン / シールド"},
+  "枕头":{en:"Pillow",jp:"枕"},
+  "书 / 山雀":{en:"Book / Tit",jp:"本 / シジュウカラ"},
+  "冲锋枪 / 镜子":{en:"SMG / Mirror",jp:"サブマシンガン / 鏡"}
+};
+
+const characterNames = {
+  1:{en:"Arisu",jp:"アリス"},2:{cn:"临战爱丽丝",en:"Arisu (Armed)",jp:"アリス（臨戦）"},3:{cn:"爱露（礼服）",en:"Aru (Dress)",jp:"アル（ドレス）"},
+  4:{en:"Atsuko",jp:"アツコ"},5:{cn:"千夏（温泉）",en:"Chinatsu (Hot Spring)",jp:"チナツ（温泉）"},6:{en:"Chise",jp:"チセ"},
+  7:{en:"Haruka",jp:"ハルカ"},8:{cn:"晴奈（正月）",en:"Haruna (New Year)",jp:"ハルナ（正月）"},9:{en:"Hifumi",jp:"ヒフミ"},
+  10:{en:"Hikari",jp:"ヒカリ"},11:{cn:"日奈（礼服）",en:"Hina (Dress)",jp:"ヒナ（ドレス）"},12:{cn:"星野（临战）",en:"Hoshino (Battle)",jp:"ホシノ（臨戦）"},
+  13:{en:"Ibuki",jp:"イブキ"},14:{cn:"泉奈（泳装）",en:"Izuna (Swimsuit)",jp:"イズナ（水着）"},15:{en:"Kayoko",jp:"カヨコ"},
+  16:{en:"Kei",jp:"ケイ"},17:{en:"Kikyou",jp:"キキョウ"},18:{en:"Kokona",jp:"ココナ"},19:{en:"Kurumi",jp:"クルミ"},
+  20:{cn:"玛丽（偶像）",en:"Mari (Idol)",jp:"マリー（アイドル）"},21:{en:"Midori",jp:"ミドリ"},22:{en:"Mika",jp:"ミカ"},
+  23:{cn:"美祢（偶像）",en:"Mine (Idol)",jp:"ミネ（アイドル）"},24:{en:"Momoi",jp:"モモイ"},25:{en:"Mutsuki",jp:"ムツキ"},
+  26:{en:"Nagusa",jp:"ナグサ"},27:{en:"Natsu",jp:"ナツ"},28:{en:"Niko",jp:"ニコ"},29:{cn:"诺亚（睡衣）",en:"Noa (Pajama)",jp:"ノア（パジャマ）"},
+  30:{en:"Nozomi",jp:"ノゾミ"},31:{en:"Reisa",jp:"レイサ"},32:{cn:"樱子（偶像）",en:"Sakurako (Idol)",jp:"サクラコ（アイドル）"},
+  33:{en:"Shigure",jp:"シグレ"},34:{en:"Seia",jp:"セイア"},35:{en:"Ui",jp:"ウイ"},36:{cn:"优香（睡衣）",en:"Yuuka (Pajama)",jp:"ユウカ（パジャマ）"},37:{en:"Yuzu",jp:"ユズ"}
+};
+
+const trailers = [
+  {id:"FekdUUn3cIo",url:"https://www.youtube.com/watch?v=FekdUUn3cIo",title:{cn:"PA 泉奈 × 小光",en:"PA IZUNA HIKARI",jp:"PA イズナ × ヒカリ"}},
+  {id:"6J3IQ5VhRVQ",url:"https://www.youtube.com/watch?v=6J3IQ5VhRVQ",title:{cn:"《Project Archive》更新视频",en:'BA fan game "Project Archive" update video',jp:"『Project Archive』アップデート動画"}},
+  {id:"YamYqKh7jLI",url:"https://www.youtube.com/watch?v=YamYqKh7jLI",title:{cn:"Project Archive 名草更新！",en:"Project Archive Nagusa Update!",jp:"Project Archive ナグサアップデート！"}},
+  {id:"oZ2mTczpaZY",url:"https://www.youtube.com/watch?v=oZ2mTczpaZY",title:{cn:"Project Archive：橘望",en:"Project Archive: Tachibana Nozomi",jp:"Project Archive：橘ノゾミ"}}
+];
+
 const announcements = [
   {
-    title: "10月更新：Izuna 加入战场！",
-    img: "https://via.placeholder.com/800x450/4f7cff/ffffff?text=Izuna+Update",
-    link: "#",
-    type: "角色更新",
-    date: "2025.10"
+    id:"izuna-update",
+    img:"assets/students/14-izuna.png",
+    date:"2025.10",
+    content:{
+      cn:{
+        title:"10月更新：泉奈加入战场！",
+        type:"角色更新",
+        summary:"泉奈现已加入 Project Archive 资料库，角色卡、战斗定位和完整技能说明同步开放。",
+        body:["本次更新补充了泉奈的基础数值、攻击与防御类型、技能循环及使用备注。点击角色卡即可查看完整资料。","图鉴图片已保存为本地资源，加载更稳定；详情底部同时保留对应的 Kivo Wiki 来源入口。"],
+        highlights:["新增泉奈角色资料与本地图像","支持学院、职业和关键词筛选","详情页提供对应图鉴来源"]
+      },
+      en:{
+        title:"October Update: Izuna Joins the Battle!",
+        type:"Character Update",
+        summary:"Izuna has joined the Project Archive database with a full profile, combat role, and skill overview.",
+        body:["This update adds Izuna’s core stats, attack and defense types, skill rotation, and usage notes. Select her character card to open the complete profile.","Her portrait is stored locally for reliable loading, while the detail view retains a direct source link to the matching Kivo Wiki entry."],
+        highlights:["New Izuna profile and local portrait","Academy, role, and keyword filtering","Direct source link in the detail view"]
+      },
+      jp:{
+        title:"10月アップデート：イズナ参戦！",
+        type:"キャラクター更新",
+        summary:"イズナがProject Archiveデータベースに追加され、プロフィール、戦闘ポジション、スキル情報を確認できるようになりました。",
+        body:["今回の更新では、イズナの基本ステータス、攻撃・防御タイプ、スキル構成、使用メモを追加しました。キャラクターカードから詳細を確認できます。","画像は安定して表示できるようローカル保存し、詳細画面にはKivo Wikiの対応ページへのリンクも掲載しています。"],
+        highlights:["イズナのプロフィールとローカル画像を追加","学園・役割・キーワード検索に対応","詳細画面に図鑑の出典リンクを掲載"]
+      }
+    }
   },
   {
-    title: "全新 Wiki 页面视觉升级",
-    img: "https://via.placeholder.com/800x450/8b5cf6/ffffff?text=Project+Archive+Wiki",
-    link: "#",
-    type: "网站公告",
-    date: "2025.10"
+    id:"visual-refresh",
+    img:"",
+    date:"2025.10",
+    content:{
+      cn:{
+        title:"全新 Wiki 页面视觉升级",
+        type:"网站公告",
+        summary:"资料库完成界面重制，加入玻璃质感、克制动画、三语言切换与夜间模式。",
+        body:["首页、公告、角色卡与详情弹窗已统一视觉语言，信息层级更清楚，并针对桌面与移动设备重新调整布局。","所有主要交互同时支持键盘操作；系统启用“减少动态效果”时，页面会自动关闭非必要动画。"],
+        highlights:["CN / English / 日本語即时切换","可记忆的日间与夜间主题","滚动入场、图片淡入和弹窗过渡"]
+      },
+      en:{
+        title:"A Fresh New Look for the Wiki",
+        type:"Site Notice",
+        summary:"The database has been refreshed with layered glass surfaces, restrained motion, three languages, and dark mode.",
+        body:["The home page, announcements, character cards, and detail dialog now share one consistent visual language, with clearer hierarchy across desktop and mobile layouts.","Every main interaction supports keyboard input, and non-essential animation is disabled automatically when reduced motion is enabled at system level."],
+        highlights:["Instant CN / English / 日本語 switching","Persistent light and dark themes","Scroll reveals, image fades, and dialog transitions"]
+      },
+      jp:{
+        title:"Wikiページを全面リニューアル",
+        type:"サイトからのお知らせ",
+        summary:"ガラス調のレイヤー、控えめなモーション、3言語切り替え、ダークモードを追加しました。",
+        body:["トップページ、お知らせ、キャラクターカード、詳細ダイアログのデザインを統一し、PCとモバイルの両方で情報を確認しやすくしました。","主要な操作はキーボードに対応し、OSでモーション軽減が有効な場合は不要なアニメーションを自動的に停止します。"],
+        highlights:["中文 / English / 日本語を即時切り替え","設定を保存するライト・ダークテーマ","スクロール表示、画像フェード、ダイアログ遷移"]
+      }
+    }
   },
   {
-    title: "学院与职业筛选功能上线",
-    img: "https://via.placeholder.com/800x450/22d3ee/ffffff?text=Filter+System",
-    link: "#",
-    type: "功能更新",
-    date: "2025.10"
+    id:"filter-system",
+    img:"",
+    date:"2025.10",
+    content:{
+      cn:{
+        title:"学院与职业筛选功能上线",
+        type:"功能更新",
+        summary:"角色列表现在可以按学院、职业与关键词组合筛选，寻找学生更加快速。",
+        body:["学院和职业选项可以组合使用，搜索框会同时匹配角色名、学院、武器、攻击类型、防御类型与定位说明。","切换网站语言后，筛选标签与角色名称会同步更新，原始中文和罗马字名称仍然可以被搜索。"],
+        highlights:["学院与职业组合筛选","多字段即时关键词搜索","切换语言后保持当前筛选条件"]
+      },
+      en:{
+        title:"Academy and Role Filters Are Now Available",
+        type:"Feature Update",
+        summary:"The character roster can now be filtered by academy, role, and keyword to help you find students faster.",
+        body:["Academy and role filters work together, while search matches names, academies, weapons, attack types, defense types, and positioning notes.","Changing the site language updates filter labels and character names without clearing the current selection. Original Chinese and romanized names remain searchable."],
+        highlights:["Combined academy and role filters","Instant multi-field keyword search","Selections persist across language changes"]
+      },
+      jp:{
+        title:"学園・役割フィルターを追加",
+        type:"機能アップデート",
+        summary:"学園、役割、キーワードを組み合わせて、生徒をすばやく検索できるようになりました。",
+        body:["学園と役割のフィルターは同時に使用でき、検索欄ではキャラクター名、学園、武器、攻撃・防御タイプ、ポジション説明を照合します。","サイトの言語を切り替えると、現在の選択を維持したままラベルとキャラクター名が更新されます。中国語名とローマ字名でも検索できます。"],
+        highlights:["学園と役割の組み合わせ検索","複数項目のリアルタイム検索","言語切り替え後も条件を保持"]
+      }
+    }
   }
 ];
 
@@ -3115,19 +4353,167 @@ const roleSelect = document.getElementById("roleSelect");
 const searchInput = document.getElementById("searchInput");
 const charGrid = document.getElementById("charGrid");
 const resultCount = document.getElementById("resultCount");
+const filterSection = document.getElementById("filters");
+const mainNav = document.getElementById("mainNav");
+const languageSwitch = document.getElementById("languageSwitch");
+const languageButtons = [...document.querySelectorAll(".lang-btn")];
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+const themeLabel = document.getElementById("themeLabel");
+const trailerFrame = document.getElementById("trailerFrame");
+const trailerList = document.getElementById("trailerList");
+const activeTrailerTitle = document.getElementById("activeTrailerTitle");
+const trailerExternalLink = document.getElementById("trailerExternalLink");
 
 const modal = document.getElementById("modal");
+const modalCard = modal.querySelector(".modal-card");
 const modalAvatar = document.getElementById("modalAvatar");
 const modalName = document.getElementById("modalName");
 const modalStars = document.getElementById("modalStars");
 const modalTags = document.getElementById("modalTags");
 const modalBody = document.getElementById("modalBody");
 const closeModal = document.getElementById("closeModal");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const supportedLanguages = ["cn", "en", "jp"];
+let currentLanguage = supportedLanguages.includes(readPreference("pa-language")) ? readPreference("pa-language") : "cn";
+let activeTrailerIndex = 0;
+let activeModal = null;
 let lastFocusedElement = null;
 
-document.getElementById("announcementCount").textContent = announcements.length;
-document.getElementById("characterCount").textContent = characters.length;
-document.getElementById("academyCount").textContent = academies.length;
+function readPreference(key){
+  try{
+    return localStorage.getItem(key);
+  }catch(error){
+    return null;
+  }
+}
+
+function savePreference(key, value){
+  try{
+    localStorage.setItem(key, value);
+  }catch(error){
+    // The current page still works when storage is unavailable.
+  }
+}
+
+function t(key, replacements = {}){
+  const template = translations[currentLanguage]?.[key] ?? translations.cn[key] ?? key;
+
+  return Object.entries(replacements).reduce(
+    (text, [name, value]) => text.replaceAll(`{${name}}`, String(value)),
+    template
+  );
+}
+
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[character]);
+}
+
+function localizeValue(value){
+  if(value === undefined || value === null || value === ""){
+    return t("common.unknown");
+  }
+
+  if(currentLanguage === "cn"){
+    return String(value);
+  }
+
+  return localizedValues[value]?.[currentLanguage] || String(value);
+}
+
+function getCharacterName(character){
+  return characterNames[character.id]?.[currentLanguage] || character.name;
+}
+
+function getAnnouncementContent(announcement){
+  return announcement.content[currentLanguage] || announcement.content.cn;
+}
+
+function getTrailerTitle(trailer){
+  return trailer.title[currentLanguage] || trailer.title.en;
+}
+
+function applyStaticTranslations(){
+  document.documentElement.lang = currentLanguage === "cn" ? "zh-CN" : currentLanguage === "jp" ? "ja" : "en";
+  document.documentElement.dataset.language = currentLanguage;
+  document.title = "Project Archive Wiki";
+  document.querySelector('meta[name="description"]').content = t("page.description");
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    element.textContent = t(element.dataset.i18n);
+  });
+
+  document.querySelectorAll("[data-i18n-html]").forEach(element => {
+    element.innerHTML = t(element.dataset.i18nHtml);
+  });
+
+  mainNav.setAttribute("aria-label", t("nav.aria"));
+  languageSwitch.setAttribute("aria-label", t("language.switchAria"));
+  filterSection.setAttribute("aria-label", t("filters.aria"));
+  searchInput.placeholder = t("filters.placeholder");
+  closeModal.setAttribute("aria-label", t("modal.close"));
+
+  languageButtons.forEach(button => {
+    button.setAttribute("aria-pressed", String(button.dataset.language === currentLanguage));
+  });
+
+  updateThemeControl();
+}
+
+function setLanguage(language, persist = true){
+  if(!supportedLanguages.includes(language)){
+    return;
+  }
+
+  currentLanguage = language;
+
+  if(persist){
+    savePreference("pa-language", language);
+  }
+
+  applyStaticTranslations();
+  populateSelects();
+  applyFilters();
+  renderAnnouncements();
+  renderTrailers();
+
+  if(activeModal?.type === "character"){
+    renderCharacterModal(activeModal.item);
+  }else if(activeModal?.type === "announcement"){
+    renderAnnouncementModal(activeModal.item);
+  }
+}
+
+function getTheme(){
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function updateThemeControl(){
+  const darkMode = getTheme() === "dark";
+  const actionLabel = darkMode ? t("theme.toLightAria") : t("theme.toDarkAria");
+  themeIcon.textContent = darkMode ? "☀" : "☾";
+  themeLabel.textContent = darkMode ? t("theme.light") : t("theme.dark");
+  themeToggle.setAttribute("aria-label", actionLabel);
+  themeToggle.setAttribute("title", actionLabel);
+  themeToggle.setAttribute("aria-pressed", String(darkMode));
+}
+
+function setTheme(theme, persist = true){
+  const nextTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = nextTheme;
+
+  if(persist){
+    savePreference("pa-theme", nextTheme);
+  }
+
+  updateThemeControl();
+}
 
 function getStars(rarity){
   const value = Math.max(1, Math.min(5, Number(rarity) || 1));
@@ -3135,7 +4521,7 @@ function getStars(rarity){
 }
 
 function createTag(text, extraClass = ""){
-  return `<span class="tag ${extraClass}">${text}</span>`;
+  return `<span class="tag ${extraClass}">${escapeHtml(text)}</span>`;
 }
 
 function escapeXml(value){
@@ -3178,6 +4564,9 @@ function loadImage(image, source, label){
   const fallback = createPlaceholderImage(label);
   const isLegacyPlaceholder = /^https:\/\/via\.placeholder\.com\//i.test(source || "");
 
+  image.classList.remove("is-loaded");
+  image.onload = () => image.classList.add("is-loaded");
+
   image.onerror = () => {
     image.onerror = null;
     image.src = fallback;
@@ -3189,108 +4578,111 @@ function loadImage(image, source, label){
 function renderAnnouncements(){
   announceArea.innerHTML = "";
 
-  announcements.forEach(item => {
+  announcements.forEach((item, index) => {
+    const content = getAnnouncementContent(item);
     const card = document.createElement("article");
-    card.className = "announce-card";
+    card.className = "announce-card card-enter";
+    card.style.setProperty("--card-delay", `${Math.min(index, 12) * 60}ms`);
     card.setAttribute("role", "listitem");
 
-    const hasLink = Boolean(item.link && item.link !== "#");
-
-    if(hasLink){
-      card.tabIndex = 0;
-      card.setAttribute("aria-label", `${item.title}，查看公告详情`);
-    }else{
-      card.classList.add("is-static");
-    }
-
     card.innerHTML = `
-      <div class="announce-img">
-        <img alt="${item.title}" loading="lazy" decoding="async">
-        <div class="announce-badge">${item.type}</div>
-      </div>
-      <div class="announce-body">
-        <h3 class="announce-title">${item.title}</h3>
-        <div class="announce-meta">
-          <span>${item.date} · ${hasLink ? "点击查看详情" : "公告详情待补充"}</span>
-          ${hasLink ? '<span class="arrow" aria-hidden="true">→</span>' : ""}
+      <button class="announce-action" type="button" aria-haspopup="dialog" aria-label="${escapeHtml(t("announcement.openAria", {title:content.title}))}">
+        <div class="announce-img">
+          <img alt="${escapeHtml(content.title)}" loading="lazy" decoding="async">
+          <div class="announce-badge">${escapeHtml(content.type)}</div>
         </div>
-      </div>
+        <div class="announce-body">
+          <h3 class="announce-title">${escapeHtml(content.title)}</h3>
+          <div class="announce-meta">
+            <span>${escapeHtml(item.date)} · ${escapeHtml(t("announcement.view"))}</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </button>
     `;
 
-    loadImage(card.querySelector("img"), item.img, item.title);
-
-    if(hasLink){
-      const openAnnouncement = () => {
-        window.location.href = item.link;
-      };
-
-      card.addEventListener("click", openAnnouncement);
-      card.addEventListener("keydown", event => {
-        if(event.key === "Enter" || event.key === " "){
-          event.preventDefault();
-          openAnnouncement();
-        }
-      });
-    }
+    const action = card.querySelector(".announce-action");
+    loadImage(card.querySelector("img"), item.img, content.title);
+    action.addEventListener("click", () => openAnnouncementModal(item, action));
 
     announceArea.appendChild(card);
   });
 }
 
 function populateSelects(){
+  const selectedAcademy = academySelect.value || "all";
+  const selectedRole = roleSelect.value || "all";
+  academySelect.innerHTML = "";
+  roleSelect.innerHTML = "";
+
+  const allAcademiesOption = document.createElement("option");
+  allAcademiesOption.value = "all";
+  allAcademiesOption.textContent = t("filters.allAcademies");
+  academySelect.appendChild(allAcademiesOption);
+
   academies.forEach(academy => {
     const option = document.createElement("option");
     option.value = academy;
-    option.textContent = academy;
+    option.textContent = localizeValue(academy);
     academySelect.appendChild(option);
   });
+
+  const allRolesOption = document.createElement("option");
+  allRolesOption.value = "all";
+  allRolesOption.textContent = t("filters.allRoles");
+  roleSelect.appendChild(allRolesOption);
 
   roles.forEach(role => {
     const option = document.createElement("option");
     option.value = role;
-    option.textContent = role;
+    option.textContent = localizeValue(role);
     roleSelect.appendChild(option);
   });
+
+  academySelect.value = academies.includes(selectedAcademy) ? selectedAcademy : "all";
+  roleSelect.value = roles.includes(selectedRole) ? selectedRole : "all";
 }
 
 function renderCharacters(list){
   charGrid.innerHTML = "";
-  resultCount.textContent = `显示 ${list.length} 名角色`;
+  resultCount.textContent = t("filters.resultCount", {count:list.length});
 
   if(list.length === 0){
     charGrid.innerHTML = `
       <div class="empty">
-        没有找到匹配的角色。可以换一个学院、职业或搜索关键词试试。
+        ${escapeHtml(t("characters.empty"))}
       </div>
     `;
     return;
   }
 
-  list.forEach(character => {
+  list.forEach((character, index) => {
+    const characterName = getCharacterName(character);
     const card = document.createElement("article");
-    card.className = "char-card";
+    card.className = "char-card card-enter";
+    card.style.setProperty("--card-delay", `${Math.min(index, 12) * 34}ms`);
     card.tabIndex = 0;
     card.setAttribute("role", "button");
     card.setAttribute("aria-haspopup", "dialog");
-    card.setAttribute("aria-label", `查看 ${character.name} 的完整资料`);
+    card.setAttribute("aria-label", t("characters.openAria", {name:characterName}));
 
     card.innerHTML = `
       <div class="avatar">
-        <img alt="${character.name}" loading="lazy" decoding="async">
+        <img alt="${escapeHtml(characterName)}" loading="lazy" decoding="async">
       </div>
 
       <div class="char-info">
-        <h4>${character.name}</h4>
+        <h4>${escapeHtml(characterName)}</h4>
         <div class="card-stars">${getStars(character.rarity)}</div>
         <div class="tag-row">
-          ${createTag(character.academy)}
-          ${createTag(character.role, "role")}
-          ${createTag(character.weapon || "未知武器", "weapon")}
+          ${createTag(localizeValue(character.academy))}
+          ${createTag(localizeValue(character.role), "role")}
+          ${createTag(character.weapon ? localizeValue(character.weapon) : t("common.unknownWeapon"), "weapon")}
         </div>
       </div>
     `;
 
-    loadImage(card.querySelector("img"), character.img, character.name);
+    loadImage(card.querySelector("img"), character.img, characterName);
 
     card.addEventListener("click", () => openModal(character, card));
     card.addEventListener("keydown", e => {
@@ -3315,11 +4707,18 @@ function applyFilters(){
 
     const searchableText = [
       character.name,
+      ...Object.values(characterNames[character.id] || {}),
+      getCharacterName(character),
       character.academy,
+      localizeValue(character.academy),
       character.role,
+      localizeValue(character.role),
       character.weapon,
+      localizeValue(character.weapon),
       character.attackType,
+      localizeValue(character.attackType),
       character.defenseType,
+      localizeValue(character.defenseType),
       character.position,
       character.desc
     ].join(" ").toLowerCase();
@@ -3335,8 +4734,8 @@ function applyFilters(){
 function renderInfoItem(label, value){
   return `
     <div class="info-item">
-      <span>${label}</span>
-      <strong>${value ?? "未知"}</strong>
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value ?? t("common.unknown"))}</strong>
     </div>
   `;
 }
@@ -3344,25 +4743,32 @@ function renderInfoItem(label, value){
 function renderStatBox(label, value){
   return `
     <div class="stat-box">
-      <span>${label}</span>
-      <strong>${value ?? "-"}</strong>
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value ?? "-")}</strong>
     </div>
   `;
 }
 
 function openModal(character, triggerElement){
-  const stars = getStars(character.rarity);
+  activeModal = {type:"character", item:character};
+  renderCharacterModal(character);
+  showModal(triggerElement);
+}
 
-  lastFocusedElement = triggerElement || document.activeElement;
-  loadImage(modalAvatar, character.img, character.name);
-  modalAvatar.alt = character.name;
-  modalName.textContent = character.name;
+function renderCharacterModal(character){
+  const stars = getStars(character.rarity);
+  const characterName = getCharacterName(character);
+
+  modal.dataset.mode = "character";
+  loadImage(modalAvatar, character.img, characterName);
+  modalAvatar.alt = characterName;
+  modalName.textContent = characterName;
   modalStars.textContent = stars;
 
   modalTags.innerHTML = `
-    ${createTag(character.academy)}
-    ${createTag(character.role, "role")}
-    ${createTag(character.weapon || "未知武器", "weapon")}
+    ${createTag(localizeValue(character.academy))}
+    ${createTag(localizeValue(character.role), "role")}
+    ${createTag(character.weapon ? localizeValue(character.weapon) : t("common.unknownWeapon"), "weapon")}
   `;
 
   const stats = character.stats || {};
@@ -3372,35 +4778,35 @@ function openModal(character, triggerElement){
   modalBody.innerHTML = `
     <div class="detail-layout">
       <div class="detail-section">
-        <h3>基础信息</h3>
+        <h3>${escapeHtml(t("detail.basic"))}</h3>
 
         <div class="info-grid">
-          ${renderInfoItem("星级", stars)}
-          ${renderInfoItem("学院", character.academy)}
-          ${renderInfoItem("职业", character.role)}
-          ${renderInfoItem("武器", character.weapon)}
-          ${renderInfoItem("攻击类型", character.attackType)}
-          ${renderInfoItem("防御类型", character.defenseType)}
-          ${renderInfoItem("定位", character.position)}
+          ${renderInfoItem(t("field.rarity"), stars)}
+          ${renderInfoItem(t("field.academy"), localizeValue(character.academy))}
+          ${renderInfoItem(t("field.role"), localizeValue(character.role))}
+          ${renderInfoItem(t("field.weapon"), localizeValue(character.weapon))}
+          ${renderInfoItem(t("field.attackType"), localizeValue(character.attackType))}
+          ${renderInfoItem(t("field.defenseType"), localizeValue(character.defenseType))}
+          ${renderInfoItem(t("field.position"), character.position)}
         </div>
       </div>
 
       <div class="detail-section">
-        <h3>角色数值</h3>
+        <h3>${escapeHtml(t("detail.stats"))}</h3>
 
         <div class="stats-grid">
-          ${renderStatBox("生命值", stats.hp)}
-          ${renderStatBox("伤害", stats.attack)}
-          ${renderStatBox("防御", stats.defense)}
-          ${renderStatBox("速度", stats.speed)}
-          ${renderStatBox("射程", stats.range)}
-          ${renderStatBox("暴击率", stats.critRate)}
-          ${renderStatBox("换弹时间", stats.reloadTime)}
+          ${renderStatBox(t("stat.hp"), stats.hp)}
+          ${renderStatBox(t("stat.attack"), stats.attack)}
+          ${renderStatBox(t("stat.defense"), stats.defense)}
+          ${renderStatBox(t("stat.speed"), stats.speed)}
+          ${renderStatBox(t("stat.range"), stats.range)}
+          ${renderStatBox(t("stat.critRate"), stats.critRate)}
+          ${renderStatBox(t("stat.reloadTime"), stats.reloadTime)}
         </div>
       </div>
 
       <div class="detail-section">
-        <h3>技能</h3>
+        <h3>${escapeHtml(t("detail.skills"))}</h3>
 
         <div class="skill-list">
           ${
@@ -3408,55 +4814,285 @@ function openModal(character, triggerElement){
             ? skills.map(skill => `
               <div class="skill-card">
                 <div class="skill-head">
-                  <strong>${skill.name}</strong>
-                  <span>${skill.type}</span>
+                  <strong>${escapeHtml(skill.name)}</strong>
+                  <span>${escapeHtml(localizeValue(skill.type))}</span>
                 </div>
-                <div class="skill-cooldown">冷却：${skill.cooldown}</div>
-                <p>${skill.desc}</p>
+                <div class="skill-cooldown">${escapeHtml(t("skill.cooldown", {value:localizeValue(skill.cooldown)}))}</div>
+                <p>${escapeHtml(skill.desc)}</p>
               </div>
             `).join("")
-            : `<div class="skill-card"><p>暂无技能资料。</p></div>`
+            : `<div class="skill-card"><p>${escapeHtml(t("skill.empty"))}</p></div>`
           }
         </div>
       </div>
 
       <div class="detail-section">
-        <h3>角色说明</h3>
-        <p>${character.desc || "暂无介绍。"}</p>
+        <h3>${escapeHtml(t("detail.description"))}</h3>
+        <p>${escapeHtml(character.desc || t("detail.descriptionEmpty"))}</p>
       </div>
 
       <div class="detail-section">
-        <h3>使用备注</h3>
+        <h3>${escapeHtml(t("detail.notes"))}</h3>
         ${
           notes.length > 0
-          ? `<ul class="note-list">${notes.map(note => `<li>${note}</li>`).join("")}</ul>`
-          : `<p>暂无备注。</p>`
+          ? `<ul class="note-list">${notes.map(note => `<li>${escapeHtml(note)}</li>`).join("")}</ul>`
+          : `<p>${escapeHtml(t("detail.notesEmpty"))}</p>`
         }
+      </div>
+
+      ${character.kivoId ? `
+        <div class="detail-section source-section">
+          <h3>${escapeHtml(t("detail.imageSource"))}</h3>
+          <a
+            class="source-link"
+            href="https://kivo.wiki/data/character/${character.kivoId}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >${escapeHtml(t("detail.kivoLink"))} <span aria-hidden="true">↗</span></a>
+        </div>
+      ` : ""}
+    </div>
+  `;
+}
+
+function openAnnouncementModal(announcement, triggerElement, updateHistory = true){
+  activeModal = {type:"announcement", item:announcement};
+  renderAnnouncementModal(announcement);
+  showModal(triggerElement);
+
+  if(updateHistory){
+    history.pushState({announcement:announcement.id}, "", `#announcement/${encodeURIComponent(announcement.id)}`);
+  }
+}
+
+function renderAnnouncementModal(announcement){
+  const content = getAnnouncementContent(announcement);
+
+  modal.dataset.mode = "announcement";
+  loadImage(modalAvatar, announcement.img, content.title);
+  modalAvatar.alt = content.title;
+  modalName.textContent = content.title;
+  modalStars.textContent = t("announcement.published", {date:announcement.date});
+  modalTags.innerHTML = createTag(content.type, "role");
+
+  modalBody.innerHTML = `
+    <div class="detail-layout">
+      <div class="detail-section">
+        <h3>${escapeHtml(t("announcement.overview"))}</h3>
+        <p class="announcement-copy">${escapeHtml(content.summary)}</p>
+        ${content.body.map(paragraph => `<p class="announcement-copy">${escapeHtml(paragraph)}</p>`).join("")}
+      </div>
+
+      <div class="detail-section">
+        <h3>${escapeHtml(t("announcement.highlights"))}</h3>
+        <ul class="note-list">
+          ${content.highlights.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
       </div>
     </div>
   `;
+}
+
+function showModal(triggerElement){
+  if(!modal.classList.contains("open")){
+    lastFocusedElement = triggerElement || document.activeElement;
+  }
 
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
+  modalCard.scrollTop = 0;
   closeModal.focus();
 }
 
-function closeModalWindow(){
+function closeModalWindow({updateHistory = true, restoreFocus = true} = {}){
+  const closingAnnouncement = activeModal?.type === "announcement";
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 
-  if(lastFocusedElement instanceof HTMLElement){
+  if(updateHistory && closingAnnouncement && location.hash.startsWith("#announcement/")){
+    history.replaceState(null, "", "#announcements");
+  }
+
+  if(restoreFocus && lastFocusedElement instanceof HTMLElement){
     lastFocusedElement.focus();
   }
 
+  activeModal = null;
   lastFocusedElement = null;
+}
+
+function syncAnnouncementFromUrl(){
+  const match = location.hash.match(/^#announcement\/([^/?#]+)$/);
+
+  if(match){
+    const announcement = announcements.find(item => item.id === decodeURIComponent(match[1]));
+
+    if(announcement && !(activeModal?.type === "announcement" && activeModal.item.id === announcement.id)){
+      openAnnouncementModal(announcement, null, false);
+    }
+  }else if(activeModal?.type === "announcement"){
+    closeModalWindow({updateHistory:false});
+  }
+}
+
+function renderTrailers(){
+  trailerList.innerHTML = "";
+
+  trailers.forEach((trailer, index) => {
+    const title = getTrailerTitle(trailer);
+    const item = document.createElement("div");
+    item.setAttribute("role", "listitem");
+    item.innerHTML = `
+      <button
+        class="trailer-card"
+        type="button"
+        aria-controls="trailerFrame"
+        aria-pressed="${index === activeTrailerIndex}"
+        aria-label="${escapeHtml(t("trailers.play", {number:index + 1, title}))}"
+      >
+        <span class="trailer-thumb">
+          <img alt="" loading="lazy" decoding="async">
+        </span>
+        <span>
+          <span class="trailer-index">${escapeHtml(t("trailers.index", {number:String(index + 1).padStart(2, "0")}))}</span>
+          <span class="trailer-card-title">${escapeHtml(title)}</span>
+        </span>
+      </button>
+    `;
+
+    const button = item.querySelector(".trailer-card");
+    loadImage(item.querySelector("img"), `https://i.ytimg.com/vi/${trailer.id}/hqdefault.jpg`, title);
+    button.addEventListener("click", () => selectTrailer(index, true));
+    trailerList.appendChild(item);
+  });
+
+  selectTrailer(activeTrailerIndex, false);
+}
+
+function selectTrailer(index, autoplay){
+  const trailer = trailers[index];
+
+  if(!trailer || !/^[A-Za-z0-9_-]{11}$/.test(trailer.id)){
+    return;
+  }
+
+  activeTrailerIndex = index;
+  const title = getTrailerTitle(trailer);
+  activeTrailerTitle.textContent = title;
+  trailerExternalLink.href = trailer.url;
+  trailerFrame.title = t("trailers.frameTitle", {title});
+
+  trailerList.querySelectorAll(".trailer-card").forEach((button, buttonIndex) => {
+    button.setAttribute("aria-pressed", String(buttonIndex === index));
+  });
+
+  if(trailerFrame.dataset.videoId !== trailer.id || autoplay){
+    const autoplayParameter = autoplay ? "&autoplay=1" : "";
+    trailerFrame.src = `https://www.youtube-nocookie.com/embed/${trailer.id}?rel=0${autoplayParameter}`;
+    trailerFrame.dataset.videoId = trailer.id;
+  }
+}
+
+function animateCount(element, target, duration = 880){
+  if(!element){
+    return;
+  }
+
+  if(reducedMotion.matches){
+    element.textContent = target;
+    return;
+  }
+
+  const startTime = performance.now();
+
+  function update(currentTime){
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    element.textContent = Math.round(target * easedProgress);
+
+    if(progress < 1){
+      requestAnimationFrame(update);
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+function setupScrollState(){
+  const header = document.querySelector(".header");
+  const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
+  const navTargets = navLinks
+    .map(link => ({link, section:document.querySelector(link.getAttribute("href"))}))
+    .filter(item => item.section);
+  let framePending = false;
+
+  const update = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 10);
+
+    const marker = window.innerHeight * .38;
+    let current = null;
+
+    navTargets.forEach(item => {
+      if(item.section.getBoundingClientRect().top <= marker){
+        current = item;
+      }
+    });
+
+    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4){
+      current = navTargets.at(-1) || current;
+    }
+
+    navLinks.forEach(link => link.removeAttribute("aria-current"));
+    current?.link.setAttribute("aria-current", "location");
+    framePending = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if(!framePending){
+      framePending = true;
+      requestAnimationFrame(update);
+    }
+  }, {passive:true});
+
+  update();
+}
+
+function setupMotion(){
+  if(reducedMotion.matches || !("IntersectionObserver" in window)){
+    return;
+  }
+
+  const revealItems = [...document.querySelectorAll(".section, footer")];
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.08, rootMargin:"0px 0px -8% 0px"});
+
+  revealItems.forEach(item => {
+    item.classList.add("reveal");
+    observer.observe(item);
+  });
+
+  document.documentElement.classList.add("motion-ready");
 }
 
 academySelect.addEventListener("change", applyFilters);
 roleSelect.addEventListener("change", applyFilters);
 searchInput.addEventListener("input", applyFilters);
+
+languageButtons.forEach(button => {
+  button.addEventListener("click", () => setLanguage(button.dataset.language));
+});
+
+themeToggle.addEventListener("click", () => {
+  setTheme(getTheme() === "dark" ? "light" : "dark");
+});
 
 closeModal.addEventListener("click", closeModalWindow);
 
@@ -3472,14 +5108,39 @@ document.addEventListener("keydown", e => {
   }
 
   if(e.key === "Tab" && modal.classList.contains("open")){
-    e.preventDefault();
-    closeModal.focus();
+    const focusableElements = [...modal.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )].filter(element => element.getClientRects().length > 0);
+
+    if(focusableElements.length === 0){
+      e.preventDefault();
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements.at(-1);
+
+    if(e.shiftKey && document.activeElement === firstElement){
+      e.preventDefault();
+      lastElement.focus();
+    }else if(!e.shiftKey && document.activeElement === lastElement){
+      e.preventDefault();
+      firstElement.focus();
+    }
   }
 });
 
-renderAnnouncements();
-populateSelects();
-renderCharacters(characters);
+window.addEventListener("popstate", syncAnnouncementFromUrl);
+window.addEventListener("hashchange", syncAnnouncementFromUrl);
+
+setTheme(getTheme(), false);
+setLanguage(currentLanguage, false);
+setupScrollState();
+setupMotion();
+syncAnnouncementFromUrl();
+animateCount(document.getElementById("announcementCount"), announcements.length, 720);
+animateCount(document.getElementById("characterCount"), characters.length, 980);
+animateCount(document.getElementById("academyCount"), academies.length, 860);
 </script>
 </body>
 </html>
