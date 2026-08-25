@@ -1786,7 +1786,7 @@
         <h1 data-i18n-html="hero.title">Project Archive<br>资料库</h1>
 
         <p data-i18n="hero.description">
-          查看最新公告、角色资料、学院分类与职业定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。
+          查看最新公告、角色资料、学院分类与战斗定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。
         </p>
 
         <div class="hero-actions">
@@ -1871,7 +1871,7 @@
       <div class="section-head">
         <div>
           <h2 class="section-title" data-i18n="filters.title">角色筛选</h2>
-          <p class="section-desc" data-i18n="filters.description">按照学院、职业或角色名快速查找。</p>
+          <p class="section-desc" data-i18n="filters.description">按照学院、战斗定位或角色名快速查找。</p>
         </div>
         <div class="section-right" id="resultCount" role="status" aria-live="polite">显示 0 名角色</div>
       </div>
@@ -1885,9 +1885,9 @@
         </div>
 
         <div class="field">
-          <label for="roleSelect" data-i18n="filters.role">职业</label>
+          <label for="roleSelect" data-i18n="filters.role">战斗定位</label>
           <select class="control" id="roleSelect">
-            <option value="all">全部职业</option>
+            <option value="all">全部定位</option>
           </select>
         </div>
 
@@ -1953,7 +1953,7 @@ const translations = {
     "nav.about":"关于",
     "hero.status":"Wiki 数据库已上线",
     "hero.title":"Project Archive<br>资料库",
-    "hero.description":"查看最新公告、角色资料、学院分类与职业定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。",
+    "hero.description":"查看最新公告、角色资料、学院分类与战斗定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。",
     "hero.viewCharacters":"查看角色",
     "hero.watchTrailers":"观看最新宣传片",
     "hero.latestAnnouncements":"最新公告",
@@ -1980,17 +1980,17 @@ const translations = {
     "trailers.index":"宣传片 {number}",
     "filters.aria":"角色筛选",
     "filters.title":"角色筛选",
-    "filters.description":"按照学院、职业或角色名快速查找。",
+    "filters.description":"按照学院、战斗定位或角色名快速查找。",
     "filters.resultCount":"显示 {count} 名角色",
     "filters.academy":"学院",
     "filters.allAcademies":"全部学院",
-    "filters.role":"职业",
-    "filters.allRoles":"全部职业",
+    "filters.role":"战斗定位",
+    "filters.allRoles":"全部定位",
     "filters.search":"搜索",
     "filters.placeholder":"输入角色名、学院、武器...",
     "characters.title":"角色列表",
     "characters.description":"点击角色卡片可以查看完整角色数据。",
-    "characters.empty":"没有找到匹配的角色。可以换一个学院、职业或搜索关键词试试。",
+    "characters.empty":"没有找到匹配的角色。可以换一个学院、战斗定位或搜索关键词试试。",
     "characters.openAria":"查看 {name} 的完整资料",
     "common.unknownWeapon":"未知武器",
     "common.unknown":"未知",
@@ -1998,11 +1998,13 @@ const translations = {
     "detail.basic":"基础信息",
     "field.rarity":"星级",
     "field.academy":"学院",
-    "field.role":"职业",
+    "field.role":"战斗定位",
     "field.weapon":"武器",
+    "field.weaponName":"专属武器",
     "field.attackType":"攻击类型",
     "field.defenseType":"防御类型",
-    "field.position":"定位",
+    "field.teamPosition":"站位",
+    "field.position":"玩法定位",
     "detail.stats":"角色数值",
     "stat.hp":"生命值",
     "stat.attack":"伤害",
@@ -2067,12 +2069,12 @@ const translations = {
     "trailers.index":"Trailer {number}",
     "filters.aria":"Character filters",
     "filters.title":"Character Filters",
-    "filters.description":"Find characters by academy, role, or name.",
+    "filters.description":"Find characters by academy, combat role, or name.",
     "filters.resultCount":"Showing {count} characters",
     "filters.academy":"Academy",
     "filters.allAcademies":"All Academies",
-    "filters.role":"Role",
-    "filters.allRoles":"All Roles",
+    "filters.role":"Combat Role",
+    "filters.allRoles":"All Combat Roles",
     "filters.search":"Search",
     "filters.placeholder":"Enter a character, academy, or weapon...",
     "characters.title":"Character List",
@@ -2085,11 +2087,13 @@ const translations = {
     "detail.basic":"Basic Information",
     "field.rarity":"Rarity",
     "field.academy":"Academy",
-    "field.role":"Role",
+    "field.role":"Combat Role",
     "field.weapon":"Weapon",
+    "field.weaponName":"Signature Weapon",
     "field.attackType":"Attack Type",
     "field.defenseType":"Defense Type",
-    "field.position":"Position",
+    "field.teamPosition":"Formation",
+    "field.position":"Gameplay Role",
     "detail.stats":"Stats",
     "stat.hp":"HP",
     "stat.attack":"Damage",
@@ -2154,12 +2158,12 @@ const translations = {
     "trailers.index":"PV {number}",
     "filters.aria":"キャラクターフィルター",
     "filters.title":"キャラクター絞り込み",
-    "filters.description":"学園、役割、キャラクター名で素早く検索できます。",
+    "filters.description":"学園、戦闘役割、キャラクター名で素早く検索できます。",
     "filters.resultCount":"{count}人のキャラクターを表示",
     "filters.academy":"学園",
     "filters.allAcademies":"すべての学園",
-    "filters.role":"役割",
-    "filters.allRoles":"すべての役割",
+    "filters.role":"戦闘役割",
+    "filters.allRoles":"すべての戦闘役割",
     "filters.search":"検索",
     "filters.placeholder":"キャラクター名、学園、武器を入力...",
     "characters.title":"キャラクター一覧",
@@ -2172,11 +2176,13 @@ const translations = {
     "detail.basic":"基本情報",
     "field.rarity":"レアリティ",
     "field.academy":"学園",
-    "field.role":"役割",
+    "field.role":"戦闘役割",
     "field.weapon":"武器",
+    "field.weaponName":"固有武器",
     "field.attackType":"攻撃タイプ",
     "field.defenseType":"防御タイプ",
-    "field.position":"ポジション",
+    "field.teamPosition":"配置",
+    "field.position":"ゲーム内役割",
     "detail.stats":"ステータス",
     "stat.hp":"HP",
     "stat.attack":"ダメージ",
@@ -2222,20 +2228,28 @@ const localizedValues = {
   "前卫":{en:"Vanguard",jp:"前衛"},
   "中卫":{en:"Midline",jp:"中衛"},
   "后卫":{en:"Backline",jp:"後衛"},
+  "输出":{en:"Dealer",jp:"アタッカー"},
+  "坦克":{en:"Tank",jp:"タンク"},
+  "辅助":{en:"Support",jp:"サポーター"},
+  "治疗":{en:"Healer",jp:"ヒーラー"},
   "支援":{en:"Support",jp:"サポート"},
   "狙击":{en:"Sniper",jp:"スナイパー"},
   "爆发":{en:"Explosive",jp:"爆発"},
   "贯通":{en:"Piercing",jp:"貫通"},
   "神秘":{en:"Mystic",jp:"神秘"},
+  "振动":{en:"Sonic",jp:"振動"},
   "轻装甲":{en:"Light Armor",jp:"軽装備"},
   "重装甲":{en:"Heavy Armor",jp:"重装甲"},
   "特殊装甲":{en:"Special Armor",jp:"特殊装甲"},
+  "弹性装甲":{en:"Elastic Armor",jp:"弾力装甲"},
+  "复合装甲":{en:"Composite Armor",jp:"複合装甲"},
   "E技能":{en:"E Skill",jp:"Eスキル"},
   "Q技能":{en:"Q Skill",jp:"Qスキル"},
   "被动技能":{en:"Passive Skill",jp:"パッシブスキル"},
   "光之剑 / 电磁炮":{en:"Sword of Light / Railgun",jp:"光の剣 / レールガン"},
   "阿比舒 / 光束炮":{en:"Abishu / Beam Cannon",jp:"アビシュ / ビーム砲"},
   "狙击枪":{en:"Sniper Rifle",jp:"スナイパーライフル"},
+  "狙击步枪":{en:"Sniper Rifle",jp:"スナイパーライフル"},
   "冲锋枪":{en:"SMG",jp:"サブマシンガン"},
   "手枪":{en:"Handgun",jp:"ハンドガン"},
   "榴弹发射器":{en:"Grenade Launcher",jp:"グレネードランチャー"},
@@ -2254,16 +2268,16 @@ const localizedValues = {
 };
 
 const characterNames = {
-  1:{en:"Arisu",jp:"アリス"},2:{cn:"临战爱丽丝",en:"Arisu (Armed)",jp:"アリス（臨戦）"},3:{cn:"爱露（礼服）",en:"Aru (Dress)",jp:"アル（ドレス）"},
+  1:{en:"Aris",jp:"アリス"},2:{cn:"临战爱丽丝",en:"Aris (Armed)",jp:"アリス（臨戦）"},3:{cn:"爱露（礼服）",en:"Aru (Dress)",jp:"アル（ドレス）"},
   4:{en:"Atsuko",jp:"アツコ"},5:{cn:"千夏（温泉）",en:"Chinatsu (Hot Spring)",jp:"チナツ（温泉）"},6:{en:"Chise",jp:"チセ"},
   7:{en:"Haruka",jp:"ハルカ"},8:{cn:"晴奈（正月）",en:"Haruna (New Year)",jp:"ハルナ（正月）"},9:{en:"Hifumi",jp:"ヒフミ"},
-  10:{en:"Hikari",jp:"ヒカリ"},11:{cn:"日奈（礼服）",en:"Hina (Dress)",jp:"ヒナ（ドレス）"},12:{cn:"星野（临战）",en:"Hoshino (Battle)",jp:"ホシノ（臨戦）"},
+  10:{cn:"光",en:"Hikari",jp:"ヒカリ"},11:{cn:"日奈（礼服）",en:"Hina (Dress)",jp:"ヒナ（ドレス）"},12:{cn:"星野（临战）",en:"Hoshino (Battle)",jp:"ホシノ（臨戦）"},
   13:{en:"Ibuki",jp:"イブキ"},14:{cn:"泉奈（泳装）",en:"Izuna (Swimsuit)",jp:"イズナ（水着）"},15:{en:"Kayoko",jp:"カヨコ"},
   16:{en:"Kei",jp:"ケイ"},17:{en:"Kikyou",jp:"キキョウ"},18:{en:"Kokona",jp:"ココナ"},19:{en:"Kurumi",jp:"クルミ"},
   20:{cn:"玛丽（偶像）",en:"Mari (Idol)",jp:"マリー（アイドル）"},21:{en:"Midori",jp:"ミドリ"},22:{en:"Mika",jp:"ミカ"},
   23:{cn:"美祢（偶像）",en:"Mine (Idol)",jp:"ミネ（アイドル）"},24:{en:"Momoi",jp:"モモイ"},25:{en:"Mutsuki",jp:"ムツキ"},
   26:{en:"Nagusa",jp:"ナグサ"},27:{en:"Natsu",jp:"ナツ"},28:{en:"Niko",jp:"ニコ"},29:{cn:"诺亚（睡衣）",en:"Noa (Pajama)",jp:"ノア（パジャマ）"},
-  30:{en:"Nozomi",jp:"ノゾミ"},31:{en:"Reisa",jp:"レイサ"},32:{cn:"樱子（偶像）",en:"Sakurako (Idol)",jp:"サクラコ（アイドル）"},
+  30:{cn:"望",en:"Nozomi",jp:"ノゾミ"},31:{en:"Reisa",jp:"レイサ"},32:{cn:"樱子（偶像）",en:"Sakurako (Idol)",jp:"サクラコ（アイドル）"},
   33:{en:"Shigure",jp:"シグレ"},34:{en:"Seia",jp:"セイア"},35:{en:"Ui",jp:"ウイ"},36:{cn:"优香（睡衣）",en:"Yuuka (Pajama)",jp:"ユウカ（パジャマ）"},37:{en:"Yuzu",jp:"ユズ"}
 };
 
@@ -2285,7 +2299,7 @@ const announcements = [
         type:"角色更新",
         summary:"泉奈现已加入 Project Archive 资料库，角色卡、战斗定位和完整技能说明同步开放。",
         body:["本次更新补充了泉奈的基础数值、攻击与防御类型、技能循环及使用备注。点击角色卡即可查看完整资料。","图鉴图片已保存为本地资源，加载更稳定；详情底部同时保留对应的 Kivo Wiki 来源入口。"],
-        highlights:["新增泉奈角色资料与本地图像","支持学院、职业和关键词筛选","详情页提供对应图鉴来源"]
+        highlights:["新增泉奈角色资料与本地图像","支持学院、战斗定位和关键词筛选","详情页提供对应图鉴来源"]
       },
       en:{
         title:"October Update: Izuna Joins the Battle!",
@@ -2337,11 +2351,11 @@ const announcements = [
     date:"2025.10",
     content:{
       cn:{
-        title:"学院与职业筛选功能上线",
+        title:"学院与战斗定位筛选功能上线",
         type:"功能更新",
-        summary:"角色列表现在可以按学院、职业与关键词组合筛选，寻找学生更加快速。",
-        body:["学院和职业选项可以组合使用，搜索框会同时匹配角色名、学院、武器、攻击类型、防御类型与定位说明。","切换网站语言后，筛选标签与角色名称会同步更新，原始中文和罗马字名称仍然可以被搜索。"],
-        highlights:["学院与职业组合筛选","多字段即时关键词搜索","切换语言后保持当前筛选条件"]
+        summary:"角色列表现在可以按学院、战斗定位与关键词组合筛选，寻找学生更加快速。",
+        body:["学院和战斗定位选项可以组合使用，搜索框会同时匹配角色名、学院、武器、攻击类型、防御类型与站位说明。","切换网站语言后，筛选标签与角色名称会同步更新，原始中文和罗马字名称仍然可以被搜索。"],
+        highlights:["学院与战斗定位组合筛选","多字段即时关键词搜索","切换语言后保持当前筛选条件"]
       },
       en:{
         title:"Academy and Role Filters Are Now Available",
@@ -2377,17 +2391,16 @@ const academies = [
 ];
 
 const roles = [
-  "前卫",
-  "中卫",
-  "后卫",
-  "支援",
-  "狙击"
+  "输出",
+  "坦克",
+  "辅助",
+  "治疗"
 ];
 
 const characters = [
   {
     id: 1,
-    name: "爱丽丝 (Arisu)",
+    name: "爱丽丝 (Aris)",
     rarity: 3,
     academy: "千禧年",
     role: "后卫",
@@ -2440,7 +2453,7 @@ const characters = [
 
   {
     id: 2,
-    name: "临战爱丽丝 (Arisu Armed)",
+    name: "临战爱丽丝 (Aris Armed)",
     rarity: 3,
     academy: "千禧年",
     role: "后卫",
@@ -2864,7 +2877,7 @@ const characters = [
 
   {
     id: 10,
-    name: "小光 (Hikari)",
+    name: "光 (Hikari)",
     rarity: 3,
     academy: "百鬼夜行",
     role: "支援",
@@ -2912,7 +2925,7 @@ const characters = [
       "E可通过被动追加治疗。"
     ],
 
-    desc: "小光是偏保护型的强力辅助，可以让队友在危险时保持作战能力。"
+    desc: "光是偏保护型的强力辅助，可以让队友在危险时保持作战能力。"
   },
 
   {
@@ -3924,7 +3937,7 @@ const characters = [
 
   {
     id: 30,
-    name: "小望 (Nozomi)",
+    name: "望 (Nozomi)",
     rarity: 3,
     academy: "百鬼夜行",
     role: "中卫",
@@ -3950,7 +3963,7 @@ const characters = [
         name: "这边这边！",
         type: "E技能",
         cooldown: "12s",
-        desc: "场上存在「贴纸标记」时可释放。使标记敌人对小望高亮。该敌人连续被她射击时，追加一次暴击伤害，并为小望补充弹药、提升攻速。由她击倒该敌人后，获得最大层数攻速提升并自动装填弹药。"
+        desc: "场上存在「贴纸标记」时可释放。使标记敌人对望高亮。该敌人连续被她射击时，追加一次暴击伤害，并为望补充弹药、提升攻速。由她击倒该敌人后，获得最大层数攻速提升并自动装填弹药。"
       },
       {
         name: "启动助推器！",
@@ -3962,7 +3975,7 @@ const characters = [
         name: "出发前进！",
         type: "被动技能",
         cooldown: "无",
-        desc: "小望射击命中敌人时，为其挂上「贴纸标记」，该标记同时只能存在一个。"
+        desc: "望射击命中敌人时，为其挂上「贴纸标记」，该标记同时只能存在一个。"
       }
     ],
 
@@ -3972,7 +3985,7 @@ const characters = [
       "Q适合直线路径压制。"
     ],
 
-    desc: "小望可以通过贴纸标记追击单个目标，并用列车技能制造直线推进压力。"
+    desc: "望可以通过贴纸标记追击单个目标，并用列车技能制造直线推进压力。"
   },
 
   {
@@ -4347,6 +4360,91 @@ const characters = [
   }
 ];
 
+// Kivo Wiki 学生接口逐人复核（2026-08-26）。
+// 将官方战斗类型与前/中/后卫站位分开，避免旧资料把两套概念混在 role 中。
+const officialAcademies = {
+  1:"阿拜多斯", 2:"圣三一", 3:"歌赫娜", 4:"千禧年", 5:"红冬",
+  7:"山海经", 9:"百鬼夜行", 10:"阿里乌斯", 11:"SRT", 24:"海兰德"
+};
+
+const officialWeaponTypes = {
+  RG:"电磁炮", AR:"突击步枪", SR:"狙击步枪", SMG:"冲锋枪",
+  HG:"手枪", GL:"榴弹发射器", SG:"霰弹枪", MG:"机枪"
+};
+
+const officialCombatRoles = {
+  Dealer:"输出", Tank:"坦克", Support:"辅助", Healer:"治疗"
+};
+
+const officialAttackTypes = {
+  Mystic:"神秘", Piercing:"贯通", Explosive:"爆发", Vibration:"振动"
+};
+
+const officialDefenseTypes = {
+  Special:"特殊装甲", CompositeArmor:"复合装甲", Heavy:"重装甲",
+  Light:"轻装甲", Elastic:"弹性装甲"
+};
+
+const officialTeamPositions = {
+  FRONT:"前卫", MIDDLE:"中卫", BACK:"后卫"
+};
+
+const verifiedStudentFacts = {
+  108:{school:4,weapon:"RG",weaponName:"光之剑：超新星",role:"Dealer",attack:"Mystic",defense:"Special",team:"BACK",rarity:3},
+  574:{school:4,weapon:"AR",weaponName:"光之剑：超新星 for 阿比舒",role:"Dealer",attack:"Mystic",defense:"CompositeArmor",team:"MIDDLE",rarity:3},
+  350:{school:3,weapon:"SR",weaponName:"酒红色赞赏",role:"Support",attack:"Piercing",defense:"Heavy",team:"BACK",rarity:3},
+  35:{school:10,weapon:"SMG",weaponName:"天蝎座",role:"Tank",attack:"Explosive",defense:"Special",team:"FRONT",rarity:3},
+  140:{school:3,weapon:"HG",weaponName:"辅助指针",role:"Support",attack:"Mystic",defense:"Light",team:"MIDDLE",rarity:3},
+  84:{school:9,weapon:"GL",weaponName:"575式榴弹发射器",role:"Dealer",attack:"Mystic",defense:"Heavy",team:"MIDDLE",rarity:2},
+  192:{school:3,weapon:"SG",weaponName:"驱散者",role:"Tank",attack:"Explosive",defense:"Light",team:"FRONT",rarity:1},
+  145:{school:3,weapon:"SR",weaponName:"Ideal",role:"Dealer",attack:"Explosive",defense:"Light",team:"BACK",rarity:3},
+  74:{school:2,weapon:"AR",weaponName:"我的必需品",role:"Support",attack:"Piercing",defense:"Light",team:"MIDDLE",rarity:3},
+  365:{school:24,weapon:"HG",weaponName:"检票钳",role:"Support",attack:"Vibration",defense:"Light",team:"MIDDLE",rarity:3},
+  346:{school:3,weapon:"MG",weaponName:"终幕：毁灭者",role:"Dealer",attack:"Explosive",defense:"Elastic",team:"BACK",rarity:3},
+  373:{school:1,weapon:"SG",weaponName:"荷鲁斯之眼",role:"Tank",attack:"Mystic",defense:"Heavy",team:"FRONT",rarity:3},
+  136:{school:3,weapon:"AR",weaponName:"砰砰！枪",role:"Support",attack:"Mystic",defense:"Heavy",team:"MIDDLE",rarity:1},
+  46:{school:9,weapon:"SMG",weaponName:"泉奈流超级忍具",role:"Dealer",attack:"Mystic",defense:"Special",team:"FRONT",rarity:3},
+  176:{school:3,weapon:"HG",weaponName:"恶魔咆哮",role:"Support",attack:"Explosive",defense:"Heavy",team:"MIDDLE",rarity:2},
+  518:{school:4,weapon:"RG",weaponName:"辉光·新星",role:"Support",attack:"Mystic",defense:"CompositeArmor",team:"BACK",rarity:3},
+  320:{school:9,weapon:"SR",weaponName:"百花缭乱制式步枪——绀碧色智慧",role:"Support",attack:"Vibration",defense:"Heavy",team:"BACK",rarity:3},
+  4:{school:7,weapon:"AR",weaponName:"淑女的品格",role:"Healer",attack:"Piercing",defense:"Special",team:"MIDDLE",rarity:3},
+  66:{school:11,weapon:"SMG",weaponName:"FOX-45式冲锋枪",role:"Tank",attack:"Explosive",defense:"Light",team:"FRONT",rarity:3},
+  498:{school:2,weapon:"HG",weaponName:"虔诚",role:"Healer",attack:"Explosive",defense:"Heavy",team:"MIDDLE",rarity:3},
+  27:{school:4,weapon:"SR",weaponName:"新鲜灵感",role:"Dealer",attack:"Piercing",defense:"Light",team:"BACK",rarity:3},
+  1:{school:2,weapon:"SMG",weaponName:"Quis ut Deus",role:"Dealer",attack:"Piercing",defense:"Light",team:"FRONT",rarity:3},
+  500:{school:2,weapon:"SG",weaponName:"救护的证明",role:"Tank",attack:"Explosive",defense:"Heavy",team:"FRONT",rarity:1},
+  2:{school:4,weapon:"AR",weaponName:"独特创意",role:"Dealer",attack:"Piercing",defense:"Light",team:"MIDDLE",rarity:2},
+  107:{school:3,weapon:"MG",weaponName:"给不给糖都捣蛋",role:"Dealer",attack:"Explosive",defense:"Light",team:"BACK",rarity:2},
+  254:{school:9,weapon:"SR",weaponName:"百莲",role:"Dealer",attack:"Vibration",defense:"Elastic",team:"BACK",rarity:3},
+  139:{school:2,weapon:"SMG",weaponName:"超越沉思",role:"Tank",attack:"Mystic",defense:"Heavy",team:"FRONT",rarity:3},
+  65:{school:11,weapon:"SG",weaponName:"FOX-870式霰弹枪",role:"Support",attack:"Explosive",defense:"Elastic",team:"FRONT",rarity:3},
+  506:{school:4,weapon:"HG",weaponName:"秘书的裁断",role:"Dealer",attack:"Piercing",defense:"Light",team:"MIDDLE",rarity:3},
+  366:{school:24,weapon:"HG",weaponName:"Dead girl switch",role:"Dealer",attack:"Vibration",defense:"Light",team:"MIDDLE",rarity:3},
+  142:{school:2,weapon:"SG",weaponName:"Shooting☆Star",role:"Tank",attack:"Piercing",defense:"Heavy",team:"FRONT",rarity:3},
+  499:{school:2,weapon:"AR",weaponName:"净化之手",role:"Support",attack:"Explosive",defense:"Heavy",team:"MIDDLE",rarity:3},
+  106:{school:5,weapon:"GL",weaponName:"春之宾治",role:"Dealer",attack:"Explosive",defense:"Heavy",team:"MIDDLE",rarity:3},
+  43:{school:2,weapon:"HG",weaponName:"锐利光芒",role:"Support",attack:"Piercing",defense:"Elastic",team:"MIDDLE",rarity:3},
+  23:{school:2,weapon:"SR",weaponName:"声音抑制器",role:"Support",attack:"Explosive",defense:"Light",team:"BACK",rarity:3},
+  505:{school:4,weapon:"SMG",weaponName:"逻辑与理性",role:"Tank",attack:"Explosive",defense:"Heavy",team:"FRONT",rarity:3},
+  81:{school:4,weapon:"GL",weaponName:"喵喵冲击",role:"Dealer",attack:"Piercing",defense:"Special",team:"MIDDLE",rarity:3}
+};
+
+characters.forEach(character => {
+  const verified = verifiedStudentFacts[character.kivoId];
+  if(!verified) return;
+
+  Object.assign(character, {
+    academy: officialAcademies[verified.school],
+    weapon: officialWeaponTypes[verified.weapon],
+    weaponName: verified.weaponName,
+    role: officialCombatRoles[verified.role],
+    teamPosition: officialTeamPositions[verified.team],
+    attackType: officialAttackTypes[verified.attack],
+    defenseType: officialDefenseTypes[verified.defense],
+    rarity: verified.rarity
+  });
+});
+
 const announceArea = document.getElementById("announceArea");
 const academySelect = document.getElementById("academySelect");
 const roleSelect = document.getElementById("roleSelect");
@@ -4715,6 +4813,9 @@ function applyFilters(){
       localizeValue(character.role),
       character.weapon,
       localizeValue(character.weapon),
+      character.weaponName,
+      character.teamPosition,
+      localizeValue(character.teamPosition),
       character.attackType,
       localizeValue(character.attackType),
       character.defenseType,
@@ -4784,7 +4885,9 @@ function renderCharacterModal(character){
           ${renderInfoItem(t("field.rarity"), stars)}
           ${renderInfoItem(t("field.academy"), localizeValue(character.academy))}
           ${renderInfoItem(t("field.role"), localizeValue(character.role))}
+          ${renderInfoItem(t("field.teamPosition"), localizeValue(character.teamPosition))}
           ${renderInfoItem(t("field.weapon"), localizeValue(character.weapon))}
+          ${renderInfoItem(t("field.weaponName"), character.weaponName)}
           ${renderInfoItem(t("field.attackType"), localizeValue(character.attackType))}
           ${renderInfoItem(t("field.defenseType"), localizeValue(character.defenseType))}
           ${renderInfoItem(t("field.position"), character.position)}

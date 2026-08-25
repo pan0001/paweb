@@ -7,8 +7,8 @@ Project Archive 的非官方静态资料站，集中展示公告、学生图鉴�
 ## 功能
 
 - 37 名学生资料与 111 条技能记录
-- 12 个学院与职业筛选
-- 角色名、学院、武器及战斗定位搜索
+- 12 个学院与战斗定位筛选
+- 角色名、学院、武器、站位及战斗定位搜索
 - 学生详情弹窗与对应 Kivo Wiki 图鉴入口
 - 带独立地址的公告详情，例如 `#announcement/izuna-update`
 - 中文、English、日本語即时切换
@@ -59,11 +59,12 @@ paweb/
 主要内容都位于 `index.html` 底部的 JavaScript 数据区：
 
 - `translations`：CN / EN / JP 界面文案
-- `localizedValues`：学院、职业、武器及战斗类型译名
+- `localizedValues`：学院、战斗定位、武器及战斗类型译名
 - `characterNames`：角色名称与特殊形态译名
 - `announcements`：公告标题、摘要与完整正文
 - `trailers`：YouTube 影片 ID、链接与多语言标题
 - `characters`：学生数值、技能、备注、图片路径及 Kivo 图鉴 ID
+- `verifiedStudentFacts`：按 Kivo 图鉴复核的学院、初始星级、战斗定位、站位、武器与攻防类型
 
 语言和主题偏好保存在浏览器本地存储中，键名分别为 `pa-language` 与 `pa-theme`。
 
