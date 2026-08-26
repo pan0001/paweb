@@ -1742,6 +1742,7 @@
     }
   }
 </style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -4618,8 +4619,9 @@ function getStars(rarity){
   return "★".repeat(value) + "☆".repeat(5 - value);
 }
 
-function createTag(text, extraClass = ""){
-  return `<span class="tag ${extraClass}">${escapeHtml(text)}</span>`;
+function createTag(text, extraClass = "", tone = ""){
+  const toneAttribute = tone ? ` data-tone="${escapeHtml(tone)}"` : "";
+  return `<span class="tag ${extraClass}"${toneAttribute}>${escapeHtml(text)}</span>`;
 }
 
 function escapeXml(value){
@@ -4763,6 +4765,10 @@ function renderCharacters(list){
     card.setAttribute("role", "button");
     card.setAttribute("aria-haspopup", "dialog");
     card.setAttribute("aria-label", t("characters.openAria", {name:characterName}));
+    card.dataset.academy = character.academy;
+    card.dataset.role = character.role;
+    card.dataset.attack = character.attackType;
+    card.dataset.defense = character.defenseType;
 
     card.innerHTML = `
       <div class="avatar">
@@ -4773,9 +4779,9 @@ function renderCharacters(list){
         <h4>${escapeHtml(characterName)}</h4>
         <div class="card-stars">${getStars(character.rarity)}</div>
         <div class="tag-row">
-          ${createTag(localizeValue(character.academy))}
-          ${createTag(localizeValue(character.role), "role")}
-          ${createTag(character.weapon ? localizeValue(character.weapon) : t("common.unknownWeapon"), "weapon")}
+          ${createTag(localizeValue(character.academy), "academy", character.academy)}
+          ${createTag(localizeValue(character.role), "role", character.role)}
+          ${createTag(character.weapon ? localizeValue(character.weapon) : t("common.unknownWeapon"), "weapon", character.weapon)}
         </div>
       </div>
     `;
@@ -4832,9 +4838,10 @@ function applyFilters(){
   renderCharacters(filtered);
 }
 
-function renderInfoItem(label, value){
+function renderInfoItem(label, value, extraClass = "", tone = ""){
+  const toneAttribute = tone ? ` data-tone="${escapeHtml(tone)}"` : "";
   return `
-    <div class="info-item">
+    <div class="info-item ${extraClass}"${toneAttribute}>
       <span>${escapeHtml(label)}</span>
       <strong>${escapeHtml(value ?? t("common.unknown"))}</strong>
     </div>
@@ -4861,15 +4868,21 @@ function renderCharacterModal(character){
   const characterName = getCharacterName(character);
 
   modal.dataset.mode = "character";
+  modal.dataset.academy = character.academy;
+  modal.dataset.role = character.role;
+  modal.dataset.attack = character.attackType;
+  modal.dataset.defense = character.defenseType;
   loadImage(modalAvatar, character.img, characterName);
   modalAvatar.alt = characterName;
   modalName.textContent = characterName;
   modalStars.textContent = stars;
 
   modalTags.innerHTML = `
-    ${createTag(localizeValue(character.academy))}
-    ${createTag(localizeValue(character.role), "role")}
-    ${createTag(character.weapon ? localizeValue(character.weapon) : t("common.unknownWeapon"), "weapon")}
+    ${createTag(localizeValue(character.academy), "academy", character.academy)}
+    ${createTag(localizeValue(character.role), "role", character.role)}
+    ${createTag(localizeValue(character.attackType), "attack", character.attackType)}
+    ${createTag(localizeValue(character.defenseType), "defense", character.defenseType)}
+    ${createTag(localizeValue(character.teamPosition), "formation", character.teamPosition)}
   `;
 
   const stats = character.stats || {};
@@ -4878,23 +4891,23 @@ function renderCharacterModal(character){
 
   modalBody.innerHTML = `
     <div class="detail-layout">
-      <div class="detail-section">
+      <div class="detail-section basic-section">
         <h3>${escapeHtml(t("detail.basic"))}</h3>
 
         <div class="info-grid">
-          ${renderInfoItem(t("field.rarity"), stars)}
-          ${renderInfoItem(t("field.academy"), localizeValue(character.academy))}
-          ${renderInfoItem(t("field.role"), localizeValue(character.role))}
-          ${renderInfoItem(t("field.teamPosition"), localizeValue(character.teamPosition))}
-          ${renderInfoItem(t("field.weapon"), localizeValue(character.weapon))}
-          ${renderInfoItem(t("field.weaponName"), character.weaponName)}
-          ${renderInfoItem(t("field.attackType"), localizeValue(character.attackType))}
-          ${renderInfoItem(t("field.defenseType"), localizeValue(character.defenseType))}
-          ${renderInfoItem(t("field.position"), character.position)}
+          ${renderInfoItem(t("field.rarity"), stars, "field-rarity")}
+          ${renderInfoItem(t("field.academy"), localizeValue(character.academy), "field-academy", character.academy)}
+          ${renderInfoItem(t("field.role"), localizeValue(character.role), "field-role", character.role)}
+          ${renderInfoItem(t("field.teamPosition"), localizeValue(character.teamPosition), "field-formation", character.teamPosition)}
+          ${renderInfoItem(t("field.weapon"), localizeValue(character.weapon), "field-weapon", character.weapon)}
+          ${renderInfoItem(t("field.weaponName"), character.weaponName, "field-weapon-name")}
+          ${renderInfoItem(t("field.attackType"), localizeValue(character.attackType), "field-attack", character.attackType)}
+          ${renderInfoItem(t("field.defenseType"), localizeValue(character.defenseType), "field-defense", character.defenseType)}
+          ${renderInfoItem(t("field.position"), character.position, "field-gameplay")}
         </div>
       </div>
 
-      <div class="detail-section">
+      <div class="detail-section stats-section">
         <h3>${escapeHtml(t("detail.stats"))}</h3>
 
         <div class="stats-grid">
@@ -4908,7 +4921,7 @@ function renderCharacterModal(character){
         </div>
       </div>
 
-      <div class="detail-section">
+      <div class="detail-section skills-section">
         <h3>${escapeHtml(t("detail.skills"))}</h3>
 
         <div class="skill-list">
@@ -4929,12 +4942,12 @@ function renderCharacterModal(character){
         </div>
       </div>
 
-      <div class="detail-section">
+      <div class="detail-section description-section">
         <h3>${escapeHtml(t("detail.description"))}</h3>
         <p>${escapeHtml(character.desc || t("detail.descriptionEmpty"))}</p>
       </div>
 
-      <div class="detail-section">
+      <div class="detail-section notes-section">
         <h3>${escapeHtml(t("detail.notes"))}</h3>
         ${
           notes.length > 0
@@ -4972,6 +4985,10 @@ function renderAnnouncementModal(announcement){
   const content = getAnnouncementContent(announcement);
 
   modal.dataset.mode = "announcement";
+  delete modal.dataset.academy;
+  delete modal.dataset.role;
+  delete modal.dataset.attack;
+  delete modal.dataset.defense;
   loadImage(modalAvatar, announcement.img, content.title);
   modalAvatar.alt = content.title;
   modalName.textContent = content.title;

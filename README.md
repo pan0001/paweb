@@ -2,7 +2,7 @@
 
 Project Archive 的非官方静态资料站，集中展示公告、学生图鉴、战斗资料与宣传片。
 
-网站使用单个 `index.html` 实现，不需要构建工具或额外依赖，可以直接本地打开，也可以部署到任意静态网站服务。
+网站由 `index.html` 与独立的 `styles.css` 主题覆盖层组成，不需要构建工具或额外依赖，可以直接本地打开，也可以部署到任意静态网站服务。
 
 ## 功能
 
@@ -40,6 +40,7 @@ http://localhost:8000
 ```text
 paweb/
 ├── index.html          # 页面、样式、资料数据与交互逻辑
+├── styles.css          # Project Archive 学生档案主题与语义配色
 ├── assets/
 │   └── students/       # 37 张本地学生图像
 └── README.md
@@ -65,6 +66,8 @@ paweb/
 - `trailers`：YouTube 影片 ID、链接与多语言标题
 - `characters`：学生数值、技能、备注、图片路径及 Kivo 图鉴 ID
 - `verifiedStudentFacts`：按 Kivo 图鉴复核的学院、初始星级、战斗定位、站位、武器与攻防类型
+
+视觉覆盖规则位于 `styles.css`，包括学院主题色、攻击/防御语义色、学生卡片、详情档案布局、暗色主题和移动端覆盖。
 
 语言和主题偏好保存在浏览器本地存储中，键名分别为 `pa-language` 与 `pa-theme`。
 
