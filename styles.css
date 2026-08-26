@@ -20,6 +20,7 @@
   --archive-radius-panel: 18px;
   --archive-radius-card: 13px;
   --archive-radius-control: 9px;
+  --archive-font: "Blueaka", "Noto Sans SC", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --bg: var(--archive-bg);
   --card: var(--archive-surface-solid);
@@ -58,6 +59,7 @@ html[data-theme="dark"] {
 }
 
 body {
+  font-family: var(--archive-font);
   background:
     radial-gradient(circle at 7% 3%, rgba(52, 73, 132, 0.16), transparent 30%),
     radial-gradient(circle at 93% 22%, rgba(85, 173, 197, 0.11), transparent 28%),
@@ -67,10 +69,21 @@ body {
 
 body::before {
   background-image:
+    url("assets/ui/ba-screen-frame.png"),
     linear-gradient(rgba(52, 73, 132, 0.055) 1px, transparent 1px),
     linear-gradient(90deg, rgba(52, 73, 132, 0.055) 1px, transparent 1px),
     linear-gradient(135deg, transparent 49.5%, rgba(85, 173, 197, 0.035) 50%, transparent 50.5%);
-  background-size: 52px 52px, 52px 52px, 104px 104px;
+  background-repeat: no-repeat, repeat, repeat, repeat;
+  background-position: center, 0 0, 0 0, 0 0;
+  background-size: 100% 100%, 52px 52px, 52px 52px, 104px 104px;
+}
+
+html[lang="ja"] body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--archive-font);
 }
 
 html[data-theme="dark"] body {
@@ -83,6 +96,7 @@ html[data-theme="dark"] body {
 
 html[data-theme="dark"] body::before {
   background-image:
+    url("assets/ui/ba-screen-frame.png"),
     linear-gradient(rgba(159, 174, 205, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(159, 174, 205, 0.045) 1px, transparent 1px),
     linear-gradient(135deg, transparent 49.5%, rgba(105, 191, 210, 0.028) 50%, transparent 50.5%);
@@ -122,8 +136,17 @@ html[data-theme="dark"] body::before {
 }
 
 .brand-logo {
+  display: block;
+  box-sizing: border-box;
+  width: clamp(160px, 15vw, 190px);
+  height: auto;
+  padding: 0;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(111, 187, 218, 0.28);
   border-radius: 10px 16px 10px 16px;
-  background: linear-gradient(145deg, var(--archive-navy), #3f6599 62%, var(--archive-cyan));
+  background: linear-gradient(145deg, #111d3a, #243d72 66%, #347c9a);
   box-shadow: 0 13px 26px -15px rgba(52, 73, 132, 0.88);
 }
 
@@ -135,6 +158,14 @@ html[data-theme="dark"] body::before {
 .site-title {
   color: var(--archive-ink);
   letter-spacing: 0.35px;
+}
+
+.site-title,
+.hero h1,
+.section-title,
+.modal-name {
+  font-family: var(--archive-font);
+  font-weight: 700;
 }
 
 .site-subtitle {
@@ -224,15 +255,26 @@ html[data-theme="dark"] .theme-toggle {
 }
 
 .hero::after {
-  right: -82px;
-  top: -132px;
-  width: 330px;
-  height: 330px;
-  opacity: 0.2;
-  background:
-    repeating-conic-gradient(from 20deg, var(--archive-navy) 0 1deg, transparent 1deg 14deg),
-    radial-gradient(circle, transparent 42%, var(--archive-cyan) 43% 44%, transparent 45%);
+  right: -4%;
+  top: 0;
+  width: min(690px, 62%);
+  height: 100%;
+  border-radius: 0;
+  opacity: 0.44;
+  background: url("assets/ui/kivo-panel-corner.webp") right top / contain no-repeat;
   filter: none;
+  animation: archive-ui-drift 9s ease-in-out infinite;
+}
+
+@keyframes archive-ui-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-8px, 5px, 0) scale(1.015);
+  }
 }
 
 .eyebrow {
@@ -268,6 +310,30 @@ html[data-theme="dark"] .theme-toggle {
   box-shadow: var(--archive-shadow);
 }
 
+.hero-art {
+  position: relative;
+  min-height: 148px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 14px;
+  background:
+    linear-gradient(90deg, rgba(12, 24, 52, 0.02), rgba(12, 24, 52, 0.2)),
+    url("assets/ui/hina-dress-home-banner.png") center 30% / cover no-repeat;
+  box-shadow: 0 18px 38px -26px rgba(20, 30, 55, 0.72);
+}
+
+.hero-art::before {
+  content: "";
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  width: 142px;
+  height: 48px;
+  background: url("assets/ui/project-archive-logo.png") center / contain no-repeat;
+  filter: drop-shadow(0 4px 10px rgba(5, 12, 30, 0.55));
+  opacity: 0.92;
+}
+
 .stat-card::before {
   height: 3px;
   background: linear-gradient(90deg, var(--archive-navy), var(--archive-cyan), transparent 82%);
@@ -283,6 +349,24 @@ html[data-theme="dark"] .hero {
 
 html[data-theme="dark"] .hero::before {
   background: radial-gradient(520px circle at var(--pointer-x) var(--pointer-y), rgba(105, 191, 210, 0.11), transparent 62%);
+}
+
+html[data-theme="dark"] .hero::after {
+  opacity: 0.25;
+  filter: saturate(0.82) brightness(0.78);
+}
+
+html[data-theme="dark"] .hero-art {
+  border-color: rgba(159, 174, 205, 0.2);
+  background:
+    linear-gradient(90deg, rgba(9, 14, 25, 0.06), rgba(9, 14, 25, 0.42)),
+    url("assets/ui/hina-dress-home-banner.png") center 30% / cover no-repeat;
+}
+
+html[data-theme="dark"] .brand-logo {
+  border-color: rgba(125, 203, 232, 0.3);
+  background: linear-gradient(145deg, #0a1226, #182c56 66%, #225e79);
+  box-shadow: 0 15px 30px -16px rgba(4, 10, 25, 0.9);
 }
 
 html[data-theme="dark"] .hero p {
@@ -654,6 +738,10 @@ html[data-theme="dark"] :is(.tag.role, .tag.attack, .tag.defense, .tag.formation
   border-top: 3px solid var(--academy);
   border-radius: 17px;
   background: var(--archive-surface-solid);
+  background-image: url("assets/ui/ba-screen-frame.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   box-shadow: 0 30px 86px -30px rgba(15, 23, 42, 0.58);
 }
 
@@ -678,6 +766,15 @@ html[data-theme="dark"] :is(.tag.role, .tag.attack, .tag.defense, .tag.formation
   font-weight: 900;
   letter-spacing: 1.8px;
   opacity: 0.42;
+}
+
+.modal[data-mode="character"] .modal-top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("assets/ui/kivo-panel-corner.webp") right top / 175% auto no-repeat;
+  opacity: 0.13;
 }
 
 .modal[data-mode="character"] .modal-close {
@@ -851,6 +948,10 @@ html[data-theme="dark"] :is(.tag.role, .tag.attack, .tag.defense, .tag.formation
 html[data-theme="dark"] .modal[data-mode="character"] .modal-card {
   color: var(--archive-ink);
   background: var(--archive-surface-solid);
+  background-image: url("assets/ui/ba-screen-frame.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   border-color: var(--archive-border);
   border-top-color: var(--academy);
 }
@@ -985,6 +1086,18 @@ html[data-theme="dark"] .modal[data-mode="character"] :is(.info-item, .skill-car
     grid-template-columns: 1fr;
   }
 
+  .hero-art {
+    min-height: 112px;
+    background-position: center, center 28%;
+  }
+
+  .hero-art::before {
+    right: 10px;
+    bottom: 8px;
+    width: 100px;
+    height: 36px;
+  }
+
   #charGrid .char-card {
     min-height: 122px;
     padding: 11px;
@@ -1031,6 +1144,11 @@ html[data-theme="dark"] .modal[data-mode="character"] :is(.info-item, .skill-car
 }
 
 @media (max-width: 420px) {
+  .brand-logo {
+    width: 150px;
+    height: auto;
+  }
+
   .brand > div:not(.brand-logo) {
     display: none;
   }

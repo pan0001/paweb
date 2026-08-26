@@ -6,6 +6,8 @@
 <meta name="description" content="Project Archive 角色图鉴、公告与战斗资料库。" />
 <title>Project Archive Wiki</title>
 
+<script src="i18n/skills.en.js"></script>
+<script src="i18n/skills.jp.js"></script>
 <script>
   (() => {
     try{
@@ -20,6 +22,9 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://font.kivo.wiki" crossorigin>
+<link rel="stylesheet" href="https://font.kivo.wiki/Blueaka/Blueaka.css">
+<link rel="stylesheet" href="https://font.kivo.wiki/Blueaka_Bold/Blueaka_Bold.css">
 
 <style>
   :root{
@@ -1748,9 +1753,8 @@
 <body>
   <header class="header">
     <div class="brand">
-      <div class="brand-logo">PA</div>
+      <img class="brand-logo" src="assets/ui/project-archive-logo.png" alt="Project Archive Wiki">
       <div>
-        <h1 class="site-title">Project Archive Wiki</h1>
         <div class="site-subtitle" data-i18n="brand.subtitle">档案 · 学生 · 战斗记录</div>
       </div>
     </div>
@@ -1798,6 +1802,8 @@
       </div>
 
       <div class="hero-panel">
+        <div class="hero-art" aria-hidden="true"></div>
+
         <div class="stat-card">
           <div class="stat-label" data-i18n="stats.announcements">当前版本公告</div>
           <div class="stat-value" id="announcementCount">0</div>
@@ -2265,7 +2271,9 @@ const localizedValues = {
   "冲锋枪 / 盾牌":{en:"SMG / Shield",jp:"サブマシンガン / シールド"},
   "枕头":{en:"Pillow",jp:"枕"},
   "书 / 山雀":{en:"Book / Tit",jp:"本 / シジュウカラ"},
-  "冲锋枪 / 镜子":{en:"SMG / Mirror",jp:"サブマシンガン / 鏡"}
+  "冲锋枪 / 镜子":{en:"SMG / Mirror",jp:"サブマシンガン / 鏡"},
+  "无":{en:"None",jp:"なし"},
+  "独立冷却":{en:"Independent Cooldown",jp:"個別クールダウン"}
 };
 
 const characterNames = {
@@ -4526,6 +4534,18 @@ function localizeValue(value){
   return localizedValues[value]?.[currentLanguage] || String(value);
 }
 
+function getLocalizedSkill(character, skill, skillIndex){
+  if(currentLanguage === "cn"){
+    return skill;
+  }
+
+  const dictionaries = window.PA_SKILL_TRANSLATIONS || {};
+  const languageDictionary = dictionaries[currentLanguage] || dictionaries.en || {};
+  const localizedSkill = languageDictionary[`${character.id}:${skillIndex}`];
+
+  return localizedSkill ? {...skill, ...localizedSkill} : skill;
+}
+
 function getCharacterName(character){
   return characterNames[character.id]?.[currentLanguage] || character.name;
 }
@@ -4927,16 +4947,20 @@ function renderCharacterModal(character){
         <div class="skill-list">
           ${
             skills.length > 0
-            ? skills.map(skill => `
-              <div class="skill-card">
-                <div class="skill-head">
-                  <strong>${escapeHtml(skill.name)}</strong>
-                  <span>${escapeHtml(localizeValue(skill.type))}</span>
+            ? skills.map((rawSkill, skillIndex) => {
+              const skill = getLocalizedSkill(character, rawSkill, skillIndex);
+
+              return `
+                <div class="skill-card">
+                  <div class="skill-head">
+                    <strong>${escapeHtml(skill.name)}</strong>
+                    <span>${escapeHtml(localizeValue(skill.type))}</span>
+                  </div>
+                  <div class="skill-cooldown">${escapeHtml(t("skill.cooldown", {value:localizeValue(skill.cooldown)}))}</div>
+                  <p>${escapeHtml(skill.desc)}</p>
                 </div>
-                <div class="skill-cooldown">${escapeHtml(t("skill.cooldown", {value:localizeValue(skill.cooldown)}))}</div>
-                <p>${escapeHtml(skill.desc)}</p>
-              </div>
-            `).join("")
+              `;
+            }).join("")
             : `<div class="skill-card"><p>${escapeHtml(t("skill.empty"))}</p></div>`
           }
         </div>
