@@ -8,6 +8,8 @@
 
 <script src="i18n/skills.en.js"></script>
 <script src="i18n/skills.jp.js"></script>
+<script src="i18n/characters.en.js"></script>
+<script src="i18n/characters.jp.js"></script>
 <script>
   (() => {
     try{
@@ -4546,6 +4548,30 @@ function getLocalizedSkill(character, skill, skillIndex){
   return localizedSkill ? {...skill, ...localizedSkill} : skill;
 }
 
+function getLocalizedCharacterContent(character){
+  const originalContent = {
+    desc: character.desc || "",
+    notes: character.notes || []
+  };
+
+  if(currentLanguage === "cn"){
+    return originalContent;
+  }
+
+  const dictionaries = window.PA_CHARACTER_TRANSLATIONS || {};
+  const languageDictionary = dictionaries[currentLanguage] || dictionaries.en || {};
+  const localizedContent = languageDictionary[character.id];
+
+  if(!localizedContent){
+    return originalContent;
+  }
+
+  return {
+    desc: localizedContent.desc || originalContent.desc,
+    notes: Array.isArray(localizedContent.notes) ? localizedContent.notes : originalContent.notes
+  };
+}
+
 function getCharacterName(character){
   return characterNames[character.id]?.[currentLanguage] || character.name;
 }
@@ -4907,7 +4933,8 @@ function renderCharacterModal(character){
 
   const stats = character.stats || {};
   const skills = character.skills || [];
-  const notes = character.notes || [];
+  const localizedContent = getLocalizedCharacterContent(character);
+  const notes = localizedContent.notes;
 
   modalBody.innerHTML = `
     <div class="detail-layout">
@@ -4968,7 +4995,7 @@ function renderCharacterModal(character){
 
       <div class="detail-section description-section">
         <h3>${escapeHtml(t("detail.description"))}</h3>
-        <p>${escapeHtml(character.desc || t("detail.descriptionEmpty"))}</p>
+        <p>${escapeHtml(localizedContent.desc || t("detail.descriptionEmpty"))}</p>
       </div>
 
       <div class="detail-section notes-section">

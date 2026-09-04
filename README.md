@@ -6,7 +6,7 @@ Project Archive 的非官方静态资料站，集中展示公告、学生图鉴�
 
 ## 功能
 
-- 37 名学生资料与 111 条技能记录，技能名称、说明及冷却支持 CN / EN / JP
+- 37 名学生资料与 111 条技能记录；技能、角色说明与使用备注支持 CN / EN / JP
 - 12 个学院与战斗定位筛选
 - 角色名、学院、武器、站位及战斗定位搜索
 - 学生详情弹窗与对应 Kivo Wiki 图鉴入口
@@ -21,7 +21,12 @@ Project Archive 的非官方静态资料站，集中展示公告、学生图鉴�
 
 版本标题、日期和顺序以 [GitHub Activity](https://github.com/pan0001/paweb/activity) 与仓库提交历史为准，最新开发版本记录在顶部。
 
-### 0.03 beta · 2026-08-27
+### 0.03.1 beta · 2026-09-04
+
+- 修复切换 English / 日本語 后角色说明与 Usage Notes 仍显示中文的问题
+- 为 37 条角色说明和 111 条使用备注补齐 English 与日本語文本，并支持弹窗内即时切换
+
+### [0.03 beta](https://github.com/pan0001/paweb/commit/6cf39790fec3b26a4cc7eb608691a2368f48026f) · 2026-08-27
 
 - 接入 Blueaka / Blueaka Bold 字体与本地 BA、Kivo UI 装饰素材
 - 为 37 名学生的 111 条技能补齐 English 与日本語名称和说明，并修复冷却文本残留中文的问题
@@ -81,6 +86,8 @@ paweb/
 ├── index.html          # 页面、样式、资料数据与交互逻辑
 ├── styles.css          # Project Archive 学生档案主题与语义配色
 ├── i18n/
+│   ├── characters.en.js # 角色说明与使用备注的 English 文本
+│   ├── characters.jp.js # 角色说明与使用备注的日本語文本
 │   ├── skills.en.js    # 111 条技能的 English 文本
 │   └── skills.jp.js    # 111 条技能的日本語文本
 ├── assets/
@@ -104,6 +111,7 @@ paweb/
 
 - `translations`：CN / EN / JP 界面文案
 - `localizedValues`：学院、战斗定位、武器及战斗类型译名
+- `i18n/characters.en.js`、`i18n/characters.jp.js`：按学生 ID 维护的角色说明与使用备注
 - `i18n/skills.en.js`、`i18n/skills.jp.js`：按“学生 ID:技能序号”维护的技能名称与说明
 - `characterNames`：角色名称与特殊形态译名
 - `announcements`：公告标题、摘要与完整正文
