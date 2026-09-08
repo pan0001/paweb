@@ -1,0 +1,138 @@
+/* Original image_gen PNG artwork. Labels remain HTML; no text is baked in.
+   Provenance and full prompts: assets/ui/generated-buttons/prompts.json. */
+:root {
+  --art-arrow:url('../assets/ui/generated-buttons/arrow.png');
+  --art-play:url('../assets/ui/generated-buttons/play.png');
+  --art-pause:url('../assets/ui/generated-buttons/pause.png');
+  --art-close:url('../assets/ui/generated-buttons/close.png');
+  --art-expand:url('../assets/ui/generated-buttons/expand.png');
+  --art-moon:url('../assets/ui/generated-buttons/moon.png');
+  --art-sun:url('../assets/ui/generated-buttons/sun.png');
+  --art-reset:url('../assets/ui/generated-buttons/reset.png');
+  --art-search:url('../assets/ui/generated-buttons/search.png');
+  --art-plate:url('../assets/ui/generated-buttons/button-plate.png');
+}
+
+/* Every direction comes from the same generated arrow, rotated only in CSS. */
+#characters :is(.strip-arrow,.showcase-prev,.showcase-next),
+.showcase-fullscreen,.modal-close {
+  /* Zero-size fallback text must not create a second implicit grid row. */
+  display:inline-flex; align-items:center; justify-content:center; gap:0;
+  position:relative; padding:0; line-height:1; letter-spacing:0; vertical-align:middle;
+  font-size:0; color:transparent; min-width:36px; min-height:40px;
+  border:1px solid var(--line); border-radius:8px 4px 10px 4px;
+  background:var(--surface); box-shadow:0 2px 0 var(--game-shadow);
+}
+#characters :is(.strip-arrow,.showcase-prev,.showcase-next)::after,
+.showcase-fullscreen::after,.modal-close::after {
+  content:""; display:block; width:29px; height:29px; pointer-events:none;
+  background:var(--control-art,var(--art-arrow)) center / contain no-repeat;
+  transform:rotate(var(--art-turn,0deg)); transition:filter .18s,scale .18s;
+}
+#academyPrevious,#studentPrevious,.showcase-prev { --art-turn:180deg; }
+.showcase-fullscreen { position:absolute; --control-art:var(--art-expand); width:43px; height:43px; }
+.showcase-fullscreen[data-expanded="true"] { border-color:var(--yellow); box-shadow:0 2px 0 var(--yellow); }
+.modal-close { position:absolute; --control-art:var(--art-close); border-radius:50%; width:44px; height:44px; }
+.modal-close:is(:hover,:focus-visible) { background:var(--surface-alt); border-color:var(--primary); }
+.modal-close::after { width:28px; height:28px; }
+#characters :is(.strip-arrow,.showcase-prev,.showcase-next):hover::after,
+.showcase-fullscreen:hover::after,.modal-close:hover::after { scale:1.09; }
+#characters :is(.strip-arrow,.showcase-prev,.showcase-next):disabled { opacity:.4; cursor:not-allowed; }
+
+/* Small inline arrows retain their existing accessible parent action. */
+.announce-meta .arrow { display:inline-flex; align-items:center; justify-content:center; gap:0; line-height:1; letter-spacing:0; font-size:0; width:36px; height:33px; background:var(--surface); }
+.announce-meta .arrow::after { content:""; width:28px; height:28px; background:var(--art-arrow) center / contain no-repeat; }
+.btn-primary::after,.youtube-link::after,.hero-actions .btn-ghost[href="#announcements"]::after {
+  content:""; display:inline-block; flex:0 0 26px; width:26px; height:26px;
+  background:var(--art-arrow) center / contain no-repeat; transform:rotate(-45deg);
+}
+.hero-actions .btn-ghost[href="#announcements"]::after { transform:none; width:23px; height:23px; flex-basis:23px; }
+.source-link > span[aria-hidden="true"] { display:inline-block; font-size:0; width:24px; height:24px; flex-shrink:0; background:var(--art-arrow) center / contain no-repeat; transform:rotate(-45deg); }
+.hero-scroll > span:first-child { display:inline-flex; align-items:center; justify-content:center; gap:0; line-height:1; letter-spacing:0; font-size:0; border:1px solid var(--line); background:var(--surface); animation:none; }
+.hero-scroll > span:first-child::before { content:""; width:27px; height:27px; background:var(--art-arrow) center / contain no-repeat; transform:rotate(90deg); }
+
+/* Theme and search no longer depend on OS-specific Unicode glyphs. */
+.theme-toggle {
+  display:inline-flex; align-items:center; justify-content:center; gap:0;
+  position:relative; padding:0; line-height:1; letter-spacing:0; appearance:none;
+  width:43px; height:43px; background:var(--surface-alt); border:1px solid var(--line); border-radius:50%;
+}
+.theme-toggle:hover { background:var(--soft-blue); }
+#themeIcon { display:grid; place-items:center; flex:0 0 auto; line-height:1; font-size:0; width:30px; height:30px; background:var(--art-moon) center / contain no-repeat; }
+html[data-theme="dark"] #themeIcon { background-image:var(--art-sun); }
+#characters .student-dock .search-icon { display:block; width:23px; height:23px; top:6px; left:9px; font-size:0; background:var(--art-search) center / contain no-repeat; }
+
+/* Play artwork on our controls only: YouTube's embedded controls stay intact. */
+.hero-actions .btn-ghost[href="#trailers"]::before { content:""; width:36px; height:36px; background:var(--art-play) center / 29px 29px no-repeat,var(--surface); }
+.trailer-thumb::after { content:""; inset:0; background:var(--art-play) center / 34px 34px no-repeat,#122b4052; }
+#characters :is(.showcase-pause,.showcase-reset),#characters .clear-filters { display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+#characters :is(.showcase-pause,.showcase-reset)::after,#characters .clear-filters::after {
+  content:""; order:-1; flex:0 0 23px; width:23px; height:23px; pointer-events:none;
+  background:var(--art-reset) center / contain no-repeat;
+}
+#characters .showcase-pause::after { background-image:var(--art-pause); }
+#characters .showcase-pause[data-art-icon="play"]::after { background-image:var(--art-play); }
+#characters .clear-filters::after { background-image:var(--art-close); width:19px; height:19px; flex-basis:19px; }
+
+/* Shared generated backplate. Keep the original hit areas, not the alpha bounds. */
+.hero-actions .btn-primary,.youtube-link,#characters .showcase-details {
+  color:#234a63; background:none; border:0; box-shadow:none; padding-inline:23px;
+}
+.hero-actions .btn-primary::before,.youtube-link::before,#characters .showcase-details::before {
+  content:""; position:absolute; z-index:-1; inset:-3px -5px;
+  background:var(--art-plate) center / 100% 170% no-repeat;
+  transform:none; border:0; border-radius:0; box-shadow:none;
+}
+#characters .showcase-details:hover::before { background:var(--art-plate) center / 100% 170% no-repeat; filter:brightness(1.07); }
+#characters .showcase-modes button::before {
+  border:0; box-shadow:none; transform:none; border-radius:0; inset:-3px;
+  background:var(--art-plate) center / 100% 170% no-repeat;
+  filter:grayscale(.85) brightness(1.18); opacity:.9;
+}
+#characters .showcase-modes button { color:#30485f; }
+#characters .showcase-modes button[aria-pressed="true"] { color:#234a63; }
+#characters .showcase-modes button[aria-pressed="true"]::before {
+  background:var(--art-plate) center / 100% 170% no-repeat; filter:none; opacity:1;
+  border:0; box-shadow:none;
+}
+#characters .showcase-modes button[aria-pressed="true"]::after { content:""; position:absolute; width:46%; height:3px; bottom:1px; left:27%; background:var(--yellow); transform:skewX(-12deg); }
+#characters .showcase-modes button:disabled { opacity:.4; }
+#characters .showcase-controls button,#characters .clear-filters {
+  position:relative; isolation:isolate; border:0; border-radius:5px; background:none;
+  color:#30485f; min-height:38px; padding:7px 14px; box-shadow:none;
+}
+#characters .showcase-controls button::before,#characters .clear-filters::before {
+  content:""; position:absolute; z-index:-1; inset:-2px;
+  background:var(--art-plate) center / 100% 170% no-repeat;
+  filter:grayscale(.85) brightness(1.18);
+}
+#characters .showcase-controls button:hover::before,#characters .clear-filters:hover::before { filter:none; }
+#characters .showcase-controls button:disabled { opacity:.4; }
+
+/* Preserve legible HTML labels and status under dark / forced-color modes. */
+html[data-theme="dark"] #characters :is(.strip-arrow,.showcase-prev,.showcase-next)::after,
+html[data-theme="dark"] .showcase-fullscreen::after,
+html[data-theme="dark"] .modal-close::after,
+html[data-theme="dark"] #characters .student-dock .search-icon,
+html[data-theme="dark"] .source-link > span[aria-hidden="true"] { filter:brightness(1.9); }
+html[data-theme="dark"] #characters .showcase-modes button:not([aria-pressed="true"]) { color:#eff7fc; }
+html[data-theme="dark"] #characters .showcase-modes button:not([aria-pressed="true"])::before { filter:brightness(.46) saturate(.55); opacity:1; }
+@media(max-width:680px) {
+  #characters :is(.strip-arrow,.showcase-prev,.showcase-next) { min-width:30px; }
+  #characters .strip-arrow { flex-basis:30px; }
+  #characters :is(.strip-arrow,.showcase-prev,.showcase-next)::after { width:25px; height:25px; }
+  #characters .showcase-modes button { padding-inline:16px; }
+  #characters .showcase-controls button { padding-inline:12px; }
+  .theme-toggle { width:36px; height:36px; }
+  #themeIcon { width:27px; height:27px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #characters :is(.strip-arrow,.showcase-prev,.showcase-next)::after,.showcase-fullscreen::after,.modal-close::after { transition:none; scale:1; }
+}
+@media(forced-colors:active) {
+  #characters :is(.strip-arrow,.showcase-prev,.showcase-next),.showcase-fullscreen,.modal-close { font-size:23px; color:ButtonText; }
+  #characters :is(.strip-arrow,.showcase-prev,.showcase-next)::after,.showcase-fullscreen::after,.modal-close::after { display:none; }
+  #themeIcon { font-size:23px; background:none; }
+  .hero-actions .btn-primary,.youtube-link,#characters .showcase-details,#characters .showcase-modes button,#characters .showcase-controls button,#characters .clear-filters { color:ButtonText; background:ButtonFace; border:1px solid ButtonText; }
+  #characters .showcase-modes button[aria-pressed="true"] { outline:2px solid Highlight; }
+}

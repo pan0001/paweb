@@ -1,0 +1,13 @@
+/* Generated from frames.json; original PNGs stay untouched. */
+:root {
+  --ref-pin:url('../assets/ui/reference-atlas/Common.png') 15.43210% 31.50826% / 1969.23077% 1828.57143% no-repeat;
+  --ref-arrow:url('../assets/ui/reference-atlas/Common.png') 27.76089% 20.54303% / 2767.56757% 2133.33333% no-repeat;
+  --ref-search:url('../assets/ui/reference-atlas/Common.png') 54.97988% 33.75125% / 3413.33333% 3792.59259% no-repeat;
+  --ref-home:url('../assets/ui/reference-atlas/Common.png') 17.40666% 21.30653% / 3103.03030% 3531.03448% no-repeat;
+  --ref-academy:url('../assets/ui/reference-atlas/Common.png') 0.35425% 16.93467% / 2844.44444% 3531.03448% no-repeat;
+  --ref-profile:url('../assets/ui/reference-atlas/Common.png') 18.55087% 57.41801% / 2007.84314% 1612.59843% no-repeat;
+  --ref-notice:url('../assets/ui/reference-atlas/Common.png') 0.10331% 51.01404% / 1828.57143% 1638.40000% no-repeat;
+  --ref-paper-texture:url('../assets/ui/reference-atlas/Common.png') 0.22371% 97.99714% / 787.69231% 315.07692% no-repeat;
+  --ref-target:url('../assets/ui/reference-atlas/Combat.png') 43.57179% 24.10256% / 4179.59184% 2089.79592% no-repeat;
+  --ref-reload:url('../assets/ui/reference-atlas/Combat.png') 31.91705% 18.21990% / 2884.50704% 1484.05797% no-repeat;
+}

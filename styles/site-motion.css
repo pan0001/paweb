@@ -1,0 +1,156 @@
+/* Gentle interface motion. The opaque homepage and all 3D animation tracks stay intact. */
+/* Clip overscan without creating a new scrolling container or extra footer space. */
+main.container { overflow:clip; }
+@keyframes archive-facet-drift {
+  0% { transform:translate(-16px,-10px); opacity:.5; }
+  50% { opacity:.95; }
+  100% { transform:translate(16px,10px); opacity:.6; }
+}
+@keyframes archive-light-breathe {
+  from { opacity:.2; transform:translateY(-12px); }
+  to { opacity:.65; transform:translateY(12px); }
+}
+main.container::before {
+  inset:-32px;
+  animation:archive-facet-drift 28s ease-in-out infinite alternate;
+  animation-play-state:paused;
+}
+main.container::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 78% 42%,var(--archive-stage-light),transparent 48%);
+  animation:archive-light-breathe 19s ease-in-out infinite alternate;
+  animation-play-state:paused;
+}
+#characters .showcase-viewport:fullscreen::before {
+  inset:-32px;
+  width:auto;
+  height:auto;
+  animation:archive-facet-drift 28s ease-in-out infinite alternate;
+  animation-play-state:paused;
+}
+html[data-ambient-motion="running"] main.container::before,
+html[data-ambient-motion="running"] main.container::after,
+html[data-ambient-motion="running"] #characters .showcase-viewport:fullscreen::before { animation-play-state:running; }
+.showcase-media { position:absolute; inset:0; }
+/* School crests stay in the scene (also in fullscreen), underneath the student.
+   Alpha PNGs are reused locally; no rectangular image plate or canvas filter. */
+.academy-backdrop {
+  --crest-center:50%; --crest-height:115%;
+  position:absolute; inset:0; z-index:-1; overflow:clip;
+  pointer-events:none; user-select:none;
+}
+.academy-crest-anchor {
+  position:absolute; left:var(--crest-center); top:50%; height:min(var(--crest-height),650px);
+  max-width:95%; width:auto;
+  aspect-ratio:1; transform:translate(-50%,-50%);
+}
+.academy-crest-layer { position:absolute; inset:0; }
+.academy-crest-layer img {
+  width:100%; height:100%; object-fit:contain; opacity:.145;
+  filter:brightness(0) saturate(100%) invert(43%) sepia(34%) saturate(1114%) hue-rotate(158deg) brightness(93%);
+}
+.academy-crest-orbit {
+  position:absolute; inset:16%; border:1px solid #399ec521; border-radius:50%;
+  border-inline-color:#399ec554; transform:rotate(-18deg);
+}
+.academy-crest-orbit::before {
+  content:""; position:absolute; inset:-12%; border:1px dashed #329bcb24; border-radius:50%;
+}
+.academy-crest-orbit::after {
+  content:""; position:absolute; top:14%; right:14%; width:7px; height:7px;
+  border:2px solid #4ab5d97a; background:var(--surface); transform:rotate(45deg);
+}
+.academy-backdrop[data-academy=""] { display:none; }
+#characters .showcase-viewport:fullscreen .academy-backdrop { --crest-center:50%; --crest-height:95%; }
+html[data-theme="dark"] .academy-crest-layer img { filter:brightness(0) invert(1); opacity:.11; }
+html[data-theme="dark"] .academy-crest-orbit { border-color:#95ddff21; border-inline-color:#95ddff4a; }
+/* Finite, locally clipped diagonal paper sweep: all controls remain clickable. */
+.academy-transition {
+  position:absolute; inset:0; z-index:4; overflow:clip; contain:paint;
+  pointer-events:none; user-select:none;
+}
+.academy-transition > div { position:absolute; opacity:0; pointer-events:none; }
+.academy-wipe {
+  top:-18%; bottom:-18%; left:0; width:38%;
+  background:linear-gradient(90deg,transparent 0%,#81dafa18 12%,#6bd5f943 68%,#e3f9ff88 98%,transparent);
+  border-right:2px solid #c0f3ffb3;
+}
+.academy-wipe-edge {
+  top:-18%; bottom:-18%; left:0; width:7%;
+  background:linear-gradient(90deg,transparent,#60cdef36 85%,#eaffffe6 99%,transparent);
+}
+.academy-burst {
+  left:50%; top:47%; width:min(60vw,780px); aspect-ratio:1;
+  translate:-50% -50%; border:2px solid #65d7ef80; border-radius:50%;
+  box-shadow:0 0 0 22px #4dd4ed0c,0 0 0 23px #9be9ff40;
+  background:radial-gradient(circle,transparent 57%,#9deaff1a 68%,transparent 71%);
+}
+html[data-theme="dark"] .academy-wipe { background:linear-gradient(90deg,transparent,#43aecd18 12%,#3ab7dc38 68%,#97e5ff60 98%,transparent); }
+@media(max-width:680px) {
+  .page-model-stage .academy-backdrop { --crest-center:50%; --crest-height:110%; }
+  .academy-burst { left:50%; top:40%; width:90vw; }
+}
+@media(prefers-reduced-motion:reduce) { .academy-transition { display:none; } }
+@media(forced-colors:active) { .academy-backdrop,.academy-transition { display:none; } }
+.showcase-player[data-reveal="pending"],.showcase-portrait[data-reveal="pending"] { opacity:0; pointer-events:none; }
+/* Gallery now starts illustration entrances after the image loads, not before. */
+#characters .showcase-portrait { animation:none; }
+.ambient-motion-toggle {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:38px;
+  margin-top:18px;
+  padding:7px 14px;
+  border:1px solid var(--line);
+  border-radius:8px 4px;
+  color:var(--text);
+  background:var(--surface);
+  font:700 11px/1.5 var(--font);
+}
+.ambient-motion-toggle::before {
+  content:"";
+  width:15px;
+  height:15px;
+  background:var(--art-pause) center / contain no-repeat;
+}
+.ambient-motion-toggle[data-motion="paused"]::before { background-image:var(--art-play); }
+.ambient-motion-toggle:hover:not(:disabled) { border-color:var(--primary); background-color:var(--soft-blue); }
+.ambient-motion-toggle:disabled { opacity:.65; cursor:default; }
+html[data-theme="dark"] .ambient-motion-toggle::before { filter:brightness(2.5); }
+
+/* Local tap ripples: no fixed overlay, no changes to button icons or hit areas. */
+.ui-tap-anchor { position:relative; }
+.ui-tap-clip { position:absolute; inset:0; z-index:5; overflow:hidden; border-radius:inherit; pointer-events:none; }
+.ui-tap-wave {
+  position:absolute; pointer-events:none; border-radius:50%;
+  border:1px solid #39bbed75;
+  background:radial-gradient(circle,#bcefff88 0%,#65d5f04d 55%,#36b8e31a 70%,transparent 72%);
+}
+html[data-theme="dark"] .ui-tap-wave { border-color:#91e9ff80; background:radial-gradient(circle,#b2eeff77,#66d3ef44 55%,transparent 72%); }
+
+@media(prefers-reduced-motion:no-preference) {
+  /* Individual translate/scale preserve the atlas arrows' existing rotations. */
+  #characters :is(.strip-arrow,.showcase-prev,.showcase-next)::after { transition:translate .2s ease,scale .18s ease; }
+  #characters :is(#academyPrevious,#studentPrevious,.showcase-prev) { --arrow-nudge:-3px; }
+  #characters :is(.strip-arrow,.showcase-prev,.showcase-next):not(:disabled):is(:hover,:focus-visible)::after { translate:var(--arrow-nudge,3px) 0; }
+  .trailer-thumb img { transition:scale .45s var(--ease); }
+  .trailer-card:is(:hover,:focus-visible) .trailer-thumb img { scale:1.05; }
+  :is(.strip-arrow,.showcase-prev,.showcase-next,.showcase-modes button,.lang-btn,.clear-filters) { transition:scale .16s ease,background .2s,box-shadow .2s,transform .2s; }
+  :is(.strip-arrow,.showcase-prev,.showcase-next,.showcase-modes button,.lang-btn,.clear-filters):not(:disabled):active { scale:.95; }
+}
+@media(prefers-reduced-motion:reduce) {
+  main.container::before,main.container::after,
+  #characters .showcase-viewport:fullscreen::before { animation:none; transform:none; }
+  main.container::after { display:none; }
+  .ui-tap-clip { display:none; }
+}
+@media(forced-colors:active) {
+  main.container::after,.ambient-motion-toggle::before,.ui-tap-clip { display:none; }
+  .ambient-motion-toggle { color:ButtonText; background:ButtonFace; }
+}

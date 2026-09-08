@@ -1,0 +1,140 @@
+/* Game-UI reference skin. Preserve the academy / model / student-strip layout. */
+#characters {
+  /* Decorative slants must not create a horizontal page scrollbar. */
+  overflow-x:clip;
+  --hud-navy:#304c6c;
+  --hud-paper:#fff;
+  --hud-ink:#425a70;
+  --hud-yellow:#fff02b;
+  --hud-edge:#cbd7db;
+}
+html[data-theme="dark"] #characters {
+  --hud-paper:#21394d;
+  --hud-ink:#e2edf5;
+  --hud-edge:#486278;
+}
+.hud-icon { width:22px; height:22px; display:inline-block; flex:0 0 22px; vertical-align:middle; }
+
+/* A slanted name plate and the compact combat HUD from the reference. */
+#characters .showcase-info {
+  display:block; padding:10px 12px 15px; border-radius:5px 5px 14px 5px;
+  max-height:500px; background:color-mix(in srgb,var(--hud-paper) 92%,transparent);
+  border:1px solid var(--hud-edge); box-shadow:3px 4px 0 #29445a12;
+}
+#characters .showcase-info::before { display:none; }
+.showcase-profile-head {
+  position:relative; padding:14px 18px 17px; margin:0 -5px 12px;
+  color:#fff; background:linear-gradient(120deg,#225681e8,#20364dec),linear-gradient(40deg,#368dcc,#263c55);
+  clip-path:polygon(4% 0,100% 0,96% 100%,0 100%); border-radius:4px;
+}
+.showcase-profile-head::before {
+  content:""; position:absolute; width:105px; height:180px; right:25%; top:-85px;
+  border:20px solid #75c8ea12; transform:rotate(35deg); pointer-events:none;
+}
+.showcase-profile-head::after {
+  content:""; position:absolute; bottom:4px; left:16px; right:19px; height:5px;
+  background:var(--hud-yellow); transform:skewX(-12deg); box-shadow:0 -2px 0 #fffbaf70;
+}
+#characters .showcase-registration { margin:0 0 6px; color:#cbe6f6; font-size:8px; letter-spacing:.12em; }
+#characters .showcase-number { color:#dff6ff; font-size:17px; }
+#characters .showcase-name { color:#fff; font-size:clamp(23px,2vw,32px); line-height:1.25; margin:0 0 10px; }
+.showcase-header-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+#characters .showcase-academy { padding:0; margin:0; border-radius:0; background:none; color:#dbebf5; font-size:10px; }
+#characters .showcase-stars { margin:0; font-size:19px; color:#ffe241; letter-spacing:-.09em; white-space:nowrap; text-shadow:0 1px 0 #df8e0d,1px 0 0 #fff2ae; }
+#characters .showcase-facts { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:0 2px 12px; }
+.showcase-facts > div { min-width:0; position:relative; isolation:isolate; }
+.showcase-facts > div::before {
+  content:""; position:absolute; z-index:-1; inset:0; transform:skewX(-9deg);
+  border:1px solid var(--hud-edge); border-radius:3px; background:var(--hud-paper);
+  box-shadow:0 2px 0 #283d5220;
+}
+#characters .showcase-facts dd { min-height:35px; display:flex; align-items:center; gap:7px; padding:5px 8px; color:var(--hud-ink); font-weight:900; font-size:13px; line-height:1.2; }
+.hud-value { min-width:0; overflow-wrap:anywhere; }
+.showcase-facts .hud-icon { opacity:.8; width:19px; height:19px; flex-basis:19px; }
+.showcase-facts [data-fact="weapon"] { grid-column:1 / -1; }
+#characters .showcase-facts [data-fact="weapon"] dd { font-size:11px; min-height:29px; }
+.showcase-facts [data-fact="formation"]::before { background:var(--hud-navy); border-color:#496782; }
+#characters .showcase-facts [data-fact="formation"] dd { color:white; }
+:is(.showcase-facts > div,.roster-attack)[data-tone="爆发"], .showcase-facts [data-tone="轻装甲"] { --combat-color:#bb1728; }
+:is(.showcase-facts > div,.roster-attack)[data-tone="贯通"], .showcase-facts [data-tone="重装甲"] { --combat-color:#9a6512; }
+:is(.showcase-facts > div,.roster-attack)[data-tone="神秘"], .showcase-facts [data-tone="特殊装甲"] { --combat-color:#326aa2; }
+:is(.showcase-facts > div,.roster-attack)[data-tone="振动"], .showcase-facts [data-tone="弹性装甲"] { --combat-color:#9944af; }
+.showcase-facts [data-tone="复合装甲"] { --combat-color:#327c80; }
+.showcase-facts :is([data-fact="attack"],[data-fact="defense"])::before { background:var(--combat-color); border-color:transparent; }
+#characters .showcase-facts :is([data-fact="attack"],[data-fact="defense"]) dd { color:#fff; }
+#characters .showcase-description { font-size:11px; margin:10px 4px 13px; line-height:1.8; }
+#characters .showcase-details { background:none; min-height:39px; color:var(--hud-navy); font-size:13px; }
+#characters .showcase-details::before { background:#fff; border:1px solid #bccbd4; border-bottom:3px solid #e4c42f; border-radius:4px; box-shadow:2px 3px 0 #20364d14; }
+#characters .showcase-details:hover::before { background:#fffad5; }
+#characters .showcase-source { margin:12px 3px 9px; }
+#characters .showcase-downloads { margin:0 3px 9px; }
+#characters .showcase-pagination { padding-top:9px; }
+#characters .showcase-pagination button { border-radius:4px; border:1px solid var(--hud-edge); background:var(--hud-paper); }
+
+/* White bevelled portraits, blue bottom ribbons, names outside the frame. */
+#characters .student-dock { padding-top:19px; }
+#characters .student-dock::before {
+  transform:none; border:1px solid var(--hud-edge); border-radius:7px 7px 17px 7px;
+  background:linear-gradient(130deg,color-mix(in srgb,var(--hud-paper) 96%,transparent),color-mix(in srgb,var(--surface-alt) 87%,transparent));
+  box-shadow:0 4px 0 #31526d0d;
+}
+#characters .student-dock::after { height:4px; top:0; left:25px; width:90px; background:var(--hud-yellow); }
+#characters .dock-heading { padding-bottom:10px; border-bottom:1px dashed var(--hud-edge); }
+#characters #charGrid { gap:19px; padding:17px 12px 12px; align-items:stretch; }
+#characters #charGrid .char-card { width:143px; flex-basis:143px; border-radius:5px; text-align:center; }
+#characters #charGrid .char-card::before { display:none; }
+#characters #charGrid .avatar {
+  position:relative; width:100%; height:143px; margin:0; border:5px solid var(--hud-paper);
+  border-radius:8px 8px 0 8px; background:var(--hud-paper);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%);
+  box-shadow:inset 0 0 0 1px var(--hud-edge);
+}
+#characters #charGrid .avatar img { height:100%; width:100%; display:block; object-position:center 20%; border-radius:3px; }
+.roster-role {
+  position:absolute; left:0; right:0; bottom:0; padding:7px 4px 6px;
+  color:#fff; background:#223f60d9; font-weight:900; font-size:15px; line-height:1.25;
+}
+.roster-attack { position:absolute; right:4px; bottom:37px; display:grid; place-items:center; width:25px; height:25px; border-radius:7px 3px; color:white; background:var(--combat-color,#ce8315); border:1px solid #ffffffb3; }
+.roster-attack .hud-icon { width:18px; height:18px; }
+#characters #charGrid .roster-index {
+  top:-7px; left:-7px; bottom:auto; right:auto; width:28px; height:28px; display:grid; place-items:center;
+  border-radius:50%; background:#d0d9de; color:#536c7c; border:1px solid #afc0c8; z-index:2;
+  font:italic 900 11px Arial,sans-serif; box-shadow:0 2px 2px #102a3c12;
+}
+#characters #charGrid .char-card[aria-pressed="true"] .roster-index { background:#fff1a1; color:#c68108; border-color:#e1be54; }
+#characters #charGrid .char-card[aria-pressed="true"] .avatar { border-color:#fff2a6; }
+#characters #charGrid .char-card[aria-pressed="true"]::after { top:-5px; right:0; width:11px; height:11px; background:#ffc719; z-index:3; }
+#characters #charGrid .char-info { padding:8px 0 2px; }
+#characters #charGrid .char-info h4 { display:inline; font-weight:900; font-size:13px; line-height:1.5; color:var(--hud-ink); margin:0; }
+#characters #charGrid .char-card[aria-pressed="true"] h4 { background:linear-gradient(transparent 83%,var(--hud-yellow) 83%,var(--hud-yellow) 95%,transparent 95%); }
+#characters #charGrid .card-stars { top:8px; right:8px; background:#203c5270; color:#ffe459; font-size:9px; padding:3px; border-radius:2px; letter-spacing:-.08em; }
+#characters #charGrid .tag-row { display:none; }
+#characters #charGrid .char-card:focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+#characters #charGrid .char-card:hover .avatar { border-color:#fff2a6; }
+
+/* Supporting controls use the same game-paper vocabulary, not new navigation. */
+#characters .academy-card::before { border:2px solid var(--hud-paper); border-radius:5px 5px 9px 5px; box-shadow:2px 3px 0 #29445a19; }
+#characters .academy-card[aria-pressed="true"]::before { background:linear-gradient(120deg,#315c81,#273f5b); border-color:#e6f3fa; box-shadow:0 4px 0 var(--hud-yellow); }
+#characters .showcase-modes button::before { border:1px solid var(--hud-edge); border-radius:4px; background:var(--hud-paper); }
+#characters .showcase-modes button[aria-pressed="true"]::before { background:var(--hud-navy); border-color:#668ba5; box-shadow:0 3px 0 var(--hud-yellow); }
+#characters .showcase-controls { border:1px solid var(--hud-edge); border-radius:5px 5px 11px 5px; background:color-mix(in srgb,var(--hud-paper) 94%,transparent); }
+#characters .showcase-controls button { border-radius:3px; border:1px solid var(--hud-edge); color:var(--hud-ink); background:var(--hud-paper); }
+#characters .showcase-controls select, #characters .student-dock .control { border-radius:4px; border:1px solid var(--hud-edge); }
+#characters .showcase-fullscreen { border:1px solid var(--hud-edge); border-radius:5px; }
+
+@media(max-width:1100px) {
+  #characters .showcase-info { padding:8px 10px 12px; }
+  #characters .showcase-facts dd { font-size:11px; gap:5px; padding-inline:6px; }
+  #characters .showcase-name { font-size:24px; }
+}
+@media(max-width:680px) {
+  #characters .showcase-info { max-height:none; }
+  .showcase-profile-head { padding-inline:20px; }
+  #characters .showcase-name { font-size:28px; }
+  #characters .showcase-facts dd { font-size:13px; min-height:37px; }
+  #characters #charGrid { gap:16px; }
+  #characters #charGrid .char-card { width:125px; flex-basis:125px; }
+  #characters #charGrid .avatar { height:129px; }
+  #characters #charGrid .char-info h4 { font-size:12px; }
+  .roster-role { font-size:13px; }
+}

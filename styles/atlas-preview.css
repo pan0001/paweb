@@ -1,0 +1,12 @@
+body{margin:24px;background:#d9e8ef;font:16px system-ui;color:#294360}
+h1{font-size:22px}main{display:flex;flex-wrap:wrap;gap:18px}.sample{padding:16px;background:#fff;border-radius:12px;width:190px}.sprite{margin:16px auto;width:96px;height:96px}.label{font-weight:bold}.sample img{display:block;margin:24px auto}
+.sprite[data-sprite="arrow"]{background:var(--ref-arrow)}
+.sprite[data-sprite="search"]{background:var(--ref-search)}
+.sprite[data-sprite="search"]{clip-path:polygon(30% 0,100% 0,100% 100%,0 100%,0 35%)}
+.sprite[data-sprite="home"]{background:var(--ref-home)}
+.sprite[data-sprite="academy"]{background:var(--ref-academy)}
+.sprite[data-sprite="profile"]{background:var(--ref-profile)}
+.sprite[data-sprite="notice"]{background:var(--ref-notice)}
+.sprite[data-sprite="paper-texture"]{background:var(--ref-paper-texture)}
+.sprite[data-sprite="target"]{background:var(--ref-target)}
+.sprite[data-sprite="reload"]{background:var(--ref-reload)}

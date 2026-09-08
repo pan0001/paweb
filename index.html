@@ -10,6 +10,9 @@
 <script src="i18n/skills.jp.js"></script>
 <script src="i18n/characters.en.js"></script>
 <script src="i18n/characters.jp.js"></script>
+<script src="assets/media/catalog.js"></script>
+<script src="scripts/gallery.js"></script>
+<script src="scripts/ui-motion.js"></script>
 <script>
   (() => {
     try{
@@ -28,1738 +31,28 @@
 <link rel="stylesheet" href="https://font.kivo.wiki/Blueaka/Blueaka.css">
 <link rel="stylesheet" href="https://font.kivo.wiki/Blueaka_Bold/Blueaka_Bold.css">
 
-<style>
-  :root{
-    --bg:#f5f7ff;
-    --card:#ffffff;
-    --text:#111827;
-    --muted:#6b7280;
-    --line:rgba(148,163,184,.32);
-
-    --primary:#4f7cff;
-    --primary-dark:#3152c9;
-    --secondary:#8b5cf6;
-    --cyan:#22d3ee;
-    --pink:#fb7185;
-
-    --shadow-sm:0 8px 24px rgba(15,23,42,.06);
-    --shadow-md:0 18px 48px rgba(15,23,42,.12);
-    --shadow-lg:0 28px 80px rgba(15,23,42,.24);
-    --ease-out:cubic-bezier(.22,1,.36,1);
-    --motion-fast:180ms;
-    --motion-enter:520ms;
-    --glass-highlight:inset 0 1px 0 rgba(255,255,255,.72);
-  }
-
-  *{
-    box-sizing:border-box;
-  }
-
-  html{
-    scroll-behavior:smooth;
-  }
-
-  body{
-    margin:0;
-    min-height:100vh;
-    font-family:'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color:var(--text);
-    background:
-      radial-gradient(circle at 8% 8%, rgba(79,124,255,.20), transparent 34%),
-      radial-gradient(circle at 88% 18%, rgba(139,92,246,.16), transparent 32%),
-      radial-gradient(circle at 50% 100%, rgba(34,211,238,.12), transparent 42%),
-      var(--bg);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-
-  html[lang="ja"] body{
-    font-family:'Noto Sans JP', 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-
-  ::selection{
-    color:#1e3a8a;
-    background:rgba(79,124,255,.22);
-  }
-
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background-image:
-      linear-gradient(rgba(255,255,255,.34) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.34) 1px, transparent 1px);
-    background-size:48px 48px;
-    -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 70%);
-    mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 70%);
-    z-index:-1;
-  }
-
-  a{
-    color:inherit;
-  }
-
-  :focus-visible{
-    outline:3px solid rgba(79,124,255,.48);
-    outline-offset:3px;
-  }
-
-  section[id],
-  footer[id]{
-    scroll-margin-top:88px;
-  }
-
-  button,
-  input,
-  select{
-    font:inherit;
-  }
-
-  .header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    padding:16px 28px;
-    -webkit-backdrop-filter:blur(18px);
-    backdrop-filter:blur(18px);
-    background:rgba(245,247,255,.72);
-    border-bottom:1px solid rgba(148,163,184,.18);
-    transition:background .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-
-  .header.is-scrolled{
-    background:rgba(245,247,255,.9);
-    border-color:rgba(148,163,184,.26);
-    box-shadow:0 12px 34px rgba(15,23,42,.08);
-  }
-
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    min-width:0;
-  }
-
-  .brand-logo{
-    width:42px;
-    height:42px;
-    border-radius:14px;
-    display:grid;
-    place-items:center;
-    color:white;
-    font-weight:900;
-    letter-spacing:.5px;
-    background:linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow:0 14px 34px rgba(79,124,255,.32);
-    flex-shrink:0;
-    transition:transform .35s var(--ease-out), box-shadow .35s ease;
-  }
-
-  .brand:hover .brand-logo{
-    transform:rotate(-6deg) scale(1.06);
-    box-shadow:0 18px 42px rgba(79,124,255,.4);
-  }
-
-  .site-title{
-    margin:0;
-    font-size:18px;
-    font-weight:900;
-    letter-spacing:.2px;
-    white-space:nowrap;
-  }
-
-  .site-subtitle{
-    margin-top:2px;
-    font-size:12px;
-    color:var(--muted);
-    white-space:nowrap;
-  }
-
-  .nav{
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-
-  .nav a{
-    text-decoration:none;
-    color:#475569;
-    font-size:14px;
-    font-weight:500;
-    padding:9px 12px;
-    border-radius:999px;
-    transition:.18s ease;
-  }
-
-  .nav a:hover{
-    color:var(--primary-dark);
-    background:rgba(79,124,255,.10);
-  }
-
-  .nav a[aria-current="location"]{
-    color:var(--primary-dark);
-    background:rgba(79,124,255,.12);
-  }
-
-  .utility-controls{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    flex-shrink:0;
-  }
-
-  .language-switch{
-    display:flex;
-    align-items:center;
-    gap:3px;
-    padding:3px;
-    border-radius:999px;
-    background:rgba(255,255,255,.68);
-    border:1px solid rgba(148,163,184,.24);
-    box-shadow:var(--glass-highlight);
-  }
-
-  .lang-btn,
-  .theme-toggle{
-    border:0;
-    cursor:pointer;
-    color:#64748b;
-    background:transparent;
-    font-weight:800;
-    transition:color .2s ease, background .2s ease, transform .2s var(--ease-out);
-  }
-
-  .lang-btn{
-    min-width:34px;
-    height:32px;
-    padding:0 8px;
-    border-radius:999px;
-    font-size:11px;
-    letter-spacing:.2px;
-  }
-
-  .lang-btn:is(:hover,:focus-visible){
-    color:var(--primary-dark);
-    background:rgba(79,124,255,.09);
-  }
-
-  .lang-btn[aria-pressed="true"]{
-    color:white;
-    background:linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow:0 6px 18px rgba(79,124,255,.24);
-  }
-
-  .theme-toggle{
-    width:40px;
-    height:40px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    background:rgba(255,255,255,.68);
-    border:1px solid rgba(148,163,184,.24);
-    box-shadow:var(--glass-highlight);
-    font-size:18px;
-  }
-
-  .theme-toggle:is(:hover,:focus-visible){
-    color:var(--primary-dark);
-    transform:translateY(-2px) rotate(8deg);
-    background:white;
-  }
-
-  .sr-only{
-    position:absolute !important;
-    width:1px !important;
-    height:1px !important;
-    padding:0 !important;
-    margin:-1px !important;
-    overflow:hidden !important;
-    clip:rect(0,0,0,0) !important;
-    white-space:nowrap !important;
-    border:0 !important;
-  }
-
-  .container{
-    width:min(1180px, calc(100% - 32px));
-    margin:0 auto;
-    padding:26px 0 72px;
-  }
-
-  .hero{
-    --pointer-x:30%;
-    --pointer-y:25%;
-    position:relative;
-    overflow:hidden;
-    display:grid;
-    grid-template-columns:minmax(0, 1.2fr) minmax(280px, .8fr);
-    gap:22px;
-    align-items:stretch;
-    padding:28px;
-    border:1px solid rgba(148,163,184,.24);
-    border-radius:28px;
-    background:
-      linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.62)),
-      radial-gradient(circle at 20% 20%, rgba(79,124,255,.22), transparent 36%),
-      radial-gradient(circle at 80% 70%, rgba(139,92,246,.18), transparent 36%);
-    box-shadow:var(--shadow-md);
-  }
-
-  .hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    background:radial-gradient(520px circle at var(--pointer-x) var(--pointer-y), rgba(255,255,255,.72), transparent 58%);
-    opacity:.72;
-    transition:opacity .3s ease;
-  }
-
-  .hero::after{
-    content:"";
-    position:absolute;
-    right:-90px;
-    top:-90px;
-    width:260px;
-    height:260px;
-    background:linear-gradient(135deg, rgba(79,124,255,.22), rgba(139,92,246,.18));
-    border-radius:50%;
-    filter:blur(1px);
-    animation:orb-float 8s ease-in-out infinite;
-  }
-
-  .hero-content,
-  .hero-panel{
-    position:relative;
-    z-index:1;
-  }
-
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    border-radius:999px;
-    color:#3152c9;
-    background:rgba(79,124,255,.12);
-    font-size:13px;
-    font-weight:700;
-  }
-
-  .eyebrow-dot{
-    width:8px;
-    height:8px;
-    border-radius:999px;
-    background:#22c55e;
-    box-shadow:0 0 0 6px rgba(34,197,94,.14);
-    animation:status-pulse 2.6s ease-in-out infinite;
-  }
-
-  .hero h1{
-    margin:18px 0 10px;
-    font-size:clamp(30px, 5vw, 54px);
-    line-height:1.05;
-    letter-spacing:-1.8px;
-  }
-
-  .hero p{
-    max-width:680px;
-    margin:0;
-    color:#475569;
-    font-size:15px;
-    line-height:1.8;
-  }
-
-  .hero-actions{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:22px;
-  }
-
-  .btn{
-    position:relative;
-    overflow:hidden;
-    border:0;
-    cursor:pointer;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    min-height:42px;
-    padding:10px 15px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:14px;
-    transition:transform .22s var(--ease-out), box-shadow .22s ease, background .22s ease;
-  }
-
-  .btn::after{
-    content:"";
-    position:absolute;
-    inset:-2px auto -2px -46%;
-    width:36%;
-    pointer-events:none;
-    transform:skewX(-20deg);
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
-    transition:left .55s var(--ease-out);
-  }
-
-  .btn:hover::after{
-    left:118%;
-  }
-
-  .btn-primary{
-    color:white;
-    background:linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow:0 14px 34px rgba(79,124,255,.28);
-  }
-
-  .btn-primary:hover,
-  .btn-ghost:hover{
-    transform:translateY(-2px);
-  }
-
-  .btn-ghost{
-    color:#334155;
-    background:rgba(255,255,255,.72);
-    border:1px solid rgba(148,163,184,.28);
-  }
-
-  .hero-panel{
-    display:grid;
-    gap:12px;
-  }
-
-  .stat-card{
-    position:relative;
-    overflow:hidden;
-    padding:18px;
-    border-radius:22px;
-    background:rgba(255,255,255,.74);
-    border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--glass-highlight), var(--shadow-sm);
-    transition:transform .3s var(--ease-out), box-shadow .3s ease, border-color .3s ease;
-  }
-
-  .stat-card::before{
-    content:"";
-    position:absolute;
-    inset:0 0 auto;
-    height:2px;
-    background:linear-gradient(90deg, transparent, var(--primary), var(--cyan), transparent);
-    opacity:.58;
-  }
-
-  .stat-card:hover{
-    transform:translateY(-3px);
-    border-color:rgba(79,124,255,.3);
-    box-shadow:var(--glass-highlight), 0 16px 34px rgba(15,23,42,.1);
-  }
-
-  .stat-label{
-    font-size:13px;
-    color:var(--muted);
-  }
-
-  .stat-value{
-    margin-top:6px;
-    font-size:28px;
-    font-weight:900;
-    letter-spacing:-1px;
-  }
-
-  .stat-note{
-    margin-top:5px;
-    font-size:12px;
-    color:#64748b;
-  }
-
-  .mini-stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-  }
-
-  .section{
-    margin-top:30px;
-  }
-
-  .section-head{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:16px;
-    margin-bottom:14px;
-  }
-
-  .section-title{
-    margin:0;
-    font-size:21px;
-    font-weight:900;
-    letter-spacing:-.4px;
-  }
-
-  .section-desc{
-    margin:6px 0 0;
-    color:var(--muted);
-    font-size:13px;
-  }
-
-  .section-right{
-    color:var(--muted);
-    font-size:13px;
-  }
-
-  .announcements{
-    display:grid;
-    grid-auto-flow:column;
-    grid-auto-columns:minmax(290px, 380px);
-    gap:16px;
-    overflow-x:auto;
-    padding:4px 4px 14px;
-    scroll-snap-type:x proximity;
-  }
-
-  .announcements::-webkit-scrollbar{
-    height:8px;
-  }
-
-  .announcements::-webkit-scrollbar-thumb{
-    background:rgba(148,163,184,.45);
-    border-radius:999px;
-  }
-
-  .announce-card{
-    scroll-snap-align:start;
-    overflow:hidden;
-    border-radius:24px;
-    background:white;
-    border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--glass-highlight), var(--shadow-sm);
-    cursor:pointer;
-    transition:transform .3s var(--ease-out), box-shadow .3s ease, border-color .3s ease;
-  }
-
-  .announce-action{
-    width:100%;
-    display:block;
-    padding:0;
-    border:0;
-    color:inherit;
-    background:transparent;
-    cursor:pointer;
-    text-align:left;
-  }
-
-  .announce-card:not(.is-static):is(:hover,:focus-within){
-    transform:translateY(-5px);
-    box-shadow:var(--glass-highlight), var(--shadow-md);
-    border-color:rgba(79,124,255,.3);
-  }
-
-  .announce-card.is-static{
-    cursor:default;
-  }
-
-  .announce-card.is-static:hover{
-    transform:none;
-    box-shadow:var(--glass-highlight), var(--shadow-sm);
-  }
-
-  .announce-img{
-    position:relative;
-    height:170px;
-    overflow:hidden;
-    background:linear-gradient(135deg, rgba(79,124,255,.95), rgba(139,92,246,.88));
-  }
-
-  .announce-img::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    background:linear-gradient(to top, rgba(15,23,42,.24), transparent 62%);
-  }
-
-  .announce-img img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    opacity:0;
-    mix-blend-mode:normal;
-    transform:scale(1.025);
-    transition:opacity .3s ease, transform .55s var(--ease-out), filter .4s ease;
-  }
-
-  .announce-img img.is-loaded{
-    opacity:1;
-    transform:scale(1);
-  }
-
-  .announce-card:not(.is-static):is(:hover,:focus-within) .announce-img img{
-    transform:scale(1.06);
-    filter:saturate(1.12);
-  }
-
-  .announce-badge{
-    position:absolute;
-    left:14px;
-    top:14px;
-    padding:7px 10px;
-    border-radius:999px;
-    color:white;
-    background:rgba(15,23,42,.42);
-    -webkit-backdrop-filter:blur(10px);
-    backdrop-filter:blur(10px);
-    font-size:12px;
-    font-weight:700;
-    z-index:1;
-  }
-
-  .announce-body{
-    padding:16px;
-  }
-
-  .announce-title{
-    margin:0;
-    font-size:16px;
-    font-weight:900;
-    letter-spacing:-.2px;
-  }
-
-  .announce-meta{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-top:10px;
-    color:var(--muted);
-    font-size:13px;
-  }
-
-  .arrow{
-    width:28px;
-    height:28px;
-    border-radius:999px;
-    display:grid;
-    place-items:center;
-    color:#3152c9;
-    background:rgba(79,124,255,.12);
-    flex-shrink:0;
-  }
-
-  .trailer-layout{
-    display:grid;
-    grid-template-columns:minmax(0, 1.55fr) minmax(280px, .75fr);
-    gap:16px;
-    align-items:start;
-  }
-
-  .trailer-feature,
-  .trailer-card{
-    border:1px solid rgba(148,163,184,.22);
-    background:rgba(255,255,255,.84);
-    box-shadow:var(--glass-highlight), var(--shadow-sm);
-  }
-
-  .trailer-feature{
-    overflow:hidden;
-    border-radius:26px;
-  }
-
-  .video-frame{
-    position:relative;
-    aspect-ratio:16 / 9;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 30% 20%, rgba(79,124,255,.35), transparent 42%),
-      linear-gradient(135deg, #111827, #1e293b);
-  }
-
-  .video-frame iframe{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    border:0;
-    display:block;
-  }
-
-  .trailer-feature-body{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    padding:16px 18px;
-  }
-
-  .trailer-feature-title{
-    margin:0;
-    font-size:17px;
-    font-weight:900;
-  }
-
-  .trailer-channel{
-    margin-top:5px;
-    color:var(--muted);
-    font-size:12px;
-  }
-
-  .youtube-link{
-    flex-shrink:0;
-    color:#dc2626;
-    background:rgba(239,68,68,.09);
-  }
-
-  .youtube-link:is(:hover,:focus-visible){
-    background:rgba(239,68,68,.15);
-  }
-
-  .trailer-list{
-    display:grid;
-    gap:10px;
-  }
-
-  .trailer-card{
-    width:100%;
-    display:grid;
-    grid-template-columns:116px minmax(0,1fr);
-    gap:12px;
-    align-items:center;
-    padding:9px;
-    border-radius:18px;
-    color:var(--text);
-    cursor:pointer;
-    text-align:left;
-    transition:transform .25s var(--ease-out), border-color .25s ease, box-shadow .25s ease;
-  }
-
-  .trailer-card:is(:hover,:focus-visible){
-    transform:translateX(-4px);
-    border-color:rgba(79,124,255,.38);
-    box-shadow:var(--glass-highlight), var(--shadow-md);
-  }
-
-  .trailer-card[aria-pressed="true"]{
-    border-color:rgba(79,124,255,.55);
-    background:linear-gradient(135deg, rgba(79,124,255,.13), rgba(139,92,246,.08)), rgba(255,255,255,.9);
-  }
-
-  .trailer-thumb{
-    position:relative;
-    overflow:hidden;
-    aspect-ratio:16 / 9;
-    border-radius:12px;
-    background:linear-gradient(135deg, #dbeafe, #ede9fe);
-  }
-
-  .trailer-thumb img{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-    transition:transform .35s var(--ease-out);
-  }
-
-  .trailer-card:is(:hover,:focus-visible) .trailer-thumb img{
-    transform:scale(1.05);
-  }
-
-  .trailer-index{
-    display:block;
-    margin-bottom:4px;
-    color:var(--primary-dark);
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:.8px;
-    text-transform:uppercase;
-  }
-
-  .trailer-card-title{
-    display:-webkit-box;
-    overflow:hidden;
-    color:var(--text);
-    font-size:13px;
-    font-weight:800;
-    line-height:1.45;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:2;
-  }
-
-  .toolbar{
-    display:grid;
-    grid-template-columns:1fr 1fr minmax(220px, 1.2fr);
-    gap:12px;
-    padding:14px;
-    border-radius:24px;
-    background:rgba(255,255,255,.70);
-    border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--glass-highlight), var(--shadow-sm);
-    -webkit-backdrop-filter:blur(14px);
-    backdrop-filter:blur(14px);
-  }
-
-  .field{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-  }
-
-  .field label{
-    color:#64748b;
-    font-size:12px;
-    font-weight:700;
-  }
-
-  .control{
-    width:100%;
-    min-height:42px;
-    border:1px solid rgba(148,163,184,.26);
-    border-radius:14px;
-    background:white;
-    color:#111827;
-    outline:0;
-    padding:0 12px;
-    transition:.16s ease;
-  }
-
-  .control:focus{
-    border-color:rgba(79,124,255,.78);
-    box-shadow:0 0 0 4px rgba(79,124,255,.12);
-  }
-
-  .search-wrap{
-    position:relative;
-  }
-
-  .search-wrap input{
-    padding-left:40px;
-  }
-
-  .search-icon{
-    position:absolute;
-    left:13px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#94a3b8;
-    pointer-events:none;
-  }
-
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-    gap:16px;
-    margin-top:16px;
-  }
-
-  .char-card{
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    gap:14px;
-    align-items:center;
-    min-height:132px;
-    padding:14px;
-    border-radius:24px;
-    background:rgba(255,255,255,.84);
-    border:1px solid rgba(148,163,184,.22);
-    box-shadow:var(--glass-highlight), var(--shadow-sm);
-    cursor:pointer;
-    isolation:isolate;
-    transition:transform .3s var(--ease-out), box-shadow .3s ease, border-color .3s ease;
-  }
-
-  .char-card::before{
-    content:"";
-    position:absolute;
-    inset:auto -30px -48px auto;
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    background:linear-gradient(135deg, rgba(79,124,255,.16), rgba(139,92,246,.12));
-    transition:transform .45s var(--ease-out), opacity .3s ease;
-  }
-
-  .char-card:is(:hover,:focus-visible){
-    transform:translateY(-6px);
-    box-shadow:var(--glass-highlight), var(--shadow-md);
-    border-color:rgba(79,124,255,.28);
-  }
-
-  .char-card:is(:hover,:focus-visible)::before{
-    transform:scale(1.18);
-  }
-
-  .avatar{
-    position:relative;
-    z-index:1;
-    width:86px;
-    height:86px;
-    border-radius:20px;
-    overflow:hidden;
-    flex-shrink:0;
-    background:linear-gradient(135deg, #dbeafe, #ede9fe);
-    box-shadow:0 12px 30px rgba(15,23,42,.12);
-  }
-
-  .avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center 20%;
-    display:block;
-    opacity:0;
-    transform:scale(1.025);
-    transition:opacity .3s ease, transform .55s var(--ease-out), filter .35s ease;
-  }
-
-  .avatar img.is-loaded{
-    opacity:1;
-    transform:scale(1);
-  }
-
-  .char-card:is(:hover,:focus-visible) .avatar img{
-    transform:scale(1.1);
-    filter:saturate(1.06) contrast(1.02);
-  }
-
-  .char-info{
-    position:relative;
-    z-index:1;
-    min-width:0;
-  }
-
-  .char-info h4{
-    margin:0 0 8px;
-    font-size:16px;
-    font-weight:900;
-    letter-spacing:-.2px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-
-  .card-stars{
-    margin-bottom:8px;
-    color:#f59e0b;
-    font-size:13px;
-    letter-spacing:1px;
-  }
-
-  .tag-row{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-  }
-
-  .tag{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    padding:6px 9px;
-    border-radius:999px;
-    background:#f1f5f9;
-    color:#475569;
-    font-size:12px;
-    font-weight:700;
-  }
-
-  .tag.role{
-    background:rgba(79,124,255,.10);
-    color:#3152c9;
-  }
-
-  .tag.weapon{
-    background:rgba(139,92,246,.10);
-    color:#6d28d9;
-  }
-
-  .empty{
-    grid-column:1/-1;
-    padding:26px;
-    border-radius:24px;
-    text-align:center;
-    color:var(--muted);
-    background:rgba(255,255,255,.72);
-    border:1px dashed rgba(148,163,184,.46);
-  }
-
-  .modal{
-    position:fixed;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:22px;
-    background:rgba(15,23,42,.52);
-    -webkit-backdrop-filter:blur(12px);
-    backdrop-filter:blur(12px);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:opacity .22s var(--ease-out), visibility 0s linear .22s;
-    z-index:100;
-  }
-
-  .modal.open{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transition-delay:0s;
-  }
-
-  .modal-card{
-    width:min(880px, 100%);
-    max-height:min(780px, 90vh);
-    overflow:auto;
-    border-radius:28px;
-    background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(248,250,252,.96));
-    box-shadow:var(--glass-highlight), var(--shadow-lg);
-    border:1px solid rgba(255,255,255,.72);
-    opacity:0;
-    transform:translateY(14px) scale(.985);
-    transition:opacity .24s var(--ease-out), transform .24s var(--ease-out);
-  }
-
-  .modal.open .modal-card{
-    opacity:1;
-    transform:none;
-  }
-
-  .modal-top{
-    position:relative;
-    padding:20px;
-    background:
-      radial-gradient(circle at 18% 12%, rgba(79,124,255,.20), transparent 32%),
-      radial-gradient(circle at 82% 24%, rgba(139,92,246,.18), transparent 34%);
-    border-bottom:1px solid rgba(148,163,184,.20);
-  }
-
-  .modal-close{
-    position:absolute;
-    right:16px;
-    top:16px;
-    width:38px;
-    height:38px;
-    border:0;
-    border-radius:999px;
-    cursor:pointer;
-    color:#64748b;
-    background:rgba(255,255,255,.72);
-    transition:.16s ease;
-  }
-
-  .modal-close:hover{
-    color:#111827;
-    background:white;
-    transform:rotate(90deg);
-  }
-
-  .modal-head{
-    display:flex;
-    gap:16px;
-    align-items:center;
-    padding-right:48px;
-  }
-
-  .modal-head img{
-    width:116px;
-    height:116px;
-    border-radius:26px;
-    object-fit:cover;
-    object-position:center 20%;
-    box-shadow:0 18px 42px rgba(15,23,42,.16);
-    background:#e0e7ff;
-    opacity:0;
-    transform:scale(1.025);
-    transition:opacity .3s ease, transform .5s var(--ease-out);
-  }
-
-  .modal-head img.is-loaded{
-    opacity:1;
-    transform:scale(1);
-  }
-
-  .modal[data-mode="announcement"] .modal-head img{
-    width:168px;
-    height:104px;
-    border-radius:20px;
-  }
-
-  .modal[data-mode="announcement"] .modal-stars{
-    color:var(--muted);
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:0;
-  }
-
-  .announcement-copy{
-    margin:0;
-  }
-
-  .announcement-copy + .announcement-copy{
-    margin-top:12px;
-  }
-
-  .modal-name{
-    margin:0;
-    font-size:26px;
-    font-weight:900;
-    letter-spacing:-.7px;
-  }
-
-  .modal-stars{
-    margin-top:8px;
-    color:#f59e0b;
-    font-size:17px;
-    letter-spacing:2px;
-  }
-
-  .modal-tags{
-    margin-top:12px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-  }
-
-  .modal-body{
-    padding:20px;
-    color:#475569;
-    line-height:1.85;
-    font-size:15px;
-  }
-
-  .detail-layout{
-    display:grid;
-    gap:18px;
-  }
-
-  .detail-section{
-    padding:16px;
-    border-radius:20px;
-    background:rgba(248,250,252,.82);
-    border:1px solid rgba(148,163,184,.22);
-  }
-
-  .detail-section h3{
-    margin:0 0 12px;
-    font-size:16px;
-    font-weight:900;
-    color:#111827;
-  }
-
-  .info-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
-    gap:10px;
-  }
-
-  .info-item{
-    padding:12px;
-    border-radius:14px;
-    background:white;
-    border:1px solid rgba(148,163,184,.18);
-  }
-
-  .info-item span{
-    display:block;
-    margin-bottom:5px;
-    color:#64748b;
-    font-size:12px;
-    font-weight:700;
-  }
-
-  .info-item strong{
-    color:#111827;
-    font-size:14px;
-  }
-
-  .stats-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
-    gap:10px;
-  }
-
-  .stat-box{
-    padding:14px;
-    border-radius:16px;
-    background:
-      linear-gradient(135deg, rgba(79,124,255,.10), rgba(139,92,246,.08)),
-      white;
-    border:1px solid rgba(79,124,255,.14);
-  }
-
-  .stat-box span{
-    display:block;
-    color:#64748b;
-    font-size:12px;
-    font-weight:700;
-  }
-
-  .stat-box strong{
-    display:block;
-    margin-top:4px;
-    color:#3152c9;
-    font-size:20px;
-    font-weight:900;
-  }
-
-  .skill-list{
-    display:grid;
-    gap:10px;
-  }
-
-  .skill-card{
-    padding:14px;
-    border-radius:16px;
-    background:white;
-    border:1px solid rgba(148,163,184,.20);
-  }
-
-  .skill-head{
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    align-items:center;
-  }
-
-  .skill-head strong{
-    color:#111827;
-    font-size:15px;
-  }
-
-  .skill-head span{
-    padding:5px 8px;
-    border-radius:999px;
-    color:#3152c9;
-    background:rgba(79,124,255,.10);
-    font-size:12px;
-    font-weight:700;
-    white-space:nowrap;
-  }
-
-  .skill-cooldown{
-    margin-top:6px;
-    color:#8b5cf6;
-    font-size:13px;
-    font-weight:700;
-  }
-
-  .skill-card p{
-    margin:8px 0 0;
-    color:#475569;
-    line-height:1.7;
-  }
-
-  .note-list{
-    margin:0;
-    padding-left:18px;
-    color:#475569;
-  }
-
-  .source-section{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-  }
-
-  .source-section h3{
-    margin:0;
-  }
-
-  .source-link{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:9px 12px;
-    border-radius:999px;
-    color:#3152c9;
-    background:rgba(79,124,255,.1);
-    font-size:13px;
-    font-weight:800;
-    text-decoration:none;
-    transition:transform .22s var(--ease-out), background .22s ease;
-  }
-
-  .source-link:is(:hover,:focus-visible){
-    transform:translateY(-2px);
-    background:rgba(79,124,255,.16);
-  }
-
-  footer{
-    margin-top:38px;
-    padding:20px 0;
-    color:#64748b;
-    text-align:center;
-    font-size:13px;
-  }
-
-  .footer-credit{
-    margin-top:6px;
-    color:#94a3b8;
-    font-size:12px;
-  }
-
-  .footer-credit a{
-    color:#64748b;
-    font-weight:700;
-    text-underline-offset:3px;
-  }
-
-  .motion-ready .hero-content{
-    animation:hero-rise .7s var(--ease-out) backwards;
-  }
-
-  .motion-ready .hero-panel .stat-card{
-    animation:hero-rise .62s var(--ease-out) backwards;
-  }
-
-  .motion-ready .hero-panel > .stat-card{
-    animation-delay:.12s;
-  }
-
-  .motion-ready .mini-stats .stat-card:nth-child(1){
-    animation-delay:.2s;
-  }
-
-  .motion-ready .mini-stats .stat-card:nth-child(2){
-    animation-delay:.28s;
-  }
-
-  .motion-ready .reveal{
-    opacity:0;
-    transform:translateY(20px);
-    transition:opacity .68s ease, transform .68s var(--ease-out);
-  }
-
-  .motion-ready .reveal.is-visible{
-    opacity:1;
-    transform:none;
-  }
-
-  .motion-ready .card-enter{
-    animation:card-in .52s var(--ease-out) backwards;
-    animation-delay:var(--card-delay, 0ms);
-  }
-
-  @keyframes hero-rise{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:none;}
-  }
-
-  @keyframes card-in{
-    from{opacity:0; transform:translateY(16px) scale(.985);}
-    to{opacity:1; transform:none;}
-  }
-
-  @keyframes orb-float{
-    0%, 100%{transform:translate3d(0,0,0) scale(1);}
-    50%{transform:translate3d(-22px,18px,0) scale(1.08);}
-  }
-
-  @keyframes status-pulse{
-    0%, 100%{box-shadow:0 0 0 6px rgba(34,197,94,.14);}
-    50%{box-shadow:0 0 0 10px rgba(34,197,94,.04);}
-  }
-
-  html[data-theme="dark"]{
-    color-scheme:dark;
-    --bg:#080c18;
-    --card:#111827;
-    --text:#eef2ff;
-    --muted:#94a3b8;
-    --line:rgba(148,163,184,.18);
-    --primary:#7698ff;
-    --primary-dark:#a9bdff;
-    --secondary:#a78bfa;
-    --shadow-sm:0 10px 28px rgba(0,0,0,.24);
-    --shadow-md:0 20px 54px rgba(0,0,0,.34);
-    --shadow-lg:0 30px 90px rgba(0,0,0,.55);
-    --glass-highlight:inset 0 1px 0 rgba(255,255,255,.08);
-  }
-
-  html[data-theme="dark"] body{
-    background:
-      radial-gradient(circle at 8% 8%, rgba(79,124,255,.18), transparent 34%),
-      radial-gradient(circle at 88% 18%, rgba(139,92,246,.14), transparent 32%),
-      radial-gradient(circle at 50% 100%, rgba(34,211,238,.08), transparent 42%),
-      var(--bg);
-  }
-
-  html[data-theme="dark"] body::before{
-    background-image:
-      linear-gradient(rgba(148,163,184,.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148,163,184,.055) 1px, transparent 1px);
-  }
-
-  html[data-theme="dark"] .header{
-    background:rgba(8,12,24,.74);
-    border-color:rgba(148,163,184,.12);
-  }
-
-  html[data-theme="dark"] .header.is-scrolled{
-    background:rgba(8,12,24,.92);
-    border-color:rgba(148,163,184,.2);
-  }
-
-  html[data-theme="dark"] .nav a,
-  html[data-theme="dark"] .lang-btn,
-  html[data-theme="dark"] .theme-toggle{
-    color:#a8b4ca;
-  }
-
-  html[data-theme="dark"] .nav a:is(:hover,[aria-current="location"]),
-  html[data-theme="dark"] .lang-btn:is(:hover,:focus-visible),
-  html[data-theme="dark"] .theme-toggle:is(:hover,:focus-visible){
-    color:#dbe7ff;
-    background:rgba(118,152,255,.14);
-  }
-
-  html[data-theme="dark"] .language-switch,
-  html[data-theme="dark"] .theme-toggle{
-    background:rgba(15,23,42,.78);
-    border-color:rgba(148,163,184,.18);
-  }
-
-  html[data-theme="dark"] .lang-btn[aria-pressed="true"]{
-    color:white;
-    background:linear-gradient(135deg, var(--primary), var(--secondary));
-  }
-
-  html[data-theme="dark"] .hero{
-    background:
-      linear-gradient(135deg, rgba(17,24,39,.94), rgba(15,23,42,.76)),
-      radial-gradient(circle at 20% 20%, rgba(79,124,255,.2), transparent 36%),
-      radial-gradient(circle at 80% 70%, rgba(139,92,246,.16), transparent 36%);
-    border-color:rgba(148,163,184,.16);
-  }
-
-  html[data-theme="dark"] .hero::before{
-    background:radial-gradient(520px circle at var(--pointer-x) var(--pointer-y), rgba(118,152,255,.13), transparent 60%);
-  }
-
-  html[data-theme="dark"] .hero p,
-  html[data-theme="dark"] .char-info,
-  html[data-theme="dark"] .modal-body,
-  html[data-theme="dark"] .skill-card p,
-  html[data-theme="dark"] .note-list{
-    color:#bdc8dc;
-  }
-
-  html[data-theme="dark"] .eyebrow{
-    color:#bed0ff;
-    background:rgba(118,152,255,.14);
-  }
-
-  html[data-theme="dark"] .btn-ghost,
-  html[data-theme="dark"] .stat-card,
-  html[data-theme="dark"] .toolbar,
-  html[data-theme="dark"] .announce-card,
-  html[data-theme="dark"] .char-card,
-  html[data-theme="dark"] .trailer-feature,
-  html[data-theme="dark"] .trailer-card{
-    color:var(--text);
-    background:rgba(15,23,42,.82);
-    border-color:rgba(148,163,184,.16);
-  }
-
-  html[data-theme="dark"] .trailer-card[aria-pressed="true"]{
-    background:linear-gradient(135deg, rgba(118,152,255,.18), rgba(167,139,250,.12)), rgba(15,23,42,.9);
-  }
-
-  html[data-theme="dark"] .control,
-  html[data-theme="dark"] .info-item,
-  html[data-theme="dark"] .skill-card{
-    color:var(--text);
-    background:#101827;
-    border-color:rgba(148,163,184,.15);
-  }
-
-  html[data-theme="dark"] .control::placeholder{
-    color:#64748b;
-  }
-
-  html[data-theme="dark"] .tag{
-    color:#c2cce0;
-    background:rgba(148,163,184,.12);
-  }
-
-  html[data-theme="dark"] .tag.role{
-    color:#bdceff;
-    background:rgba(118,152,255,.14);
-  }
-
-  html[data-theme="dark"] .tag.weapon{
-    color:#d6c5ff;
-    background:rgba(167,139,250,.14);
-  }
-
-  html[data-theme="dark"] .modal-card{
-    background:linear-gradient(135deg, rgba(15,23,42,.99), rgba(8,12,24,.98));
-    border-color:rgba(148,163,184,.14);
-  }
-
-  html[data-theme="dark"] .modal-top{
-    border-color:rgba(148,163,184,.14);
-  }
-
-  html[data-theme="dark"] .modal-close{
-    color:#bdc8dc;
-    background:rgba(30,41,59,.8);
-  }
-
-  html[data-theme="dark"] .modal-close:hover{
-    color:white;
-    background:#334155;
-  }
-
-  html[data-theme="dark"] .detail-section{
-    background:rgba(15,23,42,.72);
-    border-color:rgba(148,163,184,.15);
-  }
-
-  html[data-theme="dark"] .detail-section h3,
-  html[data-theme="dark"] .info-item strong,
-  html[data-theme="dark"] .skill-head strong,
-  html[data-theme="dark"] .trailer-card-title{
-    color:var(--text);
-  }
-
-  html[data-theme="dark"] .stat-box{
-    background:linear-gradient(135deg, rgba(79,124,255,.15), rgba(139,92,246,.1)), #101827;
-    border-color:rgba(118,152,255,.18);
-  }
-
-  html[data-theme="dark"] .empty{
-    background:rgba(15,23,42,.72);
-    border-color:rgba(148,163,184,.24);
-  }
-
-  html[data-theme="dark"] .footer-credit a{
-    color:#aebbd0;
-  }
-
-  @media (max-width:820px){
-    .header{
-      padding:14px 16px;
-      flex-wrap:wrap;
-    }
-
-    .site-subtitle{
-      display:none;
-    }
-
-    .nav{
-      order:3;
-      width:100%;
-      gap:4px;
-      justify-content:center;
-      overflow-x:auto;
-    }
-
-    .nav a{
-      padding:8px 9px;
-      font-size:13px;
-    }
-
-    .hero{
-      grid-template-columns:1fr;
-      padding:22px;
-    }
-
-    .toolbar{
-      grid-template-columns:1fr;
-    }
-
-    .mini-stats{
-      grid-template-columns:1fr 1fr;
-    }
-
-    .trailer-layout{
-      grid-template-columns:1fr;
-    }
-
-    .trailer-list{
-      grid-template-columns:1fr 1fr;
-    }
-  }
-
-  @media (max-width:560px){
-    .container{
-      width:min(100% - 22px, 1180px);
-      padding-top:16px;
-    }
-
-    .brand-logo{
-      width:38px;
-      height:38px;
-      border-radius:12px;
-    }
-
-    .site-title{
-      font-size:15px;
-    }
-
-    .nav a[href="#about"]{
-      display:none;
-    }
-
-    .utility-controls{
-      gap:6px;
-    }
-
-    .lang-btn{
-      min-width:31px;
-      padding:0 6px;
-    }
-
-    .theme-toggle{
-      width:38px;
-      height:38px;
-    }
-
-    .hero h1{
-      font-size:34px;
-    }
-
-    .announcements{
-      grid-auto-columns:86%;
-    }
-
-    .grid{
-      grid-template-columns:1fr;
-    }
-
-    .modal-head{
-      align-items:flex-start;
-    }
-
-    .modal-head img{
-      width:88px;
-      height:88px;
-      border-radius:22px;
-    }
-
-    .modal[data-mode="announcement"] .modal-head img{
-      width:112px;
-      height:76px;
-      border-radius:16px;
-    }
-
-    .modal-name{
-      font-size:21px;
-    }
-
-    .skill-head{
-      align-items:flex-start;
-      flex-direction:column;
-      gap:6px;
-    }
-
-    .source-section{
-      align-items:flex-start;
-      flex-direction:column;
-    }
-
-    .trailer-list{
-      grid-template-columns:1fr;
-    }
-
-    .trailer-card{
-      grid-template-columns:104px minmax(0,1fr);
-    }
-
-    .trailer-feature-body{
-      align-items:flex-start;
-      flex-direction:column;
-    }
-  }
-
-  @media (max-width:420px){
-    .brand > div:not(.brand-logo){
-      display:none;
-    }
-  }
-
-  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-    .header,
-    .toolbar{
-      background:rgba(245,247,255,.96);
-    }
-
-    .modal{
-      background:rgba(15,23,42,.72);
-    }
-
-    html[data-theme="dark"] .header,
-    html[data-theme="dark"] .toolbar{
-      background:rgba(8,12,24,.97);
-    }
-  }
-
-  @media (prefers-reduced-motion:reduce){
-    html{
-      scroll-behavior:auto;
-    }
-
-    .hero::after,
-    .eyebrow-dot,
-    .motion-ready .hero-content,
-    .motion-ready .hero-panel .stat-card,
-    .motion-ready .card-enter{
-      animation:none !important;
-    }
-
-    .motion-ready .reveal{
-      opacity:1;
-      transform:none;
-    }
-
-    .modal,
-    .modal-card,
-    .char-card,
-    .avatar img,
-    .announce-img img,
-    .btn,
-    .modal-close,
-    .source-link,
-    .trailer-card,
-    .trailer-thumb img,
-    .lang-btn,
-    .theme-toggle{
-      transition:none !important;
-    }
-
-    .char-card:is(:hover,:focus-visible),
-    .announce-card:not(.is-static):is(:hover,:focus-within),
-    .btn:hover,
-    .modal-close:hover,
-    .source-link:is(:hover,:focus-visible),
-    .trailer-card:is(:hover,:focus-visible),
-    .theme-toggle:is(:hover,:focus-visible){
-      transform:none;
-    }
-  }
-</style>
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles/details.css">
+<link rel="stylesheet" href="styles/gallery.css">
+<link rel="stylesheet" href="styles/game-ui.css">
+<link rel="stylesheet" href="styles/site-ui.css">
+<link rel="stylesheet" href="styles/button-art.css">
+<link rel="stylesheet" href="styles/atlas-frames.css">
+<link rel="stylesheet" href="styles/atlas-ui.css">
+<link rel="stylesheet" href="styles/site-backgrounds.css">
+<link rel="stylesheet" href="styles/lobby.css">
+<link rel="stylesheet" href="styles/site-motion.css">
 </head>
 
 <body>
+  <a class="skip-link" href="#characters" data-i18n="nav.skip">跳转到学生图鉴</a>
   <header class="header">
-    <div class="brand">
+    <a class="brand" href="#home" aria-label="Project Archive Wiki">
       <img class="brand-logo" src="assets/ui/project-archive-logo.png" alt="Project Archive Wiki">
       <div>
         <div class="site-subtitle" data-i18n="brand.subtitle">档案 · 学生 · 战斗记录</div>
       </div>
-    </div>
+    </a>
 
     <nav class="nav" id="mainNav" aria-label="主导航">
       <a href="#announcements" data-i18n="nav.announcements">公告</a>
@@ -1783,14 +76,17 @@
   </header>
 
   <main class="container">
-    <section class="hero">
+    <section class="hero" id="home">
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="hero-coordinate" aria-hidden="true">PROJECT ARCHIVE &nbsp; / &nbsp; HINA (DRESS)<span>MEMORY COLLECTION — 01</span></div>
       <div class="hero-content">
+        <div class="hero-wordmark" aria-hidden="true">PROJECT ARCHIVE<span>UNOFFICIAL FAN WIKI</span></div>
         <div class="eyebrow">
           <span class="eyebrow-dot"></span>
           <span data-i18n="hero.status">Wiki 数据库已上线</span>
         </div>
 
-        <h1 data-i18n-html="hero.title">Project Archive<br>资料库</h1>
+        <h1 data-i18n-html="hero.title">每一次相遇，<br><em>都值得记录。</em></h1>
 
         <p data-i18n="hero.description">
           查看最新公告、角色资料、学院分类与战斗定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。
@@ -1804,8 +100,6 @@
       </div>
 
       <div class="hero-panel">
-        <div class="hero-art" aria-hidden="true"></div>
-
         <div class="stat-card">
           <div class="stat-label" data-i18n="stats.announcements">当前版本公告</div>
           <div class="stat-value" id="announcementCount">0</div>
@@ -1826,11 +120,14 @@
           </div>
         </div>
       </div>
+      <a class="hero-scroll" href="#announcements"><span aria-hidden="true">↓</span><span data-i18n="hero.scroll">向下探索</span></a>
     </section>
 
     <section class="section" id="announcements">
+      <div class="section-watermark" aria-hidden="true">NEWS</div>
       <div class="section-head">
         <div>
+          <div class="section-kicker" aria-hidden="true">01 / LATEST UPDATES</div>
           <h2 class="section-title" data-i18n="announcements.title">最新公告</h2>
           <p class="section-desc" data-i18n="announcements.description">版本更新、角色加入和活动消息会显示在这里。</p>
         </div>
@@ -1841,8 +138,10 @@
     </section>
 
     <section class="section" id="trailers">
+      <div class="section-watermark" aria-hidden="true">REPLAY</div>
       <div class="section-head">
         <div>
+          <div class="section-kicker" aria-hidden="true">02 / PROJECT ARCHIVE ON AIR</div>
           <h2 class="section-title" data-i18n="trailers.title">最新宣传片</h2>
           <p class="section-desc" data-i18n="trailers.description">选择一支宣传片，在站内开始播放。</p>
         </div>
@@ -1876,58 +175,77 @@
       </div>
     </section>
 
-    <section class="section" id="filters" aria-label="角色筛选">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title" data-i18n="filters.title">角色筛选</h2>
-          <p class="section-desc" data-i18n="filters.description">按照学院、战斗定位或角色名快速查找。</p>
-        </div>
-        <div class="section-right" id="resultCount" role="status" aria-live="polite">显示 0 名角色</div>
-      </div>
+    <section class="section" id="characters">
+      <div class="character-workspace">
+        <img id="characterBackdrop" class="workspace-backdrop" alt="" aria-hidden="true">
+        <section id="filters" class="academy-band" aria-label="学院选择">
+          <div class="academy-heading">
+            <div>
+              <div class="section-kicker" aria-hidden="true">SCHALE NETWORK / 01</div>
+              <h2 data-i18n="academy.title">从一所学院，开始相遇。</h2>
+            </div>
+            <p data-i18n="academy.description">选择学院，查看已收录的学生。</p>
+          </div>
+          <div class="academy-navigation">
+            <button class="strip-arrow" id="academyPrevious" type="button" data-i18n-aria="academy.previous" aria-label="向前查看学院">‹</button>
+            <div id="academyCards" class="academy-cards" role="group" aria-label="学院选择"></div>
+            <button class="strip-arrow" id="academyNext" type="button" data-i18n-aria="academy.next" aria-label="向后查看学院">›</button>
+          </div>
+          <select id="academySelect" hidden aria-hidden="true" tabindex="-1"><option value="all">全部学院</option></select>
+        </section>
 
-      <div class="toolbar">
-        <div class="field">
-          <label for="academySelect" data-i18n="filters.academy">学院</label>
-          <select class="control" id="academySelect">
-            <option value="all">全部学院</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="roleSelect" data-i18n="filters.role">战斗定位</label>
-          <select class="control" id="roleSelect">
-            <option value="all">全部定位</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="searchInput" data-i18n="filters.search">搜索</label>
-          <div class="search-wrap">
-            <span class="search-icon">⌕</span>
-            <input class="control" id="searchInput" type="search" autocomplete="off" placeholder="输入角色名、学院、武器..." />
+        <div class="character-scene">
+          <aside class="character-profile"><div id="characterProfileSlot"></div></aside>
+          <div id="characterShowcase" class="character-showcase"></div>
+          <div id="characterModeSlot"></div>
+          <div id="sceneEmpty" class="scene-empty" role="status" hidden>
+            <span aria-hidden="true">◇</span>
+            <p data-i18n="academy.empty">暂时没有符合条件的学生，试试其他学院或清除筛选。</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="characters">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title" data-i18n="characters.title">角色列表</h2>
-          <p class="section-desc" data-i18n="characters.description">点击角色卡片可以查看完整角色数据。</p>
-        </div>
+        <section class="student-dock" aria-labelledby="selectedAcademyTitle">
+          <div class="dock-heading">
+            <div class="dock-title">
+              <span class="dock-kicker" aria-hidden="true">STUDENT ROSTER / 02</span>
+              <h3 id="selectedAcademyTitle">全部学院</h3>
+              <span id="resultCount" role="status" aria-live="polite">显示 0 名角色</span>
+            </div>
+            <div class="toolbar">
+              <div class="field">
+                <label for="roleSelect" data-i18n="filters.role">战斗定位</label>
+                <select class="control" id="roleSelect"><option value="all">全部定位</option></select>
+              </div>
+              <div class="field">
+                <label class="sr-only" for="searchInput" data-i18n="filters.search">搜索</label>
+                <div class="search-wrap">
+                  <span class="search-icon" aria-hidden="true">⌕</span>
+                  <input class="control" id="searchInput" type="search" autocomplete="off" placeholder="输入角色名、学院、武器...">
+                </div>
+              </div>
+              <button id="clearStudentFilters" class="clear-filters" type="button" data-i18n="academy.clear">清除筛选</button>
+            </div>
+          </div>
+          <div class="student-strip-wrap">
+            <button class="strip-arrow" id="studentPrevious" type="button" data-i18n-aria="academy.studentsPrevious" aria-label="向前查看学生">‹</button>
+            <div class="grid" id="charGrid" role="group" aria-label="学生选择"></div>
+            <button class="strip-arrow" id="studentNext" type="button" data-i18n-aria="academy.studentsNext" aria-label="向后查看学生">›</button>
+          </div>
+          <div class="dock-bottom"><span data-i18n="characters.selectHint">选择学生，切换展示</span><span data-i18n="characters.shortcuts">Q / E 切换学生 · ← / → 选择角色</span></div>
+        </section>
       </div>
-
-      <div class="grid" id="charGrid"></div>
     </section>
 
     <footer id="about">
+      <a class="footer-brand" href="#home" aria-label="Project Archive Wiki"><img src="assets/ui/project-archive-logo.png" alt="Project Archive Wiki" loading="lazy"></a>
+      <div class="footer-motto" data-i18n="footer.motto">一切相遇，都在这里存档。</div>
       © 2026 Project Archive Wiki · <span data-i18n="footer.fanMade">同人资料库界面</span>
       <div class="footer-credit">
         <span data-i18n="footer.imageSourcePrefix">角色图像资料整理自</span>
         <a href="https://kivo.wiki/" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceName">基沃托斯古书馆</a>
         · <span data-i18n="footer.rights">游戏素材版权归原权利方所有</span>
       </div>
+      <button id="ambientMotionToggle" class="ambient-motion-toggle" type="button" aria-pressed="true">暂停背景动效</button>
     </footer>
   </main>
 
@@ -1956,14 +274,28 @@ const translations = {
     "page.description":"Project Archive 角色图鉴、公告与战斗资料库。",
     "brand.subtitle":"档案 · 学生 · 战斗记录",
     "nav.aria":"主导航",
+    "nav.skip":"跳转到学生图鉴",
+    "academy.title":"从一所学院，开始相遇。",
+    "academy.description":"选择学院，查看已收录的学生。",
+    "academy.count":"{count} 名已收录",
+    "academy.open":"查看{name} · {count} 名学生",
+    "academy.none":"暂无收录",
+    "academy.empty":"暂时没有符合条件的学生，试试其他学院或清除筛选。",
+    "academy.clear":"清除条件",
+    "academy.previous":"向前查看学院",
+    "academy.next":"向后查看学院",
+    "academy.studentsPrevious":"向前查看学生",
+    "academy.studentsNext":"向后查看学生",
     "nav.announcements":"公告",
     "nav.trailers":"宣传片",
     "nav.characters":"角色",
     "nav.about":"关于",
-    "hero.status":"Wiki 数据库已上线",
-    "hero.title":"Project Archive<br>资料库",
-    "hero.description":"查看最新公告、角色资料、学院分类与战斗定位。这里可以作为 Project Archive 的角色图鉴、更新日志和玩法资料入口。",
-    "hero.viewCharacters":"查看角色",
+    "hero.status":"欢迎来到，老师。",
+    "hero.title":"每一次相遇，<br><em>都值得记录。</em>",
+    "hero.description":"从熟悉的面孔，到崭新的故事。探索 Project Archive 的学生档案、战斗资料与最新动态。",
+    "hero.viewCharacters":"打开学生图鉴",
+    "hero.scroll":"向下探索",
+    "footer.motto":"一切相遇，都在这里存档。",
     "hero.watchTrailers":"观看最新宣传片",
     "hero.latestAnnouncements":"最新公告",
     "stats.announcements":"当前版本公告",
@@ -1974,7 +306,7 @@ const translations = {
     "stats.academiesNote":"学院",
     "announcements.title":"最新公告",
     "announcements.description":"版本更新、角色加入和活动消息会显示在这里。",
-    "announcements.more":"横向滑动查看更多",
+    "announcements.more":"点击公告，阅读完整内容 ↗",
     "announcement.openAria":"查看公告“{title}”的详情",
     "announcement.view":"查看完整公告",
     "announcement.overview":"公告内容",
@@ -1988,7 +320,7 @@ const translations = {
     "trailers.openYoutube":"在 YouTube 观看",
     "trailers.index":"宣传片 {number}",
     "filters.aria":"角色筛选",
-    "filters.title":"角色筛选",
+    "filters.title":"学生档案",
     "filters.description":"按照学院、战斗定位或角色名快速查找。",
     "filters.resultCount":"显示 {count} 名角色",
     "filters.academy":"学院",
@@ -1997,8 +329,11 @@ const translations = {
     "filters.allRoles":"全部定位",
     "filters.search":"搜索",
     "filters.placeholder":"输入角色名、学院、武器...",
-    "characters.title":"角色列表",
-    "characters.description":"点击角色卡片可以查看完整角色数据。",
+    "characters.title":"在这里，与你相遇",
+    "characters.description":"立绘、3D 模型与记忆大厅。从这里走近她们的故事。",
+    "characters.selectHint":"选择学生，切换展示",
+    "characters.shortcuts":"Q / E 切换学生 · ← / → 选择角色",
+    "characters.selectAria":"展示 {name}",
     "characters.empty":"没有找到匹配的角色。可以换一个学院、战斗定位或搜索关键词试试。",
     "characters.openAria":"查看 {name} 的完整资料",
     "common.unknownWeapon":"未知武器",
@@ -2045,14 +380,28 @@ const translations = {
     "page.description":"Project Archive character guide, announcements, and battle database.",
     "brand.subtitle":"Archive · Students · Battle Records",
     "nav.aria":"Main navigation",
+    "nav.skip":"Skip to student archive",
+    "academy.title":"One academy. So many stories.",
+    "academy.description":"Choose an academy to meet its archived students.",
+    "academy.count":"{count} archived",
+    "academy.open":"Show {name} · {count} students",
+    "academy.none":"No students yet",
+    "academy.empty":"No students match. Try another academy or clear the filters.",
+    "academy.clear":"Clear filters",
+    "academy.previous":"Previous academies",
+    "academy.next":"Next academies",
+    "academy.studentsPrevious":"Previous students",
+    "academy.studentsNext":"Next students",
     "nav.announcements":"Announcements",
     "nav.trailers":"Trailers",
     "nav.characters":"Characters",
     "nav.about":"About",
-    "hero.status":"Wiki Database Online",
-    "hero.title":"Project Archive<br>Database",
-    "hero.description":"Browse the latest announcements, character profiles, academy categories, and combat roles. Your gateway to the Project Archive roster, update log, and gameplay resources.",
-    "hero.viewCharacters":"View Characters",
+    "hero.status":"Welcome back, Sensei.",
+    "hero.title":"Every encounter.<br><em>A new archive.</em>",
+    "hero.description":"Familiar faces. Stories yet to unfold. Explore the student profiles, combat records, and latest news of Project Archive.",
+    "hero.viewCharacters":"Explore Students",
+    "hero.scroll":"Explore below",
+    "footer.motto":"Every encounter, archived here.",
     "hero.watchTrailers":"Watch Latest Trailers",
     "hero.latestAnnouncements":"Latest News",
     "stats.announcements":"Current Announcements",
@@ -2063,7 +412,7 @@ const translations = {
     "stats.academiesNote":"Academies",
     "announcements.title":"Latest Announcements",
     "announcements.description":"Version updates, new characters, and feature news appear here.",
-    "announcements.more":"Scroll horizontally to see more",
+    "announcements.more":"Open an update to read more ↗",
     "announcement.openAria":"View announcement details for “{title}”",
     "announcement.view":"View Full Announcement",
     "announcement.overview":"Announcement",
@@ -2077,7 +426,7 @@ const translations = {
     "trailers.openYoutube":"Watch on YouTube",
     "trailers.index":"Trailer {number}",
     "filters.aria":"Character filters",
-    "filters.title":"Character Filters",
+    "filters.title":"Student Archive",
     "filters.description":"Find characters by academy, combat role, or name.",
     "filters.resultCount":"Showing {count} characters",
     "filters.academy":"Academy",
@@ -2086,8 +435,11 @@ const translations = {
     "filters.allRoles":"All Combat Roles",
     "filters.search":"Search",
     "filters.placeholder":"Enter a character, academy, or weapon...",
-    "characters.title":"Character List",
-    "characters.description":"Select a character card to view the full profile.",
+    "characters.title":"A familiar face. A new story.",
+    "characters.description":"Illustrations, 3D models, and recollection lobbies. A closer look at every story.",
+    "characters.selectHint":"SELECT YOUR STUDENT",
+    "characters.shortcuts":"Q / E switch students · ← / → select",
+    "characters.selectAria":"Show {name}",
     "characters.empty":"No matching characters found. Try another academy, role, or search term.",
     "characters.openAria":"View the full profile for {name}",
     "common.unknownWeapon":"Unknown Weapon",
@@ -2134,14 +486,28 @@ const translations = {
     "page.description":"Project Archiveのキャラクター図鑑、お知らせ、バトルデータベース。",
     "brand.subtitle":"アーカイブ · 生徒 · 戦闘記録",
     "nav.aria":"メインナビゲーション",
+    "nav.skip":"生徒図鑑へスキップ",
+    "academy.title":"ひとつの学園から、始まる出会い。",
+    "academy.description":"学園を選んで、収録された生徒を見てみましょう。",
+    "academy.count":"{count}人を収録",
+    "academy.open":"{name} · {count}人の生徒を表示",
+    "academy.none":"まだ未収録",
+    "academy.empty":"条件に一致する生徒がいません。別の学園を選ぶか、条件をクリアしてください。",
+    "academy.clear":"条件クリア",
+    "academy.previous":"前の学園へ",
+    "academy.next":"次の学園へ",
+    "academy.studentsPrevious":"前の生徒一覧へ",
+    "academy.studentsNext":"次の生徒一覧へ",
     "nav.announcements":"お知らせ",
     "nav.trailers":"最新PV",
     "nav.characters":"キャラクター",
     "nav.about":"このサイトについて",
-    "hero.status":"Wikiデータベース公開中",
-    "hero.title":"Project Archive<br>データベース",
-    "hero.description":"最新のお知らせ、キャラクター情報、学園分類、役割を確認できます。Project Archiveのキャラクター図鑑、更新履歴、攻略情報への入口です。",
-    "hero.viewCharacters":"キャラクターを見る",
+    "hero.status":"おかえりなさい、先生。",
+    "hero.title":"出会いの数だけ、<br><em>物語がある。</em>",
+    "hero.description":"おなじみの顔ぶれと、まだ見ぬ物語。Project Archiveの生徒情報、戦闘データ、最新ニュースをここから。",
+    "hero.viewCharacters":"生徒図鑑を開く",
+    "hero.scroll":"もっと見る",
+    "footer.motto":"すべての出会いを、ここに記録。",
     "hero.watchTrailers":"最新PVを見る",
     "hero.latestAnnouncements":"最新のお知らせ",
     "stats.announcements":"最新のお知らせ数",
@@ -2152,7 +518,7 @@ const translations = {
     "stats.academiesNote":"学園",
     "announcements.title":"最新のお知らせ",
     "announcements.description":"バージョン更新、新キャラクター、機能情報をここに掲載します。",
-    "announcements.more":"横にスクロールしてさらに表示",
+    "announcements.more":"お知らせを選んで詳細へ ↗",
     "announcement.openAria":"「{title}」のお知らせ詳細を見る",
     "announcement.view":"お知らせの詳細を見る",
     "announcement.overview":"お知らせ内容",
@@ -2166,7 +532,7 @@ const translations = {
     "trailers.openYoutube":"YouTubeで見る",
     "trailers.index":"PV {number}",
     "filters.aria":"キャラクターフィルター",
-    "filters.title":"キャラクター絞り込み",
+    "filters.title":"生徒アーカイブ",
     "filters.description":"学園、戦闘役割、キャラクター名で素早く検索できます。",
     "filters.resultCount":"{count}人のキャラクターを表示",
     "filters.academy":"学園",
@@ -2175,8 +541,11 @@ const translations = {
     "filters.allRoles":"すべての戦闘役割",
     "filters.search":"検索",
     "filters.placeholder":"キャラクター名、学園、武器を入力...",
-    "characters.title":"キャラクター一覧",
-    "characters.description":"キャラクターカードを選ぶと詳しいデータを確認できます。",
+    "characters.title":"ここから始まる、新しい出会い",
+    "characters.description":"立ち絵、3Dモデル、メモリアルロビー。生徒たちの物語をもっと近くに。",
+    "characters.selectHint":"生徒を選んで表示を切り替え",
+    "characters.shortcuts":"Q / E 生徒切替 · ← / → 選択",
+    "characters.selectAria":"{name}を表示",
     "characters.empty":"条件に一致するキャラクターが見つかりません。学園、役割、検索語を変えてお試しください。",
     "characters.openAria":"{name}の詳しい情報を見る",
     "common.unknownWeapon":"不明な武器",
@@ -4458,6 +2827,8 @@ characters.forEach(character => {
 
 const announceArea = document.getElementById("announceArea");
 const academySelect = document.getElementById("academySelect");
+const academyCards = document.getElementById("academyCards");
+const selectedAcademyTitle = document.getElementById("selectedAcademyTitle");
 const roleSelect = document.getElementById("roleSelect");
 const searchInput = document.getElementById("searchInput");
 const charGrid = document.getElementById("charGrid");
@@ -4483,11 +2854,31 @@ const modalTags = document.getElementById("modalTags");
 const modalBody = document.getElementById("modalBody");
 const closeModal = document.getElementById("closeModal");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const interfaceMotion = window.PAInterfaceMotion.create(reducedMotion);
 const supportedLanguages = ["cn", "en", "jp"];
 let currentLanguage = supportedLanguages.includes(readPreference("pa-language")) ? readPreference("pa-language") : "cn";
 let activeTrailerIndex = 0;
 let activeModal = null;
 let lastFocusedElement = null;
+const gallery = window.PAGallery.create(document.getElementById("characterShowcase"), {
+  getName:getCharacterName,
+  getEnglishName:character => characterNames[character.id]?.en || character.name,
+  getContent:getLocalizedCharacterContent,
+  localize:localizeValue,
+  openDetails:openModal,
+  loadImage,
+  onSelect(id){
+    charGrid.querySelectorAll(".char-card").forEach(card => {
+      setSelectedControl(card, Number(card.dataset.characterId) === id);
+    });
+  }
+});
+
+function setSelectedControl(control, selected){
+  const changed = control.getAttribute("aria-pressed") !== String(selected);
+  control.setAttribute("aria-pressed", String(selected));
+  if(changed && selected) interfaceMotion.select(control);
+}
 
 function readPreference(key){
   try{
@@ -4597,6 +2988,10 @@ function applyStaticTranslations(){
   document.querySelectorAll("[data-i18n-html]").forEach(element => {
     element.innerHTML = t(element.dataset.i18nHtml);
   });
+  document.querySelectorAll("[data-i18n-aria]").forEach(element => {
+    element.setAttribute("aria-label", t(element.dataset.i18nAria));
+  });
+  academyCards.setAttribute("aria-label", t("filters.academy"));
 
   mainNav.setAttribute("aria-label", t("nav.aria"));
   languageSwitch.setAttribute("aria-label", t("language.switchAria"));
@@ -4692,11 +3087,11 @@ function createPlaceholderImage(label){
     <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
       <defs>
         <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#4f7cff"/>
-          <stop offset="1" stop-color="#8b5cf6"/>
+          <stop offset="0" stop-color="#008cde"/>
+          <stop offset="1" stop-color="#074e83"/>
         </linearGradient>
       </defs>
-      <rect width="800" height="450" rx="32" fill="url(#background)"/>
+      <rect width="800" height="450" rx="6" fill="url(#background)"/>
       <circle cx="680" cy="70" r="170" fill="#ffffff" opacity=".12"/>
       <circle cx="120" cy="420" r="220" fill="#22d3ee" opacity=".16"/>
       <text x="50%" y="50%" fill="#ffffff" font-family="system-ui, sans-serif" font-size="42" font-weight="700" text-anchor="middle" dominant-baseline="middle">${shortLabel}</text>
@@ -4724,11 +3119,10 @@ function loadImage(image, source, label){
 function renderAnnouncements(){
   announceArea.innerHTML = "";
 
-  announcements.forEach((item, index) => {
+  announcements.forEach(item => {
     const content = getAnnouncementContent(item);
     const card = document.createElement("article");
-    card.className = "announce-card card-enter";
-    card.style.setProperty("--card-delay", `${Math.min(index, 12) * 60}ms`);
+    card.className = "announce-card";
     card.setAttribute("role", "listitem");
 
     card.innerHTML = `
@@ -4753,6 +3147,7 @@ function renderAnnouncements(){
 
     announceArea.appendChild(card);
   });
+  interfaceMotion.observeCards(announceArea.children);
 }
 
 function populateSelects(){
@@ -4787,11 +3182,59 @@ function populateSelects(){
 
   academySelect.value = academies.includes(selectedAcademy) ? selectedAcademy : "all";
   roleSelect.value = roles.includes(selectedRole) ? selectedRole : "all";
+  renderAcademyCards();
+}
+
+function renderAcademyCards(){
+  const previousScroll = academyCards.scrollLeft;
+  const focusedAcademy = document.activeElement?.closest(".academy-card")?.dataset.academy;
+  academyCards.replaceChildren();
+  ["all", ...academies].forEach((academy, index) => {
+    const members = academy === "all" ? characters : characters.filter(character => character.academy === academy);
+    const name = academy === "all" ? t("filters.allAcademies") : localizeValue(academy);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "academy-card";
+    button.dataset.academy = academy;
+    button.dataset.empty = String(!members.length);
+    button.setAttribute("aria-pressed", String(academySelect.value === academy));
+    button.setAttribute("aria-controls", "charGrid characterShowcase");
+    button.setAttribute("aria-label", t("academy.open", {name, count:members.length}));
+    button.innerHTML = `
+      <span class="academy-card-content">
+        <img class="academy-emblem" src="${window.PAGallery.academyEmblem(academy)}" alt="" loading="lazy" decoding="async">
+        <span class="academy-card-name">${escapeHtml(name)}</span>
+        <span class="academy-members" aria-hidden="true">${members.slice(0,3).map(character => `<img src="${escapeHtml(character.img)}" alt="" loading="lazy" decoding="async">`).join("")}${members.length ? "" : escapeHtml(t("academy.none"))}</span>
+        <span class="academy-count">${escapeHtml(t("academy.count",{count:members.length}))}</span>
+      </span>`;
+    button.addEventListener("click", () => { academySelect.value=academy; applyFilters(); });
+    button.addEventListener("keydown", event => {
+      if(!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const buttons = [...academyCards.querySelectorAll(".academy-card")];
+      const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? buttons.length-1 : (index + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length;
+      buttons[nextIndex].focus({preventScroll:true});
+      buttons[nextIndex].click();
+      revealInStrip(academyCards, buttons[nextIndex]);
+    });
+    academyCards.append(button);
+  });
+  academyCards.scrollLeft=previousScroll;
+  if(focusedAcademy) [...academyCards.children].find(button => button.dataset.academy === focusedAcademy)?.focus({preventScroll:true});
+}
+
+function revealInStrip(strip, item){
+  const left = item.offsetLeft - strip.offsetLeft;
+  if(left < strip.scrollLeft || left+item.offsetWidth > strip.scrollLeft+strip.clientWidth){
+    strip.scrollTo({left:Math.max(0,left-strip.clientWidth/2+item.offsetWidth/2), behavior:reducedMotion.matches ? "instant" : "smooth"});
+  }
 }
 
 function renderCharacters(list){
   charGrid.innerHTML = "";
   resultCount.textContent = t("filters.resultCount", {count:list.length});
+  gallery.update(list, currentLanguage, academySelect.value);
+  charGrid.setAttribute("aria-label", t("characters.selectHint"));
 
   if(list.length === 0){
     charGrid.innerHTML = `
@@ -4809,16 +3252,21 @@ function renderCharacters(list){
     card.style.setProperty("--card-delay", `${Math.min(index, 12) * 34}ms`);
     card.tabIndex = 0;
     card.setAttribute("role", "button");
-    card.setAttribute("aria-haspopup", "dialog");
-    card.setAttribute("aria-label", t("characters.openAria", {name:characterName}));
+    card.setAttribute("aria-controls", "characterShowcase");
+    card.setAttribute("aria-pressed", String(gallery.selectedId === character.id));
+    card.setAttribute("aria-label", t("characters.selectAria", {name:characterName}));
+    card.dataset.characterId = character.id;
     card.dataset.academy = character.academy;
     card.dataset.role = character.role;
     card.dataset.attack = character.attackType;
     card.dataset.defense = character.defenseType;
 
     card.innerHTML = `
+      <span class="roster-index" aria-hidden="true">${String(index + 1).padStart(2,"0")}</span>
       <div class="avatar">
         <img alt="${escapeHtml(characterName)}" loading="lazy" decoding="async">
+        <span class="roster-role">${escapeHtml(localizeValue(character.role))}</span>
+        <span class="roster-attack" data-tone="${escapeHtml(character.attackType)}" title="${escapeHtml(localizeValue(character.attackType))}">${window.PAGallery.icon('attack')}<span class="sr-only">${escapeHtml(localizeValue(character.attackType))}</span></span>
       </div>
 
       <div class="char-info">
@@ -4834,22 +3282,34 @@ function renderCharacters(list){
 
     loadImage(card.querySelector("img"), character.img, characterName);
 
-    card.addEventListener("click", () => openModal(character, card));
+    card.addEventListener("click", () => gallery.select(character.id));
     card.addEventListener("keydown", e => {
       if(e.key === "Enter" || e.key === " "){
         e.preventDefault();
-        openModal(character, card);
+        gallery.select(character.id);
+      }else if(["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)){
+        e.preventDefault();
+        const cards = [...charGrid.querySelectorAll(".char-card")];
+        const nextIndex = (index + (["ArrowRight", "ArrowDown"].includes(e.key) ? 1 : -1) + cards.length) % cards.length;
+        cards[nextIndex].focus();
+        gallery.select(Number(cards[nextIndex].dataset.characterId));
       }
     });
 
     charGrid.appendChild(card);
   });
+  const selectedCard = charGrid.querySelector('.char-card[aria-pressed="true"]');
+  if(selectedCard){
+    charGrid.scrollLeft = Math.max(0, selectedCard.offsetLeft - charGrid.offsetLeft - charGrid.clientWidth / 2 + selectedCard.offsetWidth / 2);
+  }
 }
 
 function applyFilters(){
   const selectedAcademy = academySelect.value;
   const selectedRole = roleSelect.value;
   const keyword = searchInput.value.trim().toLowerCase();
+  academyCards.querySelectorAll(".academy-card").forEach(button => setSelectedControl(button, button.dataset.academy === selectedAcademy));
+  selectedAcademyTitle.textContent = selectedAcademy === "all" ? t("filters.allAcademies") : localizeValue(selectedAcademy);
 
   const filtered = characters.filter(character => {
     const matchAcademy = selectedAcademy === "all" || character.academy === selectedAcademy;
@@ -5073,6 +3533,7 @@ function showModal(triggerElement){
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
   modalCard.scrollTop = 0;
+  modalBody.scrollTop = 0;
   closeModal.focus();
 }
 
@@ -5140,6 +3601,7 @@ function renderTrailers(){
   });
 
   selectTrailer(activeTrailerIndex, false);
+  interfaceMotion.observeCards(trailerList.children);
 }
 
 function selectTrailer(index, autoplay){
@@ -5156,7 +3618,7 @@ function selectTrailer(index, autoplay){
   trailerFrame.title = t("trailers.frameTitle", {title});
 
   trailerList.querySelectorAll(".trailer-card").forEach((button, buttonIndex) => {
-    button.setAttribute("aria-pressed", String(buttonIndex === index));
+    setSelectedControl(button, buttonIndex === index);
   });
 
   if(trailerFrame.dataset.videoId !== trailer.id || autoplay){
@@ -5235,7 +3697,8 @@ function setupMotion(){
     return;
   }
 
-  const revealItems = [...document.querySelectorAll(".section, footer")];
+  // Observe headings instead of the entire long roster: every viewport can reveal them.
+  const revealItems = [...document.querySelectorAll(".section-head, footer")];
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -5243,7 +3706,7 @@ function setupMotion(){
         observer.unobserve(entry.target);
       }
     });
-  }, {threshold:.08, rootMargin:"0px 0px -8% 0px"});
+  }, {threshold:0, rootMargin:"0px 0px -24px 0px"});
 
   revealItems.forEach(item => {
     item.classList.add("reveal");
@@ -5254,6 +3717,14 @@ function setupMotion(){
 }
 
 academySelect.addEventListener("change", applyFilters);
+document.getElementById("clearStudentFilters").addEventListener("click", () => {
+  roleSelect.value="all";
+  searchInput.value="";
+  applyFilters();
+});
+[["academyPrevious",academyCards,-1],["academyNext",academyCards,1],["studentPrevious",charGrid,-1],["studentNext",charGrid,1]].forEach(([id,strip,direction]) => {
+  document.getElementById(id).addEventListener("click", () => strip.scrollBy({left:direction*Math.max(200,strip.clientWidth*.75),behavior:reducedMotion.matches ? "instant" : "smooth"}));
+});
 roleSelect.addEventListener("change", applyFilters);
 searchInput.addEventListener("input", applyFilters);
 
@@ -5306,8 +3777,14 @@ window.addEventListener("hashchange", syncAnnouncementFromUrl);
 
 setTheme(getTheme(), false);
 setLanguage(currentLanguage, false);
+// The local-file setup link resumes the requested student's dynamic preview over HTTP.
+if(location.protocol === 'http:' || location.protocol === 'https:') {
+  const previewParams = new URLSearchParams(location.search);
+  gallery.openPreview(Number(previewParams.get('student')), previewParams.get('preview'));
+}
 setupScrollState();
 setupMotion();
+interfaceMotion.observeCharacterScene();
 syncAnnouncementFromUrl();
 animateCount(document.getElementById("announcementCount"), announcements.length, 720);
 animateCount(document.getElementById("characterCount"), characters.length, 980);

@@ -1,0 +1,67 @@
+{
+  "generatedOn": "2026-09-08",
+  "method": "OpenAI built-in image_gen",
+  "notes": "Original generated PNGs copied byte-for-byte. Rendering orientation is CSS-only. HTML retains localized text and accessibility labels.",
+  "assets": [
+    {
+      "id": "arrow",
+      "file": "assets/ui/generated-buttons/arrow.png",
+      "original": "exec-4288a3d6-8490-484b-a962-06c1e19305b4.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: a single right-pointing navigation arrow with a short thick horizontal shaft and clear arrowhead. Exactly one arrow."
+    },
+    {
+      "id": "play",
+      "file": "assets/ui/generated-buttons/play.png",
+      "original": "exec-9e939276-c8a7-4e03-8a32-3a8d5b0f2d2c.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: a single solid right-pointing equilateral PLAY triangle with gently chamfered corners. Exactly one triangle."
+    },
+    {
+      "id": "close",
+      "file": "assets/ui/generated-buttons/close.png",
+      "original": "exec-23fa9289-fe30-48ee-b302-0de3b64394da.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: a single CLOSE X made from two equally thick diagonal bars. Balanced four ends, transparent negative spaces."
+    },
+    {
+      "id": "expand",
+      "file": "assets/ui/generated-buttons/expand.png",
+      "original": "exec-4ba09840-b2d0-4e47-a429-717c922b696f.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: a fullscreen EXPAND symbol made from exactly four separate L-shaped corner brackets pointing outwards, symmetrically arranged around a large empty transparent square center."
+    },
+    {
+      "id": "pause",
+      "file": "assets/ui/generated-buttons/pause.png",
+      "original": "exec-78d964e2-0b97-40f8-8a91-6bc26524bac0.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: a PAUSE icon consisting of exactly two equally sized thick vertical parallel bars. Equal height, clear transparent gap."
+    },
+    {
+      "id": "moon",
+      "file": "assets/ui/generated-buttons/moon.png",
+      "original": "exec-ffb5dec1-d278-48b8-b7a5-016e85a61c45.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: a simple thick CRESCENT MOON icon representing night theme. Crescent opens to the right, empty cutout. No stars or face."
+    },
+    {
+      "id": "sun",
+      "file": "assets/ui/generated-buttons/sun.png",
+      "original": "exec-7e4205a1-b77f-4b6d-b4f3-654bf466c733.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: a SUN icon representing day theme: one solid circular disk and exactly eight short thick evenly spaced rays. Simple and bold, not a gear. No face."
+    },
+    {
+      "id": "reset",
+      "file": "assets/ui/generated-buttons/reset.png",
+      "original": "exec-cf24ff3d-c988-4f90-a55d-aaba843c8bc8.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: RESET VIEW symbol: one thick clockwise circular arrow forming a three-quarter ring with a clear arrowhead at its open upper-right end. Empty transparent center, no text."
+    },
+    {
+      "id": "search",
+      "file": "assets/ui/generated-buttons/search.png",
+      "original": "exec-8823885c-d33b-471b-bcd6-94089b711e12.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster game UI icon for the existing Blue Archive-inspired Project Archive Wiki, not a UI mockup. Style: clean flat anime-game HUD artwork, bold readable silhouette, slightly angled/chamfered ends, deep navy #304d6b main glyph, thin ivory-white outer keyline, restrained cyan #6cdbfa lower-edge accent, tiny yellow #ffe832 notch only if useful. Match the game's crisp paper-panel UI, not glossy 3D or metal. Composition: one centered isolated symbol occupying roughly 80% of a square canvas, equal small transparent margins. Genuine transparent alpha background, including interior holes. No panel, no circle behind the icon, no text, no labels, no watermark, no extra symbols, no checkerboard printed into the image. Must remain immediately legible at 24–32 CSS pixels. Subject: one SEARCH magnifying glass: thick circular rim with an empty transparent lens and short diagonal handle extending down-right. No plus sign."
+    },
+    {
+      "id": "button-plate",
+      "file": "assets/ui/generated-buttons/button-plate.png",
+      "original": "exec-e592f6f9-4235-4752-86df-424e46af0264.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster EMPTY BUTTON BACKPLATE for a Blue Archive-inspired fan-wiki UI. Single horizontal low-profile cyan paper button, width-to-height ratio 4:1, front view orthographic. Shape: softly rounded corners, left and right sides slanted 10 degrees, slightly cut lower-right corner. Palette: bright pastel cyan #6cdbfa, a few broad very subtle triangular facets in #35b9ef, thin off-white upper rim, restrained blue-gray 2D lower-edge shadow. Central 70% completely blank and evenly light, so dark navy HTML text can be overlaid legibly. Isolated on genuinely transparent alpha background, small equal transparent margins. Clean flat anime mobile game task-button artwork, not 3D, not a physical object, no glow. No text, no icons, no arrows, no logos, no watermarks, no checkerboard printed into image. One asset only."
+    }
+  ]
+}

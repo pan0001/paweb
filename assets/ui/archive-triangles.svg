@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <!-- Original vector geometry inspired by the CN site's pale triangular backdrop.
+       Alpha-only mask: the stylesheet supplies day/night colors. No game artwork. -->
+  <defs><g id="facets" fill="#fff">
+    <path opacity=".7" d="M-80 148 38-56 156 148Z"/>
+    <path opacity=".45" d="m180 28 122 211 122-211Z"/>
+    <path opacity=".9" d="m438 192 128-222 128 222Z"/>
+    <path opacity=".5" d="m690 10 100 173L890 10Z"/>
+    <path opacity=".8" d="m1058 72 148 256 148-256Z"/>
+    <path opacity=".35" d="m1306 350 129-224 129 224Z"/>
+    <path opacity=".95" d="m-54 464 123-213 123 213Z"/>
+    <path opacity=".65" d="m-46 482 119 206 119-206Z"/>
+    <path opacity=".65" d="m258 454 68-118 68 118Z"/>
+    <path opacity=".8" d="m444 274 137 237 137-237Z"/>
+    <path opacity=".55" d="m590 526 116-201 116 201Z"/>
+    <path opacity=".95" d="m832 536 110-190 110 190Z"/>
+    <path opacity=".4" d="m1056 550 94 163 94-163Z"/>
+    <path opacity=".75" d="m1308 510 120 208 120-208Z"/>
+    <path opacity=".85" d="m244 844 121-210 121 210Z"/>
+    <path opacity=".6" d="m372 622 120 208 120-208Z"/>
+    <path opacity=".45" d="m658 670 79 137 79-137Z"/>
+    <path opacity=".85" d="m876 886 112-194 112 194Z"/>
+    <path opacity=".55" d="m1164 804 119 206 119-206Z"/>
+  </g></defs>
+  <!-- Wrap edge-crossing triangles into the neighboring tile, without cut seams. -->
+  <use href="#facets"/>
+  <use href="#facets" x="-1440"/>
+  <use href="#facets" x="1440"/>
+  <use href="#facets" y="-900"/>
+  <use href="#facets" y="900"/>
+  <use href="#facets" x="-1440" y="-900"/>
+  <use href="#facets" x="1440" y="-900"/>
+  <use href="#facets" x="-1440" y="900"/>
+  <use href="#facets" x="1440" y="900"/>
+</svg>

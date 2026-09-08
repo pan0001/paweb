@@ -1,0 +1,755 @@
+CH0222_home.png
+size:2047,1983
+filter:Linear,Linear
+pma:true
+02/Pin 01
+bounds:978,1840,64,86
+offsets:5,4,74,97
+rotate:90
+02/Pin 02
+bounds:240,1703,80,160
+offsets:5,5,90,170
+rotate:90
+02/Pin 03
+bounds:1597,1137,137,195
+offsets:4,5,145,203
+rotate:90
+02/hair_bloom_01
+bounds:1673,1536,101,155
+offsets:2,0,104,156
+rotate:90
+02/hair_bloom_02
+bounds:840,1238,137,124
+offsets:3,1,140,128
+02/hair_bloom_03
+bounds:2,1412,102,258
+offsets:2,2,105,261
+rotate:90
+02/hair_bloom_04
+bounds:2,712,154,272
+offsets:3,3,157,278
+rotate:90
+02/hand_bloom
+bounds:1839,1271,121,145
+offsets:0,3,123,150
+rotate:90
+02/intro_B_Clothes
+bounds:1201,534,167,225
+offsets:3,5,174,234
+rotate:90
+02/intro_B_Eye
+bounds:117,1966,50,15
+offsets:5,5,59,25
+02/intro_B_Hair 02
+bounds:2,554,146,655
+offsets:3,2,152,660
+rotate:90
+02/intro_B_Hair 03
+bounds:770,1101,107,659
+offsets:3,3,112,671
+rotate:90
+02/intro_B_Hair_Base
+bounds:1794,1132,137,192
+offsets:60,1,200,193
+rotate:90
+02/intro_Clothes
+bounds:1419,1339,115,169
+offsets:4,5,122,177
+rotate:90
+02/intro_Ear
+bounds:1187,1218,125,137
+offsets:4,4,133,145
+rotate:90
+02/intro_Eye 01
+bounds:1826,1394,131,109
+offsets:4,4,138,116
+02/intro_Eye 02
+bounds:361,1960,50,21
+offsets:4,4,57,30
+02/intro_Eye 03
+bounds:30,1968,13,31
+offsets:4,5,22,43
+rotate:90
+02/intro_Eye 04
+bounds:1462,1946,35,82
+offsets:5,4,44,91
+rotate:90
+02/intro_Eye_highlight
+bounds:169,1966,15,30
+offsets:4,4,24,40
+rotate:90
+02/intro_Eye_shadow
+bounds:854,1765,89,75
+offsets:4,4,97,80
+02/intro_Eye_white
+bounds:1346,1656,109,98
+offsets:1,4,111,107
+02/intro_Eyebrow
+bounds:1473,1747,117,79
+offsets:4,3,124,86
+02/intro_F_B_Hair 01
+bounds:2,2,217,410
+offsets:4,0,225,413
+rotate:90
+02/intro_F_Hair 01
+bounds:1127,957,142,284
+offsets:3,4,149,292
+rotate:90
+02/intro_F_Hair 02
+bounds:899,1364,102,370
+offsets:4,4,110,377
+rotate:90
+02/intro_F_Hair 03
+bounds:258,1284,115,346
+offsets:3,4,122,353
+rotate:90
+02/intro_F_Hair 04
+bounds:235,1609,87,292
+offsets:3,3,95,299
+rotate:90
+02/intro_F_Hair 05
+bounds:657,1486,96,320
+offsets:2,3,102,327
+rotate:90
+02/intro_F_Hair 09
+bounds:1570,838,150,377
+offsets:3,0,158,383
+rotate:90
+02/intro_Finger_index 01
+bounds:1138,1833,92,65
+offsets:3,5,99,73
+02/intro_Finger_index 02
+bounds:1454,1892,58,52
+offsets:4,4,66,60
+02/intro_Finger_index 03
+bounds:1084,1901,73,49
+offsets:4,3,81,57
+02/intro_Finger_middle 01
+bounds:1915,1718,122,86
+offsets:4,2,131,91
+02/intro_Finger_middle 02
+bounds:1066,1835,64,70
+offsets:5,4,71,78
+rotate:90
+02/intro_Finger_middle 03
+bounds:1232,1831,70,67
+offsets:4,4,78,75
+02/intro_Finger_pinky 01
+bounds:1836,1886,57,105
+offsets:4,3,64,112
+rotate:90
+02/intro_Finger_pinky 02
+bounds:1159,1900,50,61
+offsets:4,4,58,69
+rotate:90
+02/intro_Finger_pinky 03
+bounds:355,1915,43,68
+offsets:5,5,52,77
+rotate:90
+02/intro_Finger_ring 01
+bounds:719,1682,86,107
+offsets:4,3,94,114
+rotate:90
+02/intro_Finger_ring 02
+bounds:898,1842,63,78
+offsets:4,4,70,85
+rotate:90
+02/intro_Finger_ring 03
+bounds:1699,1889,55,68
+offsets:4,4,63,76
+rotate:90
+02/intro_Finger_thumb 01
+bounds:1714,1416,118,110
+offsets:5,4,126,117
+rotate:90
+02/intro_Finger_thumb 02
+bounds:1943,1806,88,72
+offsets:3,4,95,78
+02/intro_Hand
+bounds:1288,142,289,206
+offsets:5,4,299,214
+02/intro_Head_sh
+bounds:703,1584,89,278
+offsets:5,5,99,289
+rotate:90
+02/intro_L_B_Hair 01
+bounds:1307,1456,98,290
+offsets:5,4,108,298
+rotate:90
+02/intro_Mouth
+bounds:201,1963,22,18
+offsets:4,5,30,27
+02/intro_R_Hair 01
+bounds:565,974,125,560
+offsets:3,5,132,568
+rotate:90
+02/intro_R_Hair 03
+bounds:226,1146,136,223
+offsets:5,5,145,231
+rotate:90
+02/intro_R_Hair 04
+bounds:1579,81,207,261
+offsets:3,3,212,267
+rotate:90
+02/intro_cherry blossom_01
+bounds:945,1763,92,75
+offsets:4,4,500,386
+02/intro_cherry blossom_02
+bounds:780,1843,116,62
+offsets:3,4,123,66
+02/intro_cherry blossom_03
+bounds:1222,1900,100,50
+offsets:3,5,105,61
+02/intro_cherry blossom_04
+bounds:1689,290,215,193
+offsets:5,1,223,198
+02/intro_cherry blossom_05
+bounds:1514,1892,52,75
+offsets:448,311,500,386
+rotate:90
+02/intro_cherry blossom_bloom_01
+bounds:639,350,178,180
+offsets:0,1,181,182
+rotate:90
+02/intro_cherry blossom_bloom_02
+bounds:1302,703,167,161
+offsets:2,3,169,164
+02/intro_cherry blossom_bloom_03
+bounds:1134,355,193,177
+offsets:0,0,196,178
+02/intro_cherry blossom_bloom_04
+bounds:795,41,221,221
+offsets:1,3,224,224
+02/petal_01
+bounds:1713,1276,124,116
+offsets:0,1,124,118
+02/petal_02
+bounds:1940,1505,105,109
+offsets:0,2,110,112
+02/petal_04
+bounds:451,1138,148,144
+offsets:0,5,149,149
+02/petal_05
+bounds:1413,866,155,155
+offsets:6,1,161,157
+02/shoulder_bloom
+bounds:1782,485,175,192
+offsets:1,1,177,194
+rotate:90
+03/Banner 01
+bounds:525,143,205,268
+offsets:2,1,210,271
+rotate:90
+03/Banner 02
+bounds:1045,151,202,241
+offsets:1,1,203,244
+rotate:90
+03/Banner 03
+bounds:821,264,197,222
+offsets:2,0,200,224
+rotate:90
+03/Banner 04
+bounds:659,530,170,219
+offsets:2,0,172,221
+rotate:90
+03/Clouds 01
+bounds:983,1578,234,95
+offsets:5,14,239,109
+03/Clouds 02
+bounds:2,1516,291,91
+offsets:0,1,292,94
+03/Clouds 04
+bounds:1581,990,380,140
+offsets:14,1,396,141
+03/Moon
+bounds:1462,1170,132,133
+offsets:0,1,135,135
+rotate:90
+B_Clothes 01
+bounds:1478,1556,95,193
+offsets:3,2,100,197
+rotate:90
+B_Clothes 02
+bounds:979,1238,124,206
+offsets:2,2,128,210
+rotate:90
+B_Hair 01
+bounds:828,1675,79,406
+offsets:4,3,87,409
+rotate:90
+B_Hair 02
+bounds:1304,1828,61,301
+offsets:10,175,89,629
+rotate:90
+B_Hair 03a
+bounds:476,702,137,501
+offsets:179,394,320,897
+rotate:90
+B_Hair 04
+bounds:1591,1891,53,106
+offsets:32,275,87,478
+rotate:90
+B_L_Hair 01
+bounds:1592,1741,76,219
+offsets:3,2,81,225
+rotate:90
+Blush
+bounds:1769,1887,65,57
+offsets:3,2,223,84
+Blush 2
+bounds:1957,1941,40,52
+offsets:180,31,223,84
+rotate:90
+Clothes 01
+bounds:2,1299,111,254
+offsets:3,3,117,260
+rotate:90
+Clothes 03
+bounds:979,640,220,161
+offsets:2,2,222,165
+Ear
+bounds:1900,1616,100,103
+offsets:4,5,107,112
+rotate:90
+F_Hair 01
+bounds:69,1863,56,194
+offsets:7,6,69,205
+rotate:90
+F_Hair 02
+bounds:1471,678,158,368
+offsets:5,5,170,376
+rotate:90
+F_Hair 04
+bounds:262,1401,100,361
+offsets:5,6,110,374
+rotate:90
+F_Hair 05
+bounds:295,1503,92,360
+offsets:6,6,104,370
+rotate:90
+F_Hair 06
+bounds:402,1698,77,315
+offsets:5,3,85,324
+rotate:90
+F_Hair 08
+bounds:1457,1653,86,292
+offsets:5,4,97,301
+rotate:90
+F_Hair 09
+bounds:979,1468,92,326
+offsets:7,5,104,335
+rotate:90
+F_Hair 10
+bounds:1428,515,161,352
+offsets:5,5,171,364
+rotate:90
+Finger_index 01
+bounds:1607,1822,74,67
+offsets:3,4,81,76
+Finger_index 02
+bounds:425,1915,43,52
+offsets:5,4,53,61
+rotate:90
+Finger_index 03
+bounds:1416,1947,34,44
+offsets:5,6,44,55
+rotate:90
+Finger_middle
+bounds:1593,1946,83,35
+offsets:4,4,90,42
+Finger_middle 02
+bounds:1546,1946,35,45
+offsets:4,4,43,53
+rotate:90
+Finger_pinky 01
+bounds:1678,1946,73,35
+offsets:5,4,82,43
+Finger_pinky 02
+bounds:1003,1906,79,47
+offsets:4,5,87,57
+Finger_ring 01
+bounds:1858,1945,97,36
+offsets:4,4,104,45
+Finger_ring 02
+bounds:1753,1946,35,46
+offsets:4,3,43,52
+rotate:90
+Hand_Base
+bounds:2,1013,150,180
+offsets:4,4,157,188
+rotate:90
+L_Arm 01
+bounds:880,463,175,252
+offsets:4,4,184,258
+rotate:90
+L_Eye
+bounds:1236,1666,108,88
+offsets:6,6,118,99
+L_Eye 03
+bounds:85,1967,14,30
+offsets:6,6,27,42
+rotate:90
+L_Eye 04
+bounds:479,1915,43,60
+offsets:6,4,53,68
+rotate:90
+L_Eye closed
+bounds:1943,1880,102,59
+offsets:6,4,112,68
+L_Eye highlight
+bounds:16,1970,12,11
+offsets:6,6,24,23
+L_Eye lid
+bounds:265,1857,68,62
+offsets:3,4,73,69
+L_Eye white
+bounds:2,1865,65,61
+offsets:4,5,73,69
+L_Eyebrows 01
+bounds:587,1958,52,23
+offsets:4,5,61,33
+L_Eyebrows 02
+bounds:891,1955,65,26
+offsets:6,5,77,37
+L_Eyebrows 03
+bounds:1345,1948,69,33
+offsets:4,5,78,43
+L_Eyebrows 04
+bounds:105,1924,84,40
+offsets:5,4,94,50
+L_Hair 01
+bounds:1219,1562,89,257
+offsets:0,5,93,264
+rotate:90
+L_Hair 02
+bounds:1830,1511,108,103
+offsets:2,93,121,200
+L_Hair 02a
+bounds:2,1928,37,101
+offsets:80,4,121,200
+rotate:90
+L_Hair 03
+bounds:2,1795,66,239
+offsets:5,4,74,250
+rotate:90
+L_Hair 05
+bounds:1329,350,163,358
+offsets:5,5,172,368
+rotate:90
+L_Hair 06a
+bounds:745,1770,107,71
+offsets:13,4,124,86
+L_Hair 06b
+bounds:502,841,131,608
+offsets:5,598,420,1210
+rotate:90
+L_Ribbon 01
+bounds:276,709,157,198
+offsets:5,4,165,207
+rotate:90
+L_Ribbon 02
+bounds:2,1165,132,222
+offsets:4,3,136,229
+rotate:90
+L_Ribbon 02_S
+bounds:529,1597,99,172
+offsets:5,3,107,179
+rotate:90
+L_Ribbon 03
+bounds:335,1853,60,200
+offsets:5,3,69,206
+rotate:90
+Mouth 01
+bounds:641,1958,62,23
+offsets:6,5,72,33
+Mouth 02
+bounds:305,1961,54,20
+offsets:5,5,64,30
+Mouth 03
+bounds:225,1962,44,19
+offsets:4,5,55,30
+Mouth 04
+bounds:1801,1946,55,35
+offsets:4,5,64,45
+Neck 1
+bounds:1112,803,152,188
+offsets:4,5,159,197
+rotate:90
+Neck 2
+bounds:1271,1345,146,109
+offsets:5,4,154,115
+Neck 3
+bounds:1813,1734,100,83
+offsets:2,2,104,87
+Nose
+bounds:63,1968,13,20
+offsets:6,7,25,32
+rotate:90
+R_Arm
+bounds:184,998,138,379
+offsets:2,3,143,385
+rotate:90
+R_Arm shadow
+bounds:1751,1639,147,93
+offsets:5,5,156,102
+R_Eye
+bounds:1759,1819,182,65
+offsets:5,6,193,76
+R_Eye 03
+bounds:271,1962,19,32
+offsets:5,6,30,42
+rotate:90
+R_Eye 04
+bounds:1683,1820,74,67
+offsets:4,4,82,76
+R_Eye closed
+bounds:541,1910,179,46
+offsets:5,5,189,56
+R_Eye highlight
+bounds:2,1971,12,10
+offsets:5,6,22,22
+R_Eye lid
+bounds:1324,1895,128,50
+offsets:5,2,133,55
+R_Eye white
+bounds:722,1910,125,46
+offsets:4,5,133,55
+R_Eyebrows 01
+bounds:191,1921,162,38
+offsets:6,6,174,50
+R_Eyebrows 02
+bounds:958,1955,145,26
+offsets:6,6,157,37
+R_Eyebrows 03
+bounds:705,1958,184,23
+offsets:4,6,193,33
+R_Eyebrows 04
+bounds:413,1960,172,21
+offsets:5,4,182,29
+R_Hair 01
+bounds:1326,1210,134,127
+offsets:5,4,143,135
+R_Hair 02
+bounds:537,1848,60,241
+offsets:4,5,68,251
+rotate:90
+R_Hair 03
+bounds:1105,1952,29,238
+offsets:4,5,38,247
+rotate:90
+R_Hair 04
+bounds:243,1785,66,236
+offsets:9,5,79,250
+rotate:90
+R_Hair 05
+bounds:1039,1756,70,432
+offsets:5,2,79,440
+rotate:90
+R_Hair 07a
+bounds:2,221,183,521
+offsets:4,758,217,1284
+rotate:90
+R_Hair 08
+bounds:2,868,128,498
+offsets:3,7,135,510
+rotate:90
+R_Hair 10
+bounds:601,1116,167,143
+offsets:4,4,175,151
+R_Hair 11
+bounds:2,406,146,635
+offsets:4,5,154,643
+rotate:90
+R_Ribbon 01
+bounds:1841,662,174,196
+offsets:3,3,182,203
+rotate:90
+R_Ribbon 01_S
+bounds:849,1907,46,152
+offsets:4,5,54,161
+rotate:90
+R_Ribbon 02
+bounds:606,1261,119,232
+offsets:4,4,128,240
+rotate:90
+R_Ribbon 02_S
+bounds:481,1777,69,131
+offsets:3,2,76,136
+rotate:90
+R_Ribbon 03
+bounds:625,1382,272,102
+offsets:3,4,279,110
+Ribbon shadow
+bounds:1590,1304,120,121
+offsets:2,0,124,124
+rotate:90
+Skirt
+bounds:2,1620,231,92
+offsets:2,2,234,95
+Torso 02
+bounds:614,1777,129,69
+offsets:16,106,169,178
+Torso 04
+bounds:2,1714,79,236
+offsets:4,3,220,268
+rotate:90
+petal_03
+bounds:1599,1426,113,108
+offsets:4,0,117,110
+petal_07
+bounds:1431,1023,145,148
+offsets:5,0,154,149
+rotate:90
+
+CH0222_home_2.png
+size:2030,1904
+filter:Linear,Linear
+pma:true
+02/intro_Arm_2
+bounds:925,207,339,673
+offsets:0,44,342,721
+rotate:90
+02/intro_Arm_3
+bounds:1600,48,381,427
+offsets:0,6,381,433
+rotate:90
+02/intro_B_Hair 01
+bounds:2,1030,259,1044
+offsets:6,4,268,1055
+rotate:90
+02/intro_B_Hair 04
+bounds:2,1574,167,677
+offsets:5,5,175,699
+rotate:90
+02/intro_B_Hair 05
+bounds:2,1743,159,896
+offsets:4,4,166,904
+rotate:90
+02/intro_F_B_Hair 02
+bounds:1577,1646,256,377
+offsets:3,5,263,385
+rotate:90
+02/intro_F_Hair 06
+bounds:609,701,382,327
+offsets:5,6,391,337
+02/intro_L_B_Hair 03
+bounds:993,548,317,699
+offsets:3,4,324,707
+rotate:90
+02/intro_Neck
+bounds:1061,1227,278,320
+offsets:4,3,286,327
+02/intro_R_Hair 05
+bounds:1048,867,311,847
+offsets:12,3,327,859
+rotate:90
+02/intro_nagusa_bloom_hand
+bounds:2,2,494,364
+offsets:3,0,498,364
+02/intro_nagusa_bloom_shoulder
+bounds:1694,431,434,334
+offsets:1,3,435,339
+rotate:90
+03/Bush
+bounds:2,712,605,316
+offsets:126,154,906,470
+03/Clouds 03
+bounds:1362,1442,652,202
+offsets:4,3,660,207
+03/moon_light
+bounds:799,1291,260,256
+offsets:0,2,260,260
+B_Hair 03
+bounds:1341,1180,260,419
+offsets:2,3,320,897
+rotate:90
+L_Hair 06
+bounds:2,368,342,506
+offsets:4,5,350,1008
+rotate:90
+L_hair 04
+bounds:900,1736,166,675
+offsets:4,4,174,683
+rotate:90
+R_Hair 07
+bounds:2,1345,202,795
+offsets:11,5,217,1284
+rotate:90
+R_Hair 09
+bounds:681,1549,185,679
+offsets:4,5,193,687
+rotate:90
+Torso 03
+bounds:510,333,366,413
+offsets:2,3,371,443
+rotate:90
+
+CH0222_home_3.png
+size:1995,1847
+filter:Linear,Linear
+pma:true
+02/intro_Head
+bounds:512,1101,400,650
+offsets:5,4,409,658
+rotate:90
+02/intro_R_Hair 02
+bounds:2,1503,342,1281
+offsets:5,3,350,1290
+rotate:90
+02/intro_R_Hair 06
+bounds:2,683,416,839
+offsets:5,2,425,847
+rotate:90
+02/intro_Torso
+bounds:674,56,694,550
+offsets:5,5,701,559
+02/intro_halo
+bounds:1285,1450,395,708
+offsets:0,4,399,712
+rotate:90
+03/BG_bloom
+bounds:1164,1038,573,410
+offsets:0,1,574,535
+03/Halo
+bounds:1419,577,459,459
+offsets:3,4,462,463
+03/Sky
+bounds:1370,2,573,597
+offsets:116,201,691,800
+rotate:90
+Clothes 02
+bounds:843,608,428,574
+offsets:5,5,436,583
+rotate:90
+Head
+bounds:2,157,524,670
+offsets:4,5,532,680
+rotate:90
+Torso 01
+bounds:2,1103,508,398
+offsets:5,3,518,406
+
+CH0222_home_4.png
+size:1949,1528
+filter:Linear,Linear
+pma:true
+02/intro_Hair_Base
+bounds:2,932,685,594
+offsets:4,2,689,600
+02/intro_nagusa_bloom_head
+bounds:1047,2,900,808
+offsets:1,0,1497,856
+03/intro_background
+bounds:2,82,1043,728
+offsets:126,95,1245,873
+03/nagusa_bloom
+bounds:689,812,844,714
+offsets:93,147,943,861
+
+CH0222_home_5.png
+size:762,1120
+filter:Linear,Linear
+pma:true
+03/Building
+bounds:2,2,758,1116
+offsets:3,4,764,1120

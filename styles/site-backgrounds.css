@@ -1,0 +1,90 @@
+/* CN official-site background study, 2026-09-08.
+   A continuous off-white field and sparse, almost-white triangles; no blue grid.
+   This layer changes backdrops only. #home is opaque and intentionally untouched.
+   Original static SVG geometry avoids another video decoder beside the 3D stage. */
+main.container {
+  --archive-paper:#f7f8fa;
+  --archive-facet:#fff;
+  --archive-line:#a4b8c530;
+  --archive-stage-light:#d8edf666;
+  --archive-stage-edge:#acc9dc33;
+  --archive-watermark:#728fa629;
+  position:relative;
+  isolation:isolate;
+  background:var(--archive-paper);
+}
+html[data-theme="dark"] main.container {
+  --archive-paper:#182a3b;
+  --archive-facet:#1d3042;
+  --archive-line:#94b4ca24;
+  --archive-stage-light:#2c50633d;
+  --archive-stage-edge:#789fb329;
+  --archive-watermark:#a6c1d82e;
+}
+main.container::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:var(--archive-facet);
+  mask:url('../assets/ui/archive-triangles.svg') left top / 1440px 900px repeat;
+}
+
+/* Preserve every section's dimensions and spacing; only remove the blue bands. */
+#announcements,#trailers,#characters { background:transparent; }
+#trailers::before { background:none; border-color:transparent; box-shadow:none; }
+#announcements .section-watermark,#trailers .section-watermark {
+  -webkit-text-stroke-color:var(--archive-watermark);
+}
+#characters .character-workspace {
+  background:radial-gradient(ellipse at 68% 43%,var(--archive-stage-light),transparent 60%);
+  border-color:transparent;
+  box-shadow:none;
+}
+#characters .workspace-backdrop,
+#characters .character-workspace::before,
+#characters .character-workspace::after { display:none; }
+
+/* Quiet stage decoration: white hair still has separation, without a model box. */
+#characters .showcase-viewport::before {
+  border-color:var(--archive-stage-edge);
+  box-shadow:0 0 0 18px color-mix(in srgb,var(--archive-facet) 35%,transparent);
+}
+#characters .showcase-viewport::after { opacity:.2; }
+#characters .showcase-watermark { -webkit-text-stroke-color:var(--archive-watermark); }
+#characters .showcase-viewport:fullscreen {
+  background:radial-gradient(ellipse at center,var(--archive-stage-light),transparent 68%),var(--archive-paper);
+}
+#characters .showcase-viewport:fullscreen::before {
+  inset:0;
+  width:100%;
+  height:100%;
+  aspect-ratio:auto;
+  transform:none;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:var(--archive-facet);
+  mask:url('../assets/ui/archive-triangles.svg') center / 1440px 900px repeat;
+}
+
+/* Credits continue the same paper rather than adding another bordered panel. */
+#about { background:transparent; border-top-color:var(--archive-line); box-shadow:none; }
+#about::before { display:none; }
+#about::after { opacity:.7; }
+
+@media(max-width:680px) {
+  main.container::before,
+  #characters .showcase-viewport:fullscreen::before { mask-size:864px 540px; }
+  #characters .character-workspace {
+    background:radial-gradient(ellipse at 60% 30%,var(--archive-stage-light),transparent 48%);
+  }
+}
+/* Backgrounds are deliberately static, including with reduced motion enabled. */
+@media(forced-colors:active) {
+  main.container,#characters .showcase-viewport:fullscreen { background:Canvas; }
+  main.container::before,#characters .showcase-viewport::before,
+  #characters .showcase-viewport::after { display:none; }
+  #characters .character-workspace { background:none; }
+}
