@@ -47,7 +47,13 @@ try {
     assert.equal(JSON.stringify(gltf.animations.map(c=>c.toJSON())),original,'Never mutate the source animation objects');
     if(file===momoiTarget) { dispose(root);continue; }
     if(file!==target) {
-      assert.equal(clips,gltf.animations,file+': no animation changes for other models');
+      if(file==='assets/media/models/354/CH0284.glb') {
+        // Yuuka appends missing toy scale channels, never rewrites halo/body keys.
+        gltf.animations.forEach((clip,i)=>clip.tracks.forEach((track,j)=>
+          assert.ok(clips[i].tracks[j]===track,'Yuuka original tracks remain identical')));
+        for(let i=0;i<clips.length;i++)for(const track of clips[i].tracks.slice(gltf.animations[i].tracks.length))
+          assert.match(track.name,/^bone_(?:wood|peroro_02|knife_\d{2})\.scale$/);
+      } else assert.ok(clips===gltf.animations,file+': no animation changes for other models');
       unchangedModels++;dispose(root);continue;
     }
     const halo=root.getObjectByName('HaloRoot'),mesh=root.getObjectByName('Kayoko_Original_Halo');
@@ -114,7 +120,7 @@ try {
     console.log(`PASS Kayoko: ${changed} corrected tracks, ${clips.length} clips × 3 poses, crossfade and first-fit height ${oldHeight.toFixed(6)} → ${fixedHeight.toFixed(6)}`);
   }
   assert.equal(unchangedModels,37);
-  console.log('PASS All other 37 GLBs keep their original animation arrays; source clips and non-halo keys are unchanged');
+  console.log('PASS Other 37 GLBs preserve all original tracks (Yuuka only adds toy scales); halo keys and source clips are unchanged');
 
   const brokenMomoi=await load(momoiTarget);
   bindHalo(brokenMomoi.scene);

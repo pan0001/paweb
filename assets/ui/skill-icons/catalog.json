@@ -1,0 +1,2160 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-13T12:13:48.854Z",
+  "sourceFetchedAt": "2026-09-13T12:00:00.398Z",
+  "students": {
+    "1": [
+      {
+        "name": "光之剑模块，切换！",
+        "kivoId": 108,
+        "key": "0/passive_skill/0",
+        "match": "reference",
+        "note": "本站激光模式为改编，借用同角色充能技能「光啊！」图标",
+        "sourceTitle": "光啊！",
+        "sourceTitleCn": "光啊！",
+        "source": "https://kivo.wiki/data/character/108",
+        "file": "assets/ui/skill-icons/b0023045150fbabbc0e3.png"
+      },
+      {
+        "name": "平衡崩坏！",
+        "kivoId": 108,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "平衡崩坏！",
+        "sourceTitleCn": "平衡崩坏！",
+        "source": "https://kivo.wiki/data/character/108",
+        "file": "assets/ui/skill-icons/32ff29e54e80b083911e.png"
+      },
+      {
+        "name": "强化魔法！",
+        "kivoId": 108,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "强化魔法！",
+        "sourceTitleCn": "强化魔法！",
+        "source": "https://kivo.wiki/data/character/108",
+        "file": "assets/ui/skill-icons/48df15223b3b53dbf2f9.png"
+      }
+    ],
+    "2": [
+      {
+        "name": "勇气的魔法",
+        "kivoId": 574,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "勇气的魔法",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/574",
+        "file": "assets/ui/skill-icons/1f280fc2579cbe4acf40.png"
+      },
+      {
+        "name": "觉醒：超新星",
+        "kivoId": 574,
+        "key": "0/ex_skill/0/derived/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "觉醒：超新星",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/574",
+        "file": "assets/ui/skill-icons/ca3295697b7f6061136b.png"
+      },
+      {
+        "name": "形态：阿比舒 / 永不言弃之心",
+        "kivoId": 574,
+        "key": "0/passive_skill/2",
+        "match": "composite",
+        "note": "组合被动以「形态：阿比舒」为主图标，另一部分为「决不放弃的心」",
+        "sourceTitle": "形态：阿比舒",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/574",
+        "file": "assets/ui/skill-icons/01125268a2318f227525.png"
+      }
+    ],
+    "3": [
+      {
+        "name": "有意义的交易",
+        "kivoId": 350,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "有意义的交易",
+        "sourceTitleCn": "有益的交易",
+        "source": "https://kivo.wiki/data/character/350",
+        "file": "assets/ui/skill-icons/484bbe76b6217117612a.png"
+      },
+      {
+        "name": "兴趣盎然的提案",
+        "kivoId": 350,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "十分有趣的提案",
+        "sourceTitleCn": "有趣的建议",
+        "source": "https://kivo.wiki/data/character/350",
+        "file": "assets/ui/skill-icons/69b4d9b11b8e4c196a5a.png"
+      },
+      {
+        "name": "社长的威严 / 有利的交易",
+        "kivoId": 350,
+        "key": "0/passive_skill/2",
+        "match": "composite",
+        "note": "使用组合名称中的「有利的交易」图标，不借用其他装束",
+        "sourceTitle": "有利的交易",
+        "sourceTitleCn": "有利的交易",
+        "source": "https://kivo.wiki/data/character/350",
+        "file": "assets/ui/skill-icons/4d1be3ea8dcb79bc70aa.png"
+      }
+    ],
+    "4": [
+      {
+        "name": "躲起来吧",
+        "kivoId": 35,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "隐匿",
+        "sourceTitleCn": "躲起来吧",
+        "source": "https://kivo.wiki/data/character/35",
+        "file": "assets/ui/skill-icons/410b88c89e3d3453d00a.png"
+      },
+      {
+        "name": "这也是我的力量……？",
+        "kivoId": 35,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "这也是我的力量吗...？",
+        "sourceTitleCn": "这也是我的力量...？",
+        "source": "https://kivo.wiki/data/character/35",
+        "file": "assets/ui/skill-icons/41f06fffb4c4ba20f1ef.png"
+      },
+      {
+        "name": "烟雾突袭",
+        "kivoId": 35,
+        "key": "0/passive_skill/0",
+        "match": "reference",
+        "note": "烟雾突袭为本站改编，借用同角色烟雾技能图标；避开废案EX",
+        "sourceTitle": "隐匿",
+        "sourceTitleCn": "躲起来吧",
+        "source": "https://kivo.wiki/data/character/35",
+        "file": "assets/ui/skill-icons/410b88c89e3d3453d00a.png"
+      }
+    ],
+    "5": [
+      {
+        "name": "强化战斗支援",
+        "kivoId": 140,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "强化战斗支援",
+        "sourceTitleCn": "强化战斗支援",
+        "source": "https://kivo.wiki/data/character/140",
+        "file": "assets/ui/skill-icons/809eb1cb0dbcc78a4bc7.png"
+      },
+      {
+        "name": "战斗用A型能量剂",
+        "kivoId": 140,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "战斗用A型能量剂",
+        "sourceTitleCn": "战斗用A型能量剂",
+        "source": "https://kivo.wiki/data/character/140",
+        "file": "assets/ui/skill-icons/577f543ddf4e6c2a8eec.png"
+      },
+      {
+        "name": "医疗负责人的严谨",
+        "kivoId": 140,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "救护担当的谨慎",
+        "sourceTitleCn": "医疗负责人的严谨",
+        "source": "https://kivo.wiki/data/character/140",
+        "file": "assets/ui/skill-icons/3fc3ad89d2a7d4d381d1.png"
+      }
+    ],
+    "6": [
+      {
+        "name": "会有点痛哦~",
+        "kivoId": 84,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "会有点痛哦~",
+        "sourceTitleCn": "会有点痛哦~",
+        "source": "https://kivo.wiki/data/character/84",
+        "file": "assets/ui/skill-icons/ce8f314ba94cadaa83bb.png"
+      },
+      {
+        "name": "可能会痛哦~",
+        "kivoId": 84,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "这个可能会痛喔～",
+        "sourceTitleCn": "可能会痛哦~",
+        "source": "https://kivo.wiki/data/character/84",
+        "file": "assets/ui/skill-icons/777a4955ce8222d924e5.png"
+      },
+      {
+        "name": "要射击啦~",
+        "kivoId": 84,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "开枪咯~",
+        "sourceTitleCn": "要射击啦~",
+        "source": "https://kivo.wiki/data/character/84",
+        "file": "assets/ui/skill-icons/2b0c77c791e053ffe0a5.png"
+      }
+    ],
+    "7": [
+      {
+        "name": "一触即发",
+        "kivoId": 192,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "一触即发",
+        "sourceTitleCn": "一触即发",
+        "source": "https://kivo.wiki/data/character/192",
+        "file": "assets/ui/skill-icons/3852ccdb6e28d39849ae.png"
+      },
+      {
+        "name": "混乱射击",
+        "kivoId": 192,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "混乱射击",
+        "sourceTitleCn": "混乱射击",
+        "source": "https://kivo.wiki/data/character/192",
+        "file": "assets/ui/skill-icons/4910d4843f52bda6f0a5.png"
+      },
+      {
+        "name": "我，我会加油的",
+        "kivoId": 192,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "我，我会加油的！",
+        "sourceTitleCn": "我，我会加油的！",
+        "source": "https://kivo.wiki/data/character/192",
+        "file": "assets/ui/skill-icons/e0c5ae44ff020388e4d3.png"
+      }
+    ],
+    "8": [
+      {
+        "name": "美食家的信念",
+        "kivoId": 145,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "美食家的信念",
+        "sourceTitleCn": "美食家的信念",
+        "source": "https://kivo.wiki/data/character/145",
+        "file": "assets/ui/skill-icons/185cce4d3b31341d5362.png"
+      },
+      {
+        "name": "美食家的愤怒",
+        "kivoId": 145,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "美食家之怒",
+        "sourceTitleCn": "美食家的愤怒",
+        "source": "https://kivo.wiki/data/character/145",
+        "file": "assets/ui/skill-icons/9b441f29afb79b672b35.png"
+      },
+      {
+        "name": "美食家的严谨",
+        "kivoId": 145,
+        "key": "0/passive_skill/2",
+        "match": "reference",
+        "note": "本站标记被动无同名原作技能，借用同装束攻击附带减益的辅助技能图标",
+        "sourceTitle": "饯别酥饼",
+        "sourceTitleCn": "送别时的甜点",
+        "source": "https://kivo.wiki/data/character/145",
+        "file": "assets/ui/skill-icons/edb0c6d13d28ed707c9a.png"
+      }
+    ],
+    "9": [
+      {
+        "name": "佩洛洛大人的助威",
+        "kivoId": 74,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "佩洛洛大人的应援",
+        "sourceTitleCn": "佩洛洛大人的助威",
+        "source": "https://kivo.wiki/data/character/74",
+        "file": "assets/ui/skill-icons/a57ee2a55e33d35343b8.png"
+      },
+      {
+        "name": "佩洛洛大人，快帮帮我！",
+        "kivoId": 74,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "帮帮我，佩洛洛大人！",
+        "sourceTitleCn": "佩洛洛大人，快帮帮我！",
+        "source": "https://kivo.wiki/data/character/74",
+        "file": "assets/ui/skill-icons/63fb18ede7ce5b92048c.png"
+      },
+      {
+        "name": "佩洛洛大人的应援",
+        "kivoId": 74,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "助威与应援是同一原作技能的不同译名，本站两项共用对应图标",
+        "sourceTitle": "佩洛洛大人的应援",
+        "sourceTitleCn": "佩洛洛大人的助威",
+        "source": "https://kivo.wiki/data/character/74",
+        "file": "assets/ui/skill-icons/a57ee2a55e33d35343b8.png"
+      }
+    ],
+    "10": [
+      {
+        "name": "预定大活跃~",
+        "kivoId": 365,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "预定大活跃~",
+        "sourceTitleCn": "准备大显身手~",
+        "source": "https://kivo.wiki/data/character/365",
+        "file": "assets/ui/skill-icons/1b0e6fa127f5eca59dd2.png"
+      },
+      {
+        "name": "剪票的时间",
+        "kivoId": 365,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "剪票的时间",
+        "sourceTitleCn": "检票☆时间",
+        "source": "https://kivo.wiki/data/character/365",
+        "file": "assets/ui/skill-icons/8e1605e5d366cc4280f4.png"
+      },
+      {
+        "name": "行驶准备~",
+        "kivoId": 365,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "行驶准备~",
+        "sourceTitleCn": "运行准备",
+        "source": "https://kivo.wiki/data/character/365",
+        "file": "assets/ui/skill-icons/3fba7f3a0c5ad8b5e266.png"
+      }
+    ],
+    "11": [
+      {
+        "name": "周密准备",
+        "kivoId": 346,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "准备充分",
+        "sourceTitleCn": "一丝不苟的准备",
+        "source": "https://kivo.wiki/data/character/346",
+        "file": "assets/ui/skill-icons/b949ecb79754d4a1adde.png"
+      },
+      {
+        "name": "开幕演出：伊施波设",
+        "kivoId": 346,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "开演：伊施波设",
+        "sourceTitleCn": "开演：伊施波设",
+        "source": "https://kivo.wiki/data/character/346",
+        "file": "assets/ui/skill-icons/457c950085393756d65a.png"
+      },
+      {
+        "name": "投入演奏的心情",
+        "kivoId": 346,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "期望演奏的心",
+        "sourceTitleCn": "演奏前的心情",
+        "source": "https://kivo.wiki/data/character/346",
+        "file": "assets/ui/skill-icons/49f476e18c2f65aa29c9.png"
+      }
+    ],
+    "12": [
+      {
+        "name": "更换护板",
+        "kivoId": 373,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "更换防弹插板",
+        "sourceTitleCn": "更换护甲",
+        "source": "https://kivo.wiki/data/character/373",
+        "file": "assets/ui/skill-icons/e6967e96b0924f5b9818.png"
+      },
+      {
+        "name": "防御姿态强化",
+        "kivoId": 373,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "防御姿势强化",
+        "sourceTitleCn": "加强防御态势",
+        "source": "https://kivo.wiki/data/character/373",
+        "file": "assets/ui/skill-icons/b809fa27fda8c2257aec.png"
+      },
+      {
+        "name": "钢铁荷鲁斯近战系统",
+        "kivoId": 373,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "采用持盾防御形态，不使用攻击形态的技能图标",
+        "sourceTitle": "近距离战斗系统",
+        "sourceTitleCn": "近战战斗系统",
+        "source": "https://kivo.wiki/data/character/373",
+        "file": "assets/ui/skill-icons/0e94d40cf153b956cd7d.png"
+      }
+    ],
+    "13": [
+      {
+        "name": "不可以当坏孩子！",
+        "kivoId": 136,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "不能当坏孩子唷",
+        "sourceTitleCn": "不许做坏事哦！",
+        "source": "https://kivo.wiki/data/character/136",
+        "file": "assets/ui/skill-icons/39f8cd85cf335871fbb3.png"
+      },
+      {
+        "name": "伊吹的绘画时间！",
+        "kivoId": 136,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "使用通常形态绘画技能，不使用搭乘虎丸的EX",
+        "sourceTitle": "（通常）伊吹的绘画时间",
+        "sourceTitleCn": "伊吹的绘画时间！",
+        "source": "https://kivo.wiki/data/character/136",
+        "file": "assets/ui/skill-icons/928a7598777e65043a34.png"
+      },
+      {
+        "name": "万魔殿的吉祥物",
+        "kivoId": 136,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "万魔殿的吉祥物",
+        "sourceTitleCn": "万魔殿的可爱吉祥物",
+        "source": "https://kivo.wiki/data/character/136",
+        "file": "assets/ui/skill-icons/ffe8e8ff3160a4f73a01.png"
+      }
+    ],
+    "14": [
+      {
+        "name": "泉奈忍法帖！",
+        "kivoId": 46,
+        "key": "0/passive_skill/0",
+        "match": "reference",
+        "note": "本站传送飞镖为改编；借用泳装版本忍术图标，不当作原作传送技能",
+        "sourceTitle": "泉奈流忍法！吹泡泡之术！",
+        "sourceTitleCn": "泉奈流忍术！咕嘟咕嘟之术！",
+        "source": "https://kivo.wiki/data/character/46",
+        "file": "assets/ui/skill-icons/1ef2bb2efd3451ed0169.png"
+      },
+      {
+        "name": "泉奈流忍法·夏天版",
+        "kivoId": 46,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "泉奈流忍法．夏日Ver.",
+        "sourceTitleCn": "夏日版·泉奈流忍术",
+        "source": "https://kivo.wiki/data/character/46",
+        "file": "assets/ui/skill-icons/1b0172a55ba2b20dcd9a.png"
+      },
+      {
+        "name": "忍者的自我修养",
+        "kivoId": 46,
+        "key": "0/passive_skill/1",
+        "match": "reference",
+        "note": "本站自我回复被动无同名技能，借用本装束被动图标",
+        "sourceTitle": "主公！夏天到了！",
+        "sourceTitleCn": "主公！夏天到了！",
+        "source": "https://kivo.wiki/data/character/46",
+        "file": "assets/ui/skill-icons/28f5704fbf857c5d60f4.png"
+      }
+    ],
+    "15": [
+      {
+        "name": "影子射击",
+        "kivoId": 176,
+        "key": "0/passive_skill/0",
+        "match": "reference",
+        "note": "影子射击是本站改名，按同角色特殊射击演出参考Panic Shot恐慌射击图标",
+        "sourceTitle": "Panic Shot",
+        "sourceTitleCn": "恐慌射击",
+        "source": "https://kivo.wiki/data/character/176",
+        "file": "assets/ui/skill-icons/b0aeeca99bb909d94958.png"
+      },
+      {
+        "name": "恐惧使者",
+        "kivoId": 176,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "对应Panic Bringer恐慌传播者",
+        "sourceTitle": "Panic Bringer",
+        "sourceTitleCn": "恐慌传播者",
+        "source": "https://kivo.wiki/data/character/176",
+        "file": "assets/ui/skill-icons/09553244ac597378e503.png"
+      },
+      {
+        "name": "可怕的表情 / 没办法……",
+        "kivoId": 176,
+        "key": "0/passive_skill/1",
+        "match": "composite",
+        "note": "组合被动以「可怕的表情」为主图标，另一部分为「没办法」",
+        "sourceTitle": "可怕的表情",
+        "sourceTitleCn": "凶狠的面相",
+        "source": "https://kivo.wiki/data/character/176",
+        "file": "assets/ui/skill-icons/d30e078d52365adbe1a8.png"
+      }
+    ],
+    "16": [
+      {
+        "name": "此处的我",
+        "kivoId": 518,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "存在于此的我",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/518",
+        "file": "assets/ui/skill-icons/970c4de02fa89ce63426.png"
+      },
+      {
+        "name": "想惹怒我是吧！？",
+        "kivoId": 518,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "生气了哦！？",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/518",
+        "file": "assets/ui/skill-icons/ffc7ad0cf93a9843b7d1.png"
+      },
+      {
+        "name": "并肩同行的伙伴",
+        "kivoId": 518,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "同行的伙伴",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/518",
+        "file": "assets/ui/skill-icons/f50994a743d3d224d6eb.png"
+      }
+    ],
+    "17": [
+      {
+        "name": "知己知彼，百战不殆",
+        "kivoId": 320,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "知己知彼百战不殆",
+        "sourceTitleCn": "知彼知己，百战不殆",
+        "source": "https://kivo.wiki/data/character/320",
+        "file": "assets/ui/skill-icons/0324f42b202ba5be30a3.png"
+      },
+      {
+        "name": "神机妙算的一着",
+        "kivoId": 320,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "神机妙算的一手",
+        "sourceTitleCn": "神机妙算的一着",
+        "source": "https://kivo.wiki/data/character/320",
+        "file": "assets/ui/skill-icons/861e36f17b1b7207990b.png"
+      },
+      {
+        "name": "风林火山之策",
+        "kivoId": 320,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "风林火山的计谋",
+        "sourceTitleCn": "风林火山之策",
+        "source": "https://kivo.wiki/data/character/320",
+        "file": "assets/ui/skill-icons/4c6b0d2bb39637d00aa2.png"
+      }
+    ],
+    "18": [
+      {
+        "name": "我很期待下回的表现哦！",
+        "kivoId": 4,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "期待下一次的表现唷！",
+        "sourceTitleCn": "下次也要再接再厉哦！",
+        "source": "https://kivo.wiki/data/character/4",
+        "file": "assets/ui/skill-icons/97f669f832a6d4402691.png"
+      },
+      {
+        "name": "做得真棒！",
+        "kivoId": 4,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "做得非常好！",
+        "sourceTitleCn": "做得真棒！",
+        "source": "https://kivo.wiki/data/character/4",
+        "file": "assets/ui/skill-icons/33cb58bf8a9f4c78d3bd.png"
+      },
+      {
+        "name": "梅花园的指导法",
+        "kivoId": 4,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "梅花园的指导方针",
+        "sourceTitleCn": "梅花园的教育之道",
+        "source": "https://kivo.wiki/data/character/4",
+        "file": "assets/ui/skill-icons/3b1e1a49a1cd7d929845.png"
+      }
+    ],
+    "19": [
+      {
+        "name": "突袭！",
+        "kivoId": 66,
+        "key": "0/passive_skill/0",
+        "match": "reference",
+        "note": "本站突袭为原创改编，参考同角色攻势转换图标",
+        "sourceTitle": "攻势转换",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/66",
+        "file": "assets/ui/skill-icons/95295789c1bea705ea8a.png"
+      },
+      {
+        "name": "推进！",
+        "kivoId": 66,
+        "key": "0/ex_skill/0",
+        "match": "reference",
+        "note": "本站闪光弹推进不等同原作EX，借用同角色盾牌主题EX图标",
+        "sourceTitle": "防护盾，展开",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/66",
+        "file": "assets/ui/skill-icons/a3513a697fc887e0347f.png"
+      },
+      {
+        "name": "闪战核心",
+        "kivoId": 66,
+        "key": "0/passive_skill/1",
+        "match": "reference",
+        "note": "本站闪战核心参考同角色防御被动图标",
+        "sourceTitle": "陶瓷装甲板",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/66",
+        "file": "assets/ui/skill-icons/e3474c0f6169ae715d6d.png"
+      }
+    ],
+    "20": [
+      {
+        "name": "慈爱的飞吻",
+        "kivoId": 498,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "慈爱的飞吻",
+        "sourceTitleCn": "慈爱的飞吻",
+        "source": "https://kivo.wiki/data/character/498",
+        "file": "assets/ui/skill-icons/42d820fc164e52abc125.png"
+      },
+      {
+        "name": "洋溢的心意",
+        "kivoId": 498,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "溢出的爱心",
+        "sourceTitleCn": "满溢的爱心",
+        "source": "https://kivo.wiki/data/character/498",
+        "file": "assets/ui/skill-icons/737a537f52bb77640287.png"
+      },
+      {
+        "name": "请喝水吧",
+        "kivoId": 498,
+        "key": "0/passive_skill/1",
+        "match": "reference",
+        "note": "原作无投放水瓶技能，借用同装束治疗强化被动图标",
+        "sourceTitle": "不懈的努力",
+        "sourceTitleCn": "不绝的努力",
+        "source": "https://kivo.wiki/data/character/498",
+        "file": "assets/ui/skill-icons/8ec012fff366cd6e4184.png"
+      }
+    ],
+    "21": [
+      {
+        "name": "审美锤炼",
+        "kivoId": 27,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "洗练的品味",
+        "sourceTitleCn": "艺术润色",
+        "source": "https://kivo.wiki/data/character/27",
+        "file": "assets/ui/skill-icons/3d09db3d0538854bd8f1.png"
+      },
+      {
+        "name": "绘画艺术",
+        "kivoId": 27,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "Drawing Art",
+        "sourceTitleCn": "绘画艺术",
+        "source": "https://kivo.wiki/data/character/27",
+        "file": "assets/ui/skill-icons/50de6ac3861c6667a641.png"
+      },
+      {
+        "name": "艺术家灵感",
+        "kivoId": 27,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "Artist Inspiration",
+        "sourceTitleCn": "艺术家的灵感",
+        "source": "https://kivo.wiki/data/character/27",
+        "file": "assets/ui/skill-icons/16216e3085cb19eea96b.png"
+      }
+    ],
+    "22": [
+      {
+        "name": "星之呼唤",
+        "kivoId": 1,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "星之呼唤",
+        "sourceTitleCn": "星之呼唤",
+        "source": "https://kivo.wiki/data/character/1",
+        "file": "assets/ui/skill-icons/6b2e171913737fea57b0.png"
+      },
+      {
+        "name": "Kyrie Eleison",
+        "kivoId": 1,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "「Kyrie Eleison」",
+        "sourceTitleCn": "Kyrie Eleison",
+        "source": "https://kivo.wiki/data/character/1",
+        "file": "assets/ui/skill-icons/4e0933cfbf17a84805d8.png"
+      },
+      {
+        "name": "祝福",
+        "kivoId": 1,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "祝福对应拉丁名Benedictio",
+        "sourceTitle": "「Benedictio」",
+        "sourceTitleCn": "Benedictio",
+        "source": "https://kivo.wiki/data/character/1",
+        "file": "assets/ui/skill-icons/f01afe0b008c88c1145f.png"
+      }
+    ],
+    "23": [
+      {
+        "name": "严峻的宣告",
+        "kivoId": 500,
+        "key": "0/passive_skill/0",
+        "match": "reference",
+        "note": "按偶像装束的单体射击与应援棒消耗主题对应，原作名为非你不可",
+        "sourceTitle": "决定是你了",
+        "sourceTitleCn": "非你不可",
+        "source": "https://kivo.wiki/data/character/500",
+        "file": "assets/ui/skill-icons/8a7f260fbaa7db2bbe7a.png"
+      },
+      {
+        "name": "超级偶像降临",
+        "kivoId": 500,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "超级偶像着陆",
+        "sourceTitleCn": "超级偶像之跃",
+        "source": "https://kivo.wiki/data/character/500",
+        "file": "assets/ui/skill-icons/dc14027aa92b2567929b.png"
+      },
+      {
+        "name": "粉丝的应援",
+        "kivoId": 500,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "粉丝的声援",
+        "sourceTitleCn": "粉丝的声援",
+        "source": "https://kivo.wiki/data/character/500",
+        "file": "assets/ui/skill-icons/e4263279c5c38a049b45.png"
+      }
+    ],
+    "24": [
+      {
+        "name": "严守截稿日",
+        "kivoId": 2,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "严守截稿日",
+        "sourceTitleCn": "严守截稿日",
+        "source": "https://kivo.wiki/data/character/2",
+        "file": "assets/ui/skill-icons/b1806a1e4eb08027b448.png"
+      },
+      {
+        "name": "创作的痛苦",
+        "kivoId": 2,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "创作的痛苦",
+        "sourceTitleCn": "创作的痛苦",
+        "source": "https://kivo.wiki/data/character/2",
+        "file": "assets/ui/skill-icons/9b9e9f31492cb3fa0f36.png"
+      },
+      {
+        "name": "结果好，万事好",
+        "kivoId": 2,
+        "key": "0/passive_skill/2",
+        "match": "reference",
+        "note": "原作无结果好万事好技能，借用同角色辅助技能图标",
+        "sourceTitle": "开发者协同效应：绿",
+        "sourceTitleCn": "开发者协同效应：绿",
+        "source": "https://kivo.wiki/data/character/2",
+        "file": "assets/ui/skill-icons/8d2cc1ed4fd907319f2f.png"
+      }
+    ],
+    "25": [
+      {
+        "name": "爆裂咏叹调",
+        "kivoId": 107,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "爆裂咏叹调",
+        "sourceTitleCn": "爆裂咏叹调",
+        "source": "https://kivo.wiki/data/character/107",
+        "file": "assets/ui/skill-icons/dd1751ce657208c7c034.png"
+      },
+      {
+        "name": "灼热小夜曲",
+        "kivoId": 107,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "灼热小夜曲",
+        "sourceTitleCn": "灼热小夜曲",
+        "source": "https://kivo.wiki/data/character/107",
+        "file": "assets/ui/skill-icons/06b51652fbba0f7ad124.png"
+      },
+      {
+        "name": "爆破专家",
+        "kivoId": 107,
+        "key": "0/passive_skill/1",
+        "match": "reference",
+        "note": "爆破专家为本站改编，借用本角色攻击强化被动图标",
+        "sourceTitle": "大闹一场吧！",
+        "sourceTitleCn": "玩得开心一点吧！",
+        "source": "https://kivo.wiki/data/character/107",
+        "file": "assets/ui/skill-icons/a4f3c31ca21266dd7eb5.png"
+      }
+    ],
+    "26": [
+      {
+        "name": "锦上添花",
+        "kivoId": 254,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "锦上添花",
+        "sourceTitleCn": "锦上添花",
+        "source": "https://kivo.wiki/data/character/254",
+        "file": "assets/ui/skill-icons/6d706116c58ef939c2d2.png"
+      },
+      {
+        "name": "樱花烂漫",
+        "kivoId": 254,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "樱花烂漫",
+        "sourceTitleCn": "百花烂漫",
+        "source": "https://kivo.wiki/data/character/254",
+        "file": "assets/ui/skill-icons/c8d8db5f16056b1712a7.png"
+      },
+      {
+        "name": "穿透黄昏的言灵",
+        "kivoId": 254,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "击穿黄昏的言灵",
+        "sourceTitleCn": "穿透黄昏之语",
+        "source": "https://kivo.wiki/data/character/254",
+        "file": "assets/ui/skill-icons/4b82e13201c8fb79926b.png"
+      }
+    ],
+    "27": [
+      {
+        "name": "来口这个吧！",
+        "kivoId": 139,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "吃了这个打起精神来",
+        "sourceTitleCn": "来口这个吧！",
+        "source": "https://kivo.wiki/data/character/139",
+        "file": "assets/ui/skill-icons/923be8ad8c88201067a8.png"
+      },
+      {
+        "name": "秘藏王牌",
+        "kivoId": 139,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "为了这种时候准备的",
+        "sourceTitleCn": "秘藏王牌",
+        "source": "https://kivo.wiki/data/character/139",
+        "file": "assets/ui/skill-icons/9ba53a92e60f5b77c6ba.png"
+      },
+      {
+        "name": "填满嘴巴的幸福感",
+        "kivoId": 139,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "满嘴的幸福",
+        "sourceTitleCn": "填满嘴巴的幸福感",
+        "source": "https://kivo.wiki/data/character/139",
+        "file": "assets/ui/skill-icons/ccb8ad3910f18d9c4551.png"
+      }
+    ],
+    "28": [
+      {
+        "name": "冲锋号令",
+        "kivoId": 65,
+        "key": "0/ex_skill/0",
+        "match": "reference",
+        "note": "冲锋号令无同名原作技能，借用本角色团队支援EX图标",
+        "sourceTitle": "CSAR",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/65",
+        "file": "assets/ui/skill-icons/329ace47d3365c744d2a.png"
+      },
+      {
+        "name": "穹顶展开",
+        "kivoId": 65,
+        "key": "0/ex_skill/0",
+        "match": "reference",
+        "note": "穹顶护盾为本站改编，借用本角色团队支援EX图标，不等同原作效果",
+        "sourceTitle": "CSAR",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/65",
+        "file": "assets/ui/skill-icons/329ace47d3365c744d2a.png"
+      },
+      {
+        "name": "战术整备",
+        "kivoId": 65,
+        "key": "0/passive_skill/1",
+        "match": "reference",
+        "note": "战术整备为本站改编，借用同角色火器熟练图标",
+        "sourceTitle": "火器熟练",
+        "sourceTitleCn": "",
+        "source": "https://kivo.wiki/data/character/65",
+        "file": "assets/ui/skill-icons/07f02cd9b9cf5b692edb.png"
+      }
+    ],
+    "29": [
+      {
+        "name": "嘘，要关灯了",
+        "kivoId": 506,
+        "key": "0/ex_skill/1",
+        "match": "name",
+        "note": "采用嘘要熄灯了变体，而非第一种EX",
+        "sourceTitle": "嘘，要熄灯了",
+        "sourceTitleCn": "嘘，熄灯了",
+        "source": "https://kivo.wiki/data/character/506",
+        "file": "assets/ui/skill-icons/52b1f2c8282af135679c.png"
+      },
+      {
+        "name": "心仪的枕头",
+        "kivoId": 506,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "最喜欢的枕头",
+        "sourceTitleCn": "依恋的枕头",
+        "source": "https://kivo.wiki/data/character/506",
+        "file": "assets/ui/skill-icons/98c27b798610cdd68ac4.png"
+      },
+      {
+        "name": "睡意传递",
+        "kivoId": 506,
+        "key": "0/passive_skill/0",
+        "match": "reference",
+        "note": "睡意传递无同名原作技能，借用同装束枕头主题图标",
+        "sourceTitle": "最喜欢的枕头",
+        "sourceTitleCn": "依恋的枕头",
+        "source": "https://kivo.wiki/data/character/506",
+        "file": "assets/ui/skill-icons/98c27b798610cdd68ac4.png"
+      }
+    ],
+    "30": [
+      {
+        "name": "这边这边！",
+        "kivoId": 366,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "这里这里～！",
+        "sourceTitleCn": "这边这边~！",
+        "source": "https://kivo.wiki/data/character/366",
+        "file": "assets/ui/skill-icons/ae1158fd8f29e740e0d7.png"
+      },
+      {
+        "name": "启动助推器！",
+        "kivoId": 366,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "助推启动！",
+        "sourceTitleCn": "Booster on！",
+        "source": "https://kivo.wiki/data/character/366",
+        "file": "assets/ui/skill-icons/1db760623bf319705b39.png"
+      },
+      {
+        "name": "出发前进！",
+        "kivoId": 366,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "出发！",
+        "sourceTitleCn": "立刻出发！",
+        "source": "https://kivo.wiki/data/character/366",
+        "file": "assets/ui/skill-icons/99d5d0078049a162a3f5.png"
+      }
+    ],
+    "31": [
+      {
+        "name": "胜利的POSE！",
+        "kivoId": 142,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "胜利的姿势！",
+        "sourceTitleCn": "胜利的POSE！",
+        "source": "https://kivo.wiki/data/character/142",
+        "file": "assets/ui/skill-icons/0faaacf648b473f6c185.png"
+      },
+      {
+        "name": "收下战书吧！",
+        "kivoId": 142,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "请收下我的挑战书！",
+        "sourceTitleCn": "收下战书吧！",
+        "source": "https://kivo.wiki/data/character/142",
+        "file": "assets/ui/skill-icons/d0d2baf31add08016c02.png"
+      },
+      {
+        "name": "宇泽玲纱的存在感",
+        "kivoId": 142,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "宇泽玲纱的存在感",
+        "sourceTitleCn": "宇泽玲纱的存在感",
+        "source": "https://kivo.wiki/data/character/142",
+        "file": "assets/ui/skill-icons/40c74f242878ec2a7871.png"
+      }
+    ],
+    "32": [
+      {
+        "name": "你是最棒的",
+        "kivoId": 499,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "你是最棒的",
+        "sourceTitleCn": "比任何人都可爱",
+        "source": "https://kivo.wiki/data/character/499",
+        "file": "assets/ui/skill-icons/78ff9a419cc3c75fc3ac.png"
+      },
+      {
+        "name": "反差萌",
+        "kivoId": 499,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "反差萌",
+        "sourceTitleCn": "反差萌偶像",
+        "source": "https://kivo.wiki/data/character/499",
+        "file": "assets/ui/skill-icons/8eeb45b6e2f12c5a1c28.png"
+      },
+      {
+        "name": "为大家声援",
+        "kivoId": 499,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "大家的声援",
+        "sourceTitleCn": "相互鼓励",
+        "source": "https://kivo.wiki/data/character/499",
+        "file": "assets/ui/skill-icons/33929177a464511b4805.png"
+      }
+    ],
+    "33": [
+      {
+        "name": "来一杯，如何？",
+        "kivoId": 106,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "要来一杯吗？",
+        "sourceTitleCn": "来点儿？",
+        "source": "https://kivo.wiki/data/character/106",
+        "file": "assets/ui/skill-icons/228c7a0099d266e6da31.png"
+      },
+      {
+        "name": "时雨特制酒瓶手榴弹",
+        "kivoId": 106,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "时雨特制燃烧瓶",
+        "sourceTitleCn": "时雨特制酒瓶燃烧弹",
+        "source": "https://kivo.wiki/data/character/106",
+        "file": "assets/ui/skill-icons/3af9bdaade055b526e82.png"
+      },
+      {
+        "name": "甜蜜发酵",
+        "kivoId": 106,
+        "key": "0/passive_skill/1",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "甘甜佳酿",
+        "sourceTitleCn": "甜蜜发酵",
+        "source": "https://kivo.wiki/data/character/106",
+        "file": "assets/ui/skill-icons/f7f099f19613d2210e43.png"
+      }
+    ],
+    "34": [
+      {
+        "name": "智者的助言",
+        "kivoId": 43,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "智者的建议",
+        "sourceTitleCn": "锐利建言",
+        "source": "https://kivo.wiki/data/character/43",
+        "file": "assets/ui/skill-icons/abf8b50b46d534d815f3.png"
+      },
+      {
+        "name": "微寐之庭",
+        "kivoId": 43,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "小憩之庭",
+        "sourceTitleCn": "花园的拥抱",
+        "source": "https://kivo.wiki/data/character/43",
+        "file": "assets/ui/skill-icons/9c4e94310cba143eab46.png"
+      },
+      {
+        "name": "智者的直觉",
+        "kivoId": 43,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "智者的直觉",
+        "sourceTitleCn": "直觉的拥抱",
+        "source": "https://kivo.wiki/data/character/43",
+        "file": "assets/ui/skill-icons/f7aed2830c40db7b8c01.png"
+      }
+    ],
+    "35": [
+      {
+        "name": "传授知识",
+        "kivoId": 23,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "传授知识",
+        "sourceTitleCn": "传授知识",
+        "source": "https://kivo.wiki/data/character/23",
+        "file": "assets/ui/skill-icons/070899e13eb0404d3054.png"
+      },
+      {
+        "name": "古书专家",
+        "kivoId": 23,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "古书专家",
+        "sourceTitleCn": "古书专家",
+        "source": "https://kivo.wiki/data/character/23",
+        "file": "assets/ui/skill-icons/74aa7e48c65a41a9daec.png"
+      },
+      {
+        "name": "神经过敏",
+        "kivoId": 23,
+        "key": "0/passive_skill/2",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "神经过敏",
+        "sourceTitleCn": "神经过敏",
+        "source": "https://kivo.wiki/data/character/23",
+        "file": "assets/ui/skill-icons/37a7bce8771cdde6adce.png"
+      }
+    ],
+    "36": [
+      {
+        "name": "夜间护理",
+        "kivoId": 505,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "夜间护理",
+        "sourceTitleCn": "助眠护理",
+        "source": "https://kivo.wiki/data/character/505",
+        "file": "assets/ui/skill-icons/f95020c2d3276d292323.png"
+      },
+      {
+        "name": "佩洛洛大人千钧一发！",
+        "kivoId": 505,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "佩洛洛大人千钧一发！",
+        "sourceTitleCn": "佩洛洛大人千钧一发！",
+        "source": "https://kivo.wiki/data/character/505",
+        "file": "assets/ui/skill-icons/29cf54524fdedafa3b26.png"
+      },
+      {
+        "name": "惊醒的梦",
+        "kivoId": 505,
+        "key": "0/passive_skill/2",
+        "match": "reference",
+        "note": "惊醒的梦含本站复活机制，仅参考同装束醒来主题辅助技能图标",
+        "sourceTitle": "慵懒地醒来",
+        "sourceTitleCn": "小睡后的慵懒",
+        "source": "https://kivo.wiki/data/character/505",
+        "file": "assets/ui/skill-icons/362c288c7e2ae815756e.png"
+      }
+    ],
+    "37": [
+      {
+        "name": "达成连击！",
+        "kivoId": 81,
+        "key": "0/passive_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "连续Combo！",
+        "sourceTitleCn": "打出COMBO！",
+        "source": "https://kivo.wiki/data/character/81",
+        "file": "assets/ui/skill-icons/501f85bdd7b017741a57.png"
+      },
+      {
+        "name": "游戏开始！",
+        "kivoId": 81,
+        "key": "0/ex_skill/0",
+        "match": "name",
+        "note": "",
+        "sourceTitle": "Game Start!",
+        "sourceTitleCn": "游戏开始！",
+        "source": "https://kivo.wiki/data/character/81",
+        "file": "assets/ui/skill-icons/9902029e4ca54df88b39.png"
+      },
+      {
+        "name": "精确制导",
+        "kivoId": 81,
+        "key": "0/passive_skill/1",
+        "match": "reference",
+        "note": "原作无精确制导能力，借用本角色被动图标，不替换本站引导点机制",
+        "sourceTitle": "Debug中……",
+        "sourceTitleCn": "正在检查调试……",
+        "source": "https://kivo.wiki/data/character/81",
+        "file": "assets/ui/skill-icons/bfbbc294f3fa0a494f69.png"
+      }
+    ]
+  },
+  "files": [
+    {
+      "file": "assets/ui/skill-icons/b0023045150fbabbc0e3.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%A4%A9%E7%AB%A5%20%E7%88%B1%E4%B8%BD%E4%B8%9D/skill_icon/ROeAKyDmhVME4yVsfZXHQmA5xmpTbJ8e.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2411,
+      "sha256": "bd2bff86adb8b84516aec85e4d7a6c7fdfa6fe9b8c354a7e76c2bc6b82254afc"
+    },
+    {
+      "file": "assets/ui/skill-icons/32ff29e54e80b083911e.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%A4%A9%E7%AB%A5%20%E7%88%B1%E4%B8%BD%E4%B8%9D/skill_icon/wQvanjxNSXLlKYPvJ6s0tRwZrcAiBag7.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2607,
+      "sha256": "0da27812336fb505bf968f8ab25c30b05dc19ceee78fd23fe000cc6248c1dcfc"
+    },
+    {
+      "file": "assets/ui/skill-icons/48df15223b3b53dbf2f9.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%A4%A9%E7%AB%A5%20%E7%88%B1%E4%B8%BD%E4%B8%9D/skill_icon/XdFE2qK5qrR6RJMeMzjSZr7KliXfUJnH.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/1f280fc2579cbe4acf40.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%A4%A9%E7%AB%A5%20%E7%88%B1%E4%B8%BD%E4%B8%9D/%E4%B8%B4%E6%88%98/skill_icon/vRHdAreJkVHlPkefaYue4CvAe25N7KKT.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3071,
+      "sha256": "3bce47abdc0d4e3ab33675139c63c8cf98ff9d0a8a14d6b013504351a0012484"
+    },
+    {
+      "file": "assets/ui/skill-icons/ca3295697b7f6061136b.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%A4%A9%E7%AB%A5%20%E7%88%B1%E4%B8%BD%E4%B8%9D/%E4%B8%B4%E6%88%98/skill_icon/z5741GbbTf9WhSGCKbNWBqLRRimwXRi7.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2656,
+      "sha256": "6e3f0e08a476b28fe7cea1244c5082a07724e3ac39a2f41d6efd39f22cbfe233"
+    },
+    {
+      "file": "assets/ui/skill-icons/01125268a2318f227525.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%A4%A9%E7%AB%A5%20%E7%88%B1%E4%B8%BD%E4%B8%9D/%E4%B8%B4%E6%88%98/skill_icon/NYPA1lOnpwvV6W3WhZ0egg6481c1kcu9.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4696,
+      "sha256": "89fb554e2ee3e9311765bbba0b8a206f997c007fa84a4e0d1cc22386d6232a6a"
+    },
+    {
+      "file": "assets/ui/skill-icons/484bbe76b6217117612a.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%99%86%E5%85%AB%E9%AD%94%20%E9%98%BF%E9%9C%B2/%E7%A4%BC%E6%9C%8D/skill_icon/OVUZydVIxDRsB5k8FENHPAAOzgmqX56s.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3413,
+      "sha256": "9f0d3b9be83732260426b220baf96f2d2a6b01198f64bda2463d7b4e8bd81a2e"
+    },
+    {
+      "file": "assets/ui/skill-icons/69b4d9b11b8e4c196a5a.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%99%86%E5%85%AB%E9%AD%94%20%E9%98%BF%E9%9C%B2/%E7%A4%BC%E6%9C%8D/skill_icon/C1NMZKKKAimTcshz1G1hlUj1POmiWmb2.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4933,
+      "sha256": "3b61847f33c0f04b116b41d6915f58095c6694c32f2aae1137d2b7638bbb75a4"
+    },
+    {
+      "file": "assets/ui/skill-icons/4d1be3ea8dcb79bc70aa.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%99%86%E5%85%AB%E9%AD%94%20%E9%98%BF%E9%9C%B2/%E7%A4%BC%E6%9C%8D/skill_icon/4biVHehUEpCNote7vCfpLDcDUT2rbH8j.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3505,
+      "sha256": "060520c556de2382ab23619f866efbbef2a7b4fce730c19299c39f7cb56ef002"
+    },
+    {
+      "file": "assets/ui/skill-icons/410b88c89e3d3453d00a.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%A7%A4%20%E4%BA%9A%E6%B4%A5%E5%AD%90/skill_icon/qOTFm19lRJiiX7IVxcvuVEtPeKa2wVSy.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5758,
+      "sha256": "e22c938d76ffead4fe4678071d742dd13c99d93985b1c12925eb0e858e942d2e"
+    },
+    {
+      "file": "assets/ui/skill-icons/41f06fffb4c4ba20f1ef.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%A7%A4%20%E4%BA%9A%E6%B4%A5%E5%AD%90/skill_icon/kakkfUzC8mdGRq9WppmrUOqt5EdiJo29.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3413,
+      "sha256": "9f0d3b9be83732260426b220baf96f2d2a6b01198f64bda2463d7b4e8bd81a2e"
+    },
+    {
+      "file": "assets/ui/skill-icons/809eb1cb0dbcc78a4bc7.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%81%AB%E5%AE%AB%20%E5%8D%83%E5%A4%8F/%E6%B8%A9%E6%B3%89/skill_icon/Nq7x3IMIb4acYFIAoxXGYSzoUQQ8U7tg.png",
+      "width": 120,
+      "height": 128,
+      "bytes": 4481,
+      "sha256": "e39427e92003841cfca895ba965021bb9188cff1663605d3e53d31bced3edafc"
+    },
+    {
+      "file": "assets/ui/skill-icons/577f543ddf4e6c2a8eec.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%81%AB%E5%AE%AB%20%E5%8D%83%E5%A4%8F/%E6%B8%A9%E6%B3%89/skill_icon/4wiZXeyRZMzZz1vfxVrEhLgVakvqx3yx.png",
+      "width": 120,
+      "height": 128,
+      "bytes": 4481,
+      "sha256": "e39427e92003841cfca895ba965021bb9188cff1663605d3e53d31bced3edafc"
+    },
+    {
+      "file": "assets/ui/skill-icons/3fc3ad89d2a7d4d381d1.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%81%AB%E5%AE%AB%20%E5%8D%83%E5%A4%8F/%E6%B8%A9%E6%B3%89/skill_icon/V4MRuJmB81jVgTw8zNtRDT05Fca1Sd8z.png",
+      "width": 120,
+      "height": 128,
+      "bytes": 4341,
+      "sha256": "5043d7fa47bf2f391efb1ad4d2834de65389b271c0e9b81de6cf6709ea32c8e1"
+    },
+    {
+      "file": "assets/ui/skill-icons/ce8f314ba94cadaa83bb.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%92%8C%E4%B9%90%20%E5%8D%83%E4%B8%96/skill_icon/tzJALAFaHY1XFeJB2sMc10rJkYgx3vNp.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3032,
+      "sha256": "5c618a55ac347abcae158be037f38d3d6b299ce3b89d27a570b6f9b3052c19f5"
+    },
+    {
+      "file": "assets/ui/skill-icons/777a4955ce8222d924e5.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%92%8C%E4%B9%90%20%E5%8D%83%E4%B8%96/skill_icon/Lx4YqbmpR1SQp2tnWflngOkmesf4V9OR.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4457,
+      "sha256": "e97cc6e175391c9a9c84bb6e9401e6e9e014bcc57a201e2045aa5ffc5b53e99f"
+    },
+    {
+      "file": "assets/ui/skill-icons/2b0c77c791e053ffe0a5.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%92%8C%E4%B9%90%20%E5%8D%83%E4%B8%96/skill_icon/Tu7aCPoQvX2l4xB6ga3ysVZrEGfgsQCI.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3805,
+      "sha256": "75135e26e79df79ea2b7317239d131a8e76fe8cba2db2538a516e7205a1000d1"
+    },
+    {
+      "file": "assets/ui/skill-icons/3852ccdb6e28d39849ae.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%BC%8A%E8%8D%89%20%E9%81%A5%E9%A6%99/skill_icon/4wdq7DRDJjeOziA5tcFr9L6lxij5GeGi.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4794,
+      "sha256": "e1d8881e490285dad04a3ddafa962294f906eb4a8aaa87af9aeaac220707e73c"
+    },
+    {
+      "file": "assets/ui/skill-icons/4910d4843f52bda6f0a5.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%BC%8A%E8%8D%89%20%E9%81%A5%E9%A6%99/skill_icon/AJcIzPf6EC4euCPvWZHPp7JrnEsgC6y1.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4250,
+      "sha256": "14e2ddb00e7a78d7812a992c0bea614872eaeb183f4756d650c5205994badaf2"
+    },
+    {
+      "file": "assets/ui/skill-icons/e0c5ae44ff020388e4d3.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%BC%8A%E8%8D%89%20%E6%98%A5%E9%A6%99/skill_icon/oFN6vEEJAYrHgtigqVBhdVJPvQSgfKyH.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4794,
+      "sha256": "e1d8881e490285dad04a3ddafa962294f906eb4a8aaa87af9aeaac220707e73c"
+    },
+    {
+      "file": "assets/ui/skill-icons/185cce4d3b31341d5362.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%BB%91%E9%A6%86%20%E6%99%B4%E5%A5%88/%E6%AD%A3%E6%9C%88/skill_icon/4ZFYZWQSooiIxzOfxoVaypMSAE33sXFD.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/9b441f29afb79b672b35.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%BB%91%E9%A6%86%20%E6%99%B4%E5%A5%88/%E6%AD%A3%E6%9C%88/skill_icon/VQf23nB7EzHEkhF1kFDOTiSDl603DTRf.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3805,
+      "sha256": "75135e26e79df79ea2b7317239d131a8e76fe8cba2db2538a516e7205a1000d1"
+    },
+    {
+      "file": "assets/ui/skill-icons/edb0c6d13d28ed707c9a.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%BB%91%E9%A6%86%20%E6%99%B4%E5%A5%88/%E6%AD%A3%E6%9C%88/skill_icon/Sq22A3prHDKn6sDtX9hDyUOWfgvobQp0.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4035,
+      "sha256": "1bbd16d3e0fbdf86930f8ddf4bfe96d181c2ed95bc0a761e9929f7743ea7b4c2"
+    },
+    {
+      "file": "assets/ui/skill-icons/a57ee2a55e33d35343b8.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%98%BF%E6%85%88%E8%B0%B7%20%E6%97%A5%E5%AF%8C%E7%BE%8E/skill_icon/DxCW2gQMuUhwehNaseGcKyVowla9BKRm.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5117,
+      "sha256": "36e5fa8dc53bf8e0a094c2119fa85e928e8f8ecef0d9bc1a92ede67dd94cddf4"
+    },
+    {
+      "file": "assets/ui/skill-icons/63fb18ede7ce5b92048c.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%98%BF%E6%85%88%E8%B0%B7%20%E6%97%A5%E5%AF%8C%E7%BE%8E/skill_icon/WMK47ZUmg7RRhCAiKFhLGgolGUtRULNZ.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4078,
+      "sha256": "cad2b4aa026a33836826f1937f5a2057337f72c0fd0a184c52332521d95fed20"
+    },
+    {
+      "file": "assets/ui/skill-icons/1b0e6fa127f5eca59dd2.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A9%98%20%E5%85%89/original/skill_icon/EkOoH6E0HwvFZel7xkfOnTgpQOnSJvbP.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 6267,
+      "sha256": "729df63d818d81672918594abd58e810e6b661cc26005c0e0c339a6f3dc2ca60"
+    },
+    {
+      "file": "assets/ui/skill-icons/8e1605e5d366cc4280f4.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A9%98%20%E5%85%89/original/skill_icon/BICtRPGvs8fyA40tE1HN10uYrbsdIz2E.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5559,
+      "sha256": "89ed058f08028cd835e13f1943844b986345b8b8346f23f898fb620aac95b7d1"
+    },
+    {
+      "file": "assets/ui/skill-icons/3fba7f3a0c5ad8b5e266.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A9%98%20%E5%85%89/original/skill_icon/U8R6BiR1hY3wXtehBfk2bL6H6odjcJXX.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4839,
+      "sha256": "ff48f6179c6b05794e04430cacd9c161db0836184710ae4c1a132db8475755e6"
+    },
+    {
+      "file": "assets/ui/skill-icons/b949ecb79754d4a1adde.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%A9%BA%E5%B4%8E%20%E6%97%A5%E5%A5%88/%E7%A4%BC%E6%9C%8D/skill_icon/tvcDKfKgnoHpm3uYGuSocaIRaSHVKq0s.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2505,
+      "sha256": "d4d2c4ac04c820902f685f3d27d9ddefa129e29124b39df873a171b2b40fe346"
+    },
+    {
+      "file": "assets/ui/skill-icons/457c950085393756d65a.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%A9%BA%E5%B4%8E%20%E6%97%A5%E5%A5%88/%E7%A4%BC%E6%9C%8D/skill_icon/9QPhXj7Ax7mEmkf5iMeDierkj22yQ42M.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 6464,
+      "sha256": "da246f6ec5cdc27c6bb2dff2603c9d92f634cef9e6fd764be18394953c6c3310"
+    },
+    {
+      "file": "assets/ui/skill-icons/49f476e18c2f65aa29c9.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%A9%BA%E5%B4%8E%20%E6%97%A5%E5%A5%88/%E7%A4%BC%E6%9C%8D/skill_icon/KOF1IVNnDmjhPopmHffIs4szhPWaEcot.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5424,
+      "sha256": "6852d4346d872a0a5a57351a92712a8a8ba451b3805795fa527245faa9c0a2cd"
+    },
+    {
+      "file": "assets/ui/skill-icons/e6967e96b0924f5b9818.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%B0%8F%E9%B8%9F%E6%B8%B8%20%E6%98%9F%E9%87%8E/%E4%B8%B4%E6%88%98/skill_icon/NkvXWGIG4zGSsKwztTG5omrX3TSB0Cqp.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2671,
+      "sha256": "5c2ab099bef0bfea05969f27292b22f4d6385409e1240d199834996facb9e00e"
+    },
+    {
+      "file": "assets/ui/skill-icons/b809fa27fda8c2257aec.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%B0%8F%E9%B8%9F%E6%B8%B8%20%E6%98%9F%E9%87%8E/%E4%B8%B4%E6%88%98/skill_icon/sIIVT1RKNYbs67cGK4ljtom1aDllnNGo.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3954,
+      "sha256": "8c20c1260319a3b24e0e2ab731f316359a9e6d045b8ff05b5b0d940881937aac"
+    },
+    {
+      "file": "assets/ui/skill-icons/0e94d40cf153b956cd7d.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%B0%8F%E9%B8%9F%E6%B8%B8%20%E6%98%9F%E9%87%8E/%E4%B8%B4%E6%88%98/skill_icon/vuMatFNB0dSKuxzLFWdYByewq2id8EZX.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3915,
+      "sha256": "9fcbb968c65a05cc0b342a0213205dab935adabd6bdb876f88e6a12cd7b94393"
+    },
+    {
+      "file": "assets/ui/skill-icons/39f8cd85cf335871fbb3.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%B8%B9%E8%8A%B1%20%E4%BC%8A%E5%90%B9/skill_icon/jXxYpHabfR2KZckzfLJpTI01s6Wdebka.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5290,
+      "sha256": "cf21827a3f43f9611074fe64b6590275350f9b665d4a51aabfecfd2ef2ab691e"
+    },
+    {
+      "file": "assets/ui/skill-icons/928a7598777e65043a34.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%BC%8A%E5%90%B9/skill_icon/0nRhBguuyMjXcztxW4BN2EPzdW2PIdQc.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4933,
+      "sha256": "3b61847f33c0f04b116b41d6915f58095c6694c32f2aae1137d2b7638bbb75a4"
+    },
+    {
+      "file": "assets/ui/skill-icons/ffe8e8ff3160a4f73a01.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%B8%B9%E8%8A%B1%20%E4%BC%8A%E5%90%B9/skill_icon/KYMHeXJ7S9wyq6zHfgoumo73ucOaDw8X.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3550,
+      "sha256": "c4704894ac3d7335dd05bf5f3c2ddfdd682b29d781fe460382fcf498dba201f9"
+    },
+    {
+      "file": "assets/ui/skill-icons/1ef2bb2efd3451ed0169.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%B9%85%E7%94%B0%20%E6%B3%89%E5%A5%88/skill_icon/9MAyVEhPzXauMdxqZv3U7uZGIzBUqjRP.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3010,
+      "sha256": "ff6d7ade9b6d904253b1a79278d204d534dedb9c73ded35a0a1a95f4f5d5620a"
+    },
+    {
+      "file": "assets/ui/skill-icons/1b0172a55ba2b20dcd9a.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%B9%85%E7%94%B0%20%E6%B3%89%E5%A5%88/skill_icon/mp9IDB2li2lVsQAAICIExpUjAdWvta0b.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5071,
+      "sha256": "d5b60ad207c6f9173ef51e7a9bfef8c1e5c0ff70d149d8700851cca76827242f"
+    },
+    {
+      "file": "assets/ui/skill-icons/28f5704fbf857c5d60f4.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%B9%85%E7%94%B0%20%E6%B3%89%E5%A5%88/skill_icon/RRYidaW72kWXDxXHE94deMCC5Ccw5HHz.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/b0aeeca99bb909d94958.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%AC%BC%E6%96%B9%20%E4%BD%B3%E4%BB%A3%E5%AD%90/skill_icon/H9LDY9djiD5oUHUhvKHrYs2zKQobxCoR.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3529,
+      "sha256": "361979077ab9378b383ef3137d2ad34fee2a56c6a09be93803c9750d2317118b"
+    },
+    {
+      "file": "assets/ui/skill-icons/09553244ac597378e503.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%AC%BC%E6%96%B9%20%E4%BD%B3%E4%BB%A3%E5%AD%90/skill_icon/XBlw681kd2p3RJKRwOeuvvYT05pNE2P0.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3529,
+      "sha256": "361979077ab9378b383ef3137d2ad34fee2a56c6a09be93803c9750d2317118b"
+    },
+    {
+      "file": "assets/ui/skill-icons/d30e078d52365adbe1a8.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%AC%BC%E6%96%B9%20%E4%BD%B3%E4%BB%A3%E5%AD%90/skill_icon/Zw8fMOOJlflWlhNXecF2MZr6hnHkvpwm.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4794,
+      "sha256": "e1d8881e490285dad04a3ddafa962294f906eb4a8aaa87af9aeaac220707e73c"
+    },
+    {
+      "file": "assets/ui/skill-icons/970c4de02fa89ce63426.png",
+      "url": "https://static.kivo.wiki/images/students/%20Kei/original/skill_icon/3BwRrB57cZLonO5Kplt2UpGbmifj8ICv.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2505,
+      "sha256": "d4d2c4ac04c820902f685f3d27d9ddefa129e29124b39df873a171b2b40fe346"
+    },
+    {
+      "file": "assets/ui/skill-icons/ffc7ad0cf93a9843b7d1.png",
+      "url": "https://static.kivo.wiki/images/students/%20Kei/original/skill_icon/gyI7uT3pmTOoU9xfcUtKVllF95Vqg7EZ.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3951,
+      "sha256": "a392ea6fa9346159c39b4c95fd07941996401434144dc12cb733bfdc7e3cf0ba"
+    },
+    {
+      "file": "assets/ui/skill-icons/f50994a743d3d224d6eb.png",
+      "url": "https://static.kivo.wiki/images/students/%20Kei/original/skill_icon/kGIVyHUOIiVC1ec9A9tTlZz5D5Hv5DIK.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5424,
+      "sha256": "6852d4346d872a0a5a57351a92712a8a8ba451b3805795fa527245faa9c0a2cd"
+    },
+    {
+      "file": "assets/ui/skill-icons/0324f42b202ba5be30a3.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A1%90%E7%94%9F%20%E6%A1%94%E6%A2%97/skill_icon/EZbkjrsaPVpGmgAb0Npw5wYirSPWzZ91.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2050,
+      "sha256": "b2cf29e1cac89b59125636517ce7b141e1bfb151e8bf88ff3127c5df1f2c996c"
+    },
+    {
+      "file": "assets/ui/skill-icons/861e36f17b1b7207990b.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A1%90%E7%94%9F%20%E6%A1%94%E6%A2%97/skill_icon/owkyZooV529TMRf8MIkuiEJtemuYPH0e.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4638,
+      "sha256": "5c9b6640e3c4993186c6daf6faa5bfa4037063ab43ad4400985c5f678161c73b"
+    },
+    {
+      "file": "assets/ui/skill-icons/4c6b0d2bb39637d00aa2.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A1%90%E7%94%9F%20%E6%A1%94%E6%A2%97/skill_icon/LoqPgeAOkFGsg7Bfww5WO6papWNKCUCx.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5247,
+      "sha256": "5d50b12a719767ea5d853fbd5c023db107108a1647b695ee59e568587a8e7683"
+    },
+    {
+      "file": "assets/ui/skill-icons/97f669f832a6d4402691.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%98%A5%E5%8E%9F%E5%BF%83%E5%A5%88/skill_icon/ANQWYkyl8Ti5UXWtjMA5LipaQFqENSzs.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3413,
+      "sha256": "9f0d3b9be83732260426b220baf96f2d2a6b01198f64bda2463d7b4e8bd81a2e"
+    },
+    {
+      "file": "assets/ui/skill-icons/33cb58bf8a9f4c78d3bd.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%98%A5%E5%8E%9F%E5%BF%83%E5%A5%88/skill_icon/CE14iCrhzuXphe5L5PAg7co64YCenOhY.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3413,
+      "sha256": "9f0d3b9be83732260426b220baf96f2d2a6b01198f64bda2463d7b4e8bd81a2e"
+    },
+    {
+      "file": "assets/ui/skill-icons/3b1e1a49a1cd7d929845.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%98%A5%E5%8E%9F%E5%BF%83%E5%A5%88/skill_icon/cpFi9fvDhQsI1WmGYwV9YPdEL6645uWn.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2830,
+      "sha256": "baefe9d4c39b743b3e93e8d5133772b515ef713d07805477113de16243c93cc2"
+    },
+    {
+      "file": "assets/ui/skill-icons/95295789c1bea705ea8a.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%AB%98%E4%BB%93%20%E8%83%A1%E6%A1%83/original/skill_icon/RHkEjDidwBtB2zTXxCG9nxe8jgHLU3db.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4027,
+      "sha256": "85d5acc6d595793d8fbdb5d5ec01a19a672ba4715395546f17555e5ede39f0dc"
+    },
+    {
+      "file": "assets/ui/skill-icons/a3513a697fc887e0347f.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%AB%98%E4%BB%93%20%E8%83%A1%E6%A1%83/original/skill_icon/khsmbTNJ0BtT17nfeZnqNWQPlaMK1hZ8.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3132,
+      "sha256": "a978797fbd84b83fe9c6ef5a255dc4c2e5d80f33ed9294f4b9054dea7026af20"
+    },
+    {
+      "file": "assets/ui/skill-icons/e3474c0f6169ae715d6d.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%AB%98%E4%BB%93%20%E8%83%A1%E6%A1%83/original/skill_icon/sHg1IUdEYSlmiFtje572LH421gwWqrNI.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4839,
+      "sha256": "ff48f6179c6b05794e04430cacd9c161db0836184710ae4c1a132db8475755e6"
+    },
+    {
+      "file": "assets/ui/skill-icons/42d820fc164e52abc125.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%BC%8A%E8%90%BD%20%E7%8E%9B%E4%B8%BD/%E5%81%B6%E5%83%8F/skill_icon/hVOY2BTwVm1PDjnRylTY4idYuHnjclnA.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3550,
+      "sha256": "c4704894ac3d7335dd05bf5f3c2ddfdd682b29d781fe460382fcf498dba201f9"
+    },
+    {
+      "file": "assets/ui/skill-icons/737a537f52bb77640287.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%BC%8A%E8%90%BD%20%E7%8E%9B%E4%B8%BD/%E5%81%B6%E5%83%8F/skill_icon/FXbtKsoM6ADkyESXJA8hPEx6Jv91brmC.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3550,
+      "sha256": "c4704894ac3d7335dd05bf5f3c2ddfdd682b29d781fe460382fcf498dba201f9"
+    },
+    {
+      "file": "assets/ui/skill-icons/8ec012fff366cd6e4184.png",
+      "url": "https://static.kivo.wiki/images/students/%E4%BC%8A%E8%90%BD%20%E7%8E%9B%E4%B8%BD/%E5%81%B6%E5%83%8F/skill_icon/kNivZLTk0pZHd4th67l8GyCmZRZMidXU.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4839,
+      "sha256": "ff48f6179c6b05794e04430cacd9c161db0836184710ae4c1a132db8475755e6"
+    },
+    {
+      "file": "assets/ui/skill-icons/3d09db3d0538854bd8f1.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%89%8D%E7%BE%BD%20%E7%BB%BF/skill_icon/k8JckMtGDAUOFY7n5TCynEcnWrO2sEln.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3413,
+      "sha256": "9f0d3b9be83732260426b220baf96f2d2a6b01198f64bda2463d7b4e8bd81a2e"
+    },
+    {
+      "file": "assets/ui/skill-icons/50de6ac3861c6667a641.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%89%8D%E7%BE%BD%20%E7%BB%BF/skill_icon/QQ6TnjoUZU0UHWM97AJijve6DhttGsEr.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3010,
+      "sha256": "ff6d7ade9b6d904253b1a79278d204d534dedb9c73ded35a0a1a95f4f5d5620a"
+    },
+    {
+      "file": "assets/ui/skill-icons/16216e3085cb19eea96b.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%89%8D%E7%BE%BD%20%E7%BB%BF/skill_icon/ncesqlqkLzfaKgJqEoVhdIcilunAVnVo.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/6b2e171913737fea57b0.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%9C%A3%E5%9B%AD%20%E6%9C%AA%E8%8A%B1/skill_icon/xY17pjm6t6EW2Njtghzp4To0EftxDK9q.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3010,
+      "sha256": "ff6d7ade9b6d904253b1a79278d204d534dedb9c73ded35a0a1a95f4f5d5620a"
+    },
+    {
+      "file": "assets/ui/skill-icons/4e0933cfbf17a84805d8.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%9C%A3%E5%9B%AD%20%E6%9C%AA%E8%8A%B1/skill_icon/xwvGmqsPN6UGaru9i75xbqSkz4ycqhRY.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3010,
+      "sha256": "ff6d7ade9b6d904253b1a79278d204d534dedb9c73ded35a0a1a95f4f5d5620a"
+    },
+    {
+      "file": "assets/ui/skill-icons/f01afe0b008c88c1145f.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%9C%A3%E5%9B%AD%20%E6%9C%AA%E8%8A%B1/skill_icon/8VJ6YXgdMuca7eoziSkPJ4xOAkfD4FAn.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 6054,
+      "sha256": "6e274d46785fe4a3a692351a2b16bec4bce32ee819a550aa508e921fd75db5e1"
+    },
+    {
+      "file": "assets/ui/skill-icons/8a7f260fbaa7db2bbe7a.png",
+      "url": "https://static.kivo.wiki/images/students/%E8%8B%8D%E6%A3%AE%20%E7%BE%8E%E5%BC%A5/%E5%81%B6%E5%83%8F/skill_icon/vRgsiK00Go9EH4yf7ymsP63RmaqwBKKq.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5117,
+      "sha256": "36e5fa8dc53bf8e0a094c2119fa85e928e8f8ecef0d9bc1a92ede67dd94cddf4"
+    },
+    {
+      "file": "assets/ui/skill-icons/dc14027aa92b2567929b.png",
+      "url": "https://static.kivo.wiki/images/students/%E8%8B%8D%E6%A3%AE%20%E7%BE%8E%E5%BC%A5/%E5%81%B6%E5%83%8F/skill_icon/6vQpKNYmgpMHC98T8cv5SMqkUGb8t62p.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 1977,
+      "sha256": "13d1671c78f1ac1fffc03d547f7a129c33a5a9a32505a5d596fcf03704ce1470"
+    },
+    {
+      "file": "assets/ui/skill-icons/e4263279c5c38a049b45.png",
+      "url": "https://static.kivo.wiki/images/students/%E8%8B%8D%E6%A3%AE%20%E7%BE%8E%E5%BC%A5/%E5%81%B6%E5%83%8F/skill_icon/8wNI5blcuUQxYxaHFR6xIUQiwa7rIMC8.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4794,
+      "sha256": "e1d8881e490285dad04a3ddafa962294f906eb4a8aaa87af9aeaac220707e73c"
+    },
+    {
+      "file": "assets/ui/skill-icons/b1806a1e4eb08027b448.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%89%8D%E7%BE%BD%20%E6%A1%83%E4%BA%95/skill_icon/5ERbuFXPmsoqk3u0NPeJEDEGGAktd7qe.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/9b9e9f31492cb3fa0f36.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%89%8D%E7%BE%BD%20%E6%A1%83%E4%BA%95/skill_icon/qcR3uvuLgxQfMUWatrempFH1oXXCoMxc.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4250,
+      "sha256": "14e2ddb00e7a78d7812a992c0bea614872eaeb183f4756d650c5205994badaf2"
+    },
+    {
+      "file": "assets/ui/skill-icons/8d2cc1ed4fd907319f2f.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%89%8D%E7%BE%BD%20%E6%A1%83%E4%BA%95/skill_icon/NtSEUMrcMesuluehRWU9VGlssTwSomJU.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4976,
+      "sha256": "a3f50ff99ab00498efc633a3ef79f1ca788c5d20034316256b8e25b13ae6e702"
+    },
+    {
+      "file": "assets/ui/skill-icons/dd1751ce657208c7c034.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%B5%85%E9%BB%84%20%E7%9D%A6%E6%9C%88/skill_icon/c9lxaSB35Mt45B8dLQiQnFcCSsbwsjmC.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 1977,
+      "sha256": "13d1671c78f1ac1fffc03d547f7a129c33a5a9a32505a5d596fcf03704ce1470"
+    },
+    {
+      "file": "assets/ui/skill-icons/06b51652fbba0f7ad124.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%B5%85%E9%BB%84%20%E7%9D%A6%E6%9C%88/original/skill_icon/eSBgSIr20PgEH3o9s7o98TL8N3wllybA.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5375,
+      "sha256": "c8eb4a79f1ff98eb35cf2feff8891e8480f2a9cd861e8727839232604c189c10"
+    },
+    {
+      "file": "assets/ui/skill-icons/a4f3c31ca21266dd7eb5.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%B5%85%E9%BB%84%20%E7%9D%A6%E6%9C%88/skill_icon/MLHEKmJvycVdL7VvVfnBTMcOCL8gbcvb.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/6d706116c58ef939c2d2.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%BE%A1%E7%A8%9C%20%E5%90%8D%E8%8D%89/original/skill_icon/6CbU5rLVNTA2lK2Hgs0hq6KYEKs3lY6v.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2505,
+      "sha256": "d4d2c4ac04c820902f685f3d27d9ddefa129e29124b39df873a171b2b40fe346"
+    },
+    {
+      "file": "assets/ui/skill-icons/c8d8db5f16056b1712a7.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%BE%A1%E7%A8%9C%20%E5%90%8D%E8%8D%89/original/skill_icon/BEYF4Ll78Acu0AzkGYSddb9GjYK6Afco.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3071,
+      "sha256": "3bce47abdc0d4e3ab33675139c63c8cf98ff9d0a8a14d6b013504351a0012484"
+    },
+    {
+      "file": "assets/ui/skill-icons/4b82e13201c8fb79926b.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%BE%A1%E7%A8%9C%20%E5%90%8D%E8%8D%89/original/skill_icon/J2nFUY3u87awA5WtVkxwomIeilz1u0RL.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5424,
+      "sha256": "6852d4346d872a0a5a57351a92712a8a8ba451b3805795fa527245faa9c0a2cd"
+    },
+    {
+      "file": "assets/ui/skill-icons/923be8ad8c88201067a8.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%9F%9A%E9%B8%9F%20%E5%A4%8F/skill_icon/cTn6b1y6yOc9VOKoL75Qc4NYbvJeXYQW.png",
+      "width": 120,
+      "height": 128,
+      "bytes": 4481,
+      "sha256": "e39427e92003841cfca895ba965021bb9188cff1663605d3e53d31bced3edafc"
+    },
+    {
+      "file": "assets/ui/skill-icons/9ba53a92e60f5b77c6ba.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%9F%9A%E9%B8%9F%20%E5%A4%8F/skill_icon/r31oxwS2VI1YBhnhNTCpnGuRLScgAIgE.png",
+      "width": 120,
+      "height": 128,
+      "bytes": 3199,
+      "sha256": "b22c3bdbb4ece3e235d5579a8fd8f38b0a4e3a5734ca9a67fba89c10b1182184"
+    },
+    {
+      "file": "assets/ui/skill-icons/ccb8ad3910f18d9c4551.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%9F%9A%E9%B8%9F%20%E5%A4%8F/skill_icon/kpKkcqgcWNkAdFB4OXAl9q7sbHCKQcXF.png",
+      "width": 120,
+      "height": 128,
+      "bytes": 3907,
+      "sha256": "60b2b94bf50a9bf3f1ed2b3861f6343a2991535907fc1ad8ca268f30d16006f4"
+    },
+    {
+      "file": "assets/ui/skill-icons/329ace47d3365c744d2a.png",
+      "url": "https://static.kivo.wiki/images/students/%20%E5%A6%AE%E5%8F%AF/original/skill_icon/x2swLBYwdmziiHPgc0Z3etbYkXCF768V.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5424,
+      "sha256": "6852d4346d872a0a5a57351a92712a8a8ba451b3805795fa527245faa9c0a2cd"
+    },
+    {
+      "file": "assets/ui/skill-icons/07f02cd9b9cf5b692edb.png",
+      "url": "https://static.kivo.wiki/images/students/%20%E5%A6%AE%E5%8F%AF/original/skill_icon/CH6YcVCmEGDYDXA0b1ia96TMv50U1VC5.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5424,
+      "sha256": "6852d4346d872a0a5a57351a92712a8a8ba451b3805795fa527245faa9c0a2cd"
+    },
+    {
+      "file": "assets/ui/skill-icons/52b1f2c8282af135679c.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%94%9F%E7%9B%90%20%E8%AF%BA%E4%BA%9A/%E7%9D%A1%E8%A1%A3/skill_icon/VECJyNXhsOxSQUtSqSwrbOVZvXD8M8VD.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4227,
+      "sha256": "31a7657c4163a2f0ee604f643ef5f8ffdcc827f7c472a1445f1dd2568d0ca8df"
+    },
+    {
+      "file": "assets/ui/skill-icons/98c27b798610cdd68ac4.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%94%9F%E7%9B%90%20%E8%AF%BA%E4%BA%9A/%E7%9D%A1%E8%A1%A3/skill_icon/FEatkpobshmamSUckjLT1E1X3SulGyeI.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5716,
+      "sha256": "06f62e5d053b04ebc9716a05b190d401ff45c34756ebefd2402f86ba8ec58f8a"
+    },
+    {
+      "file": "assets/ui/skill-icons/ae1158fd8f29e740e0d7.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A9%98%20%E6%9C%9B/original/skill_icon/pJ0Ab5nbRfQDWzCZWWuNpcN7bJYpSpHE.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/1db760623bf319705b39.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A9%98%20%E6%9C%9B/original/skill_icon/J52sEDcnVZr6HF9K41qdzbz46fGTZR14.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5425,
+      "sha256": "80016c3d2dfa7d8b8f98bd8470b53c7051e5e1256947365fb89cbf557b7fd4e2"
+    },
+    {
+      "file": "assets/ui/skill-icons/99d5d0078049a162a3f5.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%A9%98%20%E6%9C%9B/original/skill_icon/N7bvXqWShCNaniNMecVjemg0RJjcorlf.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 7065,
+      "sha256": "a1fca96963899f4eb6383f1ed52c4ba273f0318c54a29f1476839531c0f09f6e"
+    },
+    {
+      "file": "assets/ui/skill-icons/0faaacf648b473f6c185.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%AE%87%E6%B3%BD%20%E7%8E%B2%E7%BA%B1/skill_icon/MVRdJNf0mMdS3xKKEZ7BSxx4GvER1Oth.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2827,
+      "sha256": "537fad9cdbebeedc77bccd3b53d2b2c0cced97dc84201bd6c64dbde4826f5434"
+    },
+    {
+      "file": "assets/ui/skill-icons/d0d2baf31add08016c02.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%AE%87%E6%B3%BD%20%E7%8E%B2%E7%BA%B1/skill_icon/S0dfQvH3oASOe5ID22AnT1OoM2pRVWsl.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4250,
+      "sha256": "14e2ddb00e7a78d7812a992c0bea614872eaeb183f4756d650c5205994badaf2"
+    },
+    {
+      "file": "assets/ui/skill-icons/40c74f242878ec2a7871.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%AE%87%E6%B3%BD%20%E7%8E%B2%E7%BA%B1/skill_icon/G5qrEZJXUDA2OKR4i8ipZVhgf8NUb8fU.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3559,
+      "sha256": "dd42f10cb3511a9bf50f5d42ab5db940419a2e5b07e3187b9c3df5ffca912c6a"
+    },
+    {
+      "file": "assets/ui/skill-icons/78ff9a419cc3c75fc3ac.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%AD%8C%E4%BD%8F%20%E6%A8%B1%E5%AD%90/%E5%81%B6%E5%83%8F/skill_icon/425J0x7qvTDvy8ZoAR8KmAN4HiAlF4jT.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/8eeb45b6e2f12c5a1c28.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%AD%8C%E4%BD%8F%20%E6%A8%B1%E5%AD%90/%E5%81%B6%E5%83%8F/skill_icon/R4tP4zGbt5fIrxaB5opgFZJVHFYnbAI2.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/33929177a464511b4805.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%AD%8C%E4%BD%8F%20%E6%A8%B1%E5%AD%90/%E5%81%B6%E5%83%8F/skill_icon/TXfNzee6DvXCjmVCBrEEffqYVV2FnjU9.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/228c7a0099d266e6da31.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%97%B4%E5%AE%B5%20%E6%97%B6%E9%9B%A8/skill_icon/ylf5lrX9SdY3Kn31mmFfTwFuWCaMMvU4.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3252,
+      "sha256": "082d6e016c68cd21ce75423fe67109dcf664e49d523069b43bbc767d85081322"
+    },
+    {
+      "file": "assets/ui/skill-icons/3af9bdaade055b526e82.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%97%B4%E5%AE%B5%20%E6%97%B6%E9%9B%A8/skill_icon/C3gJYoZDMWeCHyxPyNBRxfHlakbYL3xN.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3555,
+      "sha256": "aa1625c5ca74d10ae32c0fcddf6b2de803f063b626555d1ed85ff6eefa24ffa9"
+    },
+    {
+      "file": "assets/ui/skill-icons/f7f099f19613d2210e43.png",
+      "url": "https://static.kivo.wiki/images/students/%E9%97%B4%E5%AE%B5%20%E6%97%B6%E9%9B%A8/skill_icon/khSTF1gb6cpBJNP3b7oRrxCWQ3jiEKJI.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/abf8b50b46d534d815f3.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%99%BE%E5%90%88%E5%9B%AD%20%E5%9C%A3%E5%A8%85/original/skill_icon/upHxBTEWsZUh2CrJnoKD32EcfdM20ExU.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2505,
+      "sha256": "d4d2c4ac04c820902f685f3d27d9ddefa129e29124b39df873a171b2b40fe346"
+    },
+    {
+      "file": "assets/ui/skill-icons/9c4e94310cba143eab46.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%99%BE%E5%90%88%E5%9B%AD%20%E5%9C%A3%E5%A8%85/original/skill_icon/DUUzvA1o4bhv6gMuA4i7ni5q5k1oLXBD.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2428,
+      "sha256": "45da8b84ba58f0d5193d169ad1053cc3d0d13ab9944555396f283ca082dfb4bf"
+    },
+    {
+      "file": "assets/ui/skill-icons/f7aed2830c40db7b8c01.png",
+      "url": "https://static.kivo.wiki/images/students/%E7%99%BE%E5%90%88%E5%9B%AD%20%E5%9C%A3%E5%A8%85/original/skill_icon/tm47ONnnoANdZeiaWXqgtTp1RdXaOimC.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5298,
+      "sha256": "06b7bfdd7aed53c731d27c5777f79e284fecc0514dbc16eb925abbdc7c83e775"
+    },
+    {
+      "file": "assets/ui/skill-icons/070899e13eb0404d3054.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%8F%A4%E5%85%B3%20%E5%BF%A7/skill_icon/PkW4aFzxUzwYwVfPeSDG0HnKEOH6bAVQ.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/74aa7e48c65a41a9daec.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%8F%A4%E5%85%B3%20%E5%BF%A7/skill_icon/XkKvDVc1Etl9K5iOeWw2dfGMWVulK41N.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 2416,
+      "sha256": "3504dee3e140f38e3975ee93373a685ec93be5bf0d24bf7b010782875d04b65e"
+    },
+    {
+      "file": "assets/ui/skill-icons/37a7bce8771cdde6adce.png",
+      "url": "https://static.kivo.wiki/images/students/%E5%8F%A4%E5%85%B3%20%E5%BF%A7/skill_icon/AszXFjhAITlTkjpYpSQFQ72ZEPaKaH9R.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    },
+    {
+      "file": "assets/ui/skill-icons/f95020c2d3276d292323.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%97%A9%E6%BF%91%20%E4%BC%98%E9%A6%99/%E7%9D%A1%E8%A1%A3/skill_icon/ilb5SSqbtFnlLjWTGRFfOoZtlyf8urkw.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3550,
+      "sha256": "c4704894ac3d7335dd05bf5f3c2ddfdd682b29d781fe460382fcf498dba201f9"
+    },
+    {
+      "file": "assets/ui/skill-icons/29cf54524fdedafa3b26.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%97%A9%E6%BF%91%20%E4%BC%98%E9%A6%99/%E7%9D%A1%E8%A1%A3/skill_icon/owIPlIR0EBIeg9YGoma5PcPQ5dL61g04.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4027,
+      "sha256": "85d5acc6d595793d8fbdb5d5ec01a19a672ba4715395546f17555e5ede39f0dc"
+    },
+    {
+      "file": "assets/ui/skill-icons/362c288c7e2ae815756e.png",
+      "url": "https://static.kivo.wiki/images/students/%E6%97%A9%E6%BF%91%20%E4%BC%98%E9%A6%99/%E7%9D%A1%E8%A1%A3/skill_icon/0W0yk1HfgYy3ivND90rs0EgBnbjfZ4A0.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 4839,
+      "sha256": "ff48f6179c6b05794e04430cacd9c161db0836184710ae4c1a132db8475755e6"
+    },
+    {
+      "file": "assets/ui/skill-icons/501f85bdd7b017741a57.png",
+      "url": "https://static.kivo.wiki/images/students/%E8%8A%B1%E5%86%88%20%E6%9F%9A%E5%AD%90/skill_icon/Ht307oiXZiio4gZwfsOxnHfBTtz0GK9K.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3805,
+      "sha256": "75135e26e79df79ea2b7317239d131a8e76fe8cba2db2538a516e7205a1000d1"
+    },
+    {
+      "file": "assets/ui/skill-icons/9902029e4ca54df88b39.png",
+      "url": "https://static.kivo.wiki/images/students/%E8%8A%B1%E5%86%88%20%E6%9F%9A%E5%AD%90/skill_icon/sUvsleHeQZhi8dnU80i8uSqWsGpNgzGW.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 3805,
+      "sha256": "75135e26e79df79ea2b7317239d131a8e76fe8cba2db2538a516e7205a1000d1"
+    },
+    {
+      "file": "assets/ui/skill-icons/bfbbc294f3fa0a494f69.png",
+      "url": "https://static.kivo.wiki/images/students/%E8%8A%B1%E5%86%88%20%E6%9F%9A%E5%AD%90/skill_icon/9BXh02wABIKGmolM7XWsiv9ly67YK7Ug.png",
+      "width": 128,
+      "height": 135,
+      "bytes": 5227,
+      "sha256": "ad5a0e755fba2a002cd7a2a81d641b7f2022c2a163a60c41415cffff6c05d12e"
+    }
+  ]
+}

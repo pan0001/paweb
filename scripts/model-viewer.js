@@ -32,6 +32,22 @@ export function getModelBounds(object) {
   return box;
 }
 
+// Yuuka's toy lands in front of her after Victory_Start. A standing-only fit
+// clips Peroro at the bottom. Cache the union once, without following the pose
+// or moving the user's camera during an interaction.
+export function includeModelPropBounds(root, clips, bounds) {
+  const toy=root.getObjectByName('CH0284_SkillProp_Outline');
+  const end=clips.find(clip=>clip.name==='CH0284_Victory_End');
+  if (!toy?.isSkinnedMesh || toy.parent?.name!=='CH0284_1' || !end) return bounds;
+  const mixer=new THREE.AnimationMixer(root);
+  try {
+    mixer.clipAction(end).play();mixer.update(0);
+    return bounds.clone().union(getModelBounds(root));
+  } finally {
+    mixer.stopAllAction();mixer.uncacheRoot(root);root.updateMatrixWorld(true);
+  }
+}
+
 // Exact suffixes deliberately exclude paired/Random/Camera variants. Some exports
 // also contain another costume's Pickup; prefer the current victory clip's prefix.
 export function selectModelAnimations(clips) {
@@ -511,6 +527,7 @@ export async function mount(container, model, options = {}) {
     wrapper.position.set(-box.getCenter(new THREE.Vector3()).x * scale, -box.min.y * scale, 0);
     framingBounds = getModelBounds(wrapper);
     referenceAction?.stop();
+    framingBounds = includeModelPropBounds(wrapper, clips, framingBounds);
     animationPlayer = createModelAnimationPlayer(mixer, clips, name => options.onAnimationChange?.(name));
     if (animationPlayer.canPickUp()) {
       renderer.domElement.setAttribute('role', 'button');

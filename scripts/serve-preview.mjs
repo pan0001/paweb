@@ -18,7 +18,7 @@ const types = {
   '.woff':'font/woff', '.woff2':'font/woff2', '.ttf':'font/ttf', '.ico':'image/x-icon',
   '.md':'text/plain; charset=utf-8'
 };
-const publicScripts = new Set(['gallery.js','ui-motion.js','model-viewer.js','ba-model-materials.js','mika-halo.js','toon-renderer.js','spine-viewer.js']);
+const publicScripts = new Set(['gallery.js','ui-motion.js','dossier.js','model-viewer.js','ba-model-materials.js','mika-halo.js','toon-renderer.js','spine-viewer.js']);
 const inside = (root, target) => {
   const relative = path.relative(root, target);
   return relative !== '' && relative !== '..' && !relative.startsWith('..' + path.sep) && !path.isAbsolute(relative);

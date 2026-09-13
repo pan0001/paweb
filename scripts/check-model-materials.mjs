@@ -118,7 +118,11 @@ try {
       }
     }
     const animations=prepareAnimations(root,gltf.animations);
-    if(!['assets/media/models/404/Kayoko_Original.glb','assets/media/models/421/Momoi_Original.glb'].includes(file))
+    if(file==='assets/media/models/354/CH0284.glb') {
+      assert.equal(animations.filter((clip,i)=>clip!==gltf.animations[i]).length,8);
+      gltf.animations.forEach((clip,i)=>clip.tracks.forEach((track,j)=>
+        assert.ok(animations[i].tracks[j]===track,'Yuuka keeps all original body/face/prop curves')));
+    } else if(!['assets/media/models/404/Kayoko_Original.glb','assets/media/models/421/Momoi_Original.glb'].includes(file))
       assert.ok(animations===gltf.animations,file+': unrelated animation arrays stay unchanged');
     if(bindHalo(root))halos++;
     const mouthTexture=new THREE.Texture(atlasImage);setMouthFrame(mouthTexture);
@@ -229,8 +233,57 @@ try {
     } else {
       root.traverse(object=>{
         assert.ok(!object.userData.paInactiveExpression,'Ibuki face selection must not affect other characters');
-        assert.ok(!object.userData.paSeparateMouth,'Ibuki single-island exception must stay scoped');
+        if(file!=='assets/media/models/268/CH0167.glb')
+          assert.ok(!object.userData.paSeparateMouth,'Single-island exceptions must stay scoped to Ibuki and Reisa');
       });
+    }
+
+    if(file==='assets/media/models/268/CH0167.glb') {
+      assert.equal(face?.name,'CH0167_Body_2','Reisa separate mouth must receive the atlas');
+      assert.equal(face.userData.paSeparateMouth,true);
+      assert.equal(face.userData.paMouth.islandCount,1);
+      assert.equal(face.userData.paMouth.triangles,32);
+      assert.deepEqual(face.geometry.groups,[{start:0,count:96,materialIndex:1}]);
+      for(const name of ['CH0167_Body_Face_Outline_2','CH0167_Eyebrow02']) {
+        const eye=root.getObjectByName(name);
+        assert.ok(!Array.isArray(eye.material),name+': leave eye and eyebrow primitives alone');
+        assert.ok(!eye.userData.paSeparateMouth);
+        assert.equal(eye.material.map,originalMeshes.find(item=>item.mesh===eye).map);
+      }
+      // Sample actual mouth triangles through the shared atlas transform: verify
+      // visible coloured mouth pixels AND transparency for blending with skin.
+      mouthTexture.updateMatrix();
+      let ink=0,clear=0;
+      const uv=face.geometry.attributes.uv,indices=face.geometry.index;
+      const sample=(u,v)=>{
+        const at=new THREE.Vector2(u,v);mouthTexture.transformUv(at);
+        const x=Math.min(atlasImage.width-1,Math.floor(at.x*atlasImage.width));
+        const y=Math.min(atlasImage.height-1,Math.floor(at.y*atlasImage.height));
+        const p=(y*atlasImage.width+x)*4,rgba=atlasImage.data;
+        if(rgba[p+3]<10)clear++;
+        if(rgba[p+3]>128 && Math.min(rgba[p],rgba[p+1],rgba[p+2])<180)ink++;
+      };
+      for(let i=0;i<indices.count;i+=3) {
+        const a=indices.getX(i),b=indices.getX(i+1),c=indices.getX(i+2);
+        for(let j=0;j<=8;j++)for(let k=0;k<=8-j;k++) {
+          const w0=j/8,w1=k/8,w2=1-w0-w1;
+          sample(uv.getX(a)*w0+uv.getX(b)*w1+uv.getX(c)*w2,uv.getY(a)*w0+uv.getY(b)*w1+uv.getY(c)*w2);
+        }
+      }
+      assert.ok(ink>0,'The repaired UVs must sample visible mouth detail');
+      assert.ok(clear>0,'The surrounding patch must not remain an opaque white disk');
+      const vertices=[...new Set(indices.array)];
+      const mixer=new THREE.AnimationMixer(root);
+      for(const clip of gltf.animations) {
+        mixer.stopAllAction();const action=mixer.clipAction(clip).play();
+        for(const time of [0,clip.duration/2,Math.max(0,clip.duration-.01)]) {
+          action.time=time;mixer.update(0);root.updateMatrixWorld(true);face.skeleton.update();
+          assert.equal(face.visible,true);
+          for(const vertex of vertices)assert.ok(face.getVertexPosition(vertex,new THREE.Vector3()).toArray().every(Number.isFinite),clip.name);
+        }
+      }
+      mixer.stopAllAction();mixer.uncacheRoot(root);
+      console.log(`PASS Reisa: separate 32-triangle mouth, visible atlas ink/transparency, original eyes and skin bindings, ${gltf.animations.length} clips`);
     }
 
     if(file==='assets/media/models/319/CH0230.glb') {

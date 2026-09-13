@@ -178,6 +178,93 @@ check('Three languages update selection, details, and description',()=>{
     assert.equal(d.activeElement,d.querySelector('.showcase-details'));
   }
 });
+check('Dossier retains all 37 profiles and 111 skills in three languages',()=>{
+  const skin=fs.readFileSync(path.join(root,'styles/dossier.css'),'utf8');
+  for(const tone of new Set(w.__testRoster.map(student=>student.attackType)))assert.ok(skin.includes('[data-attack="'+tone+'"]'),tone);
+  assert.match(skin,/prefers-reduced-motion:reduce/);assert.match(skin,/forced-colors:active/);
+  const tabNames={cn:['基本信息','技能档案','使用备注'],en:['Overview','Skills','Field Notes'],jp:['基本情報','スキル','運用メモ']};
+  const statKeys=['hp','attack','defense','speed','range','critRate','reloadTime'];
+  for(const lang of ['cn','en','jp']) {
+    click('[data-language="'+lang+'"]');
+    for(const student of w.__testRoster) {
+      click('.char-card[data-character-id="'+student.id+'"]');click('.showcase-details');
+      assert.deepEqual([...d.querySelectorAll('.dossier-tab')].map(el=>el.textContent),tabNames[lang]);
+      assert.equal(d.querySelectorAll('.dossier-panel:not([hidden])').length,1);
+      assert.equal(d.querySelector('#dossier-panel-0').hidden,false,'New profile starts at overview');
+      assert.equal(d.querySelectorAll('.basic-section .info-item').length,9);
+      assert.deepEqual([...d.querySelectorAll('.stat-box strong')].map(el=>el.textContent),statKeys.map(key=>String(student.stats[key]??'-')));
+      assert.equal(d.querySelector('.dossier-weapon-copy strong').textContent,student.weaponName);
+      for(const selector of ['#modalStars','.field-rarity strong','.char-card[data-character-id="'+student.id+'"] .card-stars','.showcase-stars']) {
+        const stars=d.querySelector(selector+' .rarity-stars');assert.ok(stars,selector);
+        assert.equal(stars.querySelectorAll('.rarity-star:not(.is-empty)').length,student.rarity);
+        assert.equal(stars.querySelectorAll('.rarity-star').length,selector==='.showcase-stars'?student.rarity:5);
+        assert.equal(stars.getAttribute('aria-label'),w.t('field.rarity')+': '+student.rarity);
+        assert.equal(stars.textContent,selector==='.showcase-stars'?'★'.repeat(student.rarity):w.getStars(student.rarity));
+        for(const star of stars.children)assert.equal(star.getAttribute('aria-hidden'),'true');
+      }
+      assert.equal(d.querySelectorAll('.dossier-skill-tiles button').length,student.skills.length);
+      student.skills.forEach((raw,index)=>{
+        const icon=w.PA_SKILL_ICONS[student.id][index];
+        const tiles=[d.querySelector('.dossier-skill-tiles button:nth-child('+(index+1)+')'),d.querySelector('#dossier-skill-tab-'+index)];
+        for(const tile of tiles) {
+          assert.equal(tile.querySelector('.dossier-skill-art').getAttribute('src'),icon.file);
+          assert.equal(tile.dataset.iconKey,icon.key);assert.equal(tile.dataset.iconMatch,icon.match);
+          assert.equal(Boolean(tile.querySelector('.dossier-icon-reference')),icon.match!=='name');
+        }
+        click('.dossier-skill-tiles button:nth-child('+(index+1)+')');
+        const expected=w.getLocalizedSkill(student,raw,index),card=d.querySelector('.skill-card:not([hidden])');
+        assert.equal(d.querySelector('#dossier-panel-1').hidden,false);
+        assert.equal(d.querySelectorAll('.skill-card:not([hidden])').length,1);
+        assert.equal(card.querySelector('.skill-head strong').textContent,expected.name);
+        assert.equal(card.querySelector('p').textContent,expected.desc);
+        assert.equal(card.querySelector('.skill-cooldown').textContent,w.t('skill.cooldown',{value:w.localizeValue(expected.cooldown)}));
+        assert.equal(d.activeElement.id,'dossier-skill-tab-'+index);
+        click('#dossier-tab-0');
+      });
+      click('.dossier-detail-toggle');assert.equal(d.querySelector('#dossier-basic-fields').hidden,false);
+      click('.dossier-detail-toggle');assert.equal(d.querySelector('#dossier-basic-fields').hidden,true);
+      click('.dossier-weapon .dossier-action');assert.equal(d.querySelector('#dossier-basic-fields').hidden,false);
+      click('.dossier-guide .dossier-action');assert.equal(d.querySelector('#dossier-panel-2').hidden,false);
+      assert.equal(d.querySelector('.description-section p').textContent,w.getLocalizedCharacterContent(student).desc);
+      const ids=[...d.querySelectorAll('#modal [id]')].map(el=>el.id);assert.equal(new Set(ids).size,ids.length);
+      for(const tab of d.querySelectorAll('#modal [role="tab"]')) {
+        const panel=d.getElementById(tab.getAttribute('aria-controls'));
+        assert.ok(panel);assert.equal(panel.getAttribute('aria-labelledby'),tab.id);
+      }
+      click('#closeModal');assert.equal(d.activeElement,d.querySelector('.showcase-details'));
+    }
+  }
+  click('[data-language="cn"]');click('.char-card[data-character-id="11"]');
+});
+check('Dossier keyboard tabs and live translation preserve the selected view',()=>{
+  click('.showcase-details');
+  const key=(selector,value)=>d.querySelector(selector).dispatchEvent(new w.KeyboardEvent('keydown',{key:value,bubbles:true}));
+  key('#dossier-tab-0','ArrowRight');assert.equal(d.activeElement.id,'dossier-tab-1');
+  key('#dossier-tab-1','End');assert.equal(d.activeElement.id,'dossier-tab-2');
+  key('#dossier-tab-2','Home');assert.equal(d.activeElement.id,'dossier-tab-0');
+  key('#dossier-tab-0','ArrowLeft');assert.equal(d.activeElement.id,'dossier-tab-2');
+  click('#dossier-tab-1');key('#dossier-skill-tab-0','End');
+  assert.equal(d.activeElement.id,'dossier-skill-tab-2');
+  click('[data-language="en"]');
+  assert.equal(d.querySelector('#dossier-panel-1').hidden,false);
+  assert.equal(d.querySelector('#dossier-skill-2').hidden,false);
+  assert.equal(d.querySelector('#dossier-tab-1').textContent,'Skills');
+  assert.doesNotMatch(d.querySelector('#dossier-skill-2').textContent,/[\u4e00-\u9fff]/);
+  key('#dossier-skill-tab-2','ArrowRight');assert.equal(d.activeElement.id,'dossier-skill-tab-0');
+  click('#closeModal');click('.showcase-details');
+  assert.equal(d.querySelector('#dossier-tab-0').getAttribute('aria-selected'),'true');
+  assert.equal(d.querySelector('#dossier-basic-fields').hidden,true);
+  click('#closeModal');click('[data-language="cn"]');
+});
+check('Broken skill artwork falls back without hiding skill text or disabling interaction',()=>{
+  click('.showcase-details');
+  const tile=d.querySelector('.dossier-skill-tiles button'),image=tile.querySelector('img');
+  image.dispatchEvent(new w.Event('error'));
+  assert.equal(tile.querySelector('img'),null);assert.ok(tile.querySelector('svg'));
+  assert.equal(tile.querySelector('.dossier-skill-badge').classList.contains('has-art'),false);
+  tile.click();assert.equal(d.querySelector('#dossier-panel-1').hidden,false);
+  click('#closeModal');
+});
 check('Roster selection and arrow keys',()=>{
   click('.char-card[data-character-id="1"]');
   assert.equal(d.querySelector('.char-card[aria-pressed="true"]').dataset.characterId,'1');
@@ -196,7 +283,8 @@ check('Filters, empty results, and recovery',()=>{
 });
 check('Day/night theme and announcements',()=>{
   const original=d.documentElement.dataset.theme;click('#themeToggle');assert.notEqual(d.documentElement.dataset.theme,original);
-  click('.announce-action');assert.equal(d.querySelector('#modal').dataset.mode,'announcement');assert.match(w.location.hash,/announcement\//);click('#closeModal');
+  click('.announce-action');assert.equal(d.querySelector('#modal').dataset.mode,'announcement');assert.match(w.location.hash,/announcement\//);
+  assert.equal(d.querySelectorAll('#modal .dossier-shell').length,0,'Announcements retain their own layout');click('#closeModal');
 });
 check('Local-file preview provides a working setup link and preserves the illustration',()=>{
   dom.reconfigure({url:'file:///'+root.replaceAll('\\','/')+'/index.html'});

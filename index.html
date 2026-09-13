@@ -13,6 +13,8 @@
 <script src="assets/media/catalog.js"></script>
 <script src="scripts/gallery.js"></script>
 <script src="scripts/ui-motion.js"></script>
+<script src="assets/ui/skill-icons/catalog.js"></script>
+<script src="scripts/dossier.js"></script>
 <script>
   (() => {
     try{
@@ -41,6 +43,8 @@
 <link rel="stylesheet" href="styles/atlas-ui.css">
 <link rel="stylesheet" href="styles/site-backgrounds.css">
 <link rel="stylesheet" href="styles/lobby.css">
+<link rel="stylesheet" href="styles/dossier.css">
+<link rel="stylesheet" href="styles/rarity.css">
 <link rel="stylesheet" href="styles/site-motion.css">
 </head>
 
@@ -2862,6 +2866,7 @@ let activeModal = null;
 let lastFocusedElement = null;
 const gallery = window.PAGallery.create(document.getElementById("characterShowcase"), {
   getName:getCharacterName,
+  renderStars,
   getEnglishName:character => characterNames[character.id]?.en || character.name,
   getContent:getLocalizedCharacterContent,
   localize:localizeValue,
@@ -3058,6 +3063,13 @@ function setTheme(theme, persist = true){
 function getStars(rarity){
   const value = Math.max(1, Math.min(5, Number(rarity) || 1));
   return "★".repeat(value) + "☆".repeat(5 - value);
+}
+
+function renderStars(rarity, slots = 5){
+  const symbols = getStars(rarity).slice(0, Math.max(1, Math.min(5, slots)));
+  const count = [...symbols].filter(symbol => symbol === "★").length;
+  const label = escapeHtml(`${t("field.rarity")}: ${count}`);
+  return `<span class="rarity-stars" role="img" aria-label="${label}" data-rarity="${count}">${[...symbols].map(symbol => `<span class="rarity-star${symbol === "☆" ? " is-empty" : ""}" aria-hidden="true">${symbol}</span>`).join("")}</span>`;
 }
 
 function createTag(text, extraClass = "", tone = ""){
@@ -3271,7 +3283,7 @@ function renderCharacters(list){
 
       <div class="char-info">
         <h4>${escapeHtml(characterName)}</h4>
-        <div class="card-stars">${getStars(character.rarity)}</div>
+        <div class="card-stars">${renderStars(character.rarity)}</div>
         <div class="tag-row">
           ${createTag(localizeValue(character.academy), "academy", character.academy)}
           ${createTag(localizeValue(character.role), "role", character.role)}
@@ -3381,7 +3393,7 @@ function renderCharacterModal(character){
   loadImage(modalAvatar, character.img, characterName);
   modalAvatar.alt = characterName;
   modalName.textContent = characterName;
-  modalStars.textContent = stars;
+  modalStars.innerHTML = renderStars(character.rarity);
 
   modalTags.innerHTML = `
     ${createTag(localizeValue(character.academy), "academy", character.academy)}
@@ -3480,6 +3492,16 @@ function renderCharacterModal(character){
       ` : ""}
     </div>
   `;
+  modalBody.querySelector('.field-rarity strong').innerHTML = renderStars(character.rarity);
+  window.PADossier.mount(modalBody, {
+    skillIcons:window.PA_SKILL_ICONS?.[character.id],
+    language:currentLanguage,
+    state:activeModal,
+    weapon:localizeValue(character.weapon),
+    weaponName:character.weaponName,
+    attack:localizeValue(character.attackType),
+    defense:localizeValue(character.defenseType)
+  });
 }
 
 function openAnnouncementModal(announcement, triggerElement, updateHistory = true){

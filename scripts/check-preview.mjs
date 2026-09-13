@@ -19,10 +19,24 @@ try {
     assert.equal((await response.arrayBuffer()).byteLength, (await stat(new URL(file, root))).size);
   }
   console.log('PASS Preview HTML and all local viewer modules return complete files with correct MIME types');
+  for(const [file,mime] of [['scripts/dossier.js',/javascript/],['styles/dossier.css',/text\/css/]]) {
+    const response=await fetch(`${origin}/${file}`);
+    assert.equal(response.status,200,file);assert.match(response.headers.get('content-type'),mime);
+    assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile(new URL(file,root)),file);
+  }
+  console.log('PASS Student dossier script and skin are served intact');
+  const skillIcons=JSON.parse(await readFile(new URL('assets/ui/skill-icons/catalog.json',root),'utf8'));
+  for(const file of ['assets/ui/skill-icons/catalog.js',...skillIcons.files.map(icon=>icon.file)]) {
+    const response=await fetch(`${origin}/${file}`);
+    assert.equal(response.status,200,file);assert.match(response.headers.get('content-type'),file.endsWith('.png')?/image\/png/:/javascript/);
+    assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile(new URL(file,root)),file);
+  }
+  console.log(`PASS Skill icon registry and ${skillIcons.files.length} local PNGs are served intact`);
   const buttonArt=JSON.parse(await readFile(new URL('assets/ui/generated-buttons/prompts.json',root),'utf8'));
   const atlasFiles=['styles/atlas-frames.css','styles/atlas-ui.css','styles/atlas-preview.css',
     'styles/site-backgrounds.css','styles/site-motion.css','assets/ui/archive-triangles.svg',
     'assets/ui/reference-atlas/Common.png','assets/ui/reference-atlas/Combat.png',
+    'assets/ui/reference-atlas/Common-prologue.png','styles/rarity.css',
     ...['play','pause','expand','moon','sun','close','reset'].map(name=>`assets/ui/reference-atlas/control-${name}.svg`)];
   for (const file of atlasFiles) {
     const response=await fetch(`${origin}/${file}`);

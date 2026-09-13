@@ -6,7 +6,7 @@ const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
 const read=file=>fs.readFileSync(path.join(root,file));
 const manifest=JSON.parse(read('assets/ui/reference-atlas/frames.json'));
-const hashes={Common:'8688cb8f708fd9d6d000515b9977647f6e184d5a57e49a1979175640b830809e',Combat:'03b156bedc045510aa4eb957109c9f265365acc3b7ed4008d30edea13d85e10e'};
+const hashes={Common:'8688cb8f708fd9d6d000515b9977647f6e184d5a57e49a1979175640b830809e',Combat:'03b156bedc045510aa4eb957109c9f265365acc3b7ed4008d30edea13d85e10e',CommonPrologue:'dd54e69c3765d1d1a99a3e9fb8ce7314fb846016ec9b665fefd44ae8c11f3e85'};
 const css=read('styles/atlas-frames.css').toString();
 for(const [name,sheet] of Object.entries(manifest.sheets)) {
   const bytes=read(sheet.file);
@@ -33,4 +33,4 @@ for(const name of ['play','pause','expand','moon','sun','close','reset']) {
 }
 assert.match(skin,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(skin,/@media\(forced-colors:active\)/);
-console.log(`PASS Two source PNG hashes and dimensions, ${Object.keys(manifest.frames).length} atlas rectangles, seven native controls, and accessible-style fallbacks`);
+console.log(`PASS ${Object.keys(manifest.sheets).length} source PNG hashes and dimensions, ${Object.keys(manifest.frames).length} atlas rectangles, seven native controls, and accessible-style fallbacks`);

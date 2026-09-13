@@ -1,5 +1,6 @@
 /* Generated from frames.json; original PNGs stay untouched. */
 :root {
+  --ref-rarity-star:url('../assets/ui/reference-atlas/Common-prologue.png') 77.60364% 15.74168% / 2925.71429% 3103.03030% no-repeat;
   --ref-pin:url('../assets/ui/reference-atlas/Common.png') 15.43210% 31.50826% / 1969.23077% 1828.57143% no-repeat;
   --ref-arrow:url('../assets/ui/reference-atlas/Common.png') 27.76089% 20.54303% / 2767.56757% 2133.33333% no-repeat;
   --ref-search:url('../assets/ui/reference-atlas/Common.png') 54.97988% 33.75125% / 3413.33333% 3792.59259% no-repeat;

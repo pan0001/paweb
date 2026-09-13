@@ -2,14 +2,21 @@
 
 Project Archive 的非官方静态资料站，集中展示公告、学生图鉴、战斗资料与宣传片。
 
-网站无需构建，可部署到静态网站服务。主布局、详情弹窗与角色选择屏分别由 `styles.css`、`styles/details.css`、`styles/gallery.css` 管理；`styles/game-ui.css`、`styles/site-ui.css` 与 `styles/button-art.css` 保留原皮肤和控件基础，`styles/atlas-frames.css`、`styles/atlas-ui.css` 使用作者提供的 Common / Combat 图集统一控件视觉。`styles/site-backgrounds.css` 管理首页以外的国服官网参考背景，最后加载的 `styles/site-motion.css` 提供背景动效与角色切换基础样式。直接打开 `index.html` 可查看立绘与资料；3D / Spine 动态预览需要通过本地 HTTP 服务打开。Blueaka 字体在线加载，无法联网时回退到 Noto Sans / 系统字体；YouTube 视频与外部图鉴链接仍需要网络。
+当前工作区版本：**0.4.1 Beta** · 更新日期：**2026-09-13** · 状态：**待发布**。
+
+本版重点：游戏风格完整资料面板、古书馆技能图标、原图金色星级，以及 Reisa 嘴部与优香（睡衣）玩具显示修复。可直接复制的 [GitHub 更新简报](docs/releases/0.4.1-beta.md) 已单独整理；上一版提交为 [0.4.0 beta](https://github.com/pan0001/paweb/commit/f5160a5de7ba76e787f6b9f8b4bb151f9601861c)。
+
+网站无需构建，可部署到静态网站服务。主布局、详情弹窗与角色选择屏分别由 `styles.css`、`styles/details.css`、`styles/gallery.css` 管理；`styles/dossier.css` 与 `scripts/dossier.js` 为学生完整资料提供游戏风格的页签面板。`styles/game-ui.css`、`styles/site-ui.css` 与 `styles/button-art.css` 保留原皮肤和控件基础，`styles/atlas-frames.css`、`styles/atlas-ui.css` 使用作者提供的 Common / Combat 图集统一控件视觉。`styles/site-backgrounds.css` 管理首页以外的国服官网参考背景，最后加载的 `styles/site-motion.css` 提供背景动效与角色切换基础样式。直接打开 `index.html` 可查看立绘与资料；3D / Spine 动态预览需要通过本地 HTTP 服务打开。Blueaka 字体在线加载，无法联网时回退到 Noto Sans / 系统字体；YouTube 视频与外部图鉴链接仍需要网络。
 
 ## 功能
 
 - 37 名学生资料与 111 条技能记录；技能、角色说明与使用备注支持 CN / EN / JP
 - 上方横向学院卡片、中央角色展示与底部学生长条；支持 12 个学院与战斗定位筛选
 - 角色名、学院、武器、站位及战斗定位搜索
-- 学生详情弹窗与对应 Kivo Wiki 图鉴入口
+- 游戏风格学生详情弹窗：基本信息、技能档案、使用备注三页签，以及对应 Kivo Wiki 图鉴入口
+- 111 个技能位置使用本地古书馆图标，改编／组合技能明确标注参考；原图金色星星展示真实星级
+- 立绘、3D 模型与 Spine 记忆大厅按需切换；胜利出场、循环展示、点击 Pick Up 互动与顺滑动作过渡
+- 学院徽记、选人分层入场与切换过场；记忆大厅支持填充／完整画面、双相纸交换和全屏预览
 - 带独立地址的公告详情，例如 `#announcement/izuna-update`
 - 中文、English、日本語即时切换
 - 可记忆的日间与夜间模式
@@ -19,9 +26,48 @@ Project Archive 的非官方静态资料站，集中展示公告、学生图鉴�
 
 ## 更新记录
 
-本轮开发更新统一归入 `0.4.0 Beta`，下方按开发日期倒序保留每次调整的详细记录。早期版本号、日期及提交链接保持原样，可对照 [GitHub Activity](https://github.com/pan0001/paweb/activity) 与仓库提交历史。
+`0.4.0 beta` 提交之后的本轮修改归入 `0.4.1 Beta`；尚未提交发布，不预先填写发布链接或新提交哈希。各版本内按开发日期倒序保留详细记录，历史版本和原提交标题保持原样，可对照 [GitHub Activity](https://github.com/pan0001/paweb/activity) 与仓库提交历史。
 
-### 0.4.0 Beta
+### 0.4.1 Beta · 2026-09-13 · 待发布
+
+[查看本版更新简报](docs/releases/0.4.1-beta.md)。本轮保留原有选人布局、37 名学生与 111 条技能数据，不调整战斗平衡。
+
+#### 2026-09-13 — 古书馆原作技能图标
+
+- 核对 37 名学生对应装束的古书馆资料，为 111 个技能位置接入本地图标，共保存 107 个原始 PNG（约 440 KiB），替换资料概览与技能页签的通用图形；透明白色图案配合真实攻击类型色底板，保留原图，不裁掉轮廓
+- 89 项按名称／译名对应、3 项组合被动选取主要技能、19 项改编技能使用同角色原作参考并在卡片注明，不冒充原作相同效果；不修改本站技能名称、数值、冷却和三语说明
+- 逐项处理凯伊 E／Q 反向对应、光／千世的技能类别、临战爱丽丝派生技能、睡衣诺亚 EX 变体、星野防御形态与伊吹通常形态；映射理由、来源 URL、原图尺寸及 SHA-256 保存在 `assets/ui/skill-icons` 和 `scripts/skill-icon-map.json`
+- 加入原图缺失回退、三语参考标记与高对比模式；新增 `check-skill-icons.cjs`，扩展三语 DOM、图片错误回退与 HTTP 校验，覆盖全部 111 个位置与 107 张 PNG
+
+#### 2026-09-13 — 原图金色星级图标
+
+- 使用作者新提供的 `Common_7231006368839740661.png` 中的金色立体星星，替换完整资料右上角、基础信息、选人信息栏和学生卡片中的文字星号；数量仍取自角色真实星级，五格区域的未获得星位使用灰色弱化，不改变数据或布局
+- 新增 `styles/rarity.css`；图集以 `assets/ui/reference-atlas/Common-prologue.png` 原样保存，CSS 仅引用星星矩形，不重绘、不裁切原文件，不覆盖既有 Common／Combat 图集。素材来源、原图 SHA-256 和像素坐标记录在图集说明与 `frames.json`
+- 三语星级标签、装饰图标隐藏语义及高对比文字回退保留；回归检查覆盖全部 37 名角色的星级数量、原图哈希、CSS 定位与 HTTP 加载
+
+#### 2026-09-13 — 游戏风格完整资料面板
+
+- 按作者提供的游戏内基本信息截图重设计“查看完整资料”：深蓝顶部页签、浅蓝选中态与黄色标记、白色叠层分区、斜切技能卡、青蓝操作按钮和独立武器信息区；只修改学生资料弹窗，不改外部选人布局、模型／大厅或公告详情
+- 三个页签对应本站已有的基本信息、技能档案与使用备注；“详细”展开学院、站位等字段，点击任一技能卡查看对应效果与冷却，“武器资料”和“查看备注”均跳到实际内容。保留原有 7 项属性、9 个基础字段、37 名学生与 111 条技能，不编造升级、装备或等级数据；武器名称保留资料源表记
+- 新增 `scripts/dossier.js` 复用现有本地化内容，`styles/dossier.css` 负责独立皮肤；支持 CN／EN／JP、夜间模式、窄屏滚动、页签方向键／Home／End、关闭后焦点返回，以及减少动态效果。打开期间重新渲染语言时保留当前页签与所选技能，重新打开资料回到基本信息
+- 扩展 `check-ui.cjs` 核查全部学生的三语数据保留、技能选择、按钮跳转、键盘与公告隔离；`check-preview.mjs` 检查新增脚本／样式的 HTTP 加载。浏览器复核桌面、390px 手机宽度、英文长文本、日语夜间模式与资料跳转
+
+#### 2026-09-10 — Yuuka 玩具显示修复
+
+- 修复优香（睡衣）胜利动作中木桶、佩洛洛及部分玩具剑缺失：源模型将道具初始缩放保存为 `0.01`，部分动作省略了恢复正常大小的缩放轨道
+- 仅对已核对的胜利、Callsign 与 EX 演出共 8 条动作补齐 26 条缺失的单位缩放轨道；保留已有缩放曲线、Pick Up／待机中的收起行为、骨骼与材质，不改源 GLB。动作切换后道具可正确恢复
+- 优香首次取景加入胜利结束时的道具落点，避免佩洛洛被底边裁掉；取景范围只计算一次，不随动作晃动，也不改变其他角色的取景
+- 新增 `check-model-props.mjs`，检查真实木桶蒙皮尺寸、重复 Pick Up、顺滑缩放过渡、取景与源数据不变性，并核查其余 38 个模型不受该修复影响；浏览器实测胜利展示与点击互动后恢复
+
+#### 2026-09-10 — Reisa 嘴部显示修复
+
+- 修复玲纱（Reisa）嘴部缺失、显示为白块的问题：`CH0167_Body_2` 实际是独立嘴部网格，但共用 `CH0167_EyeMouth` 材质名称，被原先的单岛保护条件跳过
+- 仅在网格、父节点、材质名称与单岛 32 个三角形全部匹配时接入现有嘴部表情图集；保留原眼睛／眉毛贴图、顶点、UV、骨骼及动作，不改原 GLB 或大厅资源
+- 扩展真实材质测试验证嘴部图集的可见颜色与透明边缘、30 条动作中的嘴部绑定，以及其他角色不受影响；39 个模型材质回归通过，浏览器对照确认白块消失、嘴部恢复
+
+### [0.4.0 beta](https://github.com/pan0001/paweb/commit/f5160a5de7ba76e787f6b9f8b4bb151f9601861c) · 2026-09-08
+
+以下为该版本已提交的开发记录，其中“本轮”“仍待验证”等表述保留当时状态；后续修复与验收见上方新版记录。
 
 #### 2026-09-08 — 放大图标随相纸移动
 
@@ -356,6 +402,8 @@ paweb/
 ├── styles.css          # 全站布局、字体、明暗主题与响应式样式
 ├── styles/
 │   ├── details.css     # 学生／公告详情弹窗与语义标签样式
+│   ├── dossier.css     # 学生完整资料的游戏风格页签面板、日夜与窄屏适配
+│   ├── rarity.css      # 原图金星、灰色星位、响应式尺寸与高对比回退
 │   ├── gallery.css     # 上方学院、中央展示、底部学生长条的布局
 │   ├── game-ui.css     # 游戏参考风格的头像卡片、资料栏及按钮皮肤
 │   ├── site-ui.css     # 全站故事／任务 UI 参考皮肤
@@ -368,6 +416,7 @@ paweb/
 │   └── atlas-preview.css # 图集坐标检查页样式，不在主站加载
 ├── scripts/
 │   ├── gallery.js     # 角色选择、展示状态与多语言交互
+│   ├── dossier.js     # 复用本地化学生资料，组织页签／技能／展开详情
 │   ├── ui-motion.js   # 点击波纹、选中回弹及首次可见卡片入场
 │   ├── model-viewer.js # 按需加载的 3D 预览
 │   ├── toon-renderer.js # 三档卡通明暗、白色提亮与原贴图取色的骨骼描边
@@ -376,6 +425,9 @@ paweb/
 │   ├── spine-viewer.js # 按需加载的 Spine 大厅预览
 │   ├── sync-student-media.mjs # 下载与生成公开媒体索引
 │   ├── sync-academy-logos.mjs # 下载学院校徽并记录来源
+│   ├── sync-skill-icons.mjs # 获取技能元数据并按人工映射下载原图
+│   ├── skill-icon-map.json # 各角色 E／Q／被动的显式映射与改编参考理由
+│   ├── check-skill-icons.cjs # 37 人图标映射、装束／派生技能、原图哈希回归
 │   ├── serve-preview.mjs # 本机只读静态服务（默认端口 18900）
 │   ├── check-preview.mjs # HTTP、模型结构与加载依赖检查
 │   ├── check-model-materials.mjs # 真实纹理像素／材质／骨骼回归（开发依赖 sharp）
@@ -384,6 +436,7 @@ paweb/
 │   ├── check-model-coverage.mjs # 模型覆盖率、来源对照、哈希及主要动作取景检查
 │   ├── check-model-skinning.mjs # 实际坏权重网格隔离、原数据不变与可见取景回归
 │   ├── check-model-animation.mjs # 胜利出场、拾起互动、手势与动作回退回归
+│   ├── check-model-props.mjs # 优香玩具显示、动作缩放与道具取景回归
 │   ├── check-gallery-motion.cjs # 选人过渡、异步取消、图片载入与背景动效偏好回归
 │   ├── check-spine-framing.mjs # 37 个真实默认大厅主画面、填充／完整取景与多比例验证
 │   ├── check-academy-transition.cjs # 学院徽记映射、过场、连切、缓存及静态回退
@@ -401,7 +454,10 @@ paweb/
 │   ├── students/       # 37 张本地学生图像
 │   ├── media/          # 本地立绘、模型、大厅原文件和来源索引
 │   ├── vendor/         # 固定版本的 Three.js／Spine 运行库与许可证
-│   └── ui/             # Logo、Banner、academies/ 校徽、reference-atlas/ 图集与备用素材
+│   └── ui/             # Logo、Banner、academies/ 校徽、reference-atlas/ 图集、skill-icons/ 技能图标
+├── docs/
+│   └── releases/
+│       └── 0.4.1-beta.md # 可复制到 GitHub 的本版更新简报
 └── README.md
 ```
 
@@ -428,10 +484,14 @@ paweb/
 - `characters`：学生数值、技能、备注、图片路径及 Kivo 图鉴 ID
 - `verifiedStudentFacts`：按 Kivo 图鉴复核的学院、初始星级、战斗定位、站位、武器与攻防类型
 
+技能图标独立维护于 `scripts/skill-icon-map.json` 与 `assets/ui/skill-icons/`，不从图标来源覆盖本站技能数值。更新来源快照后需人工核对角色装束、形态和派生技能，再生成本地索引；流程、对应规则及素材说明见 [技能图标说明](assets/ui/skill-icons/README.md)。离线映射与原图校验运行 `node scripts/check-skill-icons.cjs`，HTTP 加载校验运行 `node scripts/check-preview.mjs`。
+
 样式按职责维护：
 
 - `styles.css`：字体、全站颜色、导航与首屏、公告与宣传片、筛选工具、学生卡片、明暗主题、响应式布局及动效
 - `styles/details.css`：学生与公告详情弹窗、学院主题色、战斗定位与攻击／防御等语义标签
+- `styles/rarity.css`：原图金色星级、灰色未获得星位与高对比回退；数量来自原有角色数据，图集坐标和哈希与 `assets/ui/reference-atlas/frames.json` 同步维护
+- `styles/dossier.css` + `scripts/dossier.js`：仅增强学生完整资料。样式在 `site-motion.css` 之前加载，脚本在 `renderCharacterModal` 生成本地化数据后挂载；原 `.basic-section`、`.stats-section`、`.skills-section`、`.description-section` 与 `.notes-section` 保留，字段仍在 `index.html` 和 `i18n` 文件维护。按钮只展开或跳转已有资料，不执行升级操作。使用 `PAWEB_TEST_MODULES` 指向含 jsdom 的开发依赖目录后运行 `node scripts/check-ui.cjs` 做三语回归
 - `styles/gallery.css`：横向学院卡片、中央角色展示、底部学生长条及移动端排列
 - `styles/lobby.css`：仅限记忆大厅的叠纸相框、图集图钉、填充／完整画面控件和全屏／窄屏适配；不要给 3D 展示区域套相框
 - `styles/game-ui.css`：游戏参考卡片、深蓝斜切资料栏、攻防状态块及其日夜／移动端适配
@@ -458,9 +518,12 @@ paweb/
 
 语言和主题偏好保存在浏览器本地存储中，键名分别为 `pa-language` 与 `pa-theme`。
 
+版本维护：下次更新同步修改 README 顶部版本／日期、更新记录和 `docs/releases/` 简报。只有完成实际发布后才移除“待发布”，并补充真实发布或提交链接；不要批量改写历史版本号，也不要将 Three.js、Spine 或媒体索引的版本号当作网站版本修改。
+
 ## 素材来源与声明
 
 - 学生图像资料整理自 [基沃托斯古书馆（Kivo Wiki）](https://kivo.wiki/)
+- 技能图标取自对应学生／装束的古书馆公开资料，原图本地保存并记录来源；改编或组合技能的图标仅作原作参考，不表示两者效果相同
 - 当前整体视觉参考 [《蔚蓝档案》国服官网](https://bluearchive-cn.com/official) 的配色、版式与几何装饰；页面布局和交互为本项目实现，并非官网页面复制
 - Blueaka 字体通过 Kivo Wiki 的字体服务加载；UI 装饰图来自 [Kivo Wiki](https://kivo.wiki/) 与 [Blue Archive 日服官网](https://bluearchive.jp/)
 - 当前 Project Archive Logo 与礼服日奈 Banner 由项目作者提供，并保存为本地素材

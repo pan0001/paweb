@@ -1,8 +1,13 @@
 {
-  "source": "User supplied Combat.png and Common.png, 2026-09-08. Original PNGs preserved; no generative redraw or destructive extraction.",
+  "source": "User supplied Combat.png and Common.png, 2026-09-08; Common_7231006368839740661.png, 2026-09-13. Original PNGs preserved; no generative redraw or destructive extraction.",
   "sheets": {
     "Common": {
       "file": "assets/ui/reference-atlas/Common.png",
+      "width": 2048,
+      "height": 2048
+    },
+    "CommonPrologue": {
+      "file": "assets/ui/reference-atlas/Common-prologue.png",
       "width": 2048,
       "height": 2048
     },
@@ -13,6 +18,7 @@
     }
   },
   "frames": {
+    "rarity-star": { "sheet": "CommonPrologue", "x": 1535, "y": 312, "w": 70, "h": 66 },
     "pin": { "sheet": "Common", "x": 300, "y": 610, "w": 104, "h": 112 },
     "arrow": {
       "sheet": "Common",

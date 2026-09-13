@@ -1,0 +1,23 @@
+/* Original gold star from the supplied prologue Common atlas; no bitmap edits. */
+.rarity-stars {
+  --rarity-size:20px;
+  display:inline-flex;align-items:center;gap:2px;
+  vertical-align:middle;line-height:1;letter-spacing:0;text-shadow:none;
+}
+.rarity-star {
+  display:block;flex:0 0 auto;width:var(--rarity-size);
+  height:calc(var(--rarity-size) * 66 / 70);
+  background:var(--ref-rarity-star);font-size:0;
+}
+.rarity-star.is-empty { filter:grayscale(1);opacity:.3; }
+.modal-stars .rarity-stars { --rarity-size:28px; }
+.field-rarity .rarity-stars { --rarity-size:16px; }
+.showcase-stars .rarity-stars { --rarity-size:25px;gap:1px; }
+.card-stars .rarity-stars { --rarity-size:11px;gap:1px; }
+@media(max-width:700px) {
+  .modal-stars .rarity-stars { --rarity-size:18px; }
+}
+@media(forced-colors:active) {
+  .rarity-star { background:none;font:var(--rarity-size)/1 Arial,sans-serif;color:CanvasText;height:auto; }
+  .rarity-star.is-empty { filter:none;opacity:1; }
+}

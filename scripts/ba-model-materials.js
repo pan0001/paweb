@@ -37,12 +37,22 @@ export function isolateInvalidSkinning(root) {
   return excluded;
 }
 
-/** Ibuki exports mutually exclusive neutral / squeezed-eye faces as siblings.
+/** Verified export-specific facial layouts; do not loosen all EyeMouth meshes.
+ * Ibuki exports mutually exclusive neutral / squeezed-eye faces as siblings.
  * GLB animation tracks do not contain the game's renderer-enable events, so
  * rendering both overlays two skins and the alternate eye geometry. Keep the
  * neutral face; do not guess expression timing from animation names.
  */
 function prepareExpressionVariants(root) {
+  // Reisa exports the mouth alone under Body, while the eyes are separate face
+  // primitives sharing the EyeMouth material. Do not treat any single eye island
+  // as a mouth: require this exact mesh, hierarchy, material and 32-triangle patch.
+  const reisaMouth=root.getObjectByName('CH0167_Body_2');
+  if(reisaMouth?.isSkinnedMesh && reisaMouth.parent?.name==='CH0167_Body'
+    && reisaMouth.material?.name==='CH0167_EyeMouth') {
+    const islands=getFaceIslands(reisaMouth.geometry);
+    if(islands.length===1 && islands[0].indices.length===96)reisaMouth.userData.paSeparateMouth=true;
+  }
   const neutral=root.getObjectByName('Ibuki_Original_Face_Outline');
   const alternate=root.getObjectByName('Ibuki_Original_Face01_Outline');
   const body=root.getObjectByName('Ibuki_Original_Body');
@@ -186,12 +196,42 @@ export function attachMouth(root, texture) {
   return face;
 }
 
+/** CH0284's prop rig is saved at its hidden (0.01) scale. Several toy-playing
+ * clips omit the constant unit-scale channels, although they animate the barrel,
+ * Peroro and swords. Add only those missing channels in verified clips; explicit
+ * hide/pop scale curves, other props and the original GLB remain untouched.
+ */
+export function prepareYuukaPropAnimations(root, clips) {
+  const mesh=root.getObjectByName('CH0284_SkillProp_Outline');
+  if (!mesh?.isSkinnedMesh || mesh.parent?.name!=='CH0284_1'
+    || mesh.material?.name!=='CH0284_SkillProp') return clips;
+  const bones=mesh.skeleton.bones.filter(bone=>
+    /^(?:bone_wood|bone_peroro_02|bone_knife_\d{2})$/.test(bone.name)
+    && bone.parent?.name==='prop_root'
+    && bone.scale.toArray().every(value=>Math.abs(value-.01)<1e-7));
+  let changed=false;
+  const result=clips.map(clip=>{
+    if (!/^CH0284_(?:Victory_(?:Start|End)|Normal_Callsign|Exs_Cutin_0[1-5])$/.test(clip.name)
+      || !Number.isFinite(clip.duration) || clip.duration<=0) return clip;
+    const names=new Set(clip.tracks.map(track=>track.name));
+    const missing=bones.filter(bone=>!names.has(bone.name+'.scale')
+      && names.has(bone.name+'.position') && names.has(bone.name+'.quaternion'));
+    if (!missing.length) return clip;
+    changed=true;
+    return new THREE.AnimationClip(clip.name,clip.duration,[...clip.tracks,
+      ...missing.map(bone=>new THREE.VectorKeyframeTrack(bone.name+'.scale',
+        [0,clip.duration],[1,1,1,1,1,1]))],clip.blendMode);
+  });
+  return changed ? result : clips;
+}
+
 /** Kayoko/Momoi have exported constant halo-position keys in character space,
  * not HaloRoot-local space. Applying both raises the halo twice. Match only the
  * verified hierarchy and constant positions; never rewrite moving halo tracks.
  * Call before bindHalo changes the hierarchy. Never mutate the source clips.
  */
 export function prepareAnimations(root, clips) {
+  clips=prepareYuukaPropAnimations(root,clips);
   const name=root.getObjectByName('Kayoko_Original') ? 'Kayoko_Original' : 'Momoi_Original';
   const body=root.getObjectByName(name);
   const halo=root.getObjectByName('HaloRoot');

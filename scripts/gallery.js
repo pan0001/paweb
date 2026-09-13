@@ -467,6 +467,7 @@
       elements.number.textContent = String(selected.id).padStart(3,'0');
       elements.academy.textContent = helpers.localize(selected.academy);
       elements.stars.textContent = '★'.repeat(selected.rarity);
+      if(helpers.renderStars) elements.stars.innerHTML = helpers.renderStars(selected.rarity, selected.rarity);
       elements.stars.setAttribute('aria-label',text('rarity')+': '+selected.rarity);
       elements.description.textContent = helpers.getContent(selected).desc;
       elements.facts.replaceChildren();
