@@ -3,7 +3,7 @@
   const tapSelector = '.strip-arrow,.showcase-prev,.showcase-next,.showcase-details,' +
     '.showcase-modes button,.showcase-pause,.showcase-reset,.showcase-fullscreen,' +
     '.clear-filters,.modal-close,.lang-btn,.theme-toggle,.nav a,.youtube-link,' +
-    '.source-link,#ambientMotionToggle';
+    '.source-link,.hero-actions .btn,.hero-scroll,#ambientMotionToggle,#heroMotionToggle';
 
   window.PAInterfaceMotion = {create};
   function create(reduced = window.matchMedia('(prefers-reduced-motion: reduce)')) {

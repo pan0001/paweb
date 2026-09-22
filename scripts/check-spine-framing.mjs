@@ -35,7 +35,7 @@ for(const student of Object.values(data.window.PA_MEDIA_CATALOG.students)) {
   }
   viewports.set(student.id,bounds);count++;
 }
-assert.equal(count,37);
+assert.equal(count,38);
 const hina=viewports.get(11),mika=viewports.get(22),haruka=viewports.get(7);
 assert.ok(hina.width>3400 && hina.width<4000,'Hina central BG, not 16k-wide intro panels');
 assert.ok(Math.abs(hina.x+hina.width/2)<100,'Hina central panel stays centered');

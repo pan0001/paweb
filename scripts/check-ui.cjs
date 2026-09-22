@@ -37,7 +37,7 @@ check('Site skin retains section order, supplied artwork and real content',()=>{
   assert.ok(fs.existsSync(path.join(root,styles.at(-1))));
   assert.deepEqual([...d.querySelectorAll('main > section')].map(el=>el.id),['home','announcements','trailers','characters']);
   assert.equal(d.querySelector('.brand-logo').getAttribute('src'),'assets/ui/project-archive-logo.png');
-  assert.equal(d.querySelectorAll('.announce-action').length,3);
+  assert.equal(d.querySelectorAll('.announce-action').length,4);
   assert.equal(d.querySelectorAll('.trailer-card').length,4);
 });
 check('Base background skin is local and leaves homepage rules alone',()=>{
@@ -60,6 +60,10 @@ check('Ambient motion keeps a translated pause control and reduced-motion fallba
   assert.ok(button.disabled,'System reduced motion takes priority');
   assert.equal(button.getAttribute('aria-pressed'),'false');
   assert.ok(button.textContent.length>0);
+  const homeButton=d.querySelector('#heroMotionToggle');
+  assert.equal(homeButton.disabled,button.disabled);
+  assert.equal(homeButton.textContent,button.textContent);
+  assert.equal(homeButton.getAttribute('aria-pressed'),button.getAttribute('aria-pressed'));
 });
 check('Generated control artwork retains labels and local assets',()=>{
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'assets/ui/generated-buttons/prompts.json'),'utf8'));
@@ -138,10 +142,77 @@ check('Academy cards filter membership, preserve focus and localize',()=>{
   click('.academy-card[data-academy="all"]');
   click('.char-card[data-character-id="11"]');
 });
-check('37 students, Hina selected, local portrait',()=>{
-  assert.equal(d.querySelectorAll('.char-card').length,37);
+check('38 students, Hina selected, local portrait',()=>{
+  assert.equal(d.querySelectorAll('.char-card').length,38);
   assert.equal(d.querySelector('.char-card[aria-pressed="true"]').dataset.characterId,'11');
   assert.match(d.querySelector('.showcase-portrait').getAttribute('src'),/^assets\/media\/portraits\//);
+});
+check('Azusa combines source values without inventing legacy stats or mixing charge with cooldown',()=>{
+  const azusa=w.__testRoster.find(s=>s.id===38);
+  assert.equal(azusa.kivoId,3);assert.equal(azusa.role,'输出');assert.equal(azusa.position,'游击');
+  assert.equal(JSON.stringify(azusa.stats),JSON.stringify({hp:100,halo:150,total:250,gunDamage:'17 / 22.1',magazine:30,fireRate:600,critMultiplier:1.3,aimMovePenalty:.2}));
+  assert.equal(azusa.skills[0].cooldown,'6s');assert.equal(azusa.skills[0].stacks,5);
+  assert.equal(azusa.skills[1].charge,600);assert.equal(azusa.skills[1].cooldown,undefined);
+  assert.equal(azusa.skills[2].name,'严酷的训练');assert.doesNotMatch(azusa.skills[2].desc,/瞄准弱点|蓄能/);
+  const charge={cn:'充能值：600',en:'Charge: 600',jp:'チャージ値：600'};
+  const timing={cn:'冷却：6s · 5 层',en:'Cooldown: 6s · 5 stacks',jp:'クールダウン：6s · 5 スタック'};
+  for(const lang of ['cn','en','jp']) {
+    click('[data-language="'+lang+'"]');
+    click('.char-card[data-character-id="38"]');click('.showcase-details');
+    assert.equal(d.querySelectorAll('.stat-box').length,8);
+    for(const key of azusa.statFields)assert.ok(w.__testTranslations[lang]['stat.'+key]);
+    if(lang!=='cn') {
+      assert.equal(w.PA_CHARACTER_TRANSLATIONS[lang][38].notes.length,3);
+      for(let i=0;i<3;i++)assert.ok(w.PA_SKILL_TRANSLATIONS[lang]['38:'+i]?.desc);
+    }
+    click('.dossier-skill-tiles button:nth-child(2)');
+    assert.equal(d.querySelector('.skill-card:not([hidden]) .skill-cooldown').textContent,charge[lang]);
+    click('#dossier-skill-tab-0');
+    assert.equal(d.querySelector('.skill-card:not([hidden]) .skill-cooldown').textContent,timing[lang]);
+    click('#closeModal');
+  }
+  click('[data-language="cn"]');click('.char-card[data-character-id="11"]');
+});
+check('Control / Flashpoint switch scopes selection, academy counts, search and all three languages',()=>{
+  const ids=()=>[...d.querySelectorAll('.char-card')].map(el=>Number(el.dataset.characterId)).sort((a,b)=>a-b);
+  click('.academy-card[data-academy="圣三一"]');
+  d.querySelector('#searchInput').value='Azusa';
+  click('[data-roster-mode="flashpoint"]');
+  assert.deepEqual(ids(),[7,12,15,21,24,25]);
+  assert.equal(d.querySelector('#rosterModeNotice').hidden,false);
+  assert.equal(d.querySelector('#searchInput').value,'');
+  assert.equal(d.querySelector('#academySelect').value,'all');
+  for(const lang of ['en','jp','cn']) {
+    click('[data-language="'+lang+'"]');
+    assert.deepEqual(ids(),[7,12,15,21,24,25]);
+    assert.equal(d.querySelector('[data-roster-mode="flashpoint"]').getAttribute('aria-pressed'),'true');
+    assert.equal(d.querySelector('.academy-card[data-academy="all"] .academy-count').textContent,w.t('academy.count',{count:6}));
+    click('.char-card[data-character-id="12"]');click('.showcase-details');
+    assert.equal(d.querySelector('#modalName').textContent,w.t('mode.hoshino'));
+    assert.equal(d.querySelector('.dossier-mode-notice').textContent,w.t('mode.notice'));
+    click('#closeModal');
+  }
+  click('.academy-card[data-academy="千禧年"]');assert.deepEqual(ids(),[21,24]);
+  const search=d.querySelector('#searchInput');search.value='Mika';search.dispatchEvent(new w.Event('input'));
+  assert.equal(ids().length,0);click('#clearStudentFilters');assert.deepEqual(ids(),[21,24]);
+  const switcher=d.querySelector('[data-roster-mode="flashpoint"]');switcher.focus();
+  switcher.dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true}));
+  assert.equal(ids().length,38);assert.equal(d.querySelector('#rosterModeNotice').hidden,true);
+  assert.equal(d.activeElement.dataset.rosterMode,'control');
+  click('.char-card[data-character-id="11"]');
+});
+check('Flashpoint announcement retains map, role rules and timing in all languages',()=>{
+  for(const lang of ['cn','en','jp']) {
+    click('[data-language="'+lang+'"]');click('.announce-action');
+    assert.match(w.location.hash,/flashpoint-20260808/);
+    assert.match(d.querySelector('#modalStars').textContent,/2026\.08\.08/);
+    const copy=d.querySelector('#modalBody').textContent;
+    for(const token of ['100%','20%','75','15%','10%','Support','Skirmisher','Assassin'])assert.ok(copy.includes(token),token);
+    assert.equal(d.querySelectorAll('.announcement-copy').length,14);
+    assert.equal(d.querySelector('.announcement-hero').getAttribute('src'),'assets/ui/announcements/flashpoint-20260808.png');
+    click('#closeModal');
+  }
+  click('[data-language="cn"]');
 });
 check('Game-style HUD uses actual role, formation, attack and armor data',()=>{
   assert.equal(d.querySelectorAll('link[href="styles/game-ui.css"]').length,1);
@@ -178,7 +249,7 @@ check('Three languages update selection, details, and description',()=>{
     assert.equal(d.activeElement,d.querySelector('.showcase-details'));
   }
 });
-check('Dossier retains all 37 profiles and 111 skills in three languages',()=>{
+check('Dossier retains all 38 profiles and 114 skills in three languages',()=>{
   const skin=fs.readFileSync(path.join(root,'styles/dossier.css'),'utf8');
   for(const tone of new Set(w.__testRoster.map(student=>student.attackType)))assert.ok(skin.includes('[data-attack="'+tone+'"]'),tone);
   assert.match(skin,/prefers-reduced-motion:reduce/);assert.match(skin,/forced-colors:active/);
@@ -192,7 +263,7 @@ check('Dossier retains all 37 profiles and 111 skills in three languages',()=>{
       assert.equal(d.querySelectorAll('.dossier-panel:not([hidden])').length,1);
       assert.equal(d.querySelector('#dossier-panel-0').hidden,false,'New profile starts at overview');
       assert.equal(d.querySelectorAll('.basic-section .info-item').length,9);
-      assert.deepEqual([...d.querySelectorAll('.stat-box strong')].map(el=>el.textContent),statKeys.map(key=>String(student.stats[key]??'-')));
+      assert.deepEqual([...d.querySelectorAll('.stat-box strong')].map(el=>el.textContent),Array.from(student.statFields || statKeys,key=>String(student.stats[key]??'-')));
       assert.equal(d.querySelector('.dossier-weapon-copy strong').textContent,student.weaponName);
       for(const selector of ['#modalStars','.field-rarity strong','.char-card[data-character-id="'+student.id+'"] .card-stars','.showcase-stars']) {
         const stars=d.querySelector(selector+' .rarity-stars');assert.ok(stars,selector);
@@ -217,7 +288,7 @@ check('Dossier retains all 37 profiles and 111 skills in three languages',()=>{
         assert.equal(d.querySelectorAll('.skill-card:not([hidden])').length,1);
         assert.equal(card.querySelector('.skill-head strong').textContent,expected.name);
         assert.equal(card.querySelector('p').textContent,expected.desc);
-        assert.equal(card.querySelector('.skill-cooldown').textContent,w.t('skill.cooldown',{value:w.localizeValue(expected.cooldown)}));
+        assert.equal(card.querySelector('.skill-cooldown').textContent,w.getSkillTiming(expected));
         assert.equal(d.activeElement.id,'dossier-skill-tab-'+index);
         click('#dossier-tab-0');
       });
@@ -279,7 +350,7 @@ check('Filters, empty results, and recovery',()=>{
   search.value='Hina (Dress)';search.dispatchEvent(new w.Event('input'));
   assert.equal(d.querySelectorAll('.char-card').length,1);assert.equal(d.querySelector('#characterShowcase').hidden,false);
   assert.equal(d.querySelector('#characterProfileSlot').hidden,false);
-  search.value='';search.dispatchEvent(new w.Event('input'));assert.equal(d.querySelectorAll('.char-card').length,37);
+  search.value='';search.dispatchEvent(new w.Event('input'));assert.equal(d.querySelectorAll('.char-card').length,38);
 });
 check('Day/night theme and announcements',()=>{
   const original=d.documentElement.dataset.theme;click('#themeToggle');assert.notEqual(d.documentElement.dataset.theme,original);

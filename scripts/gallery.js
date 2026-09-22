@@ -38,25 +38,30 @@
       .sort((a,b)=>Number(isCarrier(a))-Number(isCarrier(b)));
   }
   function createAmbientMotion(reduced) {
-    const button=document.getElementById('ambientMotionToggle');
+    const buttons=[...document.querySelectorAll('#ambientMotionToggle,#heroMotionToggle')];
+    const forcedColors=window.matchMedia('(forced-colors: active)');
     let enabled=true, language='cn';
     const visible=new Set();
     try { enabled=localStorage.getItem('pa-ambient-motion')!=='paused'; } catch { /* Private browsing can disable storage. */ }
     function sync() {
-      const active=enabled && !reduced.matches;
+      const staticMode=reduced.matches || forcedColors.matches;
+      const active=enabled && !staticMode;
       const inView=!('IntersectionObserver' in window) || visible.size>0;
       document.documentElement.dataset.ambientMotion=active && !document.hidden && inView ? 'running' : 'paused';
-      if(!button) return;
-      button.disabled=reduced.matches;
-      button.setAttribute('aria-pressed',String(active));
-      button.dataset.motion=active?'running':'paused';
-      button.textContent=ambientCopy[language][reduced.matches?'system':active?'pause':'play'];
+      document.documentElement.dataset.ambientEnabled=String(active);
+      for(const button of buttons) {
+        button.disabled=staticMode;
+        button.setAttribute('aria-pressed',String(active));
+        button.dataset.motion=active?'running':'paused';
+        button.textContent=ambientCopy[language][staticMode?'system':active?'pause':'play'];
+      }
+      document.dispatchEvent(new CustomEvent('pa:ambient-change'));
     }
-    button?.addEventListener('click',()=>{
+    buttons.forEach(button=>button.addEventListener('click',()=>{
       enabled=!enabled;
       try {localStorage.setItem('pa-ambient-motion',enabled?'running':'paused');} catch { /* Keep the current choice in memory. */ }
       sync();
-    });
+    }));
     if('IntersectionObserver' in window) {
       const observer=new IntersectionObserver(entries=>{
         for(const entry of entries) {if(entry.isIntersecting)visible.add(entry.target);else visible.delete(entry.target);}
@@ -66,6 +71,7 @@
     }
     document.addEventListener('visibilitychange',sync);
     reduced.addEventListener?.('change',sync);
+    forcedColors.addEventListener?.('change',sync);
     sync();
     return {update(nextLanguage){language=nextLanguage;sync();}};
   }

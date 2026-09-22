@@ -295,5 +295,13 @@ window.PA_CHARACTER_TRANSLATIONS.en = {
       "A Guidance Point cannot be used while obstructed.",
       "After Q, normal attacks trigger additional missiles."
     ]
+  },
+  38: {
+    desc: "Azusa is a skirmisher wielding a fully automatic assault rifle. She uses special ammunition against halos, disrupts enemies along a shock-round trajectory, and gains brief protection against attacks from behind after leaving combat.",
+    notes: [
+      "Her rifle is fully automatic. E is a single-shot special firing mode with a 6-second cooldown and 5 stacks; press E again before firing to cancel.",
+      "Q has separate direct-hit and outer hit volumes. Enemies along its path can take outer damage, slow, disarm and silence even without a direct hit.",
+      "The passive requires 10 seconds out of combat and checks the direction of the first incoming hit. It is not continuous rear damage reduction."
+    ]
   }
 };

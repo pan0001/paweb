@@ -155,6 +155,6 @@ try {
     geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());
     textures.forEach(t=>{t.dispose();t.image?.close?.();});skeletons.forEach(s=>s.dispose());
   }
-  assert.deepEqual(totals,{start:37,end:38,pickup:38});
+  assert.deepEqual(totals,{start:38,end:39,pickup:39});
   console.log(`PASS All ${files.length} real GLBs: ${totals.start} standard intros, ${totals.end} victory loops, ${totals.pickup} Pickup clips; missing standard intro/carrier safely fall back`);
 } finally { delete globalThis.self;delete globalThis.createImageBitmap; }

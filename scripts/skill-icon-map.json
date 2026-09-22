@@ -38,6 +38,7 @@
     "34": [["0/passive_skill/0","name"],["0/ex_skill/0","name"],["0/passive_skill/2","name"]],
     "35": [["0/passive_skill/0","name"],["0/ex_skill/0","name"],["0/passive_skill/2","name"]],
     "36": [["0/passive_skill/0","name"],["0/ex_skill/0","name"],["0/passive_skill/2","reference","惊醒的梦含本站复活机制，仅参考同装束醒来主题辅助技能图标"]],
-    "37": [["0/passive_skill/0","name"],["0/ex_skill/0","name"],["0/passive_skill/1","reference","原作无精确制导能力，借用本角色被动图标，不替换本站引导点机制"]]
+    "37": [["0/passive_skill/0","name"],["0/ex_skill/0","name"],["0/passive_skill/1","reference","原作无精确制导能力，借用本角色被动图标，不替换本站引导点机制"]],
+    "38": [["0/passive_skill/0","name","死亡之箭对应 Sagitta Mortis；PA数值以作者截图合并稿为准"],["0/ex_skill/0","name","赐予死亡对应 Intulit Mortem；不采用原作EX倍率"],["0/passive_skill/1","name","严酷的训练同名对应；PA效果为脱战后防护，并非原作暴击伤害增益"]]
   }
 }

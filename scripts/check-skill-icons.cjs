@@ -42,5 +42,5 @@ for(const file of files.values()) {
 for(const [id,expected] of Object.entries({2:['0/passive_skill/0','0/ex_skill/0/derived/1','0/passive_skill/2'],6:['0/passive_skill/2','0/ex_skill/0','0/passive_skill/0'],10:['0/passive_skill/2','0/ex_skill/0','0/passive_skill/1'],11:['0/passive_skill/0','0/ex_skill/0','0/passive_skill/1'],16:['0/ex_skill/0','0/passive_skill/0','0/passive_skill/2'],29:['0/ex_skill/1','0/passive_skill/0','0/passive_skill/0']}))assert.deepEqual(catalog.students[id].map(icon=>icon.key),expected,id+' exact skill order');
 assert.ok(catalog.students[12].every(icon=>icon.key.startsWith('0/')),'Shield Hoshino only');
 assert.equal(catalog.students[13][1].key,'0/ex_skill/0','Do not use Ibuki riding Toramaru');
-assert.equal(count,111);
+assert.equal(count,114);
 console.log(`PASS ${roster.length} exact student/costume IDs, ${count} reviewed skill mappings, ${files.size} original PNG hashes and dimensions`,matches);

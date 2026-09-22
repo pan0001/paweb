@@ -1,5 +1,5 @@
-/* Download only the public media explicitly linked by this wiki's 37 Kivo IDs.
-   Usage: node scripts/sync-student-media.mjs [--index-only]
+/* Download only the public media explicitly linked by this wiki's Kivo IDs.
+   Usage: node scripts/sync-student-media.mjs [--index-only] [--student=38] [--reuse-local]
    Raw game files and generated manifests are output, not edited source files. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -14,6 +14,13 @@ const errors = [];
 const tasks = new Map();
 const source = await fs.readFile(path.join(root, 'index.html'), 'utf8');
 const roster = vm.runInNewContext(source.slice(source.indexOf('const translations ='), source.indexOf('const announceArea =')) + '\ncharacters.map(c=>({id:c.id,name:c.name,kivoId:c.kivoId}));', {}, {timeout:3000});
+const selectedId = process.argv.find(arg=>arg.startsWith('--student='))?.split('=')[1];
+const selected = selectedId === undefined ? roster : roster.filter(s=>String(s.id)===selectedId);
+if(!selected.length) throw new Error('Unknown student ID: '+selectedId);
+// Explicit recovery for files downloaded successfully before a failed catalog write.
+// Never silently adopt unindexed files during a normal sync.
+const reuseLocal = process.argv.includes('--reuse-local');
+if(reuseLocal && !selectedId) throw new Error('--reuse-local requires an explicit --student ID');
 let previous = {};
 try { previous = JSON.parse(await fs.readFile(manifestPath, 'utf8')); } catch {}
 
@@ -60,11 +67,12 @@ async function mapLimit(items, limit, fn) {
   }));
 }
 const spines = new Map(), models = new Map();
-const catalog = {schemaVersion:1,updatedAt:new Date().toISOString(),source:'https://kivo.wiki/',students:{},files:[],errors};
-for(const student of roster) {
+const catalog = {schemaVersion:1,updatedAt:new Date().toISOString(),source:'https://kivo.wiki/',students:selectedId ? {...previous.students} : {},files:[],errors};
+for(const student of selected) {
   try {
     const data = await api('students', student.kivoId);
     const record = {id:student.id,kivoId:student.kivoId,name:student.name,source:'https://kivo.wiki/student/' + student.kivoId,sourceName:[data.family_name,data.given_name,data.skin ? '('+data.skin+')' : ''].join(' '),portrait:null,lobbyImage:null,spines:[],models:[]};
+    record.avatar = resource(data.avatar, 'avatars/' + student.id);
     const portraits = (data.gallery || []).find(group=>/初始立绘/.test(group.title));
     if(portraits?.images?.length) record.portrait = resource(portraits.images.find(url=>/_spr_00\.png$/i.test(url)) || portraits.images[0], 'portraits/' + student.id);
     record.lobbyImage = resource(data.recollection_lobby_image, 'lobbies/' + student.id);
@@ -97,6 +105,14 @@ await mapLimit(list, 3, async item=>{
       const hash = createHash('sha256').update(buffer).digest('hex');
       if(buffer.length === old.bytes && hash === old.sha256) Object.assign(item,old);
     }
+    if(!item.downloaded && !old && reuseLocal) {
+      try {
+        const buffer=await fs.readFile(path.join(root,item.path));
+        if(!buffer.length) throw new Error('Empty local resource');
+        if(item.path.endsWith('.glb') && (buffer.toString('ascii',0,4)!=='glTF' || buffer.readUInt32LE(8)!==buffer.length)) throw new Error('Incomplete local GLB');
+        Object.assign(item,{bytes:buffer.length,sha256:createHash('sha256').update(buffer).digest('hex'),downloaded:true});
+      } catch(error) { if(error.code!=='ENOENT') throw error; }
+    }
     if(!item.downloaded) {
       const response = await request(item.url, {method:'HEAD'});
       item.bytes = Number(response.headers.get('content-length')) || 0;
@@ -116,10 +132,12 @@ if(!process.argv.includes('--index-only')) {
       await fs.mkdir(path.dirname(absolute),{recursive:true});
       await fs.writeFile(absolute,buffer);
       Object.assign(item,{bytes:buffer.length,sha256:createHash('sha256').update(buffer).digest('hex'),downloaded:true});
+      // A successful GET supersedes an earlier optional HEAD failure.
+      for(let i=errors.length-1;i>=0;i--) if(errors[i].path===item.path) errors.splice(i,1);
       console.log('SAVED',index+1+'/'+list.length,item.path,(buffer.length/1024/1024).toFixed(2)+' MiB');
     } catch(error) { errors.push({path:item.path,message:error.message}); console.error('FAILED',error.message); }
   });
-  for(const record of Object.values(catalog.students)) {
+  for(const record of selected.map(s=>catalog.students[s.id]).filter(Boolean)) {
     for(const spine of record.spines) {
       try {
         const bytes = await fs.readFile(path.join(root,spine.skel));
@@ -130,8 +148,9 @@ if(!process.argv.includes('--index-only')) {
     for(const model of record.models) model.ready = model.files.every(file=>tasks.get(file)?.downloaded);
   }
 }
-catalog.files = list;
-catalog.totalBytes = list.reduce((sum,file)=>sum+file.bytes,0);
+if(errors.length) throw new Error('Download incomplete; previous catalog preserved. '+JSON.stringify(errors));
+catalog.files = selectedId ? [...new Map([...(previous.files || []),...list].map(file=>[file.path,file])).values()] : list;
+catalog.totalBytes = catalog.files.reduce((sum,file)=>sum+file.bytes,0);
 await fs.mkdir(path.dirname(manifestPath),{recursive:true});
 await fs.writeFile(manifestPath,JSON.stringify(catalog,null,2)+'\n');
 await fs.writeFile(path.join(root,'assets/media/catalog.js'),'// Generated by scripts/sync-student-media.mjs; public resource index.\nwindow.PA_MEDIA_CATALOG = '+JSON.stringify(catalog)+';\n');

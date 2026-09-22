@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T00:30:32.148Z",
+  "updatedAt": "2026-09-20T10:17:13.178Z",
   "source": "https://kivo.wiki/",
   "students": {
     "1": {
@@ -2841,6 +2841,67 @@
           "ready": true
         }
       ]
+    },
+    "38": {
+      "id": 38,
+      "kivoId": 3,
+      "name": "白洲梓 (Azusa)",
+      "source": "https://kivo.wiki/student/3",
+      "sourceName": "白洲 梓 ",
+      "portrait": "assets/media/portraits/38/QQ截图20211124201719.png",
+      "lobbyImage": "assets/media/lobbies/38/Azusa_home_Idle_01_1.9746000000000032.jpg",
+      "spines": [
+        {
+          "id": 370,
+          "name": "Azusa_home",
+          "type": "home",
+          "remark": "",
+          "version": "4.2.33",
+          "skel": "assets/media/spines/370/Azusa_home.skel",
+          "atlas": "assets/media/spines/370/Azusa_home.atlas",
+          "images": [
+            "assets/media/spines/370/Azusa_home.png",
+            "assets/media/spines/370/Azusa_home2.png"
+          ],
+          "files": [
+            "assets/media/spines/370/Azusa_home.skel",
+            "assets/media/spines/370/Azusa_home.atlas",
+            "assets/media/spines/370/Azusa_home.png",
+            "assets/media/spines/370/Azusa_home2.png"
+          ],
+          "ready": true
+        }
+      ],
+      "models": [
+        {
+          "id": 10,
+          "name": "Azusa_Original_Halo",
+          "type": "halo",
+          "file": "assets/media/models/10/Azusa_Original_Halo.obj",
+          "mtl": null,
+          "textures": [
+            "assets/media/models/10/Azusa_Original_Halo.png"
+          ],
+          "files": [
+            "assets/media/models/10/Azusa_Original_Halo.obj",
+            "assets/media/models/10/Azusa_Original_Halo.png"
+          ],
+          "ready": true
+        },
+        {
+          "id": 218,
+          "name": "Azusa_Original_Body",
+          "type": "body",
+          "file": "assets/media/models/218/Azusa_Original.glb",
+          "mtl": null,
+          "textures": [],
+          "files": [
+            "assets/media/models/218/Azusa_Original.glb"
+          ],
+          "ready": true
+        }
+      ],
+      "avatar": "assets/media/avatars/38/avatar.png"
     }
   },
   "files": [
@@ -6182,33 +6243,78 @@
       "bytes": 4830528,
       "sha256": "ef8e3b173fc6f58f2a11d00a86ba5530ca85ab6ea8f8154e32421480f1f5dd63",
       "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/images/students/%E7%99%BD%E6%B4%B2%E6%A2%93/avatar.png",
+      "path": "assets/media/avatars/38/avatar.png",
+      "bytes": 239379,
+      "sha256": "9a0287e5275c72dd5edc6de2c827ef6ca5f70679462734e9c6ae673e98431238",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/images/students/%E7%99%BD%E6%B4%B2%20%E6%A2%93/gallery/%E5%88%9D%E5%A7%8B%E7%AB%8B%E7%BB%98%E5%B7%AE%E5%88%86/QQ%E6%88%AA%E5%9B%BE20211124201719.png",
+      "path": "assets/media/portraits/38/QQ截图20211124201719.png",
+      "bytes": 262262,
+      "sha256": "c48dc7ec715d7d78725f4c025ec7195f82132369544df0da3b5eebb28c456137",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/images/students/%E7%99%BD%E6%B4%B2%20%E6%A2%93/original/Azusa_home_Idle_01_1.9746000000000032.jpg",
+      "path": "assets/media/lobbies/38/Azusa_home_Idle_01_1.9746000000000032.jpg",
+      "bytes": 727302,
+      "sha256": "a3d273eb8485092ff648481def7ef9d820beeb4cae2bbd4164463d9b1d7ce961",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/spines/Azusa_home/Azusa_home.skel",
+      "path": "assets/media/spines/370/Azusa_home.skel",
+      "bytes": 331842,
+      "sha256": "6ad9b4fc9fa55fec33758ba08b53cd57441b09e772814e79e3cc182ad6191a93",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/spines/Azusa_home/Azusa_home.atlas",
+      "path": "assets/media/spines/370/Azusa_home.atlas",
+      "bytes": 17545,
+      "sha256": "58d3b15b6453c0c964f2f166fb9b0d34c83db900946731511c82f24ff5e84849",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/spines/Azusa_home/Azusa_home.png",
+      "path": "assets/media/spines/370/Azusa_home.png",
+      "bytes": 3041576,
+      "sha256": "99ba5befd9a3cd4bb75749842d5cee1af5a9efc53e2ace982d715ae749d7db53",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/spines/Azusa_home/Azusa_home2.png",
+      "path": "assets/media/spines/370/Azusa_home2.png",
+      "bytes": 2184126,
+      "sha256": "9599e9b64142beb711b5ad6668a3e2ea899169f555b5bec09c42a469f6156069",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/models/Azusa_Original_Halo/Azusa_Original_Halo.obj",
+      "path": "assets/media/models/10/Azusa_Original_Halo.obj",
+      "bytes": 13679,
+      "sha256": "fa70efb17906bbcf5835a4b4c7597a80e938928432519340cc1eee51065948c5",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/models/Azusa_Original_Halo/Azusa_Original_Halo.png",
+      "path": "assets/media/models/10/Azusa_Original_Halo.png",
+      "bytes": 1400,
+      "sha256": "5f5e90e841ededdd288d035c0e0f51373c0b3f30863c5e876b2d2f90dbb8cdbc",
+      "downloaded": true
+    },
+    {
+      "url": "https://static.kivo.wiki/models/Azusa_Original_Body/Azusa_Original.glb",
+      "path": "assets/media/models/218/Azusa_Original.glb",
+      "bytes": 5923196,
+      "sha256": "0e946c63ea790c1922a154dd594884a4f7be3cd6cbccd2482ee5786cd868a6ec",
+      "downloaded": true
     }
   ],
-  "errors": [
-    {
-      "path": "assets/media/spines/1001/CH0222_home_2.png",
-      "message": "fetch failed"
-    },
-    {
-      "path": "assets/media/spines/997/CH0222_home.skel",
-      "message": "fetch failed"
-    },
-    {
-      "path": "assets/media/spines/997/CH0222_home.atlas",
-      "message": "fetch failed"
-    },
-    {
-      "path": "assets/media/spines/997/CH0222_home.png",
-      "message": "fetch failed"
-    },
-    {
-      "path": "assets/media/spines/997/CH0222_home_3.png",
-      "message": "fetch failed"
-    },
-    {
-      "path": "assets/media/spines/997/CH0222_home_2.png",
-      "message": "fetch failed"
-    }
-  ],
-  "totalBytes": 810439827
+  "errors": [],
+  "totalBytes": 823182134
 }

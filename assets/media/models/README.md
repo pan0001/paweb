@@ -1,11 +1,12 @@
 # 已下载的学生 3D 模型
 
-本目录保存本站 37 名学生在 Kivo Wiki 公开关联的模型原文件，不是外部资源链接占位。
+本目录保存本站 38 名学生在 Kivo Wiki 公开关联的模型原文件，不是外部资源链接占位。
 
-- 角色本体：39 个 GLB（部分学生有多个本体版本）
-- 光环：37 组 OBJ / PNG
-- 共 116 个文件，约 368.3 MiB
-- 全部文件已通过大小与 SHA-256 校验；39 个 GLB 的 glTF 2.0 文件头及声明长度已检查
+- 角色本体：40 个 GLB（部分学生有多个本体版本）
+- 光环：38 组 OBJ / PNG
+- 共 119 个文件，约 374.0 MiB
+- 全部文件已通过大小与 SHA-256 校验；40 个 GLB 的 glTF 2.0 文件头及声明长度已检查
+- 2026-09-20 新增常服梓：本体 `218/Azusa_Original.glb`，光环 `10/Azusa_Original_Halo.obj`；其余学生记录保持不变
 - 原始下载地址、文件大小和 SHA-256 见 [完整媒体索引](../catalog.json)
 - 2026-09-08 重新核对 Kivo 的 37 名学生关联列表，无遗漏模型；浏览器逐个确认 37 名学生及两套额外版本载入就绪，完整动作表现仍需按需复核
 
@@ -60,6 +61,7 @@ Kei 默认展示 `501/CH0335.glb` 本体，`502/CH0335_Carrier.glb` 仍可在版
 | 古关 忧  | [CH0169_Body](269/CH0169.glb) | [CH0169_Halo](59/CH0169_Halo.obj) | [Kivo](https://kivo.wiki/student/23) |
 | 早濑 优香 (睡衣) | [CH0284_Body](354/CH0284.glb) | [Yuuka_Original_Halo](76/Yuuka_Original_Halo.obj) | [Kivo](https://kivo.wiki/student/505) |
 | 花冈 柚子  | [Yuzu_Original_Body](455/Yuzu_Original.glb) | [Yuzu_Original_Halo](74/Yuzu_Original_Halo.obj) | [Kivo](https://kivo.wiki/student/81) |
+| 白洲 梓 | [Azusa_Original_Body](218/Azusa_Original.glb) | [Azusa_Original_Halo](10/Azusa_Original_Halo.obj) | [Kivo](https://kivo.wiki/data/character/3) |
 
 游戏素材与模型中的原始作者署名保持不变；本地保存不改变其权利归属。
 

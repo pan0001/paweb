@@ -19,12 +19,12 @@ try {
     assert.equal((await response.arrayBuffer()).byteLength, (await stat(new URL(file, root))).size);
   }
   console.log('PASS Preview HTML and all local viewer modules return complete files with correct MIME types');
-  for(const [file,mime] of [['scripts/dossier.js',/javascript/],['styles/dossier.css',/text\/css/]]) {
+  for(const [file,mime] of [['styles/roster-modes.css',/text\/css/],['assets/ui/announcements/flashpoint-20260808.png',/image\/png/],['scripts/dossier.js',/javascript/],['styles/dossier.css',/text\/css/],['scripts/hero-motion.js',/javascript/],['styles/hero-motion.css',/text\/css/]]) {
     const response=await fetch(`${origin}/${file}`);
     assert.equal(response.status,200,file);assert.match(response.headers.get('content-type'),mime);
     assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile(new URL(file,root)),file);
   }
-  console.log('PASS Student dossier script and skin are served intact');
+  console.log('PASS Student dossier and homepage motion scripts/skins are served intact');
   const skillIcons=JSON.parse(await readFile(new URL('assets/ui/skill-icons/catalog.json',root),'utf8'));
   for(const file of ['assets/ui/skill-icons/catalog.js',...skillIcons.files.map(icon=>icon.file)]) {
     const response=await fetch(`${origin}/${file}`);

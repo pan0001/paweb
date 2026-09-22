@@ -13,6 +13,7 @@
 <script src="assets/media/catalog.js"></script>
 <script src="scripts/gallery.js"></script>
 <script src="scripts/ui-motion.js"></script>
+<script src="scripts/hero-motion.js"></script>
 <script src="assets/ui/skill-icons/catalog.js"></script>
 <script src="scripts/dossier.js"></script>
 <script>
@@ -45,6 +46,8 @@
 <link rel="stylesheet" href="styles/lobby.css">
 <link rel="stylesheet" href="styles/dossier.css">
 <link rel="stylesheet" href="styles/rarity.css">
+<link rel="stylesheet" href="styles/hero-motion.css">
+<link rel="stylesheet" href="styles/roster-modes.css">
 <link rel="stylesheet" href="styles/site-motion.css">
 </head>
 
@@ -82,6 +85,12 @@
   <main class="container">
     <section class="hero" id="home">
       <div class="hero-art" aria-hidden="true"></div>
+      <div class="hero-atmosphere" aria-hidden="true">
+        <div class="hero-light-track"><div class="hero-light-ribbon"></div></div>
+        <div class="hero-orbit-anchor"><div class="hero-orbit"></div><div class="hero-orbit hero-orbit-inner"></div></div>
+        <div class="hero-motes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <button id="heroMotionToggle" class="ambient-motion-toggle hero-motion-toggle" type="button" aria-pressed="true">暂停背景动效</button>
       <div class="hero-coordinate" aria-hidden="true">PROJECT ARCHIVE &nbsp; / &nbsp; HINA (DRESS)<span>MEMORY COLLECTION — 01</span></div>
       <div class="hero-content">
         <div class="hero-wordmark" aria-hidden="true">PROJECT ARCHIVE<span>UNOFFICIAL FAN WIKI</span></div>
@@ -183,6 +192,14 @@
       <div class="character-workspace">
         <img id="characterBackdrop" class="workspace-backdrop" alt="" aria-hidden="true">
         <section id="filters" class="academy-band" aria-label="学院选择">
+          <div class="roster-mode-bar">
+            <div class="roster-mode-switch" role="group" data-i18n-aria="mode.label" aria-label="游戏模式">
+              <button type="button" data-roster-mode="control" aria-pressed="true" aria-controls="academyCards charGrid characterShowcase" data-i18n="mode.control">占点模式</button>
+              <button type="button" data-roster-mode="flashpoint" aria-pressed="false" aria-controls="academyCards charGrid characterShowcase" data-i18n="mode.flashpoint">闪点模式</button>
+            </div>
+            <a class="mode-rules-link" href="#announcement/flashpoint-20260808" data-i18n="mode.rules">闪点玩法公告 ↗</a>
+          </div>
+          <p id="rosterModeNotice" class="roster-mode-notice" role="status" hidden data-i18n="mode.notice"></p>
           <div class="academy-heading">
             <div>
               <div class="section-kicker" aria-hidden="true">SCHALE NETWORK / 01</div>
@@ -279,6 +296,12 @@ const translations = {
     "brand.subtitle":"档案 · 学生 · 战斗记录",
     "nav.aria":"主导航",
     "nav.skip":"跳转到学生图鉴",
+    "mode.label":"游戏模式",
+    "mode.control":"占点模式",
+    "mode.flashpoint":"闪点模式",
+    "mode.rules":"闪点玩法公告 ↗",
+    "mode.hoshino":"星野（装束待确认）",
+    "mode.notice":"按 2026-08-08 公告收录六人。数值与技能暂沿用现有档案，尚未核实为闪点专属；星野装束待确认，临战形象仅作参考。",
     "academy.title":"从一所学院，开始相遇。",
     "academy.description":"选择学院，查看已收录的学生。",
     "academy.count":"{count} 名已收录",
@@ -355,6 +378,15 @@ const translations = {
     "field.position":"玩法定位",
     "detail.stats":"角色数值",
     "stat.hp":"生命值",
+    "stat.halo":"光环值",
+    "stat.total":"生命＋光环",
+    "stat.gunDamage":"枪械伤害",
+    "stat.magazine":"弹匣容量",
+    "stat.fireRate":"枪械射速",
+    "stat.critMultiplier":"暴击倍率",
+    "stat.aimMovePenalty":"瞄准移速惩罚",
+    "skill.charge":"充能值：{value}",
+    "skill.stacks":"{value} 层",
     "stat.attack":"伤害",
     "stat.defense":"防御",
     "stat.speed":"速度",
@@ -411,6 +443,12 @@ const translations = {
     "stats.announcements":"Current Announcements",
     "stats.announcementsNote":"Updates / News",
     "stats.characters":"Character Count",
+    "mode.label":"Game mode",
+    "mode.control":"Control Point",
+    "mode.flashpoint":"Flashpoint",
+    "mode.rules":"Flashpoint rules ↗",
+    "mode.hoshino":"Hoshino (outfit unconfirmed)",
+    "mode.notice":"Six students listed in the August 8, 2026 announcement. Existing stats and skills are reference profiles, not verified Flashpoint data. Hoshino’s outfit is unconfirmed; the Battle model is a visual reference only.",
     "stats.charactersNote":"Characters",
     "stats.academies":"Academy Count",
     "stats.academiesNote":"Academies",
@@ -461,6 +499,15 @@ const translations = {
     "field.position":"Gameplay Role",
     "detail.stats":"Stats",
     "stat.hp":"HP",
+    "stat.halo":"Halo",
+    "stat.total":"HP + Halo",
+    "stat.gunDamage":"Gun damage",
+    "stat.magazine":"Magazine",
+    "stat.fireRate":"Fire rate",
+    "stat.critMultiplier":"Crit multiplier",
+    "stat.aimMovePenalty":"Aim movement penalty",
+    "skill.charge":"Charge: {value}",
+    "skill.stacks":"{value} stacks",
     "stat.attack":"Damage",
     "stat.defense":"Defense",
     "stat.speed":"Speed",
@@ -517,6 +564,12 @@ const translations = {
     "stats.announcements":"最新のお知らせ数",
     "stats.announcementsNote":"アップデート / ニュース",
     "stats.characters":"キャラクター数",
+    "mode.label":"ゲームモード",
+    "mode.control":"拠点制圧",
+    "mode.flashpoint":"フラッシュポイント",
+    "mode.rules":"モードのお知らせ ↗",
+    "mode.hoshino":"ホシノ（衣装未確認）",
+    "mode.notice":"2026年8月8日のお知らせに記載された6人を表示。数値・スキルは既存の参考資料で、このモード専用の情報としては未確認です。ホシノの衣装は未確認のため、臨戦モデルは外見の参考表示です。",
     "stats.charactersNote":"キャラクター",
     "stats.academies":"学園数",
     "stats.academiesNote":"学園",
@@ -567,6 +620,15 @@ const translations = {
     "field.position":"ゲーム内役割",
     "detail.stats":"ステータス",
     "stat.hp":"HP",
+    "stat.halo":"ヘイロー値",
+    "stat.total":"HP＋ヘイロー",
+    "stat.gunDamage":"銃撃ダメージ",
+    "stat.magazine":"装弾数",
+    "stat.fireRate":"発射速度",
+    "stat.critMultiplier":"会心倍率",
+    "stat.aimMovePenalty":"照準時の移動速度ペナルティ",
+    "skill.charge":"チャージ値：{value}",
+    "skill.stacks":"{value} スタック",
     "stat.attack":"ダメージ",
     "stat.defense":"防御力",
     "stat.speed":"速度",
@@ -648,7 +710,8 @@ const localizedValues = {
   "书 / 山雀":{en:"Book / Tit",jp:"本 / シジュウカラ"},
   "冲锋枪 / 镜子":{en:"SMG / Mirror",jp:"サブマシンガン / 鏡"},
   "无":{en:"None",jp:"なし"},
-  "独立冷却":{en:"Independent Cooldown",jp:"個別クールダウン"}
+  "独立冷却":{en:"Independent Cooldown",jp:"個別クールダウン"},
+  "游击":{en:"Skirmisher",jp:"遊撃"}
 };
 
 const characterNames = {
@@ -662,7 +725,7 @@ const characterNames = {
   23:{cn:"美祢（偶像）",en:"Mine (Idol)",jp:"ミネ（アイドル）"},24:{en:"Momoi",jp:"モモイ"},25:{en:"Mutsuki",jp:"ムツキ"},
   26:{en:"Nagusa",jp:"ナグサ"},27:{en:"Natsu",jp:"ナツ"},28:{en:"Niko",jp:"ニコ"},29:{cn:"诺亚（睡衣）",en:"Noa (Pajama)",jp:"ノア（パジャマ）"},
   30:{cn:"望",en:"Nozomi",jp:"ノゾミ"},31:{en:"Reisa",jp:"レイサ"},32:{cn:"樱子（偶像）",en:"Sakurako (Idol)",jp:"サクラコ（アイドル）"},
-  33:{en:"Shigure",jp:"シグレ"},34:{en:"Seia",jp:"セイア"},35:{en:"Ui",jp:"ウイ"},36:{cn:"优香（睡衣）",en:"Yuuka (Pajama)",jp:"ユウカ（パジャマ）"},37:{en:"Yuzu",jp:"ユズ"}
+  33:{en:"Shigure",jp:"シグレ"},34:{en:"Seia",jp:"セイア"},35:{en:"Ui",jp:"ウイ"},36:{cn:"优香（睡衣）",en:"Yuuka (Pajama)",jp:"ユウカ（パジャマ）"},37:{en:"Yuzu",jp:"ユズ"},38:{cn:"白洲梓",en:"Azusa",jp:"アズサ"}
 };
 
 const trailers = [
@@ -673,6 +736,92 @@ const trailers = [
 ];
 
 const announcements = [
+{
+  "id": "flashpoint-20260808",
+  "date": "2026.08.08",
+  "img": "assets/ui/announcements/flashpoint-20260808.png",
+  "hero": true,
+  "content": {
+    "cn": {
+      "title": "8月8日更新：闪点模式与联邦学生会地图",
+      "type": "模式更新",
+      "summary": "全新闪点模式上线！新增地图「联邦学生会」，仅在闪点模式中开放。以下为 2026 年 8 月 8 日公告内容。",
+      "body": [
+        "地图包含五个占领区域，同一时间仅激活一个，按随机顺序轮换。进入当前激活区域即可立即占领。",
+        "队伍通过占领区域和击败敌人得分。任一队伍达到 100% 分数，或对局达到 10 分钟时结束。",
+        "相比占点模式，击倒所需时间显著缩短，但技能冷却时间更长。",
+        "地图设有多个重生点。被击败后会返回学生选择界面；在该界面更换学生会将 Q 技能充能清零。",
+        "每位学生拥有「光环」与「生命」两种耐久池。伤害优先消耗光环，再消耗生命。脱战数秒后触发被动再生，持续恢复光环。",
+        "公告首批开放六名学生：小桃、小绿、星野、春香、睦月、佳代子。公告未指定各自职阶或星野装束；本站星野临战形象仅作参考。",
+        "突击（Vanguard）：击败敌人或获得助攻，立即激活光环再生。",
+        "坦克（Tank）：拥有更高的光环或生命上限。",
+        "支援（Support）：被动再生只需 4 秒即可激活，且除了光环还会恢复生命。支援学生拥有治疗能力，附近队友可按 F 激活。",
+        "游击（Skirmisher）：重生后，或 5 秒未受到伤害后，获得 20% 移动速度。使用医疗包还会额外获得 75 点护盾，持续 10 秒。",
+        "刺客（Assassin）：光环上限略低，永久获得 15% 移动速度。光环大于 0 时，暴击伤害增加 10%。",
+        "地图中的医疗包可按 F 使用，交互需要 1 秒，期间无法开枪或使用技能。",
+        "提示：选人界面右侧文本面板可查看技能简述。若说明未能加载，可先选择其他学生再切回。新地图结构较复杂，建议先熟悉关键区域再进入对局。"
+      ],
+      "highlights": [
+        "新模式：闪点（Flashpoint）",
+        "专属新地图：联邦学生会",
+        "五个轮换占领区 · 100% 得分或 10 分钟结束",
+        "公告首发六人；不代表后续版本完整名单"
+      ]
+    },
+    "en": {
+      "title": "August 8, 2026 Update — New Flashpoint Mode!",
+      "type": "Mode Update",
+      "summary": "New Map: General Student Council — available exclusively in Flashpoint Mode. This is the announcement for August 8, 2026.",
+      "body": [
+        "The map contains five capture zones. One zone becomes active at a time in a random rotation. Entering the active zone captures it immediately.",
+        "Teams earn points by capturing zones and eliminating enemies. The match ends when either team reaches 100% score or when the 10-minute time limit expires.",
+        "Time to kill is significantly shorter than in Control Point Mode, but skill cooldowns are longer.",
+        "Multiple respawn points are available across the map. When eliminated, you will return to the Student Selection screen. Switching Students on this screen will reset your Q Skill charge to zero.",
+        "Each Student has two durability pools: Halo and HP. Damage depletes Halo first, followed by HP. After remaining out of combat for several seconds, passive regeneration activates and continuously restores Halo.",
+        "Flashpoint features several combat roles. The six Students available in this announcement are Momoi, Midori, Hoshino, Haruka, Mutsuki, and Kayoko. Editorial note: individual role assignments and Hoshino’s outfit are not specified; this site uses her Battle appearance only as a reference.",
+        "Vanguard: Scoring an elimination or assist immediately activates Halo regeneration.",
+        "Tank: Has a higher maximum Halo or HP.",
+        "Support: Passive regeneration activates after only 4 seconds and restores HP in addition to Halo. Support Students also possess a healing ability that nearby teammates can activate by pressing F.",
+        "Skirmisher: Gains 20% Movement Speed upon respawning or after taking no damage for 5 seconds. Using a medkit also grants an additional 75-point shield that lasts for 10 seconds.",
+        "Assassin: Has a slightly lower maximum Halo, but permanently gains 15% Movement Speed. While Halo is above zero, Critical Damage is increased by 10%.",
+        "Medkits placed around the map can be used by pressing F. The interaction takes 1 second, during which you cannot fire your weapon or use skills.",
+        "Tips: A brief description of each Student’s skills can be found in the text panel on the right side of the Student Selection screen. If a Student’s description fails to load, select another Student and then switch back. The new map has a relatively complex layout, so familiarize yourself with its key areas before entering a match."
+      ],
+      "highlights": [
+        "New Flashpoint Mode",
+        "Exclusive map: General Student Council",
+        "Five rotating capture zones · 100% score or 10 minutes",
+        "Six launch Students; not a complete roster for later updates"
+      ]
+    },
+    "jp": {
+      "title": "2026年8月8日更新：フラッシュポイント登場！",
+      "type": "モード更新",
+      "summary": "新マップ「連邦生徒会」を追加！フラッシュポイント専用のマップです。以下は2026年8月8日のお知らせの内容です。",
+      "body": [
+        "マップには5つの占領エリアがあり、ランダムな順番で1か所ずつ有効になります。有効なエリアへ入ると即座に占領できます。",
+        "エリアの占領と敵の撃破でチームの得点が増加します。いずれかのチームが100%に到達するか、制限時間の10分が経過すると試合終了です。",
+        "拠点制圧モードより撃破までの時間は大幅に短くなりますが、スキルのクールダウンは長くなります。",
+        "複数のリスポーン地点があります。倒されると生徒選択画面へ戻り、そこで生徒を変更するとQスキルのチャージが0になります。",
+        "耐久値はヘイローとHPの2種類。ダメージはヘイローを先に消費し、その後HPを減らします。数秒間の非戦闘状態を経ると、自動再生でヘイローが継続的に回復します。",
+        "このお知らせの時点で使用可能なのは、モモイ、ミドリ、ホシノ、ハルカ、ムツキ、カヨコの6人です。編集注：各生徒の職種とホシノの衣装は未指定のため、本サイトの臨戦モデルは参考表示です。",
+        "突撃（Vanguard）：撃破またはアシストで、ヘイロー再生が即座に始まります。",
+        "タンク（Tank）：ヘイローまたはHPの上限が高くなります。",
+        "支援（Support）：自動再生が4秒で始まり、ヘイローに加えてHPも回復します。近くの味方がFキーで発動できる回復能力も持ちます。",
+        "遊撃（Skirmisher）：リスポーン時、または5秒間ダメージを受けていない場合、移動速度が20%増加します。医療キットを使うと追加で75ポイントのシールドを得て、10秒間持続します。",
+        "暗殺（Assassin）：ヘイロー上限はやや低いものの、移動速度が常時15%増加します。ヘイローが0より大きい間、会心ダメージが10%増加します。",
+        "マップ内の医療キットはFキーで使用できます。操作には1秒かかり、その間は射撃とスキルを使用できません。",
+        "ヒント：生徒選択画面右側にスキルの簡単な説明があります。読み込まれない場合は別の生徒を選んでから戻してください。新マップは複雑なので、対戦前に主要エリアの位置を確認しましょう。"
+      ],
+      "highlights": [
+        "新モード：フラッシュポイント",
+        "専用マップ：連邦生徒会",
+        "5つの占領エリア · 得点100%または10分で終了",
+        "実装時の6人を掲載。後日の全対応生徒一覧ではありません"
+      ]
+    }
+  }
+},
   {
     id:"izuna-update",
     img:"assets/students/14-izuna.png",
@@ -2741,6 +2890,36 @@ const characters = [
     ],
 
     desc: "柚子是引导点机制炮击角色，需要提前布置引导点来进行精准范围打击。"
+  },
+  {
+    // PA gameplay: merged from the author's two screenshots; see docs/students/azusa.md.
+    // BA identity/facts and artwork are sourced separately from Kivo student 3.
+    id:38, name:"白洲梓 (Azusa)", kivoId:3,
+    rarity:3, academy:"圣三一", role:"输出", weapon:"突击步枪",
+    attackType:"爆发", defenseType:"重装甲", position:"游击",
+    img:"assets/media/avatars/38/avatar.png",
+    statFields:["hp","halo","total","gunDamage","magazine","fireRate","critMultiplier","aimMovePenalty"],
+    stats:{hp:100,halo:150,total:250,gunDamage:"17 / 22.1",magazine:30,fireRate:600,critMultiplier:1.3,aimMovePenalty:0.2},
+    skills:[
+      {
+        name:"死亡之箭（Sagitta Mortis）", type:"E技能", cooldown:"6s", stacks:5,
+        desc:"按 E 切换至死亡之箭开火模式，再按 E 可取消。接下来的开火消耗技能层数，使用需单点发射的特殊弹药，对命中的目标造成 80 点技能伤害，对光环造成的伤害提升 100%。不可穿透墙体和敌人。切入 E 模式与取消回常态均使用同一套切换动作过渡。"
+      },
+      {
+        name:"赐予死亡（Intulit Mortem）", type:"Q技能", charge:600,
+        desc:"发射拥有内外两层判定的贯轴冲击弹。直击对命中的首个目标造成 250 点技能伤害，伤害随当前暴击倍率提升；外层较粗圆柱对沿途所有敌人造成 50 点技能伤害，并施加初始 99%、在 4 秒内随时间指数衰减至 0 的减速，以及 4 秒缴械与沉默。除不可阻挡目标外，可打断正在进行的技能动作，但不清除已经施加的增益。缴械本身仅禁止枪械开火，不禁止技能或打断已有技能；本技能同时施加的沉默会禁止主动技能。"
+      },
+      {
+        name:"严酷的训练", type:"被动技能", cooldown:"无",
+        desc:"脱战 10 秒后获得防护效果。此后首次受到伤害时，若攻击来自背后，则在 0.5 秒内减少受到的伤害 80%，随后解除效果；若来自正面，则立即解除效果。"
+      }
+    ],
+    notes:[
+      "使用全自动突击步枪；E 为 6 秒冷却、5 层的单点特殊射击，未开火时可再次按 E 取消。",
+      "Q 的直击与外层判定不同；沿途未被直击的敌人仍可能受到外层伤害、减速、缴械与沉默。",
+      "被动需先脱战 10 秒，且由首次受击方向决定效果；并非持续的背后减伤。"
+    ],
+    desc:"白洲梓是使用全自动突击步枪的游击角色，以特殊弹药压制光环，用贯轴冲击弹干扰沿途敌人，并依靠脱战后的短暂防护应对背后袭击。"
   }
 ];
 
@@ -2774,6 +2953,7 @@ const officialTeamPositions = {
 };
 
 const verifiedStudentFacts = {
+  3:{school:2,weapon:"AR",weaponName:"Et Omnia Vanitas",role:"Dealer",attack:"Explosive",defense:"Heavy",team:"MIDDLE",rarity:3},
   108:{school:4,weapon:"RG",weaponName:"光之剑：超新星",role:"Dealer",attack:"Mystic",defense:"Special",team:"BACK",rarity:3},
   574:{school:4,weapon:"AR",weaponName:"光之剑：超新星 for 阿比舒",role:"Dealer",attack:"Mystic",defense:"CompositeArmor",team:"MIDDLE",rarity:3},
   350:{school:3,weapon:"SR",weaponName:"酒红色赞赏",role:"Support",attack:"Piercing",defense:"Heavy",team:"BACK",rarity:3},
@@ -2830,6 +3010,25 @@ characters.forEach(character => {
 });
 
 const announceArea = document.getElementById("announceArea");
+// Announcement confirms membership, not outfits, individual roles or mode-specific stats.
+const flashpointStudentIds = new Set([24,21,12,7,25,15]);
+let currentRosterMode = "control";
+function getModeRoster(){
+  return currentRosterMode === "flashpoint" ? characters.filter(c=>flashpointStudentIds.has(c.id)) : characters;
+}
+function syncRosterMode(){
+  document.querySelectorAll('[data-roster-mode]').forEach(button=>{
+    button.setAttribute('aria-pressed',String(button.dataset.rosterMode===currentRosterMode));
+  });
+  document.getElementById('rosterModeNotice').hidden=currentRosterMode !== 'flashpoint';
+}
+function setRosterMode(mode){
+  if(!['control','flashpoint'].includes(mode) || mode===currentRosterMode) return;
+  currentRosterMode=mode;
+  // Reset incompatible filters so one click always reveals the mode's full roster.
+  academySelect.value='all';roleSelect.value='all';searchInput.value='';
+  syncRosterMode();renderAcademyCards();applyFilters();
+}
 const academySelect = document.getElementById("academySelect");
 const academyCards = document.getElementById("academyCards");
 const selectedAcademyTitle = document.getElementById("selectedAcademyTitle");
@@ -2944,6 +3143,13 @@ function getLocalizedSkill(character, skill, skillIndex){
   return localizedSkill ? {...skill, ...localizedSkill} : skill;
 }
 
+function getSkillTiming(skill){
+  const timing = skill.charge !== undefined
+    ? t("skill.charge", {value:skill.charge})
+    : t("skill.cooldown", {value:localizeValue(skill.cooldown)});
+  return skill.stacks !== undefined ? `${timing} · ${t("skill.stacks", {value:skill.stacks})}` : timing;
+}
+
 function getLocalizedCharacterContent(character){
   const originalContent = {
     desc: character.desc || "",
@@ -2969,6 +3175,7 @@ function getLocalizedCharacterContent(character){
 }
 
 function getCharacterName(character){
+  if(currentRosterMode==='flashpoint' && character.id===12) return t('mode.hoshino');
   return characterNames[character.id]?.[currentLanguage] || character.name;
 }
 
@@ -3023,6 +3230,7 @@ function setLanguage(language, persist = true){
   }
 
   applyStaticTranslations();
+  syncRosterMode();
   populateSelects();
   applyFilters();
   renderAnnouncements();
@@ -3033,6 +3241,7 @@ function setLanguage(language, persist = true){
   }else if(activeModal?.type === "announcement"){
     renderAnnouncementModal(activeModal.item);
   }
+  document.dispatchEvent(new CustomEvent('pa:language-change'));
 }
 
 function getTheme(){
@@ -3202,7 +3411,8 @@ function renderAcademyCards(){
   const focusedAcademy = document.activeElement?.closest(".academy-card")?.dataset.academy;
   academyCards.replaceChildren();
   ["all", ...academies].forEach((academy, index) => {
-    const members = academy === "all" ? characters : characters.filter(character => character.academy === academy);
+    const roster = getModeRoster();
+    const members = academy === "all" ? roster : roster.filter(character => character.academy === academy);
     const name = academy === "all" ? t("filters.allAcademies") : localizeValue(academy);
     const button = document.createElement("button");
     button.type = "button";
@@ -3323,7 +3533,7 @@ function applyFilters(){
   academyCards.querySelectorAll(".academy-card").forEach(button => setSelectedControl(button, button.dataset.academy === selectedAcademy));
   selectedAcademyTitle.textContent = selectedAcademy === "all" ? t("filters.allAcademies") : localizeValue(selectedAcademy);
 
-  const filtered = characters.filter(character => {
+  const filtered = getModeRoster().filter(character => {
     const matchAcademy = selectedAcademy === "all" || character.academy === selectedAcademy;
     const matchRole = selectedRole === "all" || character.role === selectedRole;
 
@@ -3422,7 +3632,7 @@ function renderCharacterModal(character){
           ${renderInfoItem(t("field.weaponName"), character.weaponName, "field-weapon-name")}
           ${renderInfoItem(t("field.attackType"), localizeValue(character.attackType), "field-attack", character.attackType)}
           ${renderInfoItem(t("field.defenseType"), localizeValue(character.defenseType), "field-defense", character.defenseType)}
-          ${renderInfoItem(t("field.position"), character.position, "field-gameplay")}
+          ${renderInfoItem(t("field.position"), localizeValue(character.position), "field-gameplay")}
         </div>
       </div>
 
@@ -3430,13 +3640,8 @@ function renderCharacterModal(character){
         <h3>${escapeHtml(t("detail.stats"))}</h3>
 
         <div class="stats-grid">
-          ${renderStatBox(t("stat.hp"), stats.hp)}
-          ${renderStatBox(t("stat.attack"), stats.attack)}
-          ${renderStatBox(t("stat.defense"), stats.defense)}
-          ${renderStatBox(t("stat.speed"), stats.speed)}
-          ${renderStatBox(t("stat.range"), stats.range)}
-          ${renderStatBox(t("stat.critRate"), stats.critRate)}
-          ${renderStatBox(t("stat.reloadTime"), stats.reloadTime)}
+          ${(character.statFields || ["hp","attack","defense","speed","range","critRate","reloadTime"])
+            .map(key => renderStatBox(t(`stat.${key}`), stats[key])).join("")}
         </div>
       </div>
 
@@ -3455,7 +3660,7 @@ function renderCharacterModal(character){
                     <strong>${escapeHtml(skill.name)}</strong>
                     <span>${escapeHtml(localizeValue(skill.type))}</span>
                   </div>
-                  <div class="skill-cooldown">${escapeHtml(t("skill.cooldown", {value:localizeValue(skill.cooldown)}))}</div>
+                  <div class="skill-cooldown">${escapeHtml(getSkillTiming(skill))}</div>
                   <p>${escapeHtml(skill.desc)}</p>
                 </div>
               `;
@@ -3502,6 +3707,11 @@ function renderCharacterModal(character){
     attack:localizeValue(character.attackType),
     defense:localizeValue(character.defenseType)
   });
+  if(currentRosterMode==='flashpoint'){
+    const notice=document.createElement('p');
+    notice.className='roster-mode-notice dossier-mode-notice';notice.textContent=t('mode.notice');
+    modalBody.querySelector('.dossier-content').prepend(notice);
+  }
 }
 
 function openAnnouncementModal(announcement, triggerElement, updateHistory = true){
@@ -3531,6 +3741,7 @@ function renderAnnouncementModal(announcement){
   modalBody.innerHTML = `
     <div class="detail-layout">
       <div class="detail-section">
+        ${announcement.hero ? `<img class="announcement-hero" src="${escapeHtml(announcement.img)}" alt="${escapeHtml(content.title)}">` : ""}
         <h3>${escapeHtml(t("announcement.overview"))}</h3>
         <p class="announcement-copy">${escapeHtml(content.summary)}</p>
         ${content.body.map(paragraph => `<p class="announcement-copy">${escapeHtml(paragraph)}</p>`).join("")}
@@ -3739,6 +3950,15 @@ function setupMotion(){
 }
 
 academySelect.addEventListener("change", applyFilters);
+document.querySelectorAll('[data-roster-mode]').forEach(button=>{
+  button.addEventListener('click',()=>setRosterMode(button.dataset.rosterMode));
+  button.addEventListener('keydown',event=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    event.preventDefault();event.stopPropagation();
+    const mode=event.key==='Home'?'control':event.key==='End'?'flashpoint':button.dataset.rosterMode==='control'?'flashpoint':'control';
+    document.querySelector(`[data-roster-mode="${mode}"]`).focus();setRosterMode(mode);
+  });
+});
 document.getElementById("clearStudentFilters").addEventListener("click", () => {
   roleSelect.value="all";
   searchInput.value="";
@@ -3807,6 +4027,7 @@ if(location.protocol === 'http:' || location.protocol === 'https:') {
 setupScrollState();
 setupMotion();
 interfaceMotion.observeCharacterScene();
+window.PAHeroMotion.create(reducedMotion);
 syncAnnouncementFromUrl();
 animateCount(document.getElementById("announcementCount"), announcements.length, 720);
 animateCount(document.getElementById("characterCount"), characters.length, 980);

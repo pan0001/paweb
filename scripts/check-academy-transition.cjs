@@ -77,7 +77,7 @@ function fixture({reduced=false,forced=false,waapi=true}={}) {
 
   // Every actual student's school must resolve to an existing original PNG.
   const academyNames=[...html.matchAll(/academy:\s*"([^"]+)"/g)].map(m=>m[1]);
-  assert.equal(academyNames.length,37);
+  assert.equal(academyNames.length,38);
   for(const academy of academyNames)assert.ok(fs.existsSync(path.join(root,f.w.PAGallery.academyEmblem(academy))),academy);
   assert.equal(f.w.PAGallery.academyEmblem('unknown'),'');
   assert.equal(f.w.PAGallery.academyEmblem('all'),'assets/ui/academies/6.png');
@@ -86,7 +86,7 @@ function fixture({reduced=false,forced=false,waapi=true}={}) {
   f.d.querySelector('[data-mode="spine"]').click();await flush();
   assert.equal(f.d.querySelectorAll('.academy-backdrop').length,1,'No duplicated background on lobby switch');
   f.close();
-  console.log('PASS All 37 student academies resolve locally; portrait/lobby/model reuse a single decorative viewport layer');
+  console.log('PASS All 38 student academies resolve locally; portrait/lobby/model reuse a single decorative viewport layer');
 
   const fast=fixture();await fast.load(3);await fast.finish();
   await fast.filter('千禧年');

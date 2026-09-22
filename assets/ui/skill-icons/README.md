@@ -1,8 +1,10 @@
 # Kivo 技能图标对应
 
-2026-09-13，按本站 37 个 `kivoId`（包含装束）访问古书馆公开学生资料：`https://api.kivo.wiki/api/v1/data/students/{kivoId}`，读取 `character_datas.skill` 中的原始图标链接。PNG 按原字节保存在本站，不运行时热链；素材版权归原权利方。
+2026-09-13 核对原有 37 个 `kivoId`（包含装束），2026-09-20 增量加入常服梓（本站 38／Kivo 3）。访问古书馆公开学生资料：`https://api.kivo.wiki/api/v1/data/students/{kivoId}`，读取 `character_datas.skill` 中的原始图标链接。PNG 按原字节保存在本站，不运行时热链；素材版权归原权利方。
 
-共 111 个技能位置，107 个不同来源 URL 的 PNG（约 440 KiB）。按名称或译名对应 89 项、组合被动参考 3 项、本站改编技能参考 19 项。**名称对应不代表原作效果和本站机制相同**；没有修改任何 PA 技能名称、说明、冷却或数值。图标一般为透明底白色图案，由页面按攻击类型提供红／黄／蓝／紫底板，原图不染色、不裁切。
+当前共 114 个技能位置，110 个不同来源 URL 的 PNG。按名称或译名对应 92 项、组合被动参考 3 项、本站改编技能参考 19 项。**名称对应不代表原作效果和本站机制相同**；图标同步不修改任何 PA 技能名称、说明、冷却或数值。图标一般为透明底白色图案，由页面按攻击类型提供红／黄／蓝／紫底板，原图不染色、不裁切。
+
+梓的 E／Q／被动分别对应 `Sagitta Mortis`／`Intulit Mortem`／`严酷的训练`，不采用泳装、强化被动或旧方案「瞄准弱点」图标。其 PA 机制见 [合并说明](../../../docs/students/azusa.md)。增量命令为 `node scripts/sync-skill-icons.mjs --student=38 --index-only`，审核映射后执行 `node scripts/sync-skill-icons.mjs --student=38`。
 
 ## 对应规则
 

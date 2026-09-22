@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-13T12:00:00.398Z",
+  "fetchedAt": "2026-09-20T10:07:09.758Z",
   "students": {
     "1": {
       "id": 1,
@@ -1690,6 +1690,49 @@
               "titleCn": "竭尽全力的勇气",
               "icon": "//static.kivo.wiki/images/students/%E8%8A%B1%E5%86%88%20%E6%9F%9A%E5%AD%90/original/skill_icon/yTmHKsKRem05XK79VFyqvAJpBj4FY9kc.png",
               "effect": "在Ex技能及基本技能发动的同时， 暴击伤害提升42.4%(持续6秒)"
+            }
+          ]
+        }
+      ]
+    },
+    "38": {
+      "id": 38,
+      "kivoId": 3,
+      "name": "白洲梓 (Azusa)",
+      "source": "https://kivo.wiki/data/character/3",
+      "api": "https://api.kivo.wiki/api/v1/data/students/3",
+      "sourceName": "白洲 梓",
+      "variants": [
+        {
+          "style": "default",
+          "skills": [
+            {
+              "key": "0/ex_skill/0",
+              "title": "Intulit Mortem",
+              "titleCn": "Intulit Mortem",
+              "icon": "//static.kivo.wiki/images/students/%E7%99%BD%E6%B4%B2%20%E6%A2%93/skill_icon/9AYGTx6QqVFaefdlYY9CiIlG6CZ8T5Ts.png",
+              "effect": "对1名敌人造成攻击力2023%伤害"
+            },
+            {
+              "key": "0/passive_skill/0",
+              "title": "Sagitta Mortis",
+              "titleCn": "Sagitta Mortis",
+              "icon": "//static.kivo.wiki/images/students/%E7%99%BD%E6%B4%B2%20%E6%A2%93/skill_icon/g5sNRGt6h0XyMkbn2DrXhPAyT6Q0cQHh.png",
+              "effect": "每30秒对1名敌人造成攻击力468%伤害/ 防御力减少24.6%(20秒内)"
+            },
+            {
+              "key": "0/passive_skill/1",
+              "title": "严酷的训练",
+              "titleCn": "严酷的训练",
+              "icon": "//static.kivo.wiki/images/students/%E7%99%BD%E6%B4%B2%20%E6%A2%93/skill_icon/IpDxKihOQpPtGXODFZZB6fkaFUUrQcAS.png",
+              "effect": "暴击伤害增加26.6%"
+            },
+            {
+              "key": "0/passive_skill/2",
+              "title": "瞄准弱点",
+              "titleCn": "瞄准弱点",
+              "icon": "//static.kivo.wiki/images/students/%E7%99%BD%E6%B4%B2%20%E6%A2%93/skill_icon/Qh1SdcR09CRJKOFnF4FlAh8ym2sFZbMN.png",
+              "effect": "攻击有减益效果的敌人时，造成攻击力88.5%追加伤害"
             }
           ]
         }

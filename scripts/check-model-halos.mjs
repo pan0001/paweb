@@ -119,8 +119,8 @@ try {
     player.dispose();mixer.uncacheRoot(root);dispose(root);
     console.log(`PASS Kayoko: ${changed} corrected tracks, ${clips.length} clips × 3 poses, crossfade and first-fit height ${oldHeight.toFixed(6)} → ${fixedHeight.toFixed(6)}`);
   }
-  assert.equal(unchangedModels,37);
-  console.log('PASS Other 37 GLBs preserve all original tracks (Yuuka only adds toy scales); halo keys and source clips are unchanged');
+  assert.equal(unchangedModels,38);
+  console.log('PASS Other 38 GLBs preserve all original tracks (Yuuka only adds toy scales); halo keys and source clips are unchanged');
 
   const brokenMomoi=await load(momoiTarget);
   bindHalo(brokenMomoi.scene);

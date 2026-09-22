@@ -2,9 +2,9 @@
    no invented upgrade levels, equipment inventory or combat statistics. */
 (() => {
   const copy={
-    cn:{tabs:['基本信息','技能档案','使用备注'],navigation:'资料分类',attributes:'基本属性',details:'详细',hide:'收起',skills:'技能一览',viewSkills:'查看技能',weapon:'专属武器',weaponInfo:'武器资料',notes:'作战指南',viewNotes:'查看备注',archive:'已收录资料',openSkill:'查看技能：',skillHint:'选择技能，查看效果与冷却时间',weaponHint:'武器名称按资料源收录',empty:'暂无技能记录'},
-    en:{tabs:['Overview','Skills','Field Notes'],navigation:'Profile sections',attributes:'Base Attributes',details:'Details',hide:'Hide',skills:'Skill Overview',viewSkills:'View Skills',weapon:'Unique Weapon',weaponInfo:'Weapon Info',notes:'Field Guide',viewNotes:'Read Notes',archive:'ARCHIVED DATA',openSkill:'View skill: ',skillHint:'Select a skill to view its effect and cooldown.',weaponHint:'Weapon name as listed in the source',empty:'No skills recorded'},
-    jp:{tabs:['基本情報','スキル','運用メモ'],navigation:'プロフィール分類',attributes:'基本ステータス',details:'詳細',hide:'閉じる',skills:'スキル一覧',viewSkills:'スキル詳細',weapon:'固有武器',weaponInfo:'武器情報',notes:'運用ガイド',viewNotes:'メモを読む',archive:'収録データ',openSkill:'スキルを見る：',skillHint:'スキルを選んで効果とクールタイムを確認',weaponHint:'武器名は出典の表記を使用',empty:'スキル情報なし'}
+    cn:{tabs:['基本信息','技能档案','使用备注'],navigation:'资料分类',attributes:'基本属性',details:'详细',hide:'收起',skills:'技能一览',viewSkills:'查看技能',weapon:'专属武器',weaponInfo:'武器资料',notes:'作战指南',viewNotes:'查看备注',archive:'已收录资料',openSkill:'查看技能：',skillHint:'选择技能，查看效果与冷却／充能',weaponHint:'武器名称按资料源收录',empty:'暂无技能记录'},
+    en:{tabs:['Overview','Skills','Field Notes'],navigation:'Profile sections',attributes:'Base Attributes',details:'Details',hide:'Hide',skills:'Skill Overview',viewSkills:'View Skills',weapon:'Unique Weapon',weaponInfo:'Weapon Info',notes:'Field Guide',viewNotes:'Read Notes',archive:'ARCHIVED DATA',openSkill:'View skill: ',skillHint:'Select a skill to view its effect and cooldown / charge.',weaponHint:'Weapon name as listed in the source',empty:'No skills recorded'},
+    jp:{tabs:['基本情報','スキル','運用メモ'],navigation:'プロフィール分類',attributes:'基本ステータス',details:'詳細',hide:'閉じる',skills:'スキル一覧',viewSkills:'スキル詳細',weapon:'固有武器',weaponInfo:'武器情報',notes:'運用ガイド',viewNotes:'メモを読む',archive:'収録データ',openSkill:'スキルを見る：',skillHint:'スキルを選んで効果とクールタイム／チャージを確認',weaponHint:'武器名は出典の表記を使用',empty:'スキル情報なし'}
   };
   const iconCopy={
     cn:{source:'原作图标',reference:'原作参考',composite:'组合参考',notice:'图标来自对应角色与装束的原作技能。标有「参考」的项目为改编或组合技能的视觉对应；本站的 E／Q／被动效果与数值保持不变。',missing:'图标暂不可用'},

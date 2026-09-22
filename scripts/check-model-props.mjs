@@ -140,6 +140,6 @@ try {
     assert.equal(prepareYuukaPropAnimations(gltf.scene,gltf.animations),gltf.animations,other+' is unaffected');
     dispose(gltf.scene);unchanged++;
   }
-  assert.equal(unchanged,38);
-  console.log('PASS All 38 other models bypass the Yuuka-specific prop repair');
+  assert.equal(unchanged,39);
+  console.log('PASS All 39 other models bypass the Yuuka-specific prop repair');
 } finally {delete globalThis.self;delete globalThis.createImageBitmap;}

@@ -322,7 +322,7 @@ try {
     mouthTexture.dispose();
     models++;
   }
-  assert.equal(models,39);
+  assert.equal(models,40);
   console.log(`PASS ${models} GLBs: ${materials} materials converted, ${mouths} mouths partitioned, ${halos} halos rebound`);
   console.log('PASS cel shader hooks, skinned outline passes and exception-safe material restoration for all models');
   if(skipped.length)console.log('Embedded face retained (no separable mouth):',skipped.join(', '));

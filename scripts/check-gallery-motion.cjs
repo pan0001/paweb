@@ -92,8 +92,10 @@ function fixture({reduced=false,stored}={}) {
   assert.equal(f.mounts.length,before,'Language changes do not remount');
   assert.equal(f.animations.length,animationCount,'Language changes do not restart entrances');
   assert.equal(f.d.querySelector('#ambientMotionToggle').textContent,'Pause background motion');
+  assert.equal(f.d.querySelector('#heroMotionToggle').textContent,'Pause background motion');
   f.gallery.update(f.roster,'jp');
   assert.equal(f.d.querySelector('#ambientMotionToggle').textContent,'背景の動きを止める');
+  assert.equal(f.d.querySelector('#heroMotionToggle').textContent,'背景の動きを止める');
   f.gallery.select(3);f.gallery.update([],'cn');await flush();
   assert.equal(f.gallery.selectedId,undefined);
   assert.equal(f.d.querySelectorAll('.showcase-player canvas').length,0);
@@ -116,7 +118,11 @@ function fixture({reduced=false,stored}={}) {
   f.d.querySelector('#ambientMotionToggle').click();
   assert.equal(f.w.localStorage.getItem('pa-ambient-motion'),'paused');
   assert.equal(f.d.documentElement.dataset.ambientMotion,'paused');
-  f.d.querySelector('#ambientMotionToggle').click();
+  assert.equal(f.d.querySelector('#heroMotionToggle').dataset.motion,'paused');
+  assert.equal(f.d.documentElement.dataset.ambientEnabled,'false');
+  f.d.querySelector('#heroMotionToggle').click();
+  assert.equal(f.d.querySelector('#ambientMotionToggle').dataset.motion,'running');
+  assert.equal(f.d.documentElement.dataset.ambientEnabled,'true');
   assert.equal(f.d.documentElement.dataset.ambientMotion,'running');
   f.hide(true);assert.equal(f.d.documentElement.dataset.ambientMotion,'paused');
   f.hide(false);assert.equal(f.d.documentElement.dataset.ambientMotion,'running');
