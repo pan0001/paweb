@@ -201,6 +201,59 @@ check('Control / Flashpoint switch scopes selection, academy counts, search and 
   assert.equal(d.activeElement.dataset.rosterMode,'control');
   click('.char-card[data-character-id="11"]');
 });
+check('Roster corner badges show role icons and retain attack-type colors',()=>{
+  const kinds={输出:'attack',坦克:'defense',辅助:'heal',治疗:'heal'};
+  for(const card of d.querySelectorAll('#charGrid .char-card')){
+    const badge=card.querySelector('.roster-attack');
+    const expected=d.createElement('div');expected.innerHTML=w.PAGallery.icon(kinds[card.dataset.role]);
+    assert.equal(badge.querySelector('svg').outerHTML,expected.firstElementChild.outerHTML);
+    assert.equal(badge.dataset.tone,card.dataset.attack);
+    assert.ok(badge.title.includes(card.dataset.role));
+  }
+});
+check('All four trailers switch platform by language without losing selection',()=>{
+  const ids=['BV18NHWzXEbX','BV1ESudzfE5N','BV1mUTMzTECN','BV15C55znEH8'];
+  const yt=['FekdUUn3cIo','6J3IQ5VhRVQ','YamYqKh7jLI','oZ2mTczpaZY'];
+  for(let i=0;i<4;i++){
+    click('[data-language="cn"]');d.querySelectorAll('.trailer-card')[i].click();
+    assert.ok(d.querySelector('#trailerFrame').src.includes(ids[i]));
+    assert.ok(d.querySelector('#trailerExternalLink').href.includes(ids[i]));
+    assert.ok(d.querySelectorAll('.trailer-thumb img')[i].src.includes('hdslb.com'));
+    for(const lang of ['en','jp']){
+      click('[data-language="'+lang+'"]');
+      assert.ok(d.querySelector('#trailerFrame').src.includes('youtube-nocookie.com/embed/'+yt[i]));
+      assert.equal(d.querySelectorAll('.trailer-card')[i].getAttribute('aria-pressed'),'true');
+      assert.ok(!d.querySelector('#trailerFrame').src.includes('autoplay=1'));
+    }
+    click('[data-language="cn"]');
+    assert.ok(d.querySelector('#trailerFrame').src.includes(ids[i]));
+    assert.ok(d.querySelector('#trailerFrame').src.includes('autoplay=0'));
+  }
+  click('.trailer-card');
+});
+check('Mode impact replaces rapid transitions and respects motion preferences',()=>{
+  const originalMedia=w.matchMedia;
+  const oldAmbient=d.documentElement.dataset.ambientEnabled;
+  Object.defineProperty(d,'hidden',{configurable:true,value:false});
+  w.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
+  d.documentElement.dataset.ambientEnabled='true';
+  w.playRosterModeBurst('flashpoint');
+  const first=d.querySelector('.mode-burst');
+  assert.ok(first);assert.equal(first.getAttribute('aria-hidden'),'true');
+  assert.equal(first.querySelectorAll('.mode-burst-shard').length,28);
+  assert.equal(first.querySelectorAll('.mode-burst-ray').length,20);
+  w.playRosterModeBurst('control');
+  assert.equal(first.isConnected,false);
+  assert.equal(d.querySelectorAll('.mode-burst').length,1);
+  assert.equal(d.querySelector('.mode-burst').dataset.mode,'control');
+  d.querySelector('.mode-burst').dispatchEvent(new w.Event('animationend'));
+  assert.equal(d.querySelector('.mode-burst'),null);
+  w.matchMedia=originalMedia;
+  w.playRosterModeBurst('flashpoint');
+  assert.equal(d.querySelector('.mode-burst'),null,'Reduced motion skips the impact');
+  d.documentElement.dataset.ambientEnabled=oldAmbient;
+  delete d.hidden;
+});
 check('Flashpoint announcement retains map, role rules and timing in all languages',()=>{
   for(const lang of ['cn','en','jp']) {
     click('[data-language="'+lang+'"]');click('.announce-action');

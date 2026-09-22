@@ -79,16 +79,20 @@
     role:'<circle cx="12" cy="12" r="6"/><path d="M12 2v5m0 10v5M2 12h5m10 0h5"/>',
     attack:'<path d="m6 18 12-12 2-3-3 2L5 17m-2-3 7 7M3 21l3-3"/>',
     defense:'<path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6Z"/><path d="M12 7v9"/>',
+    heal:'<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6Z" fill="currentColor" stroke="none"/>',
     formation:'<path d="M4 6h16M4 12h12M4 18h8"/>',
     weapon:'<path d="M3 7h17v5H9l-2 7H3l2-7H3Zm17 2h2M9 12h5v4H8"/>'
   };
   function icon(kind) {
     return `<svg class="hud-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${iconPaths[kind] || iconPaths.role}</svg>`;
   }
+  function roleIcon(role) {
+    return icon(({输出:'attack',坦克:'defense',辅助:'heal',治疗:'heal'})[role] || 'role');
+  }
   // One source of truth for both the school ribbon and the student's backdrop.
   const academyEmblems=Object.freeze({all:6,'歌赫娜':3,'千禧年':4,'阿拜多斯':1,'圣三一':2,'瓦尔基里':8,'阿里乌斯':10,'海兰德':24,'红冬':5,'山海经':7,'百鬼夜行':9,SRT:11,'狂猎艺术':14});
   const academyEmblem=academy=>academyEmblems[academy] ? `assets/ui/academies/${academyEmblems[academy]}.png` : '';
-  window.PAGallery = {create,icon,modelVariants,academyEmblem};
+  window.PAGallery = {create,icon,roleIcon,modelVariants,academyEmblem};
   function create(host, helpers) {
     host.innerHTML = `
       <div class="showcase-main">

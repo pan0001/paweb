@@ -180,7 +180,7 @@
               <h3 class="trailer-feature-title" id="activeTrailerTitle" aria-live="polite">PA IZUNA HIKARI</h3>
               <div class="trailer-channel">YouTube · in_uni</div>
             </div>
-            <a class="btn youtube-link" id="trailerExternalLink" href="https://www.youtube.com/watch?v=FekdUUn3cIo" target="_blank" rel="noopener noreferrer" data-i18n="trailers.openYoutube">在 YouTube 观看</a>
+            <a class="btn youtube-link" id="trailerExternalLink" href="https://www.bilibili.com/video/BV18NHWzXEbX/" target="_blank" rel="noopener noreferrer">在 B 站观看</a>
           </div>
         </article>
 
@@ -728,6 +728,13 @@ const characterNames = {
   33:{en:"Shigure",jp:"シグレ"},34:{en:"Seia",jp:"セイア"},35:{en:"Ui",jp:"ウイ"},36:{cn:"优香（睡衣）",en:"Yuuka (Pajama)",jp:"ユウカ（パジャマ）"},37:{en:"Yuzu",jp:"ユズ"},38:{cn:"白洲梓",en:"Azusa",jp:"アズサ"}
 };
 
+// Matched against In_uni's public collection (UID 1856651886), by cover and title.
+const bilibiliTrailers = {
+  FekdUUn3cIo:{bvid:'BV18NHWzXEbX',cover:'5e4e466447655176770a991892f849ddb3be7082'},
+  '6J3IQ5VhRVQ':{bvid:'BV1ESudzfE5N',cover:'f5aad9133a76a47bee78fa96275cc81072719486'},
+  YamYqKh7jLI:{bvid:'BV1mUTMzTECN',cover:'de5c483958dd4f1a56bfcb8ddd0080cb28cde773'},
+  oZ2mTczpaZY:{bvid:'BV15C55znEH8',cover:'e626089dd24352070231fa0e8461bfd573f82ead'}
+};
 const trailers = [
   {id:"FekdUUn3cIo",url:"https://www.youtube.com/watch?v=FekdUUn3cIo",title:{cn:"PA 泉奈 × 小光",en:"PA IZUNA HIKARI",jp:"PA イズナ × ヒカリ"}},
   {id:"6J3IQ5VhRVQ",url:"https://www.youtube.com/watch?v=6J3IQ5VhRVQ",title:{cn:"《Project Archive》更新视频",en:'BA fan game "Project Archive" update video',jp:"『Project Archive』アップデート動画"}},
@@ -3024,10 +3031,61 @@ function syncRosterMode(){
 }
 function setRosterMode(mode){
   if(!['control','flashpoint'].includes(mode) || mode===currentRosterMode) return;
+  playRosterModeBurst(mode);
   currentRosterMode=mode;
   // Reset incompatible filters so one click always reveals the mode's full roster.
   academySelect.value='all';roleSelect.value='all';searchInput.value='';
   syncRosterMode();renderAcademyCards();applyFilters();
+}
+// Decorative only: selection updates immediately, even during rapid switching.
+let clearRosterModeBurst = ()=>{};
+function playRosterModeBurst(mode){
+  clearRosterModeBurst();
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const forced=window.matchMedia('(forced-colors: active)');
+  if(reduced.matches || forced.matches || document.hidden || document.documentElement.dataset.ambientEnabled==='false') return;
+  const button=document.querySelector(`[data-roster-mode="${mode}"]`);
+  const bounds=button.getBoundingClientRect();
+  const layer=document.createElement('div');
+  layer.className='mode-burst';layer.dataset.mode=mode;layer.setAttribute('aria-hidden','true');
+  layer.style.setProperty('--burst-x',`${Math.max(0,Math.min(innerWidth,bounds.left+bounds.width/2))}px`);
+  layer.style.setProperty('--burst-y',`${Math.max(0,Math.min(innerHeight,bounds.top+bounds.height/2))}px`);
+  layer.innerHTML='<div class="mode-burst-wash"></div><div class="mode-burst-ring"></div><div class="mode-burst-ring mode-burst-ring-secondary"></div><div class="mode-burst-core"></div><div class="mode-burst-reticle"></div><div class="mode-burst-slice"></div><div class="mode-burst-streak mode-burst-streak-top"></div><div class="mode-burst-streak mode-burst-streak-bottom"></div><div class="mode-burst-label"><small>PROJECT ARCHIVE / MODE SHIFT</small><strong></strong><span></span></div>';
+  layer.querySelector('strong').textContent=t(`mode.${mode}`);
+  layer.querySelector('.mode-burst-label > span').textContent=mode==='flashpoint'?'FLASHPOINT // 06':'CONTROL POINT';
+  for(let i=0;i<28;i++){
+    const shard=document.createElement('i');shard.className='mode-burst-shard';
+    const angle=i*Math.PI*2/28;
+    const distance=Math.min(innerWidth,850)*(.32+(i%3)*.16);
+    shard.style.setProperty('--dx',`${Math.cos(angle)*distance}px`);
+    shard.style.setProperty('--dy',`${Math.sin(angle)*distance}px`);
+    shard.style.setProperty('--turn',`${i*47}deg`);
+    layer.append(shard);
+  }
+  for(let i=0;i<20;i++){
+    const ray=document.createElement('b');ray.className='mode-burst-ray';
+    ray.style.setProperty('--angle',`${i*18+9}deg`);
+    ray.style.setProperty('--delay',`${(i%4)*25}ms`);
+    layer.append(ray);
+  }
+  let timer;
+  const observer=new MutationObserver(()=>{
+    if(document.documentElement.dataset.ambientEnabled==='false') cleanup();
+  });
+  const cleanup=()=>{
+    clearTimeout(timer);layer.remove();observer.disconnect();
+    reduced.removeEventListener?.('change',cleanup);forced.removeEventListener?.('change',cleanup);
+    document.removeEventListener('visibilitychange',cleanup);
+    window.removeEventListener('pagehide',cleanup);
+    if(clearRosterModeBurst===cleanup) clearRosterModeBurst=()=>{};
+  };
+  clearRosterModeBurst=cleanup;
+  reduced.addEventListener?.('change',cleanup);forced.addEventListener?.('change',cleanup);
+  document.addEventListener('visibilitychange',cleanup);window.addEventListener('pagehide',cleanup);
+  observer.observe(document.documentElement,{attributes:true,attributeFilter:['data-ambient-enabled']});
+  layer.addEventListener('animationend',event=>{if(event.target===layer) cleanup();});
+  document.body.append(layer);
+  timer=setTimeout(cleanup,1600);
 }
 const academySelect = document.getElementById("academySelect");
 const academyCards = document.getElementById("academyCards");
@@ -3488,7 +3546,7 @@ function renderCharacters(list){
       <div class="avatar">
         <img alt="${escapeHtml(characterName)}" loading="lazy" decoding="async">
         <span class="roster-role">${escapeHtml(localizeValue(character.role))}</span>
-        <span class="roster-attack" data-tone="${escapeHtml(character.attackType)}" title="${escapeHtml(localizeValue(character.attackType))}">${window.PAGallery.icon('attack')}<span class="sr-only">${escapeHtml(localizeValue(character.attackType))}</span></span>
+        <span class="roster-attack" data-tone="${escapeHtml(character.attackType)}" title="${escapeHtml(localizeValue(character.role))} · ${escapeHtml(localizeValue(character.attackType))}">${window.PAGallery.roleIcon(character.role)}<span class="sr-only">${escapeHtml(localizeValue(character.role))} · ${escapeHtml(localizeValue(character.attackType))}</span></span>
       </div>
 
       <div class="char-info">
@@ -3828,7 +3886,10 @@ function renderTrailers(){
     `;
 
     const button = item.querySelector(".trailer-card");
-    loadImage(item.querySelector("img"), `https://i.ytimg.com/vi/${trailer.id}/hqdefault.jpg`, title);
+    const thumbnail=item.querySelector('img');
+    thumbnail.referrerPolicy='no-referrer';
+    const source=bilibiliTrailers[trailer.id];
+    loadImage(thumbnail, currentLanguage==='cn' && source ? `https://i0.hdslb.com/bfs/archive/${source.cover}.jpg` : `https://i.ytimg.com/vi/${trailer.id}/hqdefault.jpg`, title);
     button.addEventListener("click", () => selectTrailer(index, true));
     trailerList.appendChild(item);
   });
@@ -3847,17 +3908,24 @@ function selectTrailer(index, autoplay){
   activeTrailerIndex = index;
   const title = getTrailerTitle(trailer);
   activeTrailerTitle.textContent = title;
-  trailerExternalLink.href = trailer.url;
+  const biliSource=currentLanguage==='cn' ? bilibiliTrailers[trailer.id] : null;
+  const provider=biliSource?'bilibili':'youtube';
+  trailerExternalLink.href = biliSource ? `https://www.bilibili.com/video/${biliSource.bvid}/` : trailer.url;
+  trailerExternalLink.textContent=biliSource?'在 B 站观看':t('trailers.openYoutube');
+  document.querySelector('.trailer-channel').textContent=`${biliSource?'Bilibili':'YouTube'} · in_uni`;
   trailerFrame.title = t("trailers.frameTitle", {title});
 
   trailerList.querySelectorAll(".trailer-card").forEach((button, buttonIndex) => {
     setSelectedControl(button, buttonIndex === index);
   });
 
-  if(trailerFrame.dataset.videoId !== trailer.id || autoplay){
+  if(trailerFrame.dataset.videoId !== trailer.id || trailerFrame.dataset.provider !== provider || autoplay){
     const autoplayParameter = autoplay ? "&autoplay=1" : "";
-    trailerFrame.src = `https://www.youtube-nocookie.com/embed/${trailer.id}?rel=0${autoplayParameter}`;
+    trailerFrame.src = biliSource
+      ? `https://player.bilibili.com/player.html?bvid=${biliSource.bvid}&page=1&autoplay=${autoplay?1:0}&danmaku=0`
+      : `https://www.youtube-nocookie.com/embed/${trailer.id}?rel=0${autoplayParameter}`;
     trailerFrame.dataset.videoId = trailer.id;
+    trailerFrame.dataset.provider = provider;
   }
 }
 
